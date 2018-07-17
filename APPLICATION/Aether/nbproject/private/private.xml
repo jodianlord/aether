@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/clare/Desktop/Aether/web/index.html</file>
-            <file>file:/C:/Users/clare/Desktop/Aether/web/js/demo-1.js</file>
-            <file>file:/C:/Users/clare/Desktop/Aether/web/js/EasePack.min.js</file>
+            <file>file:/C:/Users/jodia/Documents/aether/APPLICATION/Aether/src/java/com/aether/controller/SignUpServlet.java</file>
+            <file>file:/C:/Users/jodia/Documents/aether/APPLICATION/Aether/src/java/com/aether/dao/UserDAO.java</file>
+            <file>file:/C:/Users/jodia/Documents/aether/APPLICATION/Aether/src/java/com/aether/model/User.java</file>
+            <file>file:/C:/Users/jodia/Documents/aether/APPLICATION/Aether/src/java/com/aether/controller/BlockchainServlet.java</file>
+            <file>file:/C:/Users/jodia/Documents/aether/APPLICATION/Aether/web/index.jsp</file>
         </group>
     </open-files>
 </project-private>
