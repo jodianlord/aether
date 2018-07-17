@@ -65,35 +65,35 @@
                             
                             
                             <div id="signup">   
-                                <form action="/" method="post">
+                                <form action="SignUpServlet" method="post">
                                     <div class="top-row">
                                         <div class="field-wrap">
                                             <label>
-                                                First Name<span class="req">*</span>
+                                                User ID<span class="req">*</span>
                                             </label>
-                                            <input type="text" required autocomplete="off" />
+                                            <input type="text" name='userid' required autocomplete="off" />
                                         </div>
 
                                         <div class="field-wrap">
                                             <label>
-                                                Last Name<span class="req">*</span>
+                                                Password<span class="req">*</span>
                                             </label>
-                                            <input type="text"required autocomplete="off"/>
+                                            <input type="password" name='password' required autocomplete="off"/>
                                         </div>
                                     </div>
 
                                     <div class="field-wrap">
                                         <label>
-                                            Email Address<span class="req">*</span>
+                                            Public Key<span class="req">*</span>
                                         </label>
-                                        <input type="email"required autocomplete="off"/>
+                                        <input type="text" name='publickey' required autocomplete="off"/>
                                     </div>
 
                                     <div class="field-wrap">
                                         <label>
-                                            Set A Password<span class="req">*</span>
+                                            Private Key<span class="req">*</span>
                                         </label>
-                                        <input type="password"required autocomplete="off"/>
+                                        <input type="text" name='privatekey' required autocomplete="off"/>
                                     </div>
 
                                     <button type="submit" class="button button-block"/>SIGN UP</button>

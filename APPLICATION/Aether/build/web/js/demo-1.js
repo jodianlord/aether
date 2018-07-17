@@ -3,9 +3,9 @@
     var width, height, largeHeader, canvas, ctx, points, target, animateHeader = true;
 
     // Main
-//    initHeader();
-//    initAnimation();
-//    addListeners();
+    initHeader();
+    initAnimation();
+    addListeners();
 
     function initHeader() {
         width = window.innerWidth;
