@@ -32,11 +32,11 @@ public class UserDAO {
     public void insertUser(User user) {
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = connection.prepareStatement("insert into user(userid,password,publickey,privatekey) values (?,?,?,?)");
+            preparedStatement = connection.prepareStatement("insert into user(userid,password,publickey) values (?,?,?)");
             preparedStatement.setString(1, user.getUserid());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getPublickey());
-            preparedStatement.setString(4, user.getPrivatekey());
+//            preparedStatement.setString(4, user.getPrivatekey());
 
             preparedStatement.executeUpdate();
 
@@ -65,7 +65,7 @@ public class UserDAO {
             preparedStatement.setString(1, user.getUserid());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getPublickey());
-            preparedStatement.setString(4, user.getPrivatekey());
+//            preparedStatement.setString(4, user.getPrivatekey());
             preparedStatement.setString(5, user.getUserid());
             preparedStatement.executeUpdate();
 

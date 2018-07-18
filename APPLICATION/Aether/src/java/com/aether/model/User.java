@@ -11,17 +11,17 @@ package com.aether.model;
  */
 public class User {
 
-    public User(String userid, String password, String publickey, String privatekey) {
+    public User(String userid, String password, String publickey) {
         this.userid = userid;
         this.password = password;
         this.publickey = publickey;
-        this.privatekey = privatekey;
+//        this.privatekey = privatekey;
     }
     
     private String userid;
     private String password;
     private String publickey;
-    private String privatekey;
+//    private String privatekey;
 
 
     public String getUserid() {
@@ -48,13 +48,13 @@ public class User {
         this.publickey = publickey;
     }
 
-    public String getPrivatekey() {
-        return privatekey;
-    }
-
-    public void setPrivatekey(String privatekey) {
-        this.privatekey = privatekey;
-    }
+//    public String getPrivatekey() {
+//        return privatekey;
+//    }
+//
+//    public void setPrivatekey(String privatekey) {
+//        this.privatekey = privatekey;
+//    }
     
    
     
