@@ -76,13 +76,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="field-wrap">
-                                        <label>
-                                            Public Key<span class="req">*</span>
-                                        </label>
-                                        <input type="text" name='publickey' required autocomplete="off"/>
-                                    </div>
-
 <!--                                    <div class="field-wrap">
                                         <label>
                                             Private Key<span class="req">*</span>
@@ -90,7 +83,7 @@
                                         <input type="text" name='privatekey' required autocomplete="off"/>
                                     </div>-->
 
-                                    <button type="submit" class="button button-block"/>SIGN UP</button>
+                                    <button type="submit" id="signupbutton" class="button button-block"/>SIGN UP</button>
                                 </form>
                             </div>
                         </div><!-- tab-content -->
@@ -102,7 +95,14 @@
         <script src="js/EasePack.min.js"></script>
         <script src="js/demo-1.js"></script>
         <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        <script src="js/jquery-confirm.js"></script>
         <script>
+            $("#signupbutton").click(function(){
+                $.alert({
+                    title: 'Account Created!',
+                    content: 'Your account has been created!',
+                });
+            });
             $('.form').find('input, textarea').on('keyup blur focus', function (e) {
 
                 var $this = $(this),
