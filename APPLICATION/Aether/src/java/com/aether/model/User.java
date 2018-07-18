@@ -55,9 +55,7 @@ public class User {
 //    public void setPrivatekey(String privatekey) {
 //        this.privatekey = privatekey;
 //    }
-    
-   
-    
+
     
     
 }

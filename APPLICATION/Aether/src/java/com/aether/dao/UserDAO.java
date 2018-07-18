@@ -9,6 +9,7 @@ import com.aether.model.User;
 import com.aether.util.ConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,6 +45,24 @@ public class UserDAO {
             ex.printStackTrace();
         }
 
+    }
+    
+    public static String authenticate(String username) {
+        String password = null;
+
+        // Retrieve username from SQL Database
+        try (Connection conn = ConnectionManager.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement("select password from aether.user where userid = ? ");) {
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                password = rs.getString("password");
+            }
+            // Invalid username
+        } catch (SQLException ex) {
+            return null;
+        }
+        return password;
     }
 
     public void deleteUser(String userid) {

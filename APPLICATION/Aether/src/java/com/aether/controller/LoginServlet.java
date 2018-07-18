@@ -6,24 +6,20 @@
 package com.aether.controller;
 
 import com.aether.dao.UserDAO;
-import com.aether.model.User;
 import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.mindrot.BCrypt;
 
-@WebServlet(name = "SignUpServlet", urlPatterns = {"/SignUpServlet"})
-public class SignUpServlet extends HttpServlet {
+@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
+public class LoginServlet extends HttpServlet {
 
     private UserDAO userdao;
 
-    public SignUpServlet() {
+    public LoginServlet() {
         super();
         userdao = new UserDAO();
     }
@@ -33,33 +29,24 @@ public class SignUpServlet extends HttpServlet {
 //        HttpSession session = request.getSession();
         String userid = request.getParameter("userid");
         String password = request.getParameter("password");
-        String publickey = request.getParameter("publickey");
+//        String publickey = request.getParameter("publickey");
 
-        //String privatekey = request.getParameter("privatekey");
-
-        
-        // Hash a password for the first time
-//        String hashedPWD = BCrypt.hashpw(password, BCrypt.gensalt());
-
-        // gensalt's log_rounds parameter determines the complexity
-        // the work factor is 2**log_rounds, and the default is 10
-        String hashedPWD = BCrypt.hashpw(password, BCrypt.gensalt(12));
-        
-//        System.out.print(hashedPWD);
-        
-        // Check that an unencrypted password matches one that has
-        // previously been hashed
-//        if (BCrypt.checkpw(candidate, hashed))
-//                System.out.println("It matches");
-//        else
-//                System.out.println("It does not match");
-
-        
-        User user = new User(userid, hashedPWD, publickey);
-        userdao.insertUser(user);
+        if (userid.length() != 0) {
+            String authPassword = UserDAO.authenticate(userid);
+            // Valid username and password
+            if (BCrypt.checkpw(password, authPassword)) {
+                response.sendRedirect("Success.jsp");
+            // Invalid username or password
+            } else {
+                response.sendRedirect("Error.jsp");
+            }
+        // Zero username length
+        } else {
+            response.sendRedirect("Error.jsp");
+        }
 
 //        session.setAttribute("error", hashedPWD);
-        response.sendRedirect("index.jsp");
+        
         
     }
 
