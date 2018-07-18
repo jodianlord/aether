@@ -22,8 +22,7 @@ public class BlockchainHandler {
     
     
     public static void main(String[] args){
-        
-        
+        System.out.println(getListOfAccounts().toString());
     }
     
     public static String sendPostRequest(JSONObject body) throws MalformedURLException,
@@ -63,13 +62,18 @@ public class BlockchainHandler {
         }
     }
     
-    public static JSONObject getJSONObject(String jsonString){
+    public static JSONObject getJSONObject(String jsonString) throws ParseException{
         JSONParser parser = new JSONParser();
-        try{
-            return (JSONObject) parser.parse(jsonString);
-        }catch(ParseException e){
-            System.out.println("Parse Exception Occured!");
-        }
+        return (JSONObject) parser.parse(jsonString);
+    }
+    
+    public static String sendTransaction(String from, String to, String password){
+        JSONObject body = new JSONObject();
+        body.put("jsonrpc", "2.0");
+        body.put("method", "personal_unlockAccount");
+        
+        JSONArray parameters = new JSONArray();
+        
         return null;
     }
     
@@ -81,12 +85,18 @@ public class BlockchainHandler {
         body.put("id", 1);
         try{
             String result = sendPostRequest(body);
+            JSONObject jsonResult = getJSONObject(result);
+            
+            ArrayList accountList = (ArrayList) jsonResult.get("result");
+            return accountList;
         }catch(MalformedURLException e){
             System.out.println("Malformed URL!");
         }catch(ProtocolException f){
             System.out.println("Protocol Exception!");
         }catch(IOException e){
             System.out.println("IO Exception!");
+        }catch(ParseException e){
+            System.out.println("Partse Excepion!");
         }
         
         return null;
