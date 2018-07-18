@@ -1,4 +1,4 @@
 geth -identity "aetherchain" init .\genesis.json -datadir .\aetherChain
 PAUSE
-geth --bootnodes enode://343503a593bac7db3a829e7fc423d68422fb21bed4e88482bcdf58095f0274efe3dc664b9a5bb1d81638f60290b09342fb2d9ab6fa60450374777f1d55c30a3b@[127.0.0.1]:30305 --rpc --rpcapi "admin,miner,db,eth,net,web3,personal" --datadir .\aetherChain --networkid 9876 console
+geth --bootnodes enode://18b44cfa9e4d09af5335f4e2aa000b23c7f7aa2c1b5c4b562782b07e9951934ed64555b476eba5b347c2b057e991324a5e44ded08d547b7b5f772420ad054ba3@[127.0.0.1]:30305 --rpc --rpcapi "admin,miner,db,eth,net,web3,personal" --datadir .\aetherChain --networkid 9876 console
 PAUSE
