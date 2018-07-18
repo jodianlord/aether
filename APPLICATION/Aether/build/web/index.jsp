@@ -19,12 +19,6 @@
             }
         </style>
 
-
-
-
-
-
-
     </head>
     <body>
         <div class="container demo-1">
@@ -42,19 +36,19 @@
                         <div class="tab-content">
                             
                             <div id="login">   
-                                <form action="/" method="post">
+                                <form action="LoginServlet" method="post">
                                     <div class="field-wrap">
                                         <label>
-                                            Email Address<span class="req">*</span>
+                                            Username<span class="req">*</span>
                                         </label>
-                                        <input type="email"required autocomplete="off"/>
+                                        <input type="text" name='userid' required autocomplete="off"/>
                                     </div>
 
                                     <div class="field-wrap">
                                         <label>
                                             Password<span class="req">*</span>
                                         </label>
-                                        <input type="password"required autocomplete="off"/>
+                                        <input type="password" name='password' required autocomplete="off"/>
                                     </div>
 
                                     <p class="forgot"><a href="#">Forgot Password?</a></p>
@@ -89,12 +83,12 @@
                                         <input type="text" name='publickey' required autocomplete="off"/>
                                     </div>
 
-                                    <div class="field-wrap">
+<!--                                    <div class="field-wrap">
                                         <label>
                                             Private Key<span class="req">*</span>
                                         </label>
                                         <input type="text" name='privatekey' required autocomplete="off"/>
-                                    </div>
+                                    </div>-->
 
                                     <button type="submit" class="button button-block"/>SIGN UP</button>
                                 </form>

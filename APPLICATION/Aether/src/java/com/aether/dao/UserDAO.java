@@ -9,6 +9,7 @@ import com.aether.model.User;
 import com.aether.util.ConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,11 +33,11 @@ public class UserDAO {
     public void insertUser(User user) {
         try {
             PreparedStatement preparedStatement;
-            preparedStatement = connection.prepareStatement("insert into user(userid,password,publickey,privatekey) values (?,?,?,?)");
+            preparedStatement = connection.prepareStatement("insert into user(userid,password,publickey) values (?,?,?)");
             preparedStatement.setString(1, user.getUserid());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getPublickey());
-            preparedStatement.setString(4, user.getPrivatekey());
+//            preparedStatement.setString(4, user.getPrivatekey());
 
             preparedStatement.executeUpdate();
 
@@ -44,6 +45,24 @@ public class UserDAO {
             ex.printStackTrace();
         }
 
+    }
+    
+    public static String authenticate(String username) {
+        String password = null;
+
+        // Retrieve username from SQL Database
+        try (Connection conn = ConnectionManager.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement("select password from aether.user where userid = ? ");) {
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                password = rs.getString("password");
+            }
+            // Invalid username
+        } catch (SQLException ex) {
+            return null;
+        }
+        return password;
     }
 
     public void deleteUser(String userid) {
@@ -65,7 +84,7 @@ public class UserDAO {
             preparedStatement.setString(1, user.getUserid());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getPublickey());
-            preparedStatement.setString(4, user.getPrivatekey());
+//            preparedStatement.setString(4, user.getPrivatekey());
             preparedStatement.setString(5, user.getUserid());
             preparedStatement.executeUpdate();
 

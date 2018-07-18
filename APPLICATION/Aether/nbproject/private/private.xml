@@ -3,7 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/jodia/Documents/aether/APPLICATION/Aether/src/java/com/aether/blockchain/BlockchainHandler.java</file>
+=======
+            <file>file:/C:/Users/clare/Desktop/GIT_FYP/aether/APPLICATION/Aether/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/clare/Desktop/GIT_FYP/aether/APPLICATION/Aether/src/java/com/aether/controller/SignUpServlet.java</file>
+            <file>file:/C:/Users/clare/Desktop/GIT_FYP/aether/APPLICATION/Aether/src/java/com/aether/dao/UserDAO.java</file>
+            <file>file:/C:/Users/clare/Desktop/GIT_FYP/aether/APPLICATION/Aether/src/java/com/aether/model/User.java</file>
+            <file>file:/C:/Users/clare/Desktop/GIT_FYP/aether/APPLICATION/Aether/web/index.jsp</file>
+>>>>>>> BCrypt-Implementation
         </group>
     </open-files>
 </project-private>
