@@ -29,25 +29,19 @@ public class LoginServlet extends HttpServlet {
 //        HttpSession session = request.getSession();
         String userid = request.getParameter("userid");
         String password = request.getParameter("password");
-//        String publickey = request.getParameter("publickey");
 
-        if (userid.length() != 0) {
-            String authPassword = UserDAO.authenticate(userid);
-            // Valid username and password
+        String authPassword = UserDAO.authenticate(userid);
+        
+        if(authPassword != null){
             if (BCrypt.checkpw(password, authPassword)) {
                 response.sendRedirect("Success.jsp");
-            // Invalid username or password
-            } else {
-                response.sendRedirect("Error.jsp");
+                // Invalid username or password
             }
-        // Zero username length
-        } else {
+        }
+        else {
             response.sendRedirect("Error.jsp");
         }
 
-//        session.setAttribute("error", hashedPWD);
-        
-        
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -90,4 +84,3 @@ public class LoginServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-
