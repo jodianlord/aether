@@ -115,9 +115,8 @@ public class BlockchainHandler {
         try{
             String result = sendPostRequest(body);
             JSONObject jsonResult = getJSONObject(result);
-            return jsonResult.toJSONString();
-            //String transactionHash = (String) jsonResult.get("result");
-            //return transactionHash;
+            String transactionHash = (String) jsonResult.get("result");
+            return transactionHash;
         }catch(MalformedURLException e){
             System.out.println("Malformed URL!");
         }catch(ProtocolException f){

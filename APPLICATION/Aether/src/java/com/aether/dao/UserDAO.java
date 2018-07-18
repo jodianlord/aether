@@ -36,7 +36,7 @@ public class UserDAO {
             preparedStatement = connection.prepareStatement("insert into user(userid,password,publickey) values (?,?,?)");
             preparedStatement.setString(1, user.getUserid());
             preparedStatement.setString(2, user.getPassword());
-//            preparedStatement.setString(4, user.getPrivatekey());
+            preparedStatement.setString(3, user.getPublicKey());
 
             preparedStatement.executeUpdate();
 
@@ -78,12 +78,11 @@ public class UserDAO {
 
     public void updateUser(User user) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("update user set userid=?, password=?, publickey=?, privatekey=? where userid=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("update user set userid=?, password=?, publickey=? where userid=?");
             // Parameters start with 1
             preparedStatement.setString(1, user.getUserid());
             preparedStatement.setString(2, user.getPassword());
-//            preparedStatement.setString(4, user.getPrivatekey());
-            preparedStatement.setString(5, user.getUserid());
+            preparedStatement.setString(3, user.getPublicKey());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

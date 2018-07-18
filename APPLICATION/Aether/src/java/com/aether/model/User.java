@@ -11,14 +11,23 @@ package com.aether.model;
  */
 public class User {
 
-    public User(String userid, String password) {
+    public User(String userid, String password, String publicKey) {
         this.userid = userid;
         this.password = password;
+        this.publicKey = publicKey;
     }
     
     private String userid;
     private String password;
+    private String publicKey;
 
+    public String getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
+    }
 
     public String getUserid() {
         return userid;

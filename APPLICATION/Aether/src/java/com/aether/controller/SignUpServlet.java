@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.mindrot.BCrypt;
+import com.aether.blockchain.BlockchainHandler;
 
 @WebServlet(name = "SignUpServlet", urlPatterns = {"/SignUpServlet"})
 public class SignUpServlet extends HttpServlet {
@@ -33,6 +34,7 @@ public class SignUpServlet extends HttpServlet {
 //        HttpSession session = request.getSession();
         String userid = request.getParameter("userid");
         String password = request.getParameter("password");
+        String publickey = BlockchainHandler.createAccount(password);
 
         //String privatekey = request.getParameter("privatekey");
 
@@ -54,7 +56,7 @@ public class SignUpServlet extends HttpServlet {
 //                System.out.println("It does not match");
 
         
-        User user = new User(userid, hashedPWD);
+        User user = new User(userid, hashedPWD, publickey);
         userdao.insertUser(user);
 
 //        session.setAttribute("error", hashedPWD);
