@@ -19,7 +19,6 @@ public class BlockchainHandler {
     
     private static HttpURLConnection con;
     private static final String URL = "http://127.0.0.1:8545";
-<<<<<<< HEAD
     private static final double ETHTOWEI = 1000000000000000000.0;
     
     
@@ -30,13 +29,6 @@ public class BlockchainHandler {
     
     public static double ethToWei(double eth){
         return eth * ETHTOWEI;
-=======
-    
-    
-    public static void main(String[] args){
-        
-        
->>>>>>> BCrypt-Implementation
     }
     
     public static String sendPostRequest(JSONObject body) throws MalformedURLException,
@@ -76,7 +68,6 @@ public class BlockchainHandler {
         }
     }
     
-<<<<<<< HEAD
     public static JSONObject getJSONObject(String jsonString) throws ParseException{
         JSONParser parser = new JSONParser();
         return (JSONObject) parser.parse(jsonString);
@@ -137,15 +128,6 @@ public class BlockchainHandler {
             System.out.println("Parse Exception!");
         }
         
-=======
-    public static JSONObject getJSONObject(String jsonString){
-        JSONParser parser = new JSONParser();
-        try{
-            return (JSONObject) parser.parse(jsonString);
-        }catch(ParseException e){
-            System.out.println("Parse Exception Occured!");
-        }
->>>>>>> BCrypt-Implementation
         return null;
     }
     
@@ -157,24 +139,18 @@ public class BlockchainHandler {
         body.put("id", 1);
         try{
             String result = sendPostRequest(body);
-<<<<<<< HEAD
             JSONObject jsonResult = getJSONObject(result);
             
             ArrayList accountList = (ArrayList) jsonResult.get("result");
             return accountList;
-=======
->>>>>>> BCrypt-Implementation
         }catch(MalformedURLException e){
             System.out.println("Malformed URL!");
         }catch(ProtocolException f){
             System.out.println("Protocol Exception!");
         }catch(IOException e){
             System.out.println("IO Exception!");
-<<<<<<< HEAD
         }catch(ParseException e){
             System.out.println("Partse Excepion!");
-=======
->>>>>>> BCrypt-Implementation
         }
         
         return null;
