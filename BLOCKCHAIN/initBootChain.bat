@@ -1,0 +1,1 @@
+bootnode --nodekey=bootnode_keys/boot.key -addr ":30305"

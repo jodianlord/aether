@@ -1,0 +1,1 @@
+bootnode --genkey=bootnode_keys/boot.key
