@@ -19,10 +19,16 @@ public class BlockchainHandler {
     
     private static HttpURLConnection con;
     private static final String URL = "http://127.0.0.1:8545";
+    private static final double ETHTOWEI = 1000000000000000000.0;
     
     
     public static void main(String[] args){
-        System.out.println(getListOfAccounts().toString());
+        //System.out.println(sendTransaction("0x9411c7c7E859d79FF025053137D32Db7431DDcB5", "0x7397fcf65152b25701a9F8640a2aEc6808209f61", 10.0).toString());
+        System.out.println(createAccount("password"));
+    }
+    
+    public static double ethToWei(double eth){
+        return eth * ETHTOWEI;
     }
     
     public static String sendPostRequest(JSONObject body) throws MalformedURLException,
@@ -67,12 +73,60 @@ public class BlockchainHandler {
         return (JSONObject) parser.parse(jsonString);
     }
     
-    public static String sendTransaction(String from, String to, String password){
+    public static String sendTransaction(String from, String to, double value){
         JSONObject body = new JSONObject();
         body.put("jsonrpc", "2.0");
-        body.put("method", "personal_unlockAccount");
+        body.put("method", "eth_sendTransaction");
         
+        JSONObject params = new JSONObject();
+        params.put("from", from);
+        params.put("to", to);
+        params.put("value", ethToWei(value));
         JSONArray parameters = new JSONArray();
+        parameters.add(params);
+        body.put("params", params);
+        
+        try{
+            String result = sendPostRequest(body);
+            JSONObject jsonResult = getJSONObject(result);
+            String transactionHash = (String) jsonResult.get("result");
+            return transactionHash;
+        }catch(MalformedURLException e){
+            System.out.println("Malformed URL!");
+        }catch(ProtocolException f){
+            System.out.println("Protocol Exception!");
+        }catch(IOException e){
+            System.out.println("IO Exception!");
+        }catch(ParseException e){
+            System.out.println("Parse Exception!");
+        }
+        
+        return null;
+    }
+    
+    public static String createAccount(String password){
+        JSONObject body = new JSONObject();
+        body.put("jsonrpc", "2.0");
+        body.put("method", "personal_newAccount");
+        JSONArray params = new JSONArray();
+        params.add(password);
+        body.put("params", params);
+        
+        try{
+            String result = sendPostRequest(body);
+            JSONObject jsonResult = getJSONObject(result);
+            return jsonResult.toJSONString();
+            //String transactionHash = (String) jsonResult.get("result");
+            //return transactionHash;
+        }catch(MalformedURLException e){
+            System.out.println("Malformed URL!");
+        }catch(ProtocolException f){
+            System.out.println("Protocol Exception!");
+        }catch(IOException e){
+            System.out.println("IO Exception!");
+        }catch(ParseException e){
+            System.out.println("Parse Exception!");
+        }
         
         return null;
     }
