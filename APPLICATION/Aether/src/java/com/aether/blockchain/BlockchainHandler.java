@@ -23,7 +23,7 @@ public class BlockchainHandler {
     
     
     public static void main(String[] args){
-        System.out.println(sendTransaction("0x9411c7c7E859d79FF025053137D32Db7431DDcB5", "0x7397fcf65152b25701a9F8640a2aEc6808209f61", 10.0).toString());
+        System.out.println(sendTransaction("0x9411c7c7E859d79FF025053137D32Db7431DDcB5", "0x7397fcf65152b25701a9F8640a2aEc6808209f61", 50.0).toString());
         //System.out.println(createAccount("password"));
     }
     
