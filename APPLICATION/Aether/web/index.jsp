@@ -13,8 +13,17 @@
         <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
 
         <style type="text/css">
-            body{
+            body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+                max-height: 100%;
+                margin: 0;
+                padding: 0;
                 background-image: url("img/bg1.png");
+                background-size:100% 100%;
                 background-repeat: no-repeat;
             }
         </style>
@@ -34,7 +43,7 @@
                         </ul>
 
                         <div class="tab-content">
-                            
+
                             <div id="login">   
                                 <form action="LoginServlet" method="post">
                                     <div class="field-wrap">
@@ -56,8 +65,8 @@
                                     <button class="button button-block"/>LOG IN</button>
                                 </form>
                             </div>
-                            
-                            
+
+
                             <div id="signup">   
                                 <form action="SignUpServlet" method="post">
                                     <div class="top-row">
@@ -76,12 +85,12 @@
                                         </div>
                                     </div>
 
-<!--                                    <div class="field-wrap">
-                                        <label>
-                                            Private Key<span class="req">*</span>
-                                        </label>
-                                        <input type="text" name='privatekey' required autocomplete="off"/>
-                                    </div>-->
+                                    <!--                                    <div class="field-wrap">
+                                                                            <label>
+                                                                                Private Key<span class="req">*</span>
+                                                                            </label>
+                                                                            <input type="text" name='privatekey' required autocomplete="off"/>
+                                                                        </div>-->
 
                                     <button type="submit" id="signupbutton" class="button button-block"/>SIGN UP</button>
                                 </form>
@@ -97,7 +106,7 @@
         <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
         <script src="js/jquery-confirm.js"></script>
         <script>
-            $("#signupbutton").click(function(){
+            $("#signupbutton").click(function () {
                 $.alert({
                     title: 'Account Created!',
                     content: 'Your account has been created!',
