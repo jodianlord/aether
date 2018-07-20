@@ -35,6 +35,7 @@ public class SignUpServlet extends HttpServlet {
         String userid = request.getParameter("userid");
         String password = request.getParameter("password");
         String publickey = BlockchainHandler.createAccount(password);
+//        publickey = "test";
 
         //String privatekey = request.getParameter("privatekey");
 

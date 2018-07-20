@@ -11,6 +11,7 @@
         <link rel="stylesheet" type="text/css" href="css/normalize.css" />
         <link rel="stylesheet" type="text/css" href="css/loginbox.css" />
         <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
+        <link rel="stylesheet" type="text/css" href="css/jquery-confirm.css">
 
         <style type="text/css">
             body {
@@ -68,7 +69,8 @@
 
 
                             <div id="signup">   
-                                <form action="SignUpServlet" method="post">
+                                <!--<form>-->
+                                <form id="SignUpForm" action="SignUpServlet" method="post">
                                     <div class="top-row">
                                         <div class="field-wrap">
                                             <label>
@@ -93,6 +95,9 @@
                                                                         </div>-->
 
                                     <button type="submit" id="signupbutton" class="button button-block"/>SIGN UP</button>
+<!--                                <div id="other">
+                                    Trigger the handler
+                                </div>-->
                                 </form>
                             </div>
                         </div><!-- tab-content -->
@@ -103,15 +108,29 @@
         <script src="js/TweenLite.min.js"></script>
         <script src="js/EasePack.min.js"></script>
         <script src="js/demo-1.js"></script>
-        <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        <script src='js/jquery-1.8.3.min.js'></script>
         <script src="js/jquery-confirm.js"></script>
         <script>
-            $("#signupbutton").click(function () {
-                $.alert({
-                    title: 'Account Created!',
-                    content: 'Your account has been created!',
+
+
+            $("#signupbutton").click(function (event) {
+                event.preventDefault();
+                $.confirm({
+                    title: 'Sign Up!',
+                    content: 'Are you sure you want to Sign Up?',
+                    buttons: {
+                        confirm: function () {
+                            $("#SignUpForm").submit();
+                        },
+                        cancel: function () {
+//                            $.alert('Sign Up Failed!');
+//                            return false;
+                        }
+                    }
                 });
             });
+            
+            
             $('.form').find('input, textarea').on('keyup blur focus', function (e) {
 
                 var $this = $(this),
