@@ -31,19 +31,16 @@ public class UserDAO {
     }
 
     public void insertUser(User user) {
-        try {
-            PreparedStatement preparedStatement;
-            preparedStatement = connection.prepareStatement("insert into user(userid,password,publickey) values (?,?,?)");
+        try (Connection conn = ConnectionManager.getConnection();
+                PreparedStatement preparedStatement = conn.prepareStatement("insert into aether.user(userid,password,publickey) values (?,?,?)");) {
             preparedStatement.setString(1, user.getUserid());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getPublicKey());
 
             preparedStatement.executeUpdate();
-
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
     }
     
     public static String authenticate(String username) {
