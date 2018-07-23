@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/jodia/Documents/aether/APPLICATION/Aether/src/java/com/aether/controller/SignUpServlet.java</file>
-            <file>file:/C:/Users/jodia/Documents/aether/APPLICATION/Aether/src/java/com/aether/controller/LoginServlet.java</file>
-            <file>file:/C:/Users/jodia/Documents/aether/APPLICATION/Aether/src/java/com/aether/blockchain/BlockchainHandler.java</file>
-            <file>file:/C:/Users/jodia/Documents/aether/APPLICATION/Aether/web/index.jsp</file>
-            <file>file:/C:/Users/jodia/Documents/aether/APPLICATION/Aether/web/scriptslibs.jsp</file>
-            <file>file:/C:/Users/jodia/Documents/aether/APPLICATION/Aether/web/Success.jsp</file>
-            <file>file:/C:/Users/jodia/Documents/aether/APPLICATION/Aether/web/dashboard.jsp</file>
+            <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/src/java/com/aether/blockchain/BlockchainHandler.java</file>
+            <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/src/java/com/aether/dao/UserDAO.java</file>
+            <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/src/java/com/aether/util/connection.properties</file>
         </group>
     </open-files>
 </project-private>

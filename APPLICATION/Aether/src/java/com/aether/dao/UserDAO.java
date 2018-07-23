@@ -11,8 +11,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import com.aether.util.Dreamfactory;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -44,9 +48,20 @@ public class UserDAO {
     }
     
     public static String authenticate(String username) {
-        String password = null;
 
-        // Retrieve username from SQL Database
+        // Retrieve username from Dreamfactory
+        
+        HashMap<String, String> filter = new HashMap<String, String>();
+        filter.put("userid", username);
+        JSONArray record = Dreamfactory.getRecordsFromTable("user", filter);
+        if(record == null || record.size() == 0){
+            return null;
+        }
+        
+        JSONObject user = (JSONObject) record.get(0);
+        return (String) user.get("password");
+        
+        /*
         try (Connection conn = ConnectionManager.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement("select password from aether.user where userid = ? ");) {
             pstmt.setString(1, username);
@@ -59,6 +74,7 @@ public class UserDAO {
             return null;
         }
         return password;
+        */
     }
 
     public void deleteUser(String userid) {
