@@ -1,0 +1,73 @@
+<!-- **********************************************************************************************************************************************************
+MAIN SIDEBAR MENU
+*********************************************************************************************************************************************************** -->
+<!--sidebar start-->
+<aside>
+    <div id="sidebar"  class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+
+            <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+            <h5 class="centered"><%=session.getAttribute("userid")%></h5>
+
+            <li class="mt">
+                <a id="dashboardside" href="dashboard.jsp">
+                    <i class="fa fa-dashboard"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="fa fa-user"></i>
+                    <span>Verify New User</span>
+                </a>
+            </li>
+
+            <li class="sub-menu">
+                <a id="transactionside" href="transaction.jsp" >
+                    <i class="fa fa-money-bill-wave"></i>
+                    <span>Make A transaction</span>
+                </a>
+            </li>
+            <li class="sub-menu">
+                <a id="admindashboardside" href="admindashboard.jsp" >
+                    <i class="fas fa-unlock-alt"></i>
+                    <span>Admin Dashboard</span>
+                </a>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="fa fa-tasks"></i>
+                    <span>Forms</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="form_component.html">Form Components</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class="fa fa-th"></i>
+                    <span>Data Tables</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="basic_table.html">Basic Table</a></li>
+                    <li><a  href="responsive_table.html">Responsive Table</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="javascript:;" >
+                    <i class=" fa fa-bar-chart-o"></i>
+                    <span>Charts</span>
+                </a>
+                <ul class="sub">
+                    <li><a  href="morris.html">Morris</a></li>
+                    <li><a  href="chartjs.html">Chartjs</a></li>
+                </ul>
+            </li>
+
+        </ul>
+        <!-- sidebar menu end-->
+    </div>
+</aside>
+<!--sidebar end-->
