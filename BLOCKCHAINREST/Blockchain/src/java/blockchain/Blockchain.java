@@ -102,6 +102,7 @@ public class Blockchain extends HttpServlet {
                 }
             }
         }
+        request.getSession().invalidate();
     }
 
     public static String getBody(HttpServletRequest request) throws IOException {
