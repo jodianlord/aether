@@ -61,6 +61,18 @@ public class UserDAO {
         */
     }
     
+    public static User getUser(String userid){
+        HashMap<String, String> filter = new HashMap<String, String>();
+        filter.put("userid", userid);
+        JSONArray record = Dreamfactory.getRecordsFromTable("user", filter);
+        if(record == null || record.size() == 0){
+            return null;
+        }
+        JSONObject oneRecord = (JSONObject) record.get(0);
+        User user = new User(userid, (String) oneRecord.get("password"), (String) oneRecord.get("publickey"));
+        return user;
+    }
+    
     public static String authenticate(String username) {
 
         // Retrieve username from Dreamfactory

@@ -119,6 +119,7 @@ public class BlockchainHandler {
             for (int i = 0; i < chars.length; i++) {
                 hexdec.append(Integer.toHexString((int) chars[i]));
             }
+            System.out.println(hexdec.toString());
             return hexdec.toString();
         } catch (MalformedURLException e) {
             System.out.println("Malformed URL!");
@@ -131,5 +132,10 @@ public class BlockchainHandler {
         }
 
         return null;
+    }
+    
+    public static double convertToEth(String dec){
+        int balance = Integer.parseInt(dec);
+        return balance / ETHTOWEI;
     }
 }

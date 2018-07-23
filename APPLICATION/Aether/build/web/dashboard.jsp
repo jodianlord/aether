@@ -5,7 +5,13 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="com.aether.dao.UserDAO, com.aether.blockchain.BlockchainHandler" %>
 <!DOCTYPE html>
+<%
+    String publickey = UserDAO.getUser((String) session.getAttribute("userid")).getPublicKey();
+    String balance = BlockchainHandler.getBalance(publickey);
+    double eth = BlockchainHandler.convertToEth(balance);
+%>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -23,6 +29,7 @@
         <link rel="stylesheet" type="text/css" href="css/zabuto_calendar.css">
         <link rel="stylesheet" type="text/css" href="js/gritter/css/jquery.gritter.css" />
         <link rel="stylesheet" type="text/css" href="lineicons/style.css">    
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 
         <!-- Custom styles for this template -->
         <link href="css/style.css" rel="stylesheet">
@@ -72,7 +79,7 @@
                         <h5 class="centered"><%=session.getAttribute("userid")%></h5>
 
                         <li class="mt">
-                            <a class="active" href="index.html">
+                            <a class="active" href="dashboard.jsp">
                                 <i class="fa fa-dashboard"></i>
                                 <span>Dashboard</span>
                             </a>
@@ -83,23 +90,13 @@
                                 <i class="fa fa-user"></i>
                                 <span>Verify New User</span>
                             </a>
-                            <ul class="sub">
-                                <li><a  href="general.html">General</a></li>
-                                <li><a  href="buttons.html">Buttons</a></li>
-                                <li><a  href="panels.html">Panels</a></li>
-                            </ul>
                         </li>
 
                         <li class="sub-menu">
-                            <a href="javascript:;" >
-                                <i class="fa fa-cogs"></i>
-                                <span>Components</span>
+                            <a href="transaction.jsp" >
+                                <i class="fa fa-money-bill-wave"></i>
+                                <span>Make A transaction</span>
                             </a>
-                            <ul class="sub">
-                                <li><a  href="calendar.html">Calendar</a></li>
-                                <li><a  href="gallery.html">Gallery</a></li>
-                                <li><a  href="todo_list.html">Todo List</a></li>
-                            </ul>
                         </li>
                         <li class="sub-menu">
                             <a href="javascript:;" >
@@ -159,113 +156,27 @@
                         <div class="col-lg-1"></div>
                         <div class="col-lg-9 main-chart">
                             <div class="row mt">
-                                <!-- SERVER STATUS PANELS -->
-                                <div class="col-md-4 col-sm-4 mb">
-                                    <div class="white-panel pn donut-chart">
-                                        <div class="white-header">
-                                            <h5>SERVER LOAD</h5>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6 col-xs-6 goleft">
-                                                <p><i class="fa fa-database"></i> 70%</p>
-                                            </div>
-                                        </div>
-                                        <canvas id="serverstatus01" height="120" width="120"></canvas>
-                                        <script>
-                                            var doughnutData = [
-                                                {
-                                                    value: 70,
-                                                    color: "#68dff0"
-                                                },
-                                                {
-                                                    value: 30,
-                                                    color: "#fdfdfd"
-                                                }
-                                            ];
-                                            var myDoughnut = new Chart(document.getElementById("serverstatus01").getContext("2d")).Doughnut(doughnutData);
-                                        </script>
-                                    </div><! --/grey-panel -->
-                                </div><!-- /col-md-4-->
-
-
-                                <div class="col-md-4 col-sm-4 mb">
-                                    <div class="white-panel pn">
-                                        <div class="white-header">
-                                            <h5>TOP PRODUCT</h5>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6 col-xs-6 goleft">
-                                                <p><i class="fa fa-heart"></i> 122</p>
-                                            </div>
-                                            <div class="col-sm-6 col-xs-6"></div>
-                                        </div>
-                                        <div class="centered">
-                                            <img src="img/product.png" width="120">
-                                        </div>
-                                    </div>
-                                </div><!-- /col-md-4 -->
-
-                                <div class="col-md-4 mb">
-                                    <!-- WHITE PANEL - TOP USER -->
-                                    <div class="white-panel pn">
-                                        <div class="white-header">
-                                            <h5>TOP USER</h5>
-                                        </div>
-                                        <p><img src="img/ui-zac.jpg" class="img-circle" width="80"></p>
-                                        <p><b>Zac Snider</b></p>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <p class="small mt">MEMBER SINCE</p>
-                                                <p>2012</p>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p class="small mt">TOTAL SPEND</p>
-                                                <p>$ 47,60</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!-- /col-md-4 -->
-
-
                             </div><!-- /row -->
-
-
                             <div class="row">
                                 <!-- TWITTER PANEL -->
-                                <div class="col-md-4 mb">
+                                <div class="col-md-6 mb">
                                     <div class="darkblue-panel pn">
                                         <div class="darkblue-header">
                                             <h5>BALANCE</h5>
                                         </div>
                                         <h1 class="ml15">
-                                            <span class="word">100.00</span>
+                                            <span class="word"><%= eth%></span>
                                             <span class="word">ETH</span>
                                         </h1>
-                                        <p>April 17, 2014</p>
-                                        <footer>
-                                            <div class="pull-left">
-                                                <h5><i class="fa fa-hdd-o"></i> 17 GB</h5>
-                                            </div>
-                                            <div class="pull-right">
-                                                <h5>60% Used</h5>
-                                            </div>
-                                        </footer>
+                                        <h1 class="ml15">
+                                            <span class="word"><%= balance%></span>
+                                            <span class="word">WEI</span>
+                                        </h1>
                                     </div><! -- /darkblue panel -->
                                 </div><!-- /col-md-4 -->
 
 
-                                <div class="col-md-4 mb">
-                                    <!-- INSTAGRAM PANEL -->
-                                    <div class="instagram-panel pn">
-                                        <i class="fa fa-instagram fa-4x"></i>
-                                        <p>@THISISYOU<br/>
-                                            5 min. ago
-                                        </p>
-                                        <p><i class="fa fa-comment"></i> 18 | <i class="fa fa-heart"></i> 49</p>
-                                    </div>
-                                </div><!-- /col-md-4 -->
-
-                                <div class="col-md-4 col-sm-4 mb">
+                                <div class="col-md-6 col-sm-6 mb">
                                     <!-- REVENUE PANEL -->
                                     <div class="darkblue-panel pn">
                                         <div class="darkblue-header">
@@ -280,60 +191,14 @@
 
                             </div><!-- /row -->
 
-                            <div class="row mt">
-                                <!--CUSTOM CHART START -->
-                                <div class="border-head">
-                                    <h3>VISITS</h3>
-                                </div>
-                                <div class="custom-bar-chart">
-                                    <ul class="y-axis">
-                                        <li><span>10.000</span></li>
-                                        <li><span>8.000</span></li>
-                                        <li><span>6.000</span></li>
-                                        <li><span>4.000</span></li>
-                                        <li><span>2.000</span></li>
-                                        <li><span>0</span></li>
-                                    </ul>
-                                    <div class="bar">
-                                        <div class="title">JAN</div>
-                                        <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top">85%</div>
-                                    </div>
-                                    <div class="bar ">
-                                        <div class="title">FEB</div>
-                                        <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>
-                                    </div>
-                                    <div class="bar ">
-                                        <div class="title">MAR</div>
-                                        <div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>
-                                    </div>
-                                    <div class="bar ">
-                                        <div class="title">APR</div>
-                                        <div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>
-                                    </div>
-                                    <div class="bar">
-                                        <div class="title">MAY</div>
-                                        <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">32%</div>
-                                    </div>
-                                    <div class="bar ">
-                                        <div class="title">JUN</div>
-                                        <div class="value tooltips" data-original-title="6.200" data-toggle="tooltip" data-placement="top">62%</div>
-                                    </div>
-                                    <div class="bar">
-                                        <div class="title">JUL</div>
-                                        <div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>
-                                    </div>
-                                </div>
-                                <!--custom chart end-->
-                            </div><!-- /row -->	
-
                         </div><!-- /col-lg-9 END SECTION MIDDLE -->
 
 
-                    
+
                     </div><! --/row -->
                 </section>
             </section>
-            
+
             <!--main content end-->
         </section>
 
@@ -396,22 +261,22 @@
 
         <script type="application/javascript">
             anime.timeline({loop: false})
-                .add({
-                  targets: '.ml15 .word',
-                  scale: [14,1],
-                  opacity: [0,1],
-                  easing: "easeOutCirc",
-                  duration: 800,
-                  delay: function(el, i) {
-                    return 800 * i;
-                  }
-                })
+            .add({
+            targets: '.ml15 .word',
+            scale: [14,1],
+            opacity: [0,1],
+            easing: "easeOutCirc",
+            duration: 200,
+            delay: function(el, i) {
+            return 800 * i;
+            }
+            })
         </script>
 
         <style>
             .ml15 {
                 font-weight: 800;
-                font-size: 3.8em;
+                font-size: 3em;
                 text-transform: uppercase;
                 letter-spacing: 0.5em;
             }
