@@ -22,6 +22,10 @@ import org.json.simple.JSONObject;
  */
 public class RESTHandler {
     private static HttpURLConnection con;
+    
+    public static String sendDeleteRequest(String requestURL){
+        return null;
+    }
     public static String sendPostRequest(String requestURL, JSONObject body) throws MalformedURLException,
             ProtocolException, IOException{
         byte[] postData = body.toString().getBytes(StandardCharsets.UTF_8);

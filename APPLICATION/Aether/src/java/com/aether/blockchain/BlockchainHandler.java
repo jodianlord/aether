@@ -18,14 +18,8 @@ import org.json.simple.parser.*;
 public class BlockchainHandler {
     
     private static HttpURLConnection con;
-    private static final String URL = "http://127.0.0.1:8545";
+    private static final String URL = "http://vm.jordysamuel.com:30301/Blockchain/?sendRaw=true";
     private static final double ETHTOWEI = 1000000000000000000.0;
-    
-    
-    public static void main(String[] args){
-        System.out.println(sendTransaction("0x9411c7c7E859d79FF025053137D32Db7431DDcB5", "0x7397fcf65152b25701a9F8640a2aEc6808209f61", 50.0).toString());
-        //System.out.println(createAccount("password"));
-    }
     
     public static double ethToWei(double eth){
         return eth * ETHTOWEI;
@@ -111,9 +105,11 @@ public class BlockchainHandler {
         JSONArray params = new JSONArray();
         params.add(password);
         body.put("params", params);
-        
+        body.put("id", 1);
+        System.out.println(body.toString());
         try{
             String result = sendPostRequest(body);
+            System.out.println(result);
             JSONObject jsonResult = getJSONObject(result);
             String transactionHash = (String) jsonResult.get("result");
             return transactionHash;
@@ -149,7 +145,7 @@ public class BlockchainHandler {
         }catch(IOException e){
             System.out.println("IO Exception!");
         }catch(ParseException e){
-            System.out.println("Partse Excepion!");
+            System.out.println("Parse Excepion!");
         }
         
         return null;

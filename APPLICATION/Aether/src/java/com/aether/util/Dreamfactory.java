@@ -35,6 +35,7 @@ public class Dreamfactory {
     }
     
     public static String deleteRecords(String table, String key, String value){
+        
         return null;
     }
     
@@ -58,6 +59,7 @@ public class Dreamfactory {
         body.put("resource", resource);
         String function = "_table/" + table;
         readDreamfactoryProperties(function, null);
+        System.out.println(body.toString());
         try{
             return RESTHandler.sendPostRequest(requestURL, body);
         }catch(MalformedURLException e){

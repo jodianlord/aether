@@ -14,3 +14,23 @@
 18:38:21.423628 version@stat F·[1] S·550B[550B] Sc·[0.25]
 18:38:21.431604 db@janitor F·3 G·0
 18:38:21.431604 db@open done T·24.1256ms
+=============== Jul 23, 2018 (+08) ===============
+20:00:39.907519 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+20:00:39.908519 version@stat F·[1] S·550B[550B] Sc·[0.25]
+20:00:39.908519 db@open opening
+20:00:39.908519 journal@recovery F·1
+20:00:39.908519 journal@recovery recovering @3
+20:00:39.925243 memdb@flush created L0@5 N·3 S·290B "Blo..ion,v12":"dbU..ata,v11"
+20:00:39.926242 version@stat F·[2] S·840B[840B] Sc·[0.50]
+20:00:39.931233 db@janitor F·4 G·0
+20:00:39.931233 db@open done T·22.714ms
+=============== Jul 23, 2018 (+08) ===============
+20:00:41.796472 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+20:00:41.797470 version@stat F·[2] S·840B[840B] Sc·[0.50]
+20:00:41.797470 db@open opening
+20:00:41.797470 journal@recovery F·1
+20:00:41.802458 journal@recovery recovering @6
+20:00:41.807854 memdb@flush created L0@8 N·1 S·302B "eth..L\x87%,v15":"eth..L\x87%,v15"
+20:00:41.811873 version@stat F·[3] S·1KiB[1KiB] Sc·[0.75]
+20:00:41.819824 db@janitor F·5 G·0
+20:00:41.819824 db@open done T·22.3544ms
