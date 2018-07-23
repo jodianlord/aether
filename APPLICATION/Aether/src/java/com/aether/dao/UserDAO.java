@@ -29,11 +29,13 @@ public class UserDAO {
     private Connection connection;
 
     public UserDAO() {
+        /*
         try {
             connection = ConnectionManager.getConnection();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        */
     }
 
     public void insertUser(User user) {
@@ -43,7 +45,7 @@ public class UserDAO {
         record.put("publickey", user.getPublicKey());
         ArrayList<Map<String,String>> toFeed = new ArrayList<Map<String,String>>();
         toFeed.add(record);
-        System.out.println(Dreamfactory.updateRecords("user", toFeed));
+        System.out.println(Dreamfactory.createRecords("user", toFeed));
         
         /*
         try (Connection conn = ConnectionManager.getConnection();

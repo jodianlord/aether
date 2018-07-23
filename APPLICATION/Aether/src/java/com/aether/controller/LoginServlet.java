@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.mindrot.BCrypt;
 
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
@@ -29,16 +30,18 @@ public class LoginServlet extends HttpServlet {
 //        HttpSession session = request.getSession();
         String userid = request.getParameter("userid");
         String password = request.getParameter("password");
-
+        HttpSession session = request.getSession();
         String authPassword = UserDAO.authenticate(userid);
         
         if(authPassword != null){
             if (BCrypt.checkpw(password, authPassword)) {
+                session.setAttribute("userid", userid);
                 response.sendRedirect("dashboard.jsp");
                 // Invalid username or password
             }
         }
         else {
+            session.setAttribute("error", password);
             response.sendRedirect("Error.jsp");
         }
 

@@ -31,10 +31,10 @@ public class Dreamfactory {
         record.put("publickey", "dickshit");
         ArrayList<Map<String,String>> toFeed = new ArrayList<Map<String,String>>();
         toFeed.add(record);
-        System.out.println(updateRecords("user", toFeed).toString());
+        System.out.println(createRecords("user", toFeed).toString());
     }
     
-    public static String updateRecords(String table, ArrayList<Map<String, String>> record){
+    public static String createRecords(String table, ArrayList<Map<String, String>> record){
         if(record == null || record.size() == 0){
             return null;
         }
