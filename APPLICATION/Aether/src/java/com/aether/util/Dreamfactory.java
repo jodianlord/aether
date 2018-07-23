@@ -58,10 +58,10 @@ public class Dreamfactory {
         }
         body.put("resource", resource);
         String function = "_table/" + table;
-        readDreamfactoryProperties(function, null);
+        buildURL(function, null);
         System.out.println(body.toString());
         try{
-            return RESTHandler.sendPostRequest(requestURL, body);
+            return RESTHandler.sendPostRequest(requestURL, body, "df.key");
         }catch(MalformedURLException e){
             e.printStackTrace();
         }catch(ProtocolException e){
@@ -91,10 +91,10 @@ public class Dreamfactory {
         }
         
         String function = "_table/" + table;
-        readDreamfactoryProperties(function, params);
+        buildURL(function, params);
         String result;
         try {
-            result = RESTHandler.sendGetRequest(requestURL);
+            result = RESTHandler.sendGetRequest(requestURL, "df.key");
         } catch (IOException e) {
             System.out.println("IO Exception!");
             return null;
@@ -109,8 +109,8 @@ public class Dreamfactory {
         }
         return null;
     }
-
-    private static void readDreamfactoryProperties(String function, String params) {
+    
+    private static void buildURL(String function, String params) {
         InputStream is = null;
         try {
             // Retrieve properties from connection.properties via the CLASSPATH
@@ -123,9 +123,9 @@ public class Dreamfactory {
             String host = props.getProperty("df.host");
             String key = props.getProperty("df.key");
 
-            requestURL = host + function + "?api_key=" + key;
+            requestURL = host + function;
             if (params != null && params.length() != 0) {
-                requestURL += "&" + params;
+                requestURL += "?" + params;
             }
         } catch (Exception ex) {
             // unable to load properties file
@@ -139,7 +139,7 @@ public class Dreamfactory {
                 try {
                     is.close();
                 } catch (IOException ex) {
-                    Logger.getLogger(ConnectionManager.class.getName()).log(Level.WARNING, "Unable to close connection.properties", ex);
+                    Logger.getLogger(ConnectionManager.class.getName()).log(Level.WARNING, "Unable to close dreamfactory.properties", ex);
                 }
             }
         }

@@ -9,6 +9,7 @@ import com.aether.util.RESTHandler;
 import java.net.*;
 import java.util.*;
 import java.io.*;
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import org.json.simple.*;
 import org.json.simple.parser.*;
@@ -21,11 +22,7 @@ public class BlockchainHandler {
 
     private static HttpURLConnection con;
     private static final String URL = "http://vm.jordysamuel.com:30301/Blockchain/";
-    private static final double ETHTOWEI = 1000000000000000000.0;
-
-    public static double ethToWei(double eth) {
-        return eth * ETHTOWEI;
-    }
+    private static final BigInteger ETHTOWEI = new BigInteger("1000000000000000000");
 
     public static JSONObject getJSONObject(String jsonString) throws ParseException {
         JSONParser parser = new JSONParser();
@@ -43,7 +40,7 @@ public class BlockchainHandler {
         body.put("param", param);
 
         try {
-            String result = RESTHandler.sendPostRequest(URL, body);
+            String result = RESTHandler.sendPostRequest(URL, body, null);
             JSONObject jsonResult = getJSONObject(result);
             String transactionHash = (String) jsonResult.get("result");
             return transactionHash;
@@ -67,7 +64,7 @@ public class BlockchainHandler {
         param.put("password", password);
         body.put("param", param);
         try {
-            String result = RESTHandler.sendPostRequest(URL, body);
+            String result = RESTHandler.sendPostRequest(URL, body, null);
             System.out.println(result);
             JSONObject jsonResult = getJSONObject(result);
             String transactionHash = (String) jsonResult.get("result");
@@ -88,7 +85,7 @@ public class BlockchainHandler {
     public static ArrayList<String> getListOfAccounts() {
         String requestURL = URL + "?method=getListOfAccounts";
         try {
-            String result = RESTHandler.sendGetRequest(requestURL);
+            String result = RESTHandler.sendGetRequest(requestURL, null);
             JSONObject jsonResult = getJSONObject(result);
 
             ArrayList accountList = (ArrayList) jsonResult.get("result");
@@ -106,21 +103,13 @@ public class BlockchainHandler {
         return null;
     }
 
-    public static String getBalance(String account) {
+    public static BigInteger getBalance(String account) {
         String requestURL = URL + "?method=getBalance&publickey=" + account;
         try {
-            String result = RESTHandler.sendGetRequest(requestURL);
+            String result = RESTHandler.sendGetRequest(requestURL, null);
             JSONObject jsonResult = getJSONObject(result);
             String hex = (String) jsonResult.get("result");
-
-            char[] chars = hex.toCharArray();
-
-            StringBuffer hexdec = new StringBuffer();
-            for (int i = 0; i < chars.length; i++) {
-                hexdec.append(Integer.toHexString((int) chars[i]));
-            }
-            System.out.println(hexdec.toString());
-            return hexdec.toString();
+            return new BigInteger(hex, 16);
         } catch (MalformedURLException e) {
             System.out.println("Malformed URL!");
         } catch (ProtocolException f) {
@@ -131,11 +120,10 @@ public class BlockchainHandler {
             System.out.println("Parse Excepion!");
         }
 
-        return null;
+        return new BigInteger("0");
     }
     
-    public static double convertToEth(String dec){
-        int balance = Integer.parseInt(dec);
-        return balance / ETHTOWEI;
+    public static BigInteger convertToEth(BigInteger balance){
+        return balance.divide(ETHTOWEI);
     }
 }
