@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.aether.util.Dreamfactory;
+import java.util.ArrayList;
+import java.util.Map;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -35,6 +37,15 @@ public class UserDAO {
     }
 
     public void insertUser(User user) {
+        HashMap<String, String> record = new HashMap<String, String>();
+        record.put("userid", user.getUserid());
+        record.put("password", user.getPassword());
+        record.put("publickey", user.getPublicKey());
+        ArrayList<Map<String,String>> toFeed = new ArrayList<Map<String,String>>();
+        toFeed.add(record);
+        System.out.println(Dreamfactory.updateRecords("user", toFeed));
+        
+        /*
         try (Connection conn = ConnectionManager.getConnection();
                 PreparedStatement preparedStatement = conn.prepareStatement("insert into aether.user(userid,password,publickey) values (?,?,?)");) {
             preparedStatement.setString(1, user.getUserid());
@@ -45,6 +56,7 @@ public class UserDAO {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        */
     }
     
     public static String authenticate(String username) {

@@ -25,9 +25,13 @@ public class Dreamfactory {
     private static HttpURLConnection con;
 
     public static void main(String[] args) {
-        HashMap<String, String> filter = new HashMap<String, String>();
-        filter.put("userid", "dickbutt");
-        System.out.println(getRecordsFromTable("user", filter).toString());
+        HashMap<String, String> record = new HashMap<String, String>();
+        record.put("userid", "asshole");
+        record.put("password", "password");
+        record.put("publickey", "dickshit");
+        ArrayList<Map<String,String>> toFeed = new ArrayList<Map<String,String>>();
+        toFeed.add(record);
+        System.out.println(updateRecords("user", toFeed).toString());
     }
     
     public static String updateRecords(String table, ArrayList<Map<String, String>> record){
@@ -36,6 +40,29 @@ public class Dreamfactory {
         }
         JSONObject body = new JSONObject();
         JSONArray resource = new JSONArray();
+        for(Map<String, String> rec : record){
+            JSONObject oneRecord = new JSONObject();
+            Iterator keyIt = rec.entrySet().iterator();
+            while(keyIt.hasNext()){
+                Map.Entry pair = (Map.Entry) keyIt.next();
+                String key = (String) pair.getKey();
+                String value = (String) pair.getValue();
+                oneRecord.put(key, value);
+            }
+            resource.add(oneRecord);
+        }
+        body.put("resource", resource);
+        String function = "_table/" + table;
+        readDreamfactoryProperties(function, null);
+        try{
+            return RESTHandler.sendPostRequest(requestURL, body);
+        }catch(MalformedURLException e){
+            e.printStackTrace();
+        }catch(ProtocolException e){
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
         return null;
     }
 
