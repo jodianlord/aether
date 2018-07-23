@@ -118,6 +118,7 @@
                 $.confirm({
                     title: 'Sign Up!',
                     content: 'Are you sure you want to Sign Up?',
+                    columnClass: 'col-md-4 col-md-offset-4',
                     buttons: {
                         confirm: function () {
                             $("#SignUpForm").submit();

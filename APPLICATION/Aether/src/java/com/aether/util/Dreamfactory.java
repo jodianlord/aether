@@ -34,6 +34,10 @@ public class Dreamfactory {
         System.out.println(createRecords("user", toFeed).toString());
     }
     
+    public static String deleteRecords(String table, String key, String value){
+        return null;
+    }
+    
     public static String createRecords(String table, ArrayList<Map<String, String>> record){
         if(record == null || record.size() == 0){
             return null;
