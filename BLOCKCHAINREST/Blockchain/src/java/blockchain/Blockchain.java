@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +27,8 @@ import org.json.simple.parser.ParseException;
  */
 public class Blockchain extends HttpServlet {
 
+    private static final String PROPS_FILENAME = "blockchain.properties";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,17 +40,28 @@ public class Blockchain extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response, boolean isPost)
             throws ServletException, IOException {
+        String apikey = request.getHeader("X-Blockchain-Key");
+        
+        if (!checkApiKey(apikey)) {
+            response.setContentType("application/json");
+            JSONObject error = new JSONObject();
+            error.put("error", "parse exception occurred");
+            try (PrintWriter out = response.getWriter()) {
+                out.println(error.toString());
+            }
+            return;
+        }
         response.setContentType("application/json");
-        if(request.getParameter("sendRaw") != null && request.getParameter("sendRaw").equals("true")){
+        if (request.getParameter("sendRaw") != null && request.getParameter("sendRaw").equals("true")) {
             JSONParser parser = new JSONParser();
             String payloadRequest = getBody(request);
-            try{
+            try {
                 JSONObject body = (JSONObject) parser.parse(payloadRequest);
                 String result = BlockchainHandler.sendPostRequest(body);
                 try (PrintWriter out = response.getWriter()) {
                     out.println(result);
                 }
-            }catch(ParseException e){
+            } catch (ParseException e) {
                 JSONObject error = new JSONObject();
                 error.put("error", "parse exception occurred");
                 try (PrintWriter out = response.getWriter()) {
@@ -137,6 +153,36 @@ public class Blockchain extends HttpServlet {
 
         body = stringBuilder.toString();
         return body;
+    }
+
+    public static boolean checkApiKey(String apikey) {
+        InputStream is = null;
+        try {
+            // Retrieve properties from connection.properties via the CLASSPATH
+            // WEB-INF/classes is on the CLASSPATH
+            is = ConnectionManager.class.getResourceAsStream(PROPS_FILENAME);
+            Properties props = new Properties();
+            props.load(is);
+
+            // load database connection details
+            String api = props.getProperty("api.key");
+            return api.equals(apikey);
+        } catch (Exception ex) {
+            // unable to load properties file
+            String message = "Unable to load '" + PROPS_FILENAME + "'.";
+
+            System.out.println(message);
+            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, message, ex);
+            throw new RuntimeException(message, ex);
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(ConnectionManager.class.getName()).log(Level.WARNING, "Unable to close dreamfactory.properties", ex);
+                }
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
