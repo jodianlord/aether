@@ -45,7 +45,7 @@ public class Blockchain extends HttpServlet {
         if (!checkApiKey(apikey)) {
             response.setContentType("application/json");
             JSONObject error = new JSONObject();
-            error.put("error", "parse exception occurred");
+            error.put("error", "Please set header X-Blockchain-Key to the api key from the administrator");
             try (PrintWriter out = response.getWriter()) {
                 out.println(error.toString());
             }
