@@ -80,6 +80,11 @@ public class RESTHandler {
                 con.setRequestProperty("X-DreamFactory-API-Key", apiKey);
             }
 
+            if (keyType != null && keyType.length() != 0 && keyType.equals("bc.key")) {
+                readAPIKey(keyType);
+                con.setRequestProperty("X-Blockchain-Key", apiKey);
+            }
+
             try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
                 wr.write(postData);
             }
@@ -115,6 +120,11 @@ public class RESTHandler {
         if (keyType != null && keyType.length() != 0 && keyType.equals("df.key")) {
             readAPIKey(keyType);
             con.setRequestProperty("X-DreamFactory-API-Key", apiKey);
+        }
+
+        if (keyType != null && keyType.length() != 0 && keyType.equals("bc.key")) {
+            readAPIKey(keyType);
+            con.setRequestProperty("X-Blockchain-Key", apiKey);
         }
 
         int responseCode = con.getResponseCode();

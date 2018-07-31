@@ -40,7 +40,7 @@ public class BlockchainHandler {
         body.put("param", param);
 
         try {
-            String result = RESTHandler.sendPostRequest(URL, body, null);
+            String result = RESTHandler.sendPostRequest(URL, body, "bc.key");
             JSONObject jsonResult = getJSONObject(result);
             String transactionHash = (String) jsonResult.get("result");
             return transactionHash;
@@ -64,7 +64,7 @@ public class BlockchainHandler {
         param.put("password", password);
         body.put("param", param);
         try {
-            String result = RESTHandler.sendPostRequest(URL, body, null);
+            String result = RESTHandler.sendPostRequest(URL, body, "bc.key");
             System.out.println(result);
             JSONObject jsonResult = getJSONObject(result);
             String transactionHash = (String) jsonResult.get("result");
@@ -85,7 +85,7 @@ public class BlockchainHandler {
     public static ArrayList<String> getListOfAccounts() {
         String requestURL = URL + "?method=getListOfAccounts";
         try {
-            String result = RESTHandler.sendGetRequest(requestURL, null);
+            String result = RESTHandler.sendGetRequest(requestURL, "bc.key");
             JSONObject jsonResult = getJSONObject(result);
 
             ArrayList accountList = (ArrayList) jsonResult.get("result");
@@ -106,7 +106,7 @@ public class BlockchainHandler {
     public static BigInteger getBalance(String account) {
         String requestURL = URL + "?method=getBalance&publickey=" + account;
         try {
-            String result = RESTHandler.sendGetRequest(requestURL, null);
+            String result = RESTHandler.sendGetRequest(requestURL, "bc.key");
             JSONObject jsonResult = getJSONObject(result);
             String hex = (String) jsonResult.get("result");
             return new BigInteger(hex, 16);
