@@ -4,13 +4,21 @@
     Author     : jodia
 --%>
 
+<%@page import="java.math.BigInteger"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="com.aether.dao.UserDAO, com.aether.blockchain.BlockchainHandler" %>
 <!DOCTYPE html>
 <%
     String publickey = UserDAO.getUser((String) session.getAttribute("userid")).getPublicKey();
-    String balance = BlockchainHandler.getBalance(publickey);
-    double eth = BlockchainHandler.convertToEth(balance);
+    String balance;
+    String eth;
+    try{
+        balance = BlockchainHandler.getBalance(publickey).toString();
+        eth = BlockchainHandler.convertToEth(new BigInteger(balance)).toString();
+    }catch(NumberFormatException e){
+        balance = "You're Very Rich";
+        eth = "My Friend";
+    }
 %>
 <html lang="en">
     <%@include  file="Components/head.html" %>
@@ -18,7 +26,7 @@
     <body>
 
         <section id="container" >
-
+            
             <%@include  file="Components/topbar.html" %>
             <%@include  file="Components/sidebar.html" %>
 
@@ -42,12 +50,10 @@
                                             <h5>BALANCE</h5>
                                         </div>
                                         <h1 class="ml15">
-                                            <span class="word"><%= eth%></span>
-                                            <span class="word">ETH</span>
+                                            <span class="word"><%= eth%> ETH</span>
                                         </h1>
                                         <h1 class="ml15">
-                                            <span class="word"><%= balance%></span>
-                                            <span class="word">WEI</span>
+                                            <span class="word"><%= balance%> WEI</span>
                                         </h1>
                                     </div><! -- /darkblue panel -->
                                 </div><!-- /col-md-4 -->
@@ -84,7 +90,7 @@
         <script type="application/javascript">
             document.getElementById("admindashboardside").className = "active";
         </script>
-
+        
         <%@include file="Components/style.html" %>
 
     </body>
