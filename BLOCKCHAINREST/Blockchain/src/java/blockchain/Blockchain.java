@@ -41,7 +41,7 @@ public class Blockchain extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response, boolean isPost)
             throws ServletException, IOException {
         String apikey = request.getHeader("X-Blockchain-Key");
-        
+
         if (!checkApiKey(apikey)) {
             response.setContentType("application/json");
             JSONObject error = new JSONObject();
@@ -49,6 +49,7 @@ public class Blockchain extends HttpServlet {
             try (PrintWriter out = response.getWriter()) {
                 out.println(error.toString());
             }
+            request.getSession().invalidate();
             return;
         }
         response.setContentType("application/json");
@@ -106,6 +107,14 @@ public class Blockchain extends HttpServlet {
                     String to = (String) param.get("to");
                     double value = (Double) param.get("value");
                     String result = BlockchainHandler.sendTransaction(from, to, value);
+                    try (PrintWriter out = response.getWriter()) {
+                        out.println(result);
+                    }
+                } else if (method.equals("unlockAccount")) {
+                    JSONObject param = (JSONObject) requestChecker.get("param");
+                    String publicKey = (String) param.get("publicKey");
+                    String password = (String) param.get("password");
+                    String result = BlockchainHandler.unlockAccount(publicKey, password);
                     try (PrintWriter out = response.getWriter()) {
                         out.println(result);
                     }

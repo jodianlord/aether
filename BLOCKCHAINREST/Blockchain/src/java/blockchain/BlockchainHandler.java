@@ -124,6 +124,29 @@ public class BlockchainHandler {
         return null;
     }
     
+    public static String unlockAccount(String publicKey, String password){
+        JSONObject body = new JSONObject();
+        body.put("jsonrpc", "2.0");
+        body.put("method", "personal_unlockAccount");
+        JSONArray params = new JSONArray();
+        params.add(publicKey);
+        params.add(password);
+        body.put("params", params);
+        body.put("id", 67);
+        System.out.println(body.toString());
+        try{
+            String result = sendPostRequest(body);
+            return result;
+        }catch(MalformedURLException e){
+            System.out.println("Malformed URL!");
+        }catch(ProtocolException f){
+            System.out.println("Protocol Exception!");
+        }catch(IOException e){
+            System.out.println("IO Exception!");
+        }
+        return null;
+    }
+    
     public static String getBalance(String publicKey){
         JSONObject body = new JSONObject();
         body.put("jsonrpc", "2.0");
