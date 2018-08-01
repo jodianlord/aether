@@ -109,7 +109,8 @@ public class BlockchainHandler {
             String result = RESTHandler.sendGetRequest(requestURL, "bc.key");
             JSONObject jsonResult = getJSONObject(result);
             String hex = (String) jsonResult.get("result");
-            return new BigInteger(hex, 16);
+            BigInteger balance = new BigInteger(hex.substring(2, hex.length()), 16);
+            return balance;
         } catch (MalformedURLException e) {
             System.out.println("Malformed URL!");
         } catch (ProtocolException f) {
@@ -119,9 +120,15 @@ public class BlockchainHandler {
         } catch (ParseException e) {
             System.out.println("Parse Excepion!");
         }
-
         return new BigInteger("0");
     }
+    
+    public static void main(String[] args){
+        String hex = "4563918244f40000";
+        BigInteger result = new BigInteger(hex, 16);
+        System.out.println(result);
+    }
+    
     
     public static BigInteger convertToEth(BigInteger balance){
         return balance.divide(ETHTOWEI);

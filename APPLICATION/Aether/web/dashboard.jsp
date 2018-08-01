@@ -10,14 +10,12 @@
 <!DOCTYPE html>
 <%
     String publickey = UserDAO.getUser((String) session.getAttribute("userid")).getPublicKey();
-    String balance;
-    String eth;
+    BigInteger balance = new BigInteger("0");
+    BigInteger eth = new BigInteger("0");
     try{
-        balance = BlockchainHandler.getBalance(publickey).toString();
-        eth = BlockchainHandler.convertToEth(new BigInteger(balance)).toString();
+        balance = BlockchainHandler.getBalance(publickey);
+        eth = BlockchainHandler.convertToEth(balance);
     }catch(NumberFormatException e){
-        balance = "You're Very Rich";
-        eth = "My Friend";
     }
 %>
 <html lang="en">
