@@ -114,6 +114,7 @@
                                         <row>
                                             <div class="col-xs-6">
                                                 <input type="text" class="form-control" id="ethervalue" placeholder="Transfer Ether">
+                                                WEI
                                             </div>
                                         </row>
 
