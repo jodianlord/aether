@@ -12,10 +12,10 @@
     String publickey = UserDAO.getUser((String) session.getAttribute("userid")).getPublicKey();
     BigInteger balance = new BigInteger("0");
     BigInteger eth = new BigInteger("0");
-    try{
+    try {
         balance = BlockchainHandler.getBalance(publickey);
         eth = BlockchainHandler.convertToEth(balance);
-    }catch(NumberFormatException e){
+    } catch (NumberFormatException e) {
     }
 %>
 <html lang="en">
@@ -36,98 +36,115 @@
 
                     <div class="row">
                         <div class="col-lg-1"></div>
-                        <div class="col-lg-9 main-chart">
-                            <div class="row mt">
-                            </div><!-- /row -->
-                            <div class="row">
-                                <!-- TWITTER PANEL -->
-                                <div class="col-md-6 mb">
-                                    <div class="darkblue-panel pn">
-                                        <div class="darkblue-header">
-                                            <h5>BALANCE</h5>
-                                        </div>
-                                        <h1 class="ml15">
-                                            <span class="word"><%= eth%> ETH</span>
-                                        </h1>
-                                        <h1 class="ml15">
-                                            <span class="word"><%= balance%> WEI</span>
-                                        </h1>
-                                    </div><! -- /darkblue panel -->
-                                </div><!-- /col-md-4 -->
+
+                        <div class="row mt">
+                        </div><!-- /row -->
+
+                        <!-- TWITTER PANEL -->
+                        <div class="col-md-6 mb">
+                            <div class="darkblue-panel pn">
+                                <div class="darkblue-header">
+                                    <h5>BALANCE</h5>
+                                </div>
+                                <h1 class="ml15">
+                                    <span class="word"><%= eth%> ETH</span>
+                                </h1>
+                                <h1 class="ml15">
+                                    <span class="word"><%= balance%> WEI</span>
+                                </h1>
+                            </div><! -- /darkblue panel -->
+                        </div><!-- /col-md-4 -->
 
 
-                                <div class="col-md-6 col-sm-6 mb">
-                                    <div class="grey-panel pn donut-chart">
-                                        <div class="grey-header">
-                                            <h5>SELECT ACCOUNT TO TRANSFER</h5>
-                                        </div>
-                                        <canvas id="serverstatus01" height="120" width="120"></canvas>
-                                        <script>
-                                            var doughnutData = [
-                                                {
-                                                    value: 70,
-                                                    color: "#FF6B6B"
-                                                },
-                                                {
-                                                    value: 30,
-                                                    color: "#fdfdfd"
-                                                }
-                                            ];
-                                            var myDoughnut = new Chart(document.getElementById("serverstatus01").getContext("2d")).Doughnut(doughnutData);
-                                        </script>
-                                        <div class="row">
-                                            <div class="col-sm-6 col-xs-6 goleft">
-                                                <p>Usage<br/>Increase:</p>
-                                            </div>
-                                            <div class="col-sm-6 col-xs-6">
-                                                <h2>21%</h2>
-                                            </div>
-                                        </div>
-                                    </div><! --/grey-panel -->
-                                </div><!-- /col-md-4-->
+                        <div class="col-md-6 col-sm-6 mb">
+                            <div class="green-panel pn">
+                                <div class="green-header">
+                                    <h5>TRANSFER ETHER</h5>
+                                </div>
 
-                            </div><!-- /row -->
 
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6 col-md-offset-3 mb">
-                                    <div class="green-panel pn">
-                                        <div class="green-header">
-                                            <h5>TRANSFER ETHER</h5>
-                                        </div>
-                                        <canvas id="serverstatus03" height="120" width="120"></canvas>
-                                        <script>
-                                            var doughnutData = [
-                                                {
-                                                    value: 60,
-                                                    color: "#2b2b2b"
-                                                },
-                                                {
-                                                    value: 40,
-                                                    color: "#fffffd"
-                                                }
-                                            ];
-                                            var myDoughnut = new Chart(document.getElementById("serverstatus03").getContext("2d")).Doughnut(doughnutData);
-                                        </script>
-                                        <row>
-                                            <div class="co-xs-6">
-                                        </row>
-                                        <row>
-                                            <div class="col-xs-6">
-                                                <input type="text" class="form-control" id="ethervalue" placeholder="Transfer Ether">
-                                                WEI
-                                            </div>
-                                        </row>
 
-                                        <h3>60% TO TRANSFER</h3>
+                                <row>
+                                    <div class="col-xs-6">
+                                        <input type="text" class="form-control" id="validUserID" placeholder="User ID">
                                     </div>
-                                </div><! --/col-md-4 -->
+                                    <div class="col-xs-6" id="userAccountMsg">
+                                    </div>
+
+
+                                </row>
+
+                                <canvas id="serverstatus03" height="100" width="100"></canvas>
+                                <script>
+                                    var doughnutData = [
+                                        {
+                                            value: 60,
+                                            color: "#2b2b2b"
+                                        },
+                                        {
+                                            value: 40,
+                                            color: "#fffffd"
+                                        }
+                                    ];
+                                    var myDoughnut = new Chart(document.getElementById("serverstatus03").getContext("2d")).Doughnut(doughnutData);
+                                </script>
+
+                                <script>
+                                    document.getElementById("validUserID").oninput = function () {
+                                        var name = $("#validUserID").val();
+                                        var filter = "userid=" + name;
+                                        $.ajax({
+                                            type: "GET",
+                                            beforeSend: function (request) {
+                                                request.setRequestHeader("X-DreamFactory-API-Key", "a552bede56b69bb18c9f0dbe41d58939d90f88db17c71d3bc08c5428ec94fbe3");
+                                            },
+                                            url: "http://vm.jordysamuel.com:30308/api/v2/mysql/_table/user",
+                                            data: {"filter": filter},
+                                            success: function (result) {
+                                                console.log(result);
+                                                var user = result["resource"];
+                                                var element = document.getElementById("userAccountMsg");
+                                                if (user.length < 1) {
+                                                    $('#userAccountMsg').addClass("fail");
+                                                    element.innerHTML = "No such user found!";
+
+                                                } else {
+
+                                                    element.innerHTML = user[0]["userid"] + " is found! ";
+                                                    $('#userAccountMsg').removeClass("fail");
+                                                    $('#userAccountMsg').addClass("success");
+
+                                                }
+                                            }
+                                        });
+                                    };
+
+
+                                </script>
+
+                                <div class="co-xs-6">
+
+                                    <row>
+                                        <div class="col-xs-6">
+                                            <input type="text" class="form-control" id="ethervalue" placeholder="Transfer Ether (WEI)">
+
+                                        </div>
+
+                                        <div class="col-xs-6">
+                                            <button style="width:100%" type="button" class="btn btn-success" id="transferEther">Transfer</button>
+                                        </div>
+
+                                    </row>
+
+                                </div>
+
                             </div>
 
-                        </div><!-- /col-lg-9 END SECTION MIDDLE -->
 
+                        </div>
 
+                    </div>
 
-                    </div><! --/row -->
                 </section>
             </section>
 
@@ -135,14 +152,24 @@
         </section>
 
         <%@include file="Components/script.html" %>
-        
+
         <!--set dashboard button to active-->
         <script type="application/javascript">
             document.getElementById("transactionside").className = "active";
         </script>
-        
-        <%@include file="Components/style.html" %>
 
+        <%@include file="Components/style.html" %>
+        <style>
+            div {
+
+            }
+            .success {
+                color: green;
+            }
+            .fail {
+                color: red;
+            }
+        </style>
     </body>
 </html>
 

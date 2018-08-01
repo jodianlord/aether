@@ -176,7 +176,8 @@ public class BlockchainHandler {
     }
     
     public static String toHexValue(String toHex){
-        return Integer.parseString(toHex);
+        //return Integer.parseString(toHex);
+        return null;
     }
     
     public static String toHexValue(int toHex){
