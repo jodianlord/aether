@@ -81,6 +81,33 @@ public class BlockchainHandler {
 
         return null;
     }
+    
+    public static boolean unlockAccount(String publicKey, String password){
+        JSONObject body = new JSONObject();
+        body.put("method", "unlockAccount");
+        JSONObject param = new JSONObject();
+        param.put("publicKey", publicKey);
+        param.put("password", password);
+        body.put("param", param);
+        
+        try {
+            String result = RESTHandler.sendPostRequest(URL, body, "bc.key");
+            System.out.println(result);
+            JSONObject jsonResult = getJSONObject(result);
+            String status = (String) jsonResult.get("result");
+            return status.equals("true");
+        } catch (MalformedURLException e) {
+            System.out.println("Malformed URL!");
+        } catch (ProtocolException f) {
+            System.out.println("Protocol Exception!");
+        } catch (IOException e) {
+            System.out.println("IO Exception!");
+        } catch (ParseException e) {
+            System.out.println("Parse Exception!");
+        }
+
+        return false;
+    }
 
     public static ArrayList<String> getListOfAccounts() {
         String requestURL = URL + "?method=getListOfAccounts";
