@@ -13,6 +13,10 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import org.json.simple.*;
 import org.json.simple.parser.*;
+import org.bouncycastle.jcajce.provider.digest.Keccak;
+import java.security.MessageDigest;
+
+
 
 /**
  *
@@ -27,6 +31,27 @@ public class BlockchainHandler {
     public static JSONObject getJSONObject(String jsonString) throws ParseException {
         JSONParser parser = new JSONParser();
         return (JSONObject) parser.parse(jsonString);
+    }
+    
+    public static String keccak256hash(String toHash){
+        Keccak.Digest256 digest256 = new Keccak.Digest256();
+        digest256.update(toHash.getBytes());
+
+        return hashToString(digest256);
+    }
+    
+    public static String hashToString(MessageDigest hash) {
+        return hashToString(hash.digest());
+    }
+    
+    public static String hashToString(byte[] hash) {
+        StringBuffer buff = new StringBuffer();
+
+        for (byte b : hash) {
+            buff.append(String.format("%02x", b & 0xFF));
+        }
+
+        return buff.toString();
     }
 
     public static String sendTransaction(String from, String to, double value) {
@@ -151,9 +176,8 @@ public class BlockchainHandler {
     }
     
     public static void main(String[] args){
-        String hex = "4563918244f40000";
-        BigInteger result = new BigInteger(hex, 16);
-        System.out.println(result);
+        String hex = "double(int256)";
+        System.out.println(keccak256hash(hex));
     }
     
     
