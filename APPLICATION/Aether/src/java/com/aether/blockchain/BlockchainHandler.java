@@ -175,9 +175,17 @@ public class BlockchainHandler {
         return new BigInteger("0");
     }
     
+    public static String toHexValue(String toHex){
+        return Integer.parseString(toHex);
+    }
+    
+    public static String toHexValue(int toHex){
+        return Integer.toHexString(toHex);
+    }
+    
     public static void main(String[] args){
-        String hex = "double(int256)";
-        System.out.println(keccak256hash(hex));
+        String hex = "0x7b";
+        System.out.println(Integer.toHexString(123));
     }
     
     
