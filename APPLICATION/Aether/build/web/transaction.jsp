@@ -10,14 +10,12 @@
 <!DOCTYPE html>
 <%
     String publickey = UserDAO.getUser((String) session.getAttribute("userid")).getPublicKey();
-    String balance;
-    String eth;
+    BigInteger balance = new BigInteger("0");
+    BigInteger eth = new BigInteger("0");
     try{
-        balance = BlockchainHandler.getBalance(publickey).toString();
-        eth = BlockchainHandler.convertToEth(new BigInteger(balance)).toString();
+        balance = BlockchainHandler.getBalance(publickey);
+        eth = BlockchainHandler.convertToEth(balance);
     }catch(NumberFormatException e){
-        balance = "You're Very Rich";
-        eth = "My Friend";
     }
 %>
 <html lang="en">
@@ -49,12 +47,10 @@
                                             <h5>BALANCE</h5>
                                         </div>
                                         <h1 class="ml15">
-                                            <span class="word">SOME</span>
-                                            <span class="word">ETH</span>
+                                            <span class="word"><%= eth%> ETH</span>
                                         </h1>
                                         <h1 class="ml15">
-                                            <span class="word">MORE</span>
-                                            <span class="word">WEI</span>
+                                            <span class="word"><%= balance%> WEI</span>
                                         </h1>
                                     </div><! -- /darkblue panel -->
                                 </div><!-- /col-md-4 -->
