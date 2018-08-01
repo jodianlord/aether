@@ -107,9 +107,9 @@
                                                 if (user.length < 1) {
                                                     $('#userAccountMsg').addClass("fail");
                                                     element.innerHTML = "No such user found!";
-
+                                                    document.getElementById("transferEther").disabled = true;
                                                 } else {
-
+                                                    document.getElementById("transferEther").disabled = false;
                                                     element.innerHTML = user[0]["userid"] + " is found! ";
                                                     $('#userAccountMsg').removeClass("fail");
                                                     $('#userAccountMsg').addClass("success");
@@ -131,7 +131,7 @@
                                         </div>
 
                                         <div class="col-xs-6">
-                                            <button style="width:100%" type="button" class="btn btn-success" id="transferEther">Transfer</button>
+                                            <button style="width:100%" type="button" class="btn btn-success" id="transferEther" disabled>Transfer</button>
                                         </div>
 
                                     </row>
