@@ -23,7 +23,7 @@ public class BlockchainHandler {
     
     
     public static void main(String[] args){
-        System.out.println(sendTransaction("0x9411c7c7E859d79FF025053137D32Db7431DDcB5", "0x7397fcf65152b25701a9F8640a2aEc6808209f61", 50.0).toString());
+        //System.out.println(sendTransaction("0x9411c7c7E859d79FF025053137D32Db7431DDcB5", "0x7397fcf65152b25701a9F8640a2aEc6808209f61", 50.0).toString());
         //System.out.println(createAccount("password"));
     }
     
@@ -74,7 +74,11 @@ public class BlockchainHandler {
         return (JSONObject) parser.parse(jsonString);
     }
     
-    public static String sendTransaction(String from, String to, double value){
+    public static String toHexValue(long toHex){
+        return "0x" + Long.toHexString(toHex);
+    }
+    
+    public static String sendTransaction(String from, String to, long value){
         JSONObject body = new JSONObject();
         body.put("jsonrpc", "2.0");
         body.put("method", "eth_sendTransaction");
@@ -82,10 +86,13 @@ public class BlockchainHandler {
         JSONObject params = new JSONObject();
         params.put("from", from);
         params.put("to", to);
-        params.put("value", ethToWei(value));
+        params.put("value", toHexValue(value));
         JSONArray parameters = new JSONArray();
         parameters.add(params);
-        body.put("params", params);
+        body.put("params", parameters);
+        body.put("id", 1);
+        
+        System.out.println("body: " + body.toJSONString());
         
         try{
             String result = sendPostRequest(body);

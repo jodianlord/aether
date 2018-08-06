@@ -90,6 +90,7 @@
                                 </script>
 
                                 <script>
+                                    var userID;
                                     document.getElementById("validUserID").oninput = function () {
                                         var name = $("#validUserID").val();
                                         var filter = "userid=" + name;
@@ -111,14 +112,42 @@
                                                 } else {
                                                     document.getElementById("transferEther").disabled = false;
                                                     element.innerHTML = user[0]["userid"] + " is found! ";
+                                                    userID = user[0]["userid"];
                                                     $('#userAccountMsg').removeClass("fail");
                                                     $('#userAccountMsg').addClass("success");
-
+                                                    document.getElementById("transferEther").addEventListener("click", function () {
+                                                        console.log(userID);
+                                                        var from = "<%=session.getAttribute("userid")%>";
+                                                        var to = userID;
+                                                        var password = document.getElementById("password").value;
+                                                        var value = document.getElementById("ethervalue").value;
+                                                        $.ajax({
+                                                            url: "./TransactionServlet",
+                                                            type: "GET",
+                                                            data: {
+                                                                from: from,
+                                                                to: to,
+                                                                password: password,
+                                                                value: value
+                                                            },
+                                                            success: function (response) {
+                                                                $.alert({
+                                                                    title: 'Success!',
+                                                                    content: 'Transaction Sent!',
+                                                                });
+                                                            },
+                                                            error: function (xhr) {
+                                                                $.alert({
+                                                                    title: 'Failure!',
+                                                                    content: 'Transaction Not Sent!',
+                                                                });
+                                                            }
+                                                        });
+                                                    });
                                                 }
                                             }
                                         });
-                                    };
-
+                                    }
 
                                 </script>
 
@@ -127,7 +156,7 @@
                                     <row>
                                         <div class="col-xs-6">
                                             <input type="text" class="form-control" id="ethervalue" placeholder="Transfer Ether (WEI)">
-
+                                            <input type="password" class="form-control" id="password" placeholder="Input Password">
                                         </div>
 
                                         <div class="col-xs-6">

@@ -54,7 +54,8 @@ public class BlockchainHandler {
         return buff.toString();
     }
 
-    public static String sendTransaction(String from, String to, double value) {
+    public static String sendTransaction(String from, String to, int value) {
+        System.out.println("value: " + value);
         JSONObject body = new JSONObject();
         body.put("method", "sendTransaction");
 
@@ -63,6 +64,8 @@ public class BlockchainHandler {
         param.put("to", to);
         param.put("value", value);
         body.put("param", param);
+        
+        System.out.println(body.toJSONString());
 
         try {
             String result = RESTHandler.sendPostRequest(URL, body, "bc.key");
@@ -76,7 +79,7 @@ public class BlockchainHandler {
         } catch (IOException e) {
             System.out.println("IO Exception!");
         } catch (ParseException e) {
-            System.out.println("Parse Exception!");
+            System.out.println("Parse Exception! Ahh!");
         }
 
         return null;
@@ -114,13 +117,13 @@ public class BlockchainHandler {
         param.put("publicKey", publicKey);
         param.put("password", password);
         body.put("param", param);
-        
+        System.out.println(body.toString());
         try {
             String result = RESTHandler.sendPostRequest(URL, body, "bc.key");
-            System.out.println(result);
+            System.out.println("unlock: " + result);
             JSONObject jsonResult = getJSONObject(result);
-            String status = (String) jsonResult.get("result");
-            return status.equals("true");
+            boolean status = (boolean) jsonResult.get("result");
+            return status;
         } catch (MalformedURLException e) {
             System.out.println("Malformed URL!");
         } catch (ProtocolException f) {
@@ -186,7 +189,7 @@ public class BlockchainHandler {
     
     public static void main(String[] args){
         String hex = "0x7b";
-        System.out.println(Integer.toHexString(123));
+        System.out.println(Integer.toHexString(30400));
     }
     
     
