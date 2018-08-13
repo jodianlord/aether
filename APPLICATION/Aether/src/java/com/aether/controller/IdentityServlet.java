@@ -5,15 +5,23 @@
  */
 package com.aether.controller;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import sun.misc.BASE64Decoder;
 
 /**
  *
@@ -32,8 +40,18 @@ public class IdentityServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json");
-        System.out.println(getBody(request));
+        response.setContentType("image/png");
+        String body = getBody(request);
+        
+        try {
+            JSONObject resultJSON = getJSONObject(body);
+            String picture = (String) resultJSON.get("picture");
+            BufferedImage image = decodeToImage(picture.substring(22, picture.length()));
+            ImageIO.write(image, "PNG", response.getOutputStream());
+        } catch (ParseException e) {
+
+        } 
+        
         /*
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
@@ -46,7 +64,7 @@ public class IdentityServlet extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
         }
-        */
+         */
         response.setStatus(HttpServletResponse.SC_OK);
     }
 
@@ -82,6 +100,26 @@ public class IdentityServlet extends HttpServlet {
 
         body = stringBuilder.toString();
         return body;
+    }
+
+    public static JSONObject getJSONObject(String jsonString) throws ParseException {
+        JSONParser parser = new JSONParser();
+        return (JSONObject) parser.parse(jsonString);
+    }
+
+    public static BufferedImage decodeToImage(String imageString) {
+        BufferedImage image = null;
+        byte[] imageByte;
+        try {
+            BASE64Decoder decoder = new BASE64Decoder();
+            imageByte = decoder.decodeBuffer(imageString);
+            ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+            image = ImageIO.read(bis);
+            bis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return image;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
