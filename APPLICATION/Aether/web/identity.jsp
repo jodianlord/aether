@@ -8,16 +8,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="com.aether.dao.UserDAO, com.aether.blockchain.BlockchainHandler" %>
 <!DOCTYPE html>
-<%
-    String publickey = UserDAO.getUser((String) session.getAttribute("userid")).getPublicKey();
-    BigInteger balance = new BigInteger("0");
-    BigInteger eth = new BigInteger("0");
-    try {
-        balance = BlockchainHandler.getBalance(publickey);
-        eth = BlockchainHandler.convertToEth(balance);
-    } catch (NumberFormatException e) {
-    }
-%>
 <html lang="en">
     <%@include  file="Components/head.html" %>
 
@@ -123,11 +113,9 @@
                     </div>
                     <div class="row mt">
                         <div class="col-lg-12">
-                            <div class="form-panel" style:"height:10em">
-                                <h4 class="mb"><i class="fa fa-angle-right"></i> Take Picture</h4>
+                            <div class="form-panel col-lg-12"
+                                 <h4 class="mb"><i class="fa fa-angle-right"></i> Take Picture</h4>
                                 <div id="media">
-                                    <video id="video" class="col-md-6 col-sm-6 mb"></video>
-                                    <canvas id="canvas" class="col-md-6 col-sm-6 mb"></canvas>
                                 </div>
                                 <button id="startstream" type="button" class="btn btn-primary">Start Camera</button>
                                 <button id="capture" type="button" class="btn btn-theme04">Take Photo</button>
@@ -157,7 +145,12 @@
 <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
 
 <script>
-    FilePond.parse(document.body);
+    var pondScum = FilePond.create(document.getElementById("fileupload"));
+    pondScum.setOptions({
+        maxFiles: 10,
+        required: true
+    });
+    //FilePond.parse(document.body);
 </script>
 
 <style>
@@ -178,5 +171,9 @@
         font-weight: 200;
         color: white;
         font-size: 24px;
+    }
+    .innerVid{
+        width: 50%;
+        margin: 0 auto;
     }
 </style>

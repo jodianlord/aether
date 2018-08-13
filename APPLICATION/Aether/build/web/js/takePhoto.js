@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+var streamObj;
+
 document.getElementById("startstream").onclick = function () {
     var video = document.createElement("video"),
             vendorUrl = window.URL || window.webkitURL;
@@ -22,6 +24,7 @@ document.getElementById("startstream").onclick = function () {
         video: true,
         audio: false
     }, function (stream) {
+        streamObj = stream
         video.srcObject = stream;
         video.play();
     }, function (error) {
@@ -32,11 +35,15 @@ document.getElementById("startstream").onclick = function () {
 
 document.getElementById("capture").onclick = function () {
     canvas = document.createElement("canvas");
+    canvas.id = "canvas";
     context = canvas.getContext("2d");
     canvas.width = 400;
-    canvas.style.width = '40%';
+    canvas.style.width = '45%';
     canvas.height = canvas.width * .75;
     context.drawImage(document.getElementById("video"), 0, 0, 400, 300);
     document.getElementById("media").innerHTML = "";
     document.getElementById("media").appendChild(canvas);
+    streamObj.getTracks().forEach(function(track){
+        track.stop();
+    });
 }

@@ -4,9 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/src/java/com/aether/blockchain/BlockchainHandler.java</file>
-            <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/web/Components/sidebar.html</file>
             <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/web/identity.jsp</file>
+            <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/web/js/submitdigitalidentity.js</file>
+            <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/src/java/com/aether/controller/IdentityServlet.java</file>
             <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/src/java/com/aether/util/dreamfactory.properties</file>
+            <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/web/js/takePhoto.js</file>
+            <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/src/java/com/aether/blockchain/TransactionServlet.java</file>
             <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/web/dashboard.jsp</file>
         </group>
     </open-files>

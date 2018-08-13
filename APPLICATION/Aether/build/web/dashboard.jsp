@@ -16,6 +16,8 @@
         balance = BlockchainHandler.getBalance(publickey);
         eth = BlockchainHandler.convertToEth(balance);
     }catch(NumberFormatException e){
+    }catch(NullPointerException e){
+        
     }
 %>
 <html lang="en">
@@ -58,7 +60,6 @@
 
 
                                 <div class="col-md-6 col-sm-6 mb">
-                                    <!-- REVENUE PANEL -->
                                     <div class="darkblue-panel pn">
                                         <div class="darkblue-header">
                                             <h5>REVENUE</h5>
