@@ -34,100 +34,107 @@
             <!--main content start-->
             <section id="main-content">
                 <section class="wrapper">
-
-                    <div class="row">
-                        <div class="col-lg-1"></div>
-                        <form id="details">
-                            <div class="col-lg-9 main-chart">
-                                <div class="row mt">
-                                </div><!-- /row -->
-                                <div class="row">
-                                    <!-- TWITTER PANEL -->
-                                    <div class="col-md-12 mb">
-                                        <div class="darkblue-panel pn col-md-12">
-                                            <div class="darkblue-header">
-                                                <h5>Input Details</h5>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="row">
-                                                    <div class="form-group" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
-                                                        <label class="col-sm-2 col-sm-2 control-label">Name</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="fullname" class="form-control round-form">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
-                                                        <label class="col-sm-2 col-sm-2 control-label">Email</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="email" class="form-control round-form">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
-                                                        <label class="col-sm-2 col-sm-2 control-label">Mobile</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="mobile" class="form-control round-form">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="row">
-                                                    <div class="form-group" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
-                                                        <label class="col-sm-2 col-sm-2 control-label">Nationality</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="nationality" class="form-control round-form">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
-                                                        <label class="col-sm-2 col-sm-2 control-label">Occupation</label>
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="occupation" class="form-control round-form">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!-- /darkblue panel -->
-                                    </div><!-- /col-md-4 -->
-                                </div><!-- /row -->
-                            </div><!-- /col-lg-9 END SECTION MIDDLE -->
-                        </form>
-                    </div><!--/row -->
-                    <div class="row">
-                        <div class="col-lg-1"></div>
-                        <div class="col-lg-9 main-chart">
-                            <div class="row">
-                                <!-- TWITTER PANEL -->
-                                <div class="col-md-6 mb">
-                                    <div class="darkblue-panel pn">
-                                        <div class="darkblue-header">
-                                            <h5>UPLOAD DOCUMENTS</h5>
-                                        </div>
-                                    </div><! -- /darkblue panel -->
-                                </div><!-- /col-md-4 -->
-
-                                <div class="col-md-6 col-sm-6 mb">
-                                    <!-- REVENUE PANEL -->
-                                    <div class="darkblue-panel pn" id="picture">
-                                        <div class="darkblue-header">
-                                            <h5>Take Your Picture</h5>
-                                        </div>
-                                        <!-- Take picture here -->
-                                        <div id="media">
-                                            <video id="video" class="col-md-6 col-sm-6 mb"></video>
-                                            <canvas id="canvas" class="col-md-6 col-sm-6 mb"></canvas>
-                                        </div>
-                                        <div class="col-md-6 mb"></div>
-                                        <div>
-                                            <button id="startstream" type="button" class="btn btn-primary">Start Camera</button>
-                                            <div class="col-md-6 mb"></div>
-                                            <button id="capture" type="button" class="btn btn-theme04">Take Photo</button>
+                    <div class="row mt">
+                        <div class="col-lg-12">
+                            <div class="form-panel">
+                                <h4 class="mb"><i class="fa fa-angle-right"></i> User Details</h4>
+                                <form class="form-horizontal style-form" id="userdata">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Full Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="fullname" class="form-control">
                                         </div>
                                     </div>
-                                </div><!-- /col-md-4 -->
-                            </div><!-- /row -->
-                        </div><!-- /col-lg-9 END SECTION MIDDLE -->
-                    </div><!--/row -->
-
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">NRIC</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="nric" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Email</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="email" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Mobile</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="mobile" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Gender</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="gender" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Nationality</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="nationality" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Marital Status</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" name="marital">
+                                                <option>Single</option>
+                                                <option>Married</option>
+                                                <option>Divorced</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Residence Type</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="residencetype" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Address</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="address" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Occupation</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="occupation" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Industry</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="industry" class="form-control">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt">
+                        <div class="col-lg-12">
+                            <div class="form-panel" style="height:170px">
+                                <h4 class="mb"><i class="fa fa-angle-right"></i> Upload Documents</h4>
+                                <input type="file" class="filepond" id="fileupload">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt">
+                        <div class="col-lg-12">
+                            <div class="form-panel" style:"height:10em">
+                                <h4 class="mb"><i class="fa fa-angle-right"></i> Take Picture</h4>
+                                <div id="media">
+                                    <video id="video" class="col-md-6 col-sm-6 mb"></video>
+                                    <canvas id="canvas" class="col-md-6 col-sm-6 mb"></canvas>
+                                </div>
+                                <button id="startstream" type="button" class="btn btn-primary">Start Camera</button>
+                                <button id="capture" type="button" class="btn btn-theme04">Take Photo</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="submit" type="button" class="btn btn-primary btn-lg btn-block">Submit Digital Identity</button>
                 </section>
             </section>
 
@@ -140,9 +147,36 @@
             document.getElementById("identityside").className = "active";
         </script>
         <script src ="js/takePhoto.js"></script>
+        <script src="js/submitdigitalidentity.js"></script>
 
         <%@include file="Components/style.html" %>
 
     </body>
 </html>
 
+<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+
+<script>
+    FilePond.parse(document.body);
+</script>
+
+<style>
+    .filepond--root {
+        max-height: 10em;
+        width: 75%;
+        margin: auto;
+    }
+    .filepond--panel-root {
+        background-color: #5e7496;
+    }
+    .filepond--drop-label {
+        margin: auto;
+        color: white;
+        font-size: 22px;
+    }
+    .filepond--file {
+        font-weight: 200;
+        color: white;
+        font-size: 24px;
+    }
+</style>
