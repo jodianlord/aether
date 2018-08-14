@@ -9,10 +9,12 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +24,14 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import sun.misc.BASE64Decoder;
+import java.util.UUID;
+import org.apache.commons.io.FileUtils;
+import com.aether.util.Zipper;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -40,18 +50,76 @@ public class IdentityServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("image/png");
+        response.setContentType("application/zip");
         String body = getBody(request);
-        
+        UUID uuid = UUID.randomUUID();
+        String randomUUIDString = uuid.toString();
+        String path = request.getServletContext().getRealPath("/");
         try {
             JSONObject resultJSON = getJSONObject(body);
+            //resultJSON.remove("picture");
+            //resultJSON.remove("userdata");
+
+            String jsonPath = path + randomUUIDString + ".json";
+            File jsonFile = new File(jsonPath);
+            if (!jsonFile.exists()) {
+                jsonFile.createNewFile();
+            }
+            byte[] contentBytes = resultJSON.toString().getBytes();
+            FileOutputStream fileOut = new FileOutputStream(jsonFile);
+            fileOut.write(contentBytes);
+            fileOut.flush();
+            fileOut.close();
+            //Charset charset = Charset.forName("UTF-8");
+            //FileUtils.writeStringToFile(jsonFile, resultJSON.toString(), charset, false);
+
             String picture = (String) resultJSON.get("picture");
-            BufferedImage image = decodeToImage(picture.substring(22, picture.length()));
-            ImageIO.write(image, "PNG", response.getOutputStream());
+            String pictureType = picture.substring((picture.indexOf('/') + 1), picture.indexOf(';')).toUpperCase();
+            String picturePath = path + randomUUIDString + "_picture." + pictureType;
+            File pictureFile = new File(picturePath);
+            FileOutputStream pictureOut = new FileOutputStream(pictureFile);
+            BufferedImage image = decodeToImage(picture.substring((picture.indexOf(',') + 1), picture.length()));
+            ImageIO.write(image, pictureType, pictureOut);
+
+            String userdata = (String) resultJSON.get("userdata");
+            String userdataType = userdata.substring((userdata.indexOf('/') + 1), userdata.indexOf(';')).toUpperCase();
+            String userdataPath = path + randomUUIDString + "_userdata." + userdataType;
+            File userdataFile = new File(userdataPath);
+            FileOutputStream userdataFileOut = new FileOutputStream(userdataFile);
+            BufferedImage userImage = decodeToImage(userdata.substring((userdata.indexOf(',') + 1), userdata.length()));
+            ImageIO.write(userImage, userdataType, userdataFileOut);
+
+            List<String> fileNames = new ArrayList<String>();
+            fileNames.add(jsonPath);
+            fileNames.add(picturePath);
+            fileNames.add(userdataPath);
+
+            File finalZip = Zipper.zipFiles(fileNames, path, randomUUIDString);
+            response.addHeader("Content-Disposition", "attachment; filename=" + finalZip.getName());
+            response.setContentLength((int) finalZip.length());
+            
+            if (jsonFile.delete() && pictureFile.delete() && userdataFile.delete()) {
+                System.out.println("File deleted successfully");
+            }else{
+                System.out.println("Files not deleted!");
+            }
+            pictureOut.close();
+            userdataFileOut.close();
+
+            try (OutputStream out = response.getOutputStream()) {
+                Path zipPath = finalZip.toPath();
+                Files.copy(zipPath, out);
+                out.flush();
+            } catch (IOException e) {
+
+            }
+            
+
+            //ImageIO.write(image, pictureType, response.getOutputStream());
         } catch (ParseException e) {
 
-        } 
-        
+        }
+
         /*
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
