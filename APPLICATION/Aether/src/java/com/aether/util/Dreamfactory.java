@@ -39,6 +39,12 @@ public class Dreamfactory {
         return null;
     }
     
+    /**
+     * 
+     * @param table name of the table to create records in
+     * @param record arraylist to contain multiple records. Map key is the column name, value is the value to be uploaded
+     * @return 
+     */
     public static String createRecords(String table, ArrayList<Map<String, String>> record){
         if(record == null || record.size() == 0){
             return null;
@@ -72,6 +78,12 @@ public class Dreamfactory {
         return null;
     }
 
+    /**
+     * 
+     * @param table table to retrieve records from
+     * @param filter map key is the column name, value is the equals value
+     * @return 
+     */
     public static JSONArray getRecordsFromTable(String table, Map<String, String> filter) {
         String params = "";
         if (filter.size() != 0) {
@@ -110,6 +122,11 @@ public class Dreamfactory {
         return null;
     }
     
+    /**
+     * Used only within the other methods
+     * @param function
+     * @param params 
+     */
     private static void buildURL(String function, String params) {
         InputStream is = null;
         try {
