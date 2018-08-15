@@ -11,12 +11,11 @@ import java.util.*;
 import java.io.*;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import org.json.simple.*;
 import org.json.simple.parser.*;
 import org.bouncycastle.jcajce.provider.digest.Keccak;
 import java.security.MessageDigest;
-
-
 
 /**
  *
@@ -32,18 +31,24 @@ public class BlockchainHandler {
         JSONParser parser = new JSONParser();
         return (JSONObject) parser.parse(jsonString);
     }
-    
-    public static String keccak256hash(String toHash){
+
+    public static String keccak256hash(String toHash) {
         Keccak.Digest256 digest256 = new Keccak.Digest256();
         digest256.update(toHash.getBytes());
 
         return hashToString(digest256);
     }
-    
+
+    public static String keccak256hash(File toHash) throws IOException {
+        Keccak.Digest256 digest256 = new Keccak.Digest256();
+        digest256.update(Files.readAllBytes(toHash.toPath()));
+        return hashToString(digest256);
+    }
+
     public static String hashToString(MessageDigest hash) {
         return hashToString(hash.digest());
     }
-    
+
     public static String hashToString(byte[] hash) {
         StringBuffer buff = new StringBuffer();
 
@@ -64,7 +69,7 @@ public class BlockchainHandler {
         param.put("to", to);
         param.put("value", value);
         body.put("param", param);
-        
+
         System.out.println(body.toJSONString());
 
         try {
@@ -109,8 +114,8 @@ public class BlockchainHandler {
 
         return null;
     }
-    
-    public static boolean unlockAccount(String publicKey, String password){
+
+    public static boolean unlockAccount(String publicKey, String password) {
         JSONObject body = new JSONObject();
         body.put("method", "unlockAccount");
         JSONObject param = new JSONObject();
@@ -177,23 +182,30 @@ public class BlockchainHandler {
         }
         return new BigInteger("0");
     }
-    
-    public static String toHexValue(String toHex){
-        //return Integer.parseString(toHex);
-        return null;
+
+    public static String toHex(String arg) {
+        return String.format("%x", new BigInteger(1, arg.getBytes()));
     }
-    
-    public static String toHexValue(int toHex){
+
+    public static String toHexValue(int toHex) {
         return Integer.toHexString(toHex);
     }
-    
-    public static void main(String[] args){
-        String hex = "0x7b";
-        System.out.println(Integer.toHexString(30400));
+
+    public static void main(String[] args) {
+        File f = new File("C:\\Users\\Jordy\\Documents\\aether\\APPLICATION\\Aether\\web\\0a4af52e-8c86-4009-882b-180464af09ff.zip");
+
+        System.out.println(keccak256hash("hash"));
+        String byteString = keccak256hash("double(int256)");
+        byte[] buffer = new byte[4];
+        System.out.println(byteString.substring(0, 4).getBytes());
+
+        System.out.println(toHex("dick"));
+        System.out.println(toHex("man"));
+        //System.out.println("000000000000000000000000000000000000000000000000000000000000007b".length());
+        //System.out.println(toHexValue(100));
     }
-    
-    
-    public static BigInteger convertToEth(BigInteger balance){
+
+    public static BigInteger convertToEth(BigInteger balance) {
         return balance.divide(ETHTOWEI);
     }
 }

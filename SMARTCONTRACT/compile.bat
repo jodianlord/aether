@@ -1,2 +1,2 @@
-solcjs KYCSubmission.sol --bin --abi
+solcjs KYC.sol --bin --abi
 PAUSE

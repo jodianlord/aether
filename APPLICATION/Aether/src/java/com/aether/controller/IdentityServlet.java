@@ -5,6 +5,7 @@
  */
 package com.aether.controller;
 
+import com.aether.blockchain.BlockchainHandler;
 import com.aether.util.FileHandler;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -116,8 +117,9 @@ public class IdentityServlet extends HttpServlet {
             } catch (IOException e) {
 
             }
+            String hash = BlockchainHandler.keccak256hash(finalZip);
+            String userID = (String) request.getSession().getAttribute("userid");
             
-
             //ImageIO.write(image, pictureType, response.getOutputStream());
         } catch (ParseException e) {
 
