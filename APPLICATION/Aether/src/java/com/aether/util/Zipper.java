@@ -21,11 +21,19 @@ import java.util.zip.ZipOutputStream;
  * @author clare
  */
 public class Zipper {
+    /**
+     * 
+     * @param files List of filepaths to zip
+     * @param path path of final zip
+     * @param UUID used as filename
+     * @return 
+     */
     public static File zipFiles(List<String> files, String path, String UUID){
         FileOutputStream fos = null;
         ZipOutputStream zipOut = null;
         FileInputStream fis = null;
         File input = null;
+        File finalFile = null;
         try {
             String fileP = path + "\\" + UUID + ".zip";
             System.out.println(fileP);
@@ -45,6 +53,7 @@ public class Zipper {
                 zipOut.flush();
                 fis.close();
             }
+            finalFile = new File(fileP);
             zipOut.close();
             System.out.println("Done... Zipped the files...");
         } catch (FileNotFoundException e) {
@@ -60,14 +69,8 @@ public class Zipper {
                  
             }
         }
-        return input;
+        System.out.println(input.getName());
+        return finalFile;
     }
-     
-    public static void main(String a[]){
-        Zipper zipper = new Zipper();
-        List<String> files = new ArrayList<String>();
-        files.add("C:\\Users\\clare\\Desktop\\uploadtest\\abc.txt");
-        files.add("C:\\Users\\clare\\Desktop\\uploadtest\\download.jpg");
-        //zipper.zipFiles(files);
-    }
+    
 }

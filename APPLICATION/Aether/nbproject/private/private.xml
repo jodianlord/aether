@@ -7,9 +7,14 @@
             <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/web/js/submitdigitalidentity.js</file>
             <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/src/java/com/aether/blockchain/BlockchainHandler.java</file>
             <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/src/java/com/aether/controller/IdentityServlet.java</file>
+            <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/src/java/com/aether/util/dreamfactory.properties</file>
             <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/web/js/takePhoto.js</file>
             <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/src/java/com/aether/blockchain/TransactionServlet.java</file>
+            <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/src/java/com/aether/util/Dreamfactory.java</file>
+            <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/src/java/com/aether/util/ConnectionManager.java</file>
             <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/src/java/com/aether/util/Zipper.java</file>
+            <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/src/java/com/aether/util/FileHandler.java</file>
+            <file>file:/C:/Users/Jordy/Documents/aether/APPLICATION/Aether/src/java/com/aether/util/RESTHandler.java</file>
         </group>
     </open-files>
 </project-private>

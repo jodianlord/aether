@@ -5,6 +5,7 @@
  */
 package com.aether.controller;
 
+import com.aether.util.FileHandler;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -95,17 +96,19 @@ public class IdentityServlet extends HttpServlet {
             fileNames.add(userdataPath);
 
             File finalZip = Zipper.zipFiles(fileNames, path, randomUUIDString);
+            FileHandler.uploadFile(finalZip);
             response.addHeader("Content-Disposition", "attachment; filename=" + finalZip.getName());
             response.setContentLength((int) finalZip.length());
             
+            pictureOut.close();
+            userdataFileOut.close();
             if (jsonFile.delete() && pictureFile.delete() && userdataFile.delete()) {
                 System.out.println("File deleted successfully");
             }else{
                 System.out.println("Files not deleted!");
             }
-            pictureOut.close();
-            userdataFileOut.close();
-
+            
+            
             try (OutputStream out = response.getOutputStream()) {
                 Path zipPath = finalZip.toPath();
                 Files.copy(zipPath, out);
