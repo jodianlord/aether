@@ -122,10 +122,8 @@ public class IdentityServlet extends HttpServlet {
             System.out.println("Public Key: " + publicKey);
             if(BlockchainHandler.unlockAccount(publicKey, password)){
                 String transactionHash = BlockchainHandler.deployContract(publicKey, randomUUIDString, hash);
-                String contractAddress = BlockchainHandler.getContractAddress(transactionHash);
                 JSONObject toCustomer = new JSONObject();
                 toCustomer.put("transactionHash", transactionHash);
-                toCustomer.put("contractAddress", contractAddress);
                 toCustomer.put("uuid", randomUUIDString);
                 toCustomer.put("hash", hash);
                 String finalJSON = toCustomer.toString();
