@@ -41,7 +41,6 @@ public class Blockchain extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response, boolean isPost)
             throws ServletException, IOException {
         String apikey = request.getHeader("X-Blockchain-Key");
-
         if (!checkApiKey(apikey)) {
             response.setContentType("application/json");
             JSONObject error = new JSONObject();
@@ -87,6 +86,40 @@ public class Blockchain extends HttpServlet {
                 try (PrintWriter out = response.getWriter()) {
                     out.println(result);
                 }
+            } else if (method.equals("getHash")){
+                String contractAddress = request.getParameter("contractAddress");
+                String hashSignature = "0x09bd5a60";
+                String result = BlockchainHandler.callContractParams(contractAddress, hashSignature);
+                try(PrintWriter out = response.getWriter()){
+                    out.println(result);
+                }
+            } else if(method.equals("getUUID")){
+                String contractAddress = request.getParameter("contractAddress");
+                String hashSignature = "0xbb07e85d";
+                String result = BlockchainHandler.callContractParams(contractAddress, hashSignature);
+                try(PrintWriter out = response.getWriter()){
+                    out.println(result);
+                }
+            } else if(method.equals("getVerificationStatus")){
+                String contractAddress = request.getParameter("contractAddress");
+                String hashSignature = ("0xbbb82d89");
+                String result = BlockchainHandler.callContractParams(contractAddress, hashSignature);
+                try(PrintWriter out = response.getWriter()){
+                    out.println(result);
+                }
+            } else if(method.equals("setVerificationStatus")){
+                String contractAddress = request.getParameter("contractAddress");
+                String hashSignature = ("0x9e17f6ef");
+                String result = BlockchainHandler.callContractParams(contractAddress, hashSignature);
+                try(PrintWriter out = response.getWriter()){
+                    out.println(result);    
+                }
+            } else if(method.equals("getReceipt")){
+                String transactionHash = request.getParameter("transactionHash");
+                String result = BlockchainHandler.getReceipt(transactionHash);
+                try(PrintWriter out = response.getWriter()){
+                    out.println(result);
+                }
             }
         } else {
             String payloadRequest = getBody(request);
@@ -105,7 +138,7 @@ public class Blockchain extends HttpServlet {
                     JSONObject param = (JSONObject) requestChecker.get("param");
                     String from = (String) param.get("from");
                     String to = (String) param.get("to");
-                    long value = (Long) param.get("value");
+                    int value = (Integer) param.get("value");
                     String result = BlockchainHandler.sendTransaction(from, to, value);
                     try (PrintWriter out = response.getWriter()) {
                         out.println(result);
@@ -118,6 +151,17 @@ public class Blockchain extends HttpServlet {
                     try (PrintWriter out = response.getWriter()) {
                         out.println(result);
                     }
+                } else if (method.equals("deployContract")){
+                    JSONObject param = (JSONObject) requestChecker.get("param");
+                    String publicKey = (String) param.get("publicKey");
+                    String uuid = (String) param.get("uuid");
+                    String hash = (String) param.get("hash");
+                    String result = BlockchainHandler.deployContract(publicKey, uuid, hash);
+                    System.out.println(result);
+                    try(PrintWriter out = response.getWriter()){
+                        out.println(result);
+                    }
+                    
                 }
             } catch (ParseException e) {
                 JSONObject error = new JSONObject();
@@ -206,6 +250,7 @@ public class Blockchain extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("get request");
         processRequest(request, response, false);
     }
 
@@ -220,6 +265,7 @@ public class Blockchain extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("post request");
         processRequest(request, response, true);
     }
 

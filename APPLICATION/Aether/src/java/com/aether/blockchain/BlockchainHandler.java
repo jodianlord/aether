@@ -193,16 +193,14 @@ public class BlockchainHandler {
 
     public static void main(String[] args) {
         File f = new File("C:\\Users\\Jordy\\Documents\\aether\\APPLICATION\\Aether\\web\\0a4af52e-8c86-4009-882b-180464af09ff.zip");
-
-        System.out.println(keccak256hash("hash"));
-        String byteString = keccak256hash("double(int256)");
-        byte[] buffer = new byte[4];
-        System.out.println(byteString.substring(0, 4).getBytes());
-
-        System.out.println(toHex("dick"));
-        System.out.println(toHex("man"));
-        //System.out.println("000000000000000000000000000000000000000000000000000000000000007b".length());
-        //System.out.println(toHexValue(100));
+        try{
+            System.out.println(keccak256hash(f));
+        }catch(IOException e){
+            
+        }
+        
+        System.out.println(toHex("0a4af52e-8c86-4009-882b-180464af09ff"));
+        System.out.println(toHex("872365777ac706d254972a0aecaadd4b39ca05ce16c3f720d38587c502ed85c5"));
     }
 
     public static BigInteger convertToEth(BigInteger balance) {
