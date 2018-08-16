@@ -170,6 +170,56 @@ public class BlockchainHandler {
     }
     
     /**
+     * Gets hash encoded into the blockchain in a contract address
+     * @param contractAddress contract address to retrieve the hash from
+     * @return 
+     */
+    public static String getHash(String contractAddress){
+        String requestURL = URL + "?method=getHash&contractAddress=" + contractAddress;
+        try{
+            String result = RESTHandler.sendGetRequest(requestURL, "bc.key");
+            JSONObject resultJSON = getJSONObject(result);
+            String hash = (String) resultJSON.get("result");
+            return hash;
+        }catch (MalformedURLException e) {
+            System.out.println("Malformed URL!");
+        } catch (ProtocolException f) {
+            System.out.println("Protocol Exception!");
+        } catch (IOException e) {
+            System.out.println("IO Exception!");
+        } catch (ParseException e) {
+            System.out.println("Parse Excepion!");
+        }
+        return null;
+    }
+    
+    /**
+     * Gets uuid encoded into the blockchain in a contract address
+     * @param contractAddress contract address to retrieve the uuid from
+     * @return 
+     */
+    public static String getUUID(String contractAddress){
+        String requestURL = URL + "?method=getUUID&contractAddress=" + contractAddress;
+        try{
+            String result = RESTHandler.sendGetRequest(requestURL, "bc.key");
+            JSONObject resultJSON = getJSONObject(result);
+            String hexUUID = (String) resultJSON.get("result");
+            hexUUID = hexUUID.substring(128, hexUUID.length());
+            hexUUID = hexUUID.substring(0, 72);
+            return hexUUID;
+        }catch (MalformedURLException e) {
+            System.out.println("Malformed URL!");
+        } catch (ProtocolException f) {
+            System.out.println("Protocol Exception!");
+        } catch (IOException e) {
+            System.out.println("IO Exception!");
+        } catch (ParseException e) {
+            System.out.println("Parse Excepion!");
+        }
+        return null;
+    }
+    
+    /**
      * Deploys the KYC Contract
      * @param publicKey Public Key of the account to deploy the contract from 
      * @param uuid UUID of the user detail to be encoded on the blockchain
