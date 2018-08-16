@@ -114,7 +114,7 @@ public class BlockchainHandler {
         }
         contract += uuidHex;
         contract += "0000000000000000000000000000000000000000000000000000000000000040";
-        String hashHex = toHex(uuid);
+        String hashHex = toHex(hash);
         contract += hashHex;
 
         JSONObject body = new JSONObject();

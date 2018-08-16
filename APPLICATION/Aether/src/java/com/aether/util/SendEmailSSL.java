@@ -4,15 +4,21 @@
  * and open the template in the editor.
  */
 package com.aether.util;
+import java.io.File;
 import java.util.Properties;
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 /**
  *
  * @author clare
@@ -27,11 +33,11 @@ public class SendEmailSSL {
     static MimeMessage generateMailMessage;
     
     public static void main(String args[]) throws AddressException, MessagingException {
-        generateAndSendEmail();
+        generateAndSendEmail("jordysamuel@gmail.com", new File("C:\\Users\\jodia\\Documents\\aether\\APPLICATION\\Aether\\web\\0a4af52e-8c86-4009-882b-180464af09ff.zip"));
         System.out.println("\n\n ===> Your Java Program has just sent an Email successfully. Check your email..");
     }
  
-	public static void generateAndSendEmail() throws AddressException, MessagingException {
+	public static void generateAndSendEmail(String emailAddress, File f) throws AddressException, MessagingException {
  
 		// Step1
 		System.out.println("\n 1st ===> setup Mail Server Properties..");
@@ -45,12 +51,25 @@ public class SendEmailSSL {
 		System.out.println("\n\n 2nd ===> get Mail Session..");
 		getMailSession = Session.getDefaultInstance(mailServerProperties, null);
 		generateMailMessage = new MimeMessage(getMailSession);
-		generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress("aetherfyp2018@gmail.com"));
-		generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("aetherfyp2018@gmail.com"));
-		generateMailMessage.setSubject("Greetings from AETHER");
-		String emailBody = "Test email by AETHER. " + "<br><br> Regards, <br>AETHER Admin";
-		generateMailMessage.setContent(emailBody, "text/html");
+		generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(emailAddress));
+		//generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress(emailAddress));
+		generateMailMessage.setSubject("Your Universal Digital Identity key is ready!");
+		String emailBody = "Attach the file in this email to activate digital services. The future awaits! " + "<br><br> Regards, <br>AETHER Admin";
+		//generateMailMessage.setContent(emailBody, "text/html");
+                MimeBodyPart messagePart = new MimeBodyPart();
+                messagePart.setText(emailBody, "UTF-8", "html");
 		System.out.println("Mail Session has been created successfully..");
+                
+                FileDataSource fileDataSource = new FileDataSource(f.toPath().toString());
+                MimeBodyPart attachmentPart = new MimeBodyPart();
+                attachmentPart.setDataHandler(new DataHandler(fileDataSource));
+                attachmentPart.setFileName(fileDataSource.getName());
+                
+                Multipart multipart = new MimeMultipart();
+                multipart.addBodyPart(messagePart);
+                multipart.addBodyPart(attachmentPart);
+                
+                generateMailMessage.setContent(multipart);
  
 		// Step3
 		System.out.println("\n\n 3rd ===> Get Session and Send mail");

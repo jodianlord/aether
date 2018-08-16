@@ -150,7 +150,7 @@ public class BlockchainHandler {
      * @return 
      */
     public static String getContractAddress(String transactionHash){
-        String requestURL = URL + "?method=getReceipt?transactionHash=" + transactionHash;
+        String requestURL = URL + "?method=getReceipt&transactionHash=" + transactionHash;
         try{
             String result = RESTHandler.sendGetRequest(requestURL, "bc.key");
             JSONObject resultJSON = getJSONObject(result);
@@ -228,7 +228,7 @@ public class BlockchainHandler {
      */
     public static String deployContract(String publicKey, String uuid, String hash){
         JSONObject body = new JSONObject();
-        body.put("method", "unlockAccount");
+        body.put("method", "deployContract");
         JSONObject param = new JSONObject();
         param.put("publicKey", publicKey);
         param.put("uuid", uuid);
@@ -259,6 +259,7 @@ public class BlockchainHandler {
      * @return 
      */
     public static boolean unlockAccount(String publicKey, String password) {
+        System.out.println("Blockchain pubKey: " + publicKey);
         JSONObject body = new JSONObject();
         body.put("method", "unlockAccount");
         JSONObject param = new JSONObject();
