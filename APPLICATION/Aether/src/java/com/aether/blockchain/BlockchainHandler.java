@@ -114,6 +114,52 @@ public class BlockchainHandler {
 
         return null;
     }
+    
+    public static String getContractAddress(String transactionHash){
+        String requestURL = URL + "?method=getReceipt?transactionHash=" + transactionHash;
+        try{
+            String result = RESTHandler.sendGetRequest(requestURL, "bc.key");
+            JSONObject resultJSON = getJSONObject(result);
+            JSONObject resultExtract = (JSONObject) resultJSON.get("result");
+            String contractAddress = (String) resultExtract.get("contractAddress");
+            return contractAddress;
+        }catch (MalformedURLException e) {
+            System.out.println("Malformed URL!");
+        } catch (ProtocolException f) {
+            System.out.println("Protocol Exception!");
+        } catch (IOException e) {
+            System.out.println("IO Exception!");
+        } catch (ParseException e) {
+            System.out.println("Parse Excepion!");
+        }
+        return null;
+    }
+    
+    public static String deployContract(String publicKey, String uuid, String hash){
+        JSONObject body = new JSONObject();
+        body.put("method", "unlockAccount");
+        JSONObject param = new JSONObject();
+        param.put("publicKey", publicKey);
+        param.put("uuid", uuid);
+        param.put("hash", hash);
+        body.put("param", param);
+        System.out.println(body.toString());
+        try{
+            String result = RESTHandler.sendPostRequest(URL, body, "bc.key");
+            JSONObject jsonResult = getJSONObject(result);
+            String transactionHash = (String) jsonResult.get("result");
+            return transactionHash;
+        }catch (MalformedURLException e) {
+            System.out.println("Malformed URL!");
+        } catch (ProtocolException f) {
+            System.out.println("Protocol Exception!");
+        } catch (IOException e) {
+            System.out.println("IO Exception!");
+        } catch (ParseException e) {
+            System.out.println("Parse Exception!");
+        }
+        return null;
+    }
 
     public static boolean unlockAccount(String publicKey, String password) {
         JSONObject body = new JSONObject();

@@ -6,6 +6,7 @@
 package com.aether.controller;
 
 import com.aether.blockchain.BlockchainHandler;
+import com.aether.util.Dreamfactory;
 import com.aether.util.FileHandler;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -33,7 +34,9 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import org.json.simple.JSONArray;
 
 /**
  *
@@ -59,6 +62,9 @@ public class IdentityServlet extends HttpServlet {
         String path = request.getServletContext().getRealPath("/");
         try {
             JSONObject resultJSON = getJSONObject(body);
+            String password = (String) resultJSON.get("password");
+            System.out.println(password);
+            resultJSON.remove("password");
             //resultJSON.remove("picture");
             //resultJSON.remove("userdata");
 
@@ -97,19 +103,38 @@ public class IdentityServlet extends HttpServlet {
             fileNames.add(userdataPath);
 
             File finalZip = Zipper.zipFiles(fileNames, path, randomUUIDString);
-            FileHandler.uploadFile(finalZip);
-            response.addHeader("Content-Disposition", "attachment; filename=" + finalZip.getName());
-            response.setContentLength((int) finalZip.length());
+            String hash = BlockchainHandler.keccak256hash(finalZip);
+            String userID = (String) request.getSession().getAttribute("userid");
+
+            HashMap<String, String> filterKey = new HashMap<String, String>();
+            filterKey.put("userid", userID);
+
+            JSONArray userJSON = Dreamfactory.getRecordsFromTable("user", filterKey);
+            JSONObject record = (JSONObject) userJSON.get(0);
+            String publicKey = (String) record.get("publickey");
             
+            if(BlockchainHandler.unlockAccount(publicKey, password)){
+                String transactionHash = BlockchainHandler.deployContract(publicKey, randomUUIDString, hash);
+                String contractAddress = BlockchainHandler.getContractAddress(transactionHash);
+                JSONObject toCustomer = new JSONObject();
+                toCustomer.put("transactionHash", transactionHash);
+                toCustomer.put("contractAddress", contractAddress);
+                toCustomer.put("uuid", randomUUIDString);
+                toCustomer.put("hash", hash);
+            }else{
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+            
+            FileHandler.uploadFile(finalZip);
+
             pictureOut.close();
             userdataFileOut.close();
             if (jsonFile.delete() && pictureFile.delete() && userdataFile.delete()) {
                 System.out.println("File deleted successfully");
-            }else{
+            } else {
                 System.out.println("Files not deleted!");
             }
-            
-            
+
             try (OutputStream out = response.getOutputStream()) {
                 Path zipPath = finalZip.toPath();
                 Files.copy(zipPath, out);
@@ -117,28 +142,14 @@ public class IdentityServlet extends HttpServlet {
             } catch (IOException e) {
 
             }
-            String hash = BlockchainHandler.keccak256hash(finalZip);
-            String userID = (String) request.getSession().getAttribute("userid");
-            
+
+            response.setStatus(HttpServletResponse.SC_OK);
+
             //ImageIO.write(image, pictureType, response.getOutputStream());
         } catch (ParseException e) {
 
         }
 
-        /*
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet IdentityServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet IdentityServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-         */
-        response.setStatus(HttpServletResponse.SC_OK);
     }
 
     public static String getBody(HttpServletRequest request) throws IOException {

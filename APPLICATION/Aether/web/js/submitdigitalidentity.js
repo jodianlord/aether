@@ -38,37 +38,59 @@ document.getElementById("submit").onclick = function () {
         return;
     }
 
-    var canvasbase = canvas.toDataURL();
-    object["picture"] = canvasbase;
-    var reader = new FileReader();
-    reader.readAsDataURL(documentFile);
-    reader.onload = function () {
-        var filebase = reader.result;
-        object["userdata"] = filebase;
-        console.log(object);
-        $.ajax({
-            url: "./IdentityServlet",
-            type: "POST",
-            data: JSON.stringify(object),
-            contentType: "application/json",
-            success: function (response) {
-                $.alert({
-                    title: "Success!",
-                    content: "Identity Uploaded!"
-                });
+    $.confirm({
+        title: "Input your password!",
+        content: '<form action="" class="formName">' +
+                '<div class="form-group">' +
+                '<label>Password</label>' +
+                '<input type="password" placeholder="Your Password" class="name form-control" id="password" required />' +
+                '</div>' +
+                '</form>',
+        buttons: {
+            formSubmit: {
+                text: "Submit",
+                btnClass: 'btn-red',
+                action: function () {
+                    var password = document.getElementById("password").value;
+                    var canvasbase = canvas.toDataURL();
+                    object["picture"] = canvasbase;
+                    var reader = new FileReader();
+                    reader.readAsDataURL(documentFile);
+                    reader.onload = function () {
+                        var filebase = reader.result;
+                        object["userdata"] = filebase;
+                        object["password"] = password;
+                        console.log(object);
+                        $.ajax({
+                            url: "./IdentityServlet",
+                            type: "POST",
+                            data: JSON.stringify(object),
+                            contentType: "application/json",
+                            success: function (response) {
+                                $.alert({
+                                    title: "Success!",
+                                    content: "Identity Uploaded!"
+                                });
+                            },
+                            error: function (xhr) {
+                                $.alert({
+                                    title: 'Failure!',
+                                    content: 'Transaction Not Sent!',
+                                });
+                            }
+                        });
+                    };
+                    reader.onerror = function (error) {
+                        console.log('Error: ', error);
+                    };
+                }
             },
-            error: function (xhr) {
-                $.alert({
-                    title: 'Failure!',
-                    content: 'Transaction Not Sent!',
-                });
+            cancel: function(){
+                return;
             }
-        });
-    };
-    reader.onerror = function (error) {
-        console.log('Error: ', error);
-    };
+        }
 
+    });
 }
 
 function getBase64(file) {
@@ -77,7 +99,6 @@ function getBase64(file) {
     reader.readAsDataURL(file);
     reader.onload = function () {
         file64 = reader.result;
-
     };
     reader.onerror = function (error) {
         console.log('Error: ', error);
