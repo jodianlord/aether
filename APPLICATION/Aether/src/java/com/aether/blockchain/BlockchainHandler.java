@@ -26,12 +26,23 @@ public class BlockchainHandler {
     private static HttpURLConnection con;
     private static final String URL = "http://vm.jordysamuel.com:30301/Blockchain/";
     private static final BigInteger ETHTOWEI = new BigInteger("1000000000000000000");
-
+    
+    /**
+     * Gets a JSONObject from a String, not to be directly called
+     * @param jsonString
+     * @return
+     * @throws ParseException 
+     */
     public static JSONObject getJSONObject(String jsonString) throws ParseException {
         JSONParser parser = new JSONParser();
         return (JSONObject) parser.parse(jsonString);
     }
-
+    
+    /**
+     * Hashes a String to a SHA3 String
+     * @param toHash String to hash
+     * @return 
+     */
     public static String keccak256hash(String toHash) {
         Keccak.Digest256 digest256 = new Keccak.Digest256();
         digest256.update(toHash.getBytes());
@@ -39,6 +50,12 @@ public class BlockchainHandler {
         return hashToString(digest256);
     }
 
+    /**
+     * Hashes a File object to a SHA3 String
+     * @param toHash File to hash
+     * @return
+     * @throws IOException 
+     */
     public static String keccak256hash(File toHash) throws IOException {
         Keccak.Digest256 digest256 = new Keccak.Digest256();
         digest256.update(Files.readAllBytes(toHash.toPath()));
@@ -58,7 +75,14 @@ public class BlockchainHandler {
 
         return buff.toString();
     }
-
+    
+    /**
+     * Sends a transaction from one address to another
+     * @param from Public key of account to transfer from
+     * @param to Public key of account to transfer to
+     * @param value Value to transfer in wei
+     * @return 
+     */
     public static String sendTransaction(String from, String to, int value) {
         System.out.println("value: " + value);
         JSONObject body = new JSONObject();
@@ -89,7 +113,12 @@ public class BlockchainHandler {
 
         return null;
     }
-
+    
+    /**
+     * Creates new account on the blockchain
+     * @param password Password for the account
+     * @return 
+     */
     public static String createAccount(String password) {
         JSONObject body = new JSONObject();
         body.put("method", "createAccount");
@@ -115,6 +144,11 @@ public class BlockchainHandler {
         return null;
     }
     
+    /**
+     * Gets a contract address from a transaction hash
+     * @param transactionHash Transaction Hash
+     * @return 
+     */
     public static String getContractAddress(String transactionHash){
         String requestURL = URL + "?method=getReceipt?transactionHash=" + transactionHash;
         try{
@@ -135,6 +169,13 @@ public class BlockchainHandler {
         return null;
     }
     
+    /**
+     * Deploys the KYC Contract
+     * @param publicKey Public Key of the account to deploy the contract from 
+     * @param uuid UUID of the user detail to be encoded on the blockchain
+     * @param hash Hash of the zip file to be encoded on the blockchain
+     * @return 
+     */
     public static String deployContract(String publicKey, String uuid, String hash){
         JSONObject body = new JSONObject();
         body.put("method", "unlockAccount");
@@ -160,7 +201,13 @@ public class BlockchainHandler {
         }
         return null;
     }
-
+    
+    /**
+     * Unlocks account, necessary before performing any transaction or deployment
+     * @param publicKey Public key of the account to be unlocked
+     * @param password Password of the account to be unlocked
+     * @return 
+     */
     public static boolean unlockAccount(String publicKey, String password) {
         JSONObject body = new JSONObject();
         body.put("method", "unlockAccount");
@@ -187,7 +234,11 @@ public class BlockchainHandler {
 
         return false;
     }
-
+    
+    /**
+     * Gets an ArrayList of all accounts
+     * @return 
+     */
     public static ArrayList<String> getListOfAccounts() {
         String requestURL = URL + "?method=getListOfAccounts";
         try {
@@ -208,7 +259,12 @@ public class BlockchainHandler {
 
         return null;
     }
-
+    
+    /**
+     * Gets the balance in wei of an account
+     * @param account Public Key of the account to get the balance from
+     * @return 
+     */
     public static BigInteger getBalance(String account) {
         String requestURL = URL + "?method=getBalance&publickey=" + account;
         try {
@@ -228,11 +284,21 @@ public class BlockchainHandler {
         }
         return new BigInteger("0");
     }
-
+    
+    /**
+     * Translates a String to its hex value
+     * @param arg String to be hexed
+     * @return 
+     */
     public static String toHex(String arg) {
         return String.format("%x", new BigInteger(1, arg.getBytes()));
     }
 
+    /**
+     * Translates a decimal number to hex
+     * @param toHex Integer to be hexed
+     * @return 
+     */
     public static String toHexValue(int toHex) {
         return Integer.toHexString(toHex);
     }

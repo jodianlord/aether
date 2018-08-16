@@ -40,7 +40,7 @@ public class Dreamfactory {
     }
     
     /**
-     * 
+     * Creates records in a table
      * @param table name of the table to create records in
      * @param record arraylist to contain multiple records. Map key is the column name, value is the value to be uploaded
      * @return 
@@ -79,7 +79,7 @@ public class Dreamfactory {
     }
 
     /**
-     * 
+     * Gets all records in a table given a filter
      * @param table table to retrieve records from
      * @param filter map key is the column name, value is the equals value
      * @return 

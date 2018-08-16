@@ -35,7 +35,7 @@ public class FileHandler {
     private static final int BUFFER_SIZE = 4096;
 
     /**
-     * 
+     * Uploads a file object to the server
      * @param File File object you want to upload
      * @return boolean stating whether file upload has been successful
      * @throws MalformedURLException
@@ -105,9 +105,9 @@ public class FileHandler {
     }
 
     /**
-     * 
+     * Gets a file from the server
      * @param fileName Name of the file you want to get
-     * @param context servlet context to save the file
+     * @param context servlet context to save the file (path)
      * @return File object
      * @throws MalformedURLException
      * @throws IOException 
