@@ -214,8 +214,10 @@ public class BlockchainHandler {
             String result = RESTHandler.sendGetRequest(requestURL, "bc.key");
             JSONObject resultJSON = getJSONObject(result);
             String hexUUID = (String) resultJSON.get("result");
+            System.out.println(hexUUID);
             hexUUID = hexUUID.substring(128, hexUUID.length());
-            hexUUID = hexUUID.substring(0, 72);
+            hexUUID = hexUUID.substring(2, 72);
+            System.out.println(hexUUID);
             byte[] bytes = DatatypeConverter.parseHexBinary(hexUUID);
             return new String(bytes);
         } catch (MalformedURLException e) {
@@ -379,9 +381,7 @@ public class BlockchainHandler {
         } catch (IOException e) {
 
         }
-        String UUID = "";
-        byte[] bytes = DatatypeConverter.parseHexBinary("30613461663532652d386338362d343030392d383832622d313830343634616630396666");
-        System.out.println(new String(bytes));
+        System.out.println(getUUID("0x74821ebfedddbc9612644a9da6b71cc281712829"));
         System.out.println(toHex("0a4af52e-8c86-4009-882b-180464af09ff"));
         System.out.println(toHex("872365777ac706d254972a0aecaadd4b39ca05ce16c3f720d38587c502ed85c5"));
     }
