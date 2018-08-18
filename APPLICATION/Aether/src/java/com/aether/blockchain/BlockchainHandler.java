@@ -16,6 +16,7 @@ import org.json.simple.*;
 import org.json.simple.parser.*;
 import org.bouncycastle.jcajce.provider.digest.Keccak;
 import java.security.MessageDigest;
+import javax.xml.bind.DatatypeConverter;
 
 /**
  *
@@ -26,22 +27,24 @@ public class BlockchainHandler {
     private static HttpURLConnection con;
     private static final String URL = "http://vm.jordysamuel.com:30301/Blockchain/";
     private static final BigInteger ETHTOWEI = new BigInteger("1000000000000000000");
-    
+
     /**
      * Gets a JSONObject from a String, not to be directly called
+     *
      * @param jsonString
      * @return
-     * @throws ParseException 
+     * @throws ParseException
      */
     public static JSONObject getJSONObject(String jsonString) throws ParseException {
         JSONParser parser = new JSONParser();
         return (JSONObject) parser.parse(jsonString);
     }
-    
+
     /**
      * Hashes a String to a SHA3 String
+     *
      * @param toHash String to hash
-     * @return 
+     * @return
      */
     public static String keccak256hash(String toHash) {
         Keccak.Digest256 digest256 = new Keccak.Digest256();
@@ -52,9 +55,10 @@ public class BlockchainHandler {
 
     /**
      * Hashes a File object to a SHA3 String
+     *
      * @param toHash File to hash
      * @return
-     * @throws IOException 
+     * @throws IOException
      */
     public static String keccak256hash(File toHash) throws IOException {
         Keccak.Digest256 digest256 = new Keccak.Digest256();
@@ -75,13 +79,14 @@ public class BlockchainHandler {
 
         return buff.toString();
     }
-    
+
     /**
      * Sends a transaction from one address to another
+     *
      * @param from Public key of account to transfer from
      * @param to Public key of account to transfer to
      * @param value Value to transfer in wei
-     * @return 
+     * @return
      */
     public static String sendTransaction(String from, String to, int value) {
         System.out.println("value: " + value);
@@ -113,11 +118,12 @@ public class BlockchainHandler {
 
         return null;
     }
-    
+
     /**
      * Creates new account on the blockchain
+     *
      * @param password Password for the account
-     * @return 
+     * @return
      */
     public static String createAccount(String password) {
         JSONObject body = new JSONObject();
@@ -143,21 +149,22 @@ public class BlockchainHandler {
 
         return null;
     }
-    
+
     /**
      * Gets a contract address from a transaction hash
+     *
      * @param transactionHash Transaction Hash
-     * @return 
+     * @return
      */
-    public static String getContractAddress(String transactionHash){
+    public static String getContractAddress(String transactionHash) {
         String requestURL = URL + "?method=getReceipt&transactionHash=" + transactionHash;
-        try{
+        try {
             String result = RESTHandler.sendGetRequest(requestURL, "bc.key");
             JSONObject resultJSON = getJSONObject(result);
             JSONObject resultExtract = (JSONObject) resultJSON.get("result");
             String contractAddress = (String) resultExtract.get("contractAddress");
             return contractAddress;
-        }catch (MalformedURLException e) {
+        } catch (MalformedURLException e) {
             System.out.println("Malformed URL!");
         } catch (ProtocolException f) {
             System.out.println("Protocol Exception!");
@@ -168,20 +175,22 @@ public class BlockchainHandler {
         }
         return null;
     }
-    
+
     /**
      * Gets hash encoded into the blockchain in a contract address
+     *
      * @param contractAddress contract address to retrieve the hash from
-     * @return 
+     * @return
      */
-    public static String getHash(String contractAddress){
+    public static String getHash(String contractAddress) {
         String requestURL = URL + "?method=getHash&contractAddress=" + contractAddress;
-        try{
+        try {
             String result = RESTHandler.sendGetRequest(requestURL, "bc.key");
             JSONObject resultJSON = getJSONObject(result);
             String hash = (String) resultJSON.get("result");
-            return hash;
-        }catch (MalformedURLException e) {
+            byte[] bytes = DatatypeConverter.parseHexBinary(hash);
+            return new String(bytes);
+        } catch (MalformedURLException e) {
             System.out.println("Malformed URL!");
         } catch (ProtocolException f) {
             System.out.println("Protocol Exception!");
@@ -192,22 +201,24 @@ public class BlockchainHandler {
         }
         return null;
     }
-    
+
     /**
      * Gets uuid encoded into the blockchain in a contract address
+     *
      * @param contractAddress contract address to retrieve the uuid from
-     * @return 
+     * @return
      */
-    public static String getUUID(String contractAddress){
+    public static String getUUID(String contractAddress) {
         String requestURL = URL + "?method=getUUID&contractAddress=" + contractAddress;
-        try{
+        try {
             String result = RESTHandler.sendGetRequest(requestURL, "bc.key");
             JSONObject resultJSON = getJSONObject(result);
             String hexUUID = (String) resultJSON.get("result");
             hexUUID = hexUUID.substring(128, hexUUID.length());
             hexUUID = hexUUID.substring(0, 72);
-            return hexUUID;
-        }catch (MalformedURLException e) {
+            byte[] bytes = DatatypeConverter.parseHexBinary(hexUUID);
+            return new String(bytes);
+        } catch (MalformedURLException e) {
             System.out.println("Malformed URL!");
         } catch (ProtocolException f) {
             System.out.println("Protocol Exception!");
@@ -218,15 +229,16 @@ public class BlockchainHandler {
         }
         return null;
     }
-    
+
     /**
      * Deploys the KYC Contract
-     * @param publicKey Public Key of the account to deploy the contract from 
+     *
+     * @param publicKey Public Key of the account to deploy the contract from
      * @param uuid UUID of the user detail to be encoded on the blockchain
      * @param hash Hash of the zip file to be encoded on the blockchain
-     * @return 
+     * @return
      */
-    public static String deployContract(String publicKey, String uuid, String hash){
+    public static String deployContract(String publicKey, String uuid, String hash) {
         JSONObject body = new JSONObject();
         body.put("method", "deployContract");
         JSONObject param = new JSONObject();
@@ -235,12 +247,12 @@ public class BlockchainHandler {
         param.put("hash", hash);
         body.put("param", param);
         System.out.println(body.toString());
-        try{
+        try {
             String result = RESTHandler.sendPostRequest(URL, body, "bc.key");
             JSONObject jsonResult = getJSONObject(result);
             String transactionHash = (String) jsonResult.get("result");
             return transactionHash;
-        }catch (MalformedURLException e) {
+        } catch (MalformedURLException e) {
             System.out.println("Malformed URL!");
         } catch (ProtocolException f) {
             System.out.println("Protocol Exception!");
@@ -251,12 +263,14 @@ public class BlockchainHandler {
         }
         return null;
     }
-    
+
     /**
-     * Unlocks account, necessary before performing any transaction or deployment
+     * Unlocks account, necessary before performing any transaction or
+     * deployment
+     *
      * @param publicKey Public key of the account to be unlocked
      * @param password Password of the account to be unlocked
-     * @return 
+     * @return
      */
     public static boolean unlockAccount(String publicKey, String password) {
         System.out.println("Blockchain pubKey: " + publicKey);
@@ -285,10 +299,11 @@ public class BlockchainHandler {
 
         return false;
     }
-    
+
     /**
      * Gets an ArrayList of all accounts
-     * @return 
+     *
+     * @return
      */
     public static ArrayList<String> getListOfAccounts() {
         String requestURL = URL + "?method=getListOfAccounts";
@@ -310,11 +325,12 @@ public class BlockchainHandler {
 
         return null;
     }
-    
+
     /**
      * Gets the balance in wei of an account
+     *
      * @param account Public Key of the account to get the balance from
-     * @return 
+     * @return
      */
     public static BigInteger getBalance(String account) {
         String requestURL = URL + "?method=getBalance&publickey=" + account;
@@ -335,11 +351,12 @@ public class BlockchainHandler {
         }
         return new BigInteger("0");
     }
-    
+
     /**
      * Translates a String to its hex value
+     *
      * @param arg String to be hexed
-     * @return 
+     * @return
      */
     public static String toHex(String arg) {
         return String.format("%x", new BigInteger(1, arg.getBytes()));
@@ -347,8 +364,9 @@ public class BlockchainHandler {
 
     /**
      * Translates a decimal number to hex
+     *
      * @param toHex Integer to be hexed
-     * @return 
+     * @return
      */
     public static String toHexValue(int toHex) {
         return Integer.toHexString(toHex);
@@ -356,12 +374,14 @@ public class BlockchainHandler {
 
     public static void main(String[] args) {
         File f = new File("C:\\Users\\Jordy\\Documents\\aether\\APPLICATION\\Aether\\web\\0a4af52e-8c86-4009-882b-180464af09ff.zip");
-        try{
+        try {
             System.out.println(keccak256hash(f));
-        }catch(IOException e){
-            
+        } catch (IOException e) {
+
         }
-        
+        String UUID = "";
+        byte[] bytes = DatatypeConverter.parseHexBinary("30613461663532652d386338362d343030392d383832622d313830343634616630396666");
+        System.out.println(new String(bytes));
         System.out.println(toHex("0a4af52e-8c86-4009-882b-180464af09ff"));
         System.out.println(toHex("872365777ac706d254972a0aecaadd4b39ca05ce16c3f720d38587c502ed85c5"));
     }
