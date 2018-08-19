@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +27,7 @@ import org.json.simple.parser.ParseException;
  *
  * @author Jordy
  */
+@WebServlet(name = "GetVerification", urlPatterns = {"/GetVerification"})
 public class GetVerification extends HttpServlet {
 
     /**
@@ -49,13 +51,14 @@ public class GetVerification extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
         */
-        Map<String, String> filter = new HashMap<String,String>();
+        Map<String, String> filter = new HashMap<>();
         filter.put("bank", "DBS");
         filter.put("verified%20", "%20false");
         JSONArray resultArray = Dreamfactory.getRecordsFromTable("application", filter);
         
         
         try (PrintWriter out = response.getWriter()) {
+            System.out.println("success");
             out.println(resultArray.toString());
             response.setStatus(HttpServletResponse.SC_OK);
         }

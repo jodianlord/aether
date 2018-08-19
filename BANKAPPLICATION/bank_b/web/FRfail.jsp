@@ -3,7 +3,7 @@
 <html lang="en">
     <%@include  file="Components/head.html" %>
 
-    <body>
+    <body style="background-color: black">
 
         <section id="container" >
 
@@ -37,5 +37,8 @@
         <%@include file="Components/style.html" %>
 
     </body>
+    <script type="application/javascript">
+            document.getElementById("verifyface").className = "active";
+        </script>
 </html>
 

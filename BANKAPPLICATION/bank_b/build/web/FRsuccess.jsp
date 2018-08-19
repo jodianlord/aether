@@ -3,7 +3,7 @@
 <html lang="en">
     <%@include  file="Components/head.html" %>
 
-    <body>
+    <body style="background-color: black">
 
         <section id="container" >
 
@@ -19,10 +19,11 @@
                     
                      <div class="row mt">
                         <div class="col-lg-12">
-                            <div class="form-panel" style="height:600px">
+                            <div class="form-panel" style="height:500px">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i>Facial Comparison</h4>
-                                <img src="img/shawnKYC.jpg" id="kyc" width="500">
-                                <img src="img/shawnInput.jpg" id="input" width="500">
+                                <table id="picTable">
+                                    
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -108,11 +109,16 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
-                    <form action = "PassBin" method="post">
-                        <input type ="submit" value = "val">
-                        <button id="submit" type="button" class="btn btn-primary btn-lg btn-block">Submit Digital Identity</button>
-                    </form>
+                        
+                        
+                        <button type ="submit" id="submitaccconfirm" style="width:100%"class="btn btn-primary btn-lg btn-danger">Create Account</button>
+                    </div
+                    
+                    
+                    <!-- <form action = "PassBin" method="post">
+                        
+                        <!--<button id="submit" type="button" class="btn btn-primary btn-lg btn-block">Submit Digital Identity</button>
+                    </form> -->
                     <!-- <button id="submit" type="button" class="btn btn-primary btn-lg btn-block">Submit Digital Identity</button> -->
                 </section>
             </section>
@@ -123,32 +129,37 @@
         <%@include file="Components/style.html" %>
 
     </body>
+    
+    <script type="application/javascript">
+            document.getElementById("verifyface").className = "active";
+        </script>
 </html>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    (function(){
-        var filter = "uuid=4f3c1af2-cbab-4d95-aff0-3b9176b3862c";
-        
-        $.ajax({
-            type: "GET",
-            url: "./PassBin",
-            success:function(result){
-                console.log(result);
-                var firstImage = new Image();
-                firstImage.src = result.picture;
-                document.getElementById("KYC") = firstImage;
-            },error:function(xhr){
-                console.log(xhr);
-            }
-        });
-    })();
-    
-</script>
-<script>
+    var uuid = "2d6668b3-81a1-404e-9f09-e6c4a22ca40b";
+    var obj = {};
+    obj["uuid"] = uuid;
     $.ajax({
-        url: "http://localhost:8084/bank_b/ParseJson",
-        type: "GET",
+        url: "http://localhost:8084/bank_b/TableRetrieve",
+        type: "POST",
+        data: JSON.stringify(obj),
         success: function (data) {
+            console.log(data);
+            var tbody = document.getElementById("picTable");
+            var div = document.createElement("div");
+            var pictureBase64 = data.picture;
+            var verificationBase64 = "data:image/png;base64," + data.verification;
+
+            var pictureImage = new Image();
+            pictureImage.src = pictureBase64;
+            tbody.appendChild(pictureImage);
+
+            //tbody.appendChild(div);
+
+            var verificationImage = new Image();
+            verificationImage.src = verificationBase64;
+            tbody.appendChild(verificationImage);
+            
             $("#fullname").val(data.fullname);
             $("#nric").val(data.nric);
             $("#email").val(data.email);
@@ -166,6 +177,46 @@
         }
     });
 </script>
+<!--<script>
+    var uuid = "2d6668b3-81a1-404e-9f09-e6c4a22ca40b";
+    var obj = {};
+    obj["uuid"] = uuid;
+    $.ajax({
+        url: "http://localhost:8084/bank_b/TableRetrieve",
+        type: "POST",
+        data: JSON.stringify(obj),
+        success: function (data) {
+            $("#fullname").val(data.fullname);
+            $("#nric").val(data.nric);
+            $("#email").val(data.email);
+            $("#mobile").val(data.mobile);
+            $("#gender").val(data.gender);
+            $("#nationality").val(data.nationality);
+            $("#marital").val(data.marital);
+            $("#residencetype").val(data.residencetype);
+            $("#address").val(data.address);
+            $("#occupation").val(data.occupation);
+            $("#industry").val(data.industry);
+        },
+        error: function () {
+
+        }
+    });
+</script>-->
+<script>
+    
+    $(submitaccconfirm).click(function(){
+        alert("Your Account has been successfully created!");
+        window.setTimeout(function(){
+
+        // Move to a new location or you can do something else
+        window.location.href = "verifyface.jsp";
+
+    }, 1500);
+    });
+    
+</script>
+
 <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
 
 <script>
