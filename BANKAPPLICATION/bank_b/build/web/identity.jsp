@@ -3,7 +3,7 @@
 <html lang="en">
     <%@include  file="Components/head.html" %>
 
-    <body>
+    <body style="background-color: black">
 
         <section id="container" >
 
@@ -15,18 +15,18 @@
             *********************************************************************************************************************************************************** -->
             <!--main content start-->
             <section id="main-content">
-                <section class="wrapper" style="background-color: black">
-                    
+                <section class="wrapper">
+
                     <div class="row mt">
                         <div class="col-lg-12">
                             <div class="form-panel" style="height:170px">
-                                <h4 class="mb"><i class="fa fa-angle-right"></i> Upload .bin File</h4>
+                                <h4 class="mb"><i class="fa fa-angle-right"></i> Upload .bin UDI File</h4>
                                 <input type="file" class="filepond" id="fileupload">
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="row mt">
+
+                    <div class="row mt" id="details" hidden>
                         <div class="col-lg-12">
                             <div class="form-panel">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> User Details</h4>
@@ -108,7 +108,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row mt">
                         <div class="col-lg-12">
                             <div class="form-panel col-lg-12" style="width:98%">
@@ -120,7 +120,7 @@
                             </div>
                         </div>
                     </div>
-                    <button id="submit" type="button" class="btn btn-primary btn-lg btn-block">Submit Digital Identity</button>
+                    <button id="submit" type="button" class="btn btn-danger btn-lg btn-block">Submit Account Creation</button>
                 </section>
             </section>
 
@@ -140,6 +140,34 @@
     </body>
 </html>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    document.getElementById("submit").onclick = function () {
+        console.log("hi");
+        var binFile = pondScum.getFile().file;
+        var reader = new FileReader();
+        console.log(reader);
+        reader.readAsDataURL(binFile);
+        reader.onload = function () {
+            var filebase = reader.result;
+            console.log(filebase);
+            var object = {};
+            object["binfile"] = filebase;
+            $.ajax({
+                url: "./PassBin",
+                type: "POST",
+                data: JSON.stringify(object),
+                contentType: "application/json",
+                success: function(result){
+                    console.log("done!");
+                    console.log(result);
+                }, error: function(xhr){
+                    console.log("Error Occured!");
+                }
+            });
+        }
+
+    }
+</script>
 <script>
     $.ajax({
         url: "http://localhost:8084/bank_b/ParseJson",
@@ -165,12 +193,12 @@
 <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
 
 <script>
-            var pondScum = FilePond.create(document.getElementById("fileupload"));
-            pondScum.setOptions({
-                maxFiles: 10,
-                required: true
-            });
-            //FilePond.parse(document.body);
+    var pondScum = FilePond.create(document.getElementById("fileupload"));
+    pondScum.setOptions({
+        maxFiles: 10,
+        required: true
+    });
+    //FilePond.parse(document.body);
 </script>
 
 <style>

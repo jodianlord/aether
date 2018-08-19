@@ -8,10 +8,13 @@ package com.aether.util;
 import com.aether.blockchain.BlockchainHandler;
 import com.aether.util.Unzipper;
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,6 +27,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -45,57 +49,82 @@ public class PassBin extends HttpServlet {
      * @throws IOException if an I/O error occurs
      * @throws org.json.simple.parser.ParseException
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("application/json");
-        try (PrintWriter out = response.getWriter()) {
-            File file = new File("C:/Users/Chuanyi/Desktop/UDI_asdasd.bin");
-            byte[] bytes = new byte[(int) file.length()];
-            DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(new FileInputStream("C:/Users/Chuanyi/Desktop/UDI_asdasd.bin")));
-            dataInputStream.readFully(bytes);
-            dataInputStream.close();
-            String binContent = new String(bytes);
-            
-            System.out.println(binContent);
-            
-            JSONParser parser = new JSONParser();
-            JSONObject jObj = (JSONObject) parser.parse(binContent);
-            String tranHash = (String) jObj.get("transactionHash");
-            System.out.println("transaction Hash:" + tranHash);
-
-            String contractAdd = BlockchainHandler.getContractAddress(tranHash);
-            System.out.println("ContractAdd: " + contractAdd);
-            String uuid = BlockchainHandler.getUUID(contractAdd);
-            System.out.println("uuid: " + uuid);
-            String hash = BlockchainHandler.getHash(contractAdd);
-            System.out.println("hash: " + hash);
-
+        try {
+            String body = getBody(request);
+            JSONObject bodyJSON = getJSONObject(body);
+            String binfile = (String) bodyJSON.get("binfile");
+            String base = binfile.substring(binfile.indexOf(',') + 1, binfile.length());
+            byte[] binBytes = base.getBytes();
+            byte[] decoded = Base64.decodeBase64(binBytes);
+            System.out.println(new String(decoded));
+            String bin = new String(decoded);
+            JSONObject binJSON = getJSONObject(bin);
+            String uuid = (String) binJSON.get("uuid");
             File zipFile = FileHandler.getFile(uuid + ".zip", request.getServletContext().getRealPath("/"));
-
-            String keccakHash = BlockchainHandler.keccak256hash(zipFile);
-
-            if (!keccakHash.equals(hash)) {
-                //abort
-            }
-            else {
-                request.getServletContext().getRealPath("/");
-                ArrayList<File> fileList = Unzipper.unzip(zipFile.getPath(),request.getServletContext().getRealPath("/"));
-                
-                for(File f: fileList) {
-                    if(f.getName().indexOf("picture") != -1) {
-                        if(f.getName().indexOf("userdata") != -1) {
-                            if(f.getName().indexOf("json") != -1) {
-                                byte[] encoded = Files.readAllBytes(Paths.get(f.getPath()));
-                                out.println(new String(encoded));
-                                
-                            }
-                        }
+            ArrayList<File> unzipped = Unzipper.unzip(zipFile.getPath(), request.getServletContext().getRealPath("/"));
+            for (File f : unzipped) {
+                System.out.println(f.getName());
+                if (f.getName().indexOf(".json") != -1) {
+                    try (PrintWriter out = response.getWriter()) {
+                        byte[] encoded = Files.readAllBytes(Paths.get(f.getPath()));
+                        String print = new String(encoded);
+                        System.out.println(print);
+                        out.println(print);
+                        response.setStatus(HttpServletResponse.SC_OK);
                     }
                 }
+                f.delete();
             }
-            
-            System.out.println(request.getServletContext().toString());
+            zipFile.delete();
+        } catch (IOException e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return;
+        } catch (ParseException e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return;
         }
+
+    }
+
+    public static String getBody(HttpServletRequest request) throws IOException {
+
+        String body = null;
+        StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader bufferedReader = null;
+
+        try {
+            InputStream inputStream = request.getInputStream();
+            if (inputStream != null) {
+                bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                char[] charBuffer = new char[128];
+                int bytesRead = -1;
+                while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
+                    stringBuilder.append(charBuffer, 0, bytesRead);
+                }
+            } else {
+                stringBuilder.append("");
+            }
+        } catch (IOException ex) {
+            throw ex;
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException ex) {
+                    throw ex;
+                }
+            }
+        }
+
+        body = stringBuilder.toString();
+        return body;
+    }
+
+    public static JSONObject getJSONObject(String jsonString) throws ParseException {
+        JSONParser parser = new JSONParser();
+        return (JSONObject) parser.parse(jsonString);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -110,11 +139,8 @@ public class PassBin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(PassBin.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
+
     }
 
     /**
@@ -126,13 +152,9 @@ public class PassBin extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(PassBin.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+        processRequest(request, response);
+
     }
 
     /**
