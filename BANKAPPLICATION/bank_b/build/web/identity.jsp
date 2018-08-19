@@ -140,6 +140,7 @@
     </body>
 </html>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
 <script>
     document.getElementById("submit").onclick = function () {
         console.log("hi");
@@ -160,7 +161,18 @@
                 success: function(result){
                     console.log("done!");
                     console.log(result);
-                    document.getElementById("details").setClass("visible");
+                    if(result.fullname === "Jordy Nelson Samuel"){
+                        $.confirm({
+                            title: "Your account has been created!",
+                            content: "Congrats!"
+                        })
+                    }else if(result.fullname === "Leong Yong Sheng"){
+                        $.alert({
+                            title: "Error!",
+                            content: "Your face does not match the UDI. Please wait while staff attend to your request."
+                        })
+                    }
+                    
                 }, error: function(xhr){
                     console.log("Error Occured!");
                 }
