@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
         if(authPassword != null){
             if (BCrypt.checkpw(password, authPassword)) {
                 session.setAttribute("userid", userid);
-                response.sendRedirect("dashboard.jsp");
+                response.sendRedirect("identity.jsp");
                 // Invalid username or password
             }
         }
