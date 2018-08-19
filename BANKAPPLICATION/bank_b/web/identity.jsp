@@ -26,13 +26,26 @@
                         </div>
                     </div>
 
-                    <div class="row mt" id="details" hidden>
+                    <div class="row mt">
+                        <div class="col-lg-12">
+                            <div class="form-panel col-lg-12" style="width:98%">
+                                <h4 class="mb"><i class="fa fa-angle-right"></i> Take Picture</h4>
+                                <div id="media">
+                                </div>
+                                <button id="startstream" type="button" class="btn btn-primary">Start Camera</button>
+                                <button id="capture" type="button" class="btn btn-theme04">Take Photo</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt" id="details">
                         <div class="col-lg-12">
                             <div class="form-panel">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> User Details</h4>
                                 <form class="form-horizontal style-form" id="userdata">
 
                                     <div class="form-group">
+
                                         <div style="margin-top: 10px">
                                             <label class="col-sm-2 col-sm-2 control-label">Full Name</label>
                                             <div class="col-sm-10">
@@ -103,20 +116,10 @@
                                                 <input type="text" id="industry" name="industry" class="form-control-static"  style="width:50%">
                                             </div>
                                         </div>
+
+                                        <button id="populate" type="button" class="btn btn-danger btn-lg btn-block">Populate</button>
                                     </div>
                                 </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt">
-                        <div class="col-lg-12">
-                            <div class="form-panel col-lg-12" style="width:98%">
-                                <h4 class="mb"><i class="fa fa-angle-right"></i> Take Picture</h4>
-                                <div id="media">
-                                </div>
-                                <button id="startstream" type="button" class="btn btn-primary">Start Camera</button>
-                                <button id="capture" type="button" class="btn btn-theme04">Take Photo</button>
                             </div>
                         </div>
                     </div>
@@ -141,18 +144,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
 <script>
-    document.getElementById("submit").onclick = function () {
-        console.log("hi");
+    document.getElementById("populate").onclick = function () {
         var binFile = pondScum.getFile().file;
         var reader = new FileReader();
         console.log(reader);
+
         reader.readAsDataURL(binFile);
         reader.onload = function () {
-            var filebase = reader.result;
-            console.log(filebase);
             var object = {};
-            object["binfile"] = filebase;
-
+            object["binfile"] = reader.result;
             var canvas = document.getElementById("canvas");
             if (canvas === null) {
                 $.alert({
@@ -164,7 +164,51 @@
 
             var canvasbase = canvas.toDataURL();
             object["verificationfile"] = canvasbase;
+            $.ajax({
+                url: "./PassBin",
+                type: "POST",
+                data: JSON.stringify(object),
+                contentType: "application/json",
+                success: function (data) {
+                    $("#fullname").val(data.fullname);
+                    $("#nric").val(data.nric);
+                    $("#email").val(data.email);
+                    $("#mobile").val(data.mobile);
+                    $("#gender").val(data.gender);
+                    $("#nationality").val(data.nationality);
+                    $("#marital").val(data.marital);
+                    $("#residencetype").val(data.residencetype);
+                    $("#address").val(data.address);
+                    $("#occupation").val(data.occupation);
+                    $("#industry").val(data.industry);
+                }, error: function (xhr) {
+                }
+            });
 
+        }
+    }
+    document.getElementById("submit").onclick = function () {
+        console.log("hi");
+        var binFile = pondScum.getFile().file;
+        var reader = new FileReader();
+        console.log(reader);
+        reader.readAsDataURL(binFile);
+        reader.onload = function () {
+            var filebase = reader.result;
+            console.log(filebase);
+            var object = {};
+            object["binfile"] = filebase;
+            var canvas = document.getElementById("canvas");
+            if (canvas === null) {
+                $.alert({
+                    title: 'Sorry!',
+                    content: 'Please take your picture!',
+                });
+                return;
+            }
+
+            var canvasbase = canvas.toDataURL();
+            object["verificationfile"] = canvasbase;
             $.ajax({
                 url: "./PassBin",
                 type: "POST",
@@ -204,28 +248,6 @@
         }
     }
 </script>
-<script>
-    $.ajax({
-        url: "http://localhost:8084/bank_b/ParseJson",
-        type: "GET",
-        success: function (data) {
-            $("#fullname").val(data.fullname);
-            $("#nric").val(data.nric);
-            $("#email").val(data.email);
-            $("#mobile").val(data.mobile);
-            $("#gender").val(data.gender);
-            $("#nationality").val(data.nationality);
-            $("#marital").val(data.marital);
-            $("#residencetype").val(data.residencetype);
-            $("#address").val(data.address);
-            $("#occupation").val(data.occupation);
-            $("#industry").val(data.industry);
-        },
-        error: function () {
-
-        }
-    });
-</script>
 <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
 
 <script>
@@ -233,7 +255,8 @@
     pondScum.setOptions({
         maxFiles: 10,
         required: true
-    });
+    })
+            ;
     //FilePond.parse(document.body);
 </script>
 

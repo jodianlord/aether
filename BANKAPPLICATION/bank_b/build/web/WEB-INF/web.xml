@@ -24,6 +24,10 @@
         <servlet-name>VerifyUser</servlet-name>
         <servlet-class>com.aether.util.VerifyUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TableRetrieve</servlet-name>
+        <servlet-class>com.aether.util.TableRetrieve</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignUpServlet</servlet-name>
         <url-pattern>/SignUpServlet</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>VerifyUser</servlet-name>
         <url-pattern>/VerifyUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TableRetrieve</servlet-name>
+        <url-pattern>/TableRetrieve</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
