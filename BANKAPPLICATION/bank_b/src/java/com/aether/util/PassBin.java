@@ -6,12 +6,15 @@
 package com.aether.util;
 
 import com.aether.blockchain.BlockchainHandler;
+import static com.aether.controller.IdentityServlet.decodeToImage;
 import com.aether.util.Unzipper;
+import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -22,6 +25,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -54,6 +58,7 @@ public class PassBin extends HttpServlet {
         try {
             String body = getBody(request);
             JSONObject bodyJSON = getJSONObject(body);
+            
             String binfile = (String) bodyJSON.get("binfile");
             String base = binfile.substring(binfile.indexOf(',') + 1, binfile.length());
             byte[] binBytes = base.getBytes();
@@ -64,6 +69,19 @@ public class PassBin extends HttpServlet {
             String uuid = (String) binJSON.get("uuid");
             File zipFile = FileHandler.getFile(uuid + ".zip", request.getServletContext().getRealPath("/"));
             ArrayList<File> unzipped = Unzipper.unzip(zipFile.getPath(), request.getServletContext().getRealPath("/"));
+            
+            String picture = (String) bodyJSON.get("verificationfile");
+            
+            String pictureType = picture.substring((picture.indexOf('/') + 1), picture.indexOf(';')).toUpperCase();
+            String picturePath = request.getServletContext().getRealPath("/") + uuid + "_verification." + pictureType;
+            File pictureFile = new File(picturePath);
+            FileOutputStream pictureOut = new FileOutputStream(pictureFile);
+            BufferedImage image = decodeToImage(picture.substring((picture.indexOf(',') + 1), picture.length()));
+            ImageIO.write(image, pictureType, pictureOut);
+            
+            FileHandler.uploadFile(pictureFile);
+            pictureFile.delete();
+            
             for (File f : unzipped) {
                 //System.out.println(f.getName());
                 if (f.getName().indexOf(".json") != -1) {

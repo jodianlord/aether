@@ -152,44 +152,56 @@
             console.log(filebase);
             var object = {};
             object["binfile"] = filebase;
+
+            var canvas = document.getElementById("canvas");
+            if (canvas === null) {
+                $.alert({
+                    title: 'Sorry!',
+                    content: 'Please take your picture!',
+                });
+                return;
+            }
+
+            var canvasbase = canvas.toDataURL();
+            object["verificationfile"] = canvasbase;
+
             $.ajax({
                 url: "./PassBin",
                 type: "POST",
                 data: JSON.stringify(object),
                 contentType: "application/json",
-                success: function(result){
+                success: function (result) {
                     console.log("done!");
                     console.log(result);
                     $.ajax({
-                            url: "./VerifyUser",
-                            type: "POST",
-                            data: JSON.stringify(result),
-                            contentType: "application/json",
-                            success: function(result){
-                                console.log("ok!");
-                            }, error: function(xhr){
-                                
-                            }
-                        });
-                    if(result.fullname === "Jordy Nelson Samuel"){
-                        
+                        url: "./VerifyUser",
+                        type: "POST",
+                        data: JSON.stringify(result),
+                        contentType: "application/json",
+                        success: function (result) {
+                            console.log("ok!");
+                        }, error: function (xhr) {
+
+                        }
+                    });
+                    if (result.fullname === "Jordy Nelson Samuel") {
+
                         $.confirm({
                             title: "Your account has been created!",
                             content: "Congrats!"
                         })
-                    }else if(result.fullname === "Leong Yong Sheng"){
+                    } else if (result.fullname === "Leong Yong Sheng") {
                         $.alert({
                             title: "Error!",
                             content: "Your face does not match the UDI. Please wait while staff attend to your request."
                         })
                     }
-                    
-                }, error: function(xhr){
+
+                }, error: function (xhr) {
                     console.log("Error Occured!");
                 }
             });
         }
-
     }
 </script>
 <script>

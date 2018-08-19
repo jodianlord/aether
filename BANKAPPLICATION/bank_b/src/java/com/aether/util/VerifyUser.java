@@ -40,26 +40,33 @@ public class VerifyUser extends HttpServlet {
         response.setContentType("application/json");
         String body = getBody(request);
         System.out.println("body: " + body);
-        try{
+        try {
             JSONObject bodyJSON = getJSONObject(body);
             File zipFile = FileHandler.getFile(bodyJSON.get("uuid") + ".zip", request.getServletContext().getRealPath("/"));
             String hash = BlockchainHandler.keccak256hash(zipFile);
             String binHash = (String) bodyJSON.get("hash");
-            String contractAddress = BlockchainHandler.getContractAddress((String)bodyJSON.get("transactionHash"));
+            String contractAddress = BlockchainHandler.getContractAddress((String) bodyJSON.get("transactionHash"));
             String blockchainHash = BlockchainHandler.getHash(contractAddress);
-            if(hash.equals(blockchainHash) && binHash.equals(blockchainHash)){
-                response.setStatus(HttpServletResponse.SC_OK);
-            }else{
-                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            }
             System.out.println(hash);
             System.out.println(binHash);
             System.out.println(blockchainHash);
             zipFile.delete();
-        }catch(ParseException e){
+            if (hash.equals(blockchainHash) && binHash.equals(blockchainHash)) {
+                response.setStatus(HttpServletResponse.SC_OK);
+            } else {
+                try (PrintWriter out = response.getWriter()) {
+                    /* TODO output your page here. You may use following sample code. */
+                    JSONObject json = new JSONObject();
+                    json.put("result", "fail");
+                    out.println(json.toString());
+                    return;
+                }
+            }
+            
+        } catch (ParseException e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
-        
+
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             JSONObject json = new JSONObject();
@@ -67,7 +74,7 @@ public class VerifyUser extends HttpServlet {
             out.println(json.toString());
         }
     }
-    
+
     public static String getBody(HttpServletRequest request) throws IOException {
 
         String body = null;

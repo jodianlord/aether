@@ -73,6 +73,7 @@ document.getElementById("submit").onclick = function () {
                                 });
                             },
                             error: function (xhr) {
+                                console.log(xhr);
                                 $.alert({
                                     title: 'Failure!',
                                     content: 'Transaction Not Sent!',
