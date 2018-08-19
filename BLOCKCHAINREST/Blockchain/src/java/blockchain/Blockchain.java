@@ -109,8 +109,8 @@ public class Blockchain extends HttpServlet {
                 }
             } else if(method.equals("setVerificationStatus")){
                 String contractAddress = request.getParameter("contractAddress");
-                String hashSignature = ("0x9e17f6ef");
-                String result = BlockchainHandler.callContractParams(contractAddress, hashSignature);
+                String publickey = request.getParameter("publicKey");
+                String result = BlockchainHandler.setVerified(publickey, contractAddress);
                 try(PrintWriter out = response.getWriter()){
                     out.println(result);    
                 }

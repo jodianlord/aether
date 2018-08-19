@@ -157,6 +157,39 @@ public class BlockchainHandler {
 
         body.put("params", params);
         body.put("id", 1);
+        System.out.println(body.toString());
+        try {
+            String result = sendPostRequest(body);
+            return result;
+        } catch (MalformedURLException e) {
+            System.out.println("Malformed URL!");
+        } catch (ProtocolException f) {
+            System.out.println("Protocol Exception!");
+        } catch (IOException e) {
+            System.out.println("IO Exception!");
+        }
+
+        return null;
+    }
+    
+    public static String setVerified(String from, String to){
+        String methodHash = "0x9e17f6ef";
+        JSONObject body = new JSONObject();
+        body.put("jsonrpc", "2.0");
+        body.put("method", "eth_sendTransaction");
+
+        JSONObject params = new JSONObject();
+        params.put("from", from);
+        params.put("to", to);
+        params.put("value", "0x493E0");
+        params.put("data", methodHash);
+        JSONArray parameters = new JSONArray();
+        parameters.add(params);
+        body.put("params", parameters);
+        body.put("id", 1);
+
+        System.out.println("body: " + body.toJSONString());
+
         try {
             String result = sendPostRequest(body);
             return result;
