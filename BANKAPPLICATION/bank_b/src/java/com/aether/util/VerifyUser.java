@@ -6,38 +6,25 @@
 package com.aether.util;
 
 import com.aether.blockchain.BlockchainHandler;
-import com.aether.util.Unzipper;
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /**
  *
- * @author Chuanyi
+ * @author Jordy
  */
-@WebServlet(name = "PassBin", urlPatterns = {"/PassBin"})
-public class PassBin extends HttpServlet {
+public class VerifyUser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,51 +34,40 @@ public class PassBin extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws org.json.simple.parser.ParseException
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         response.setContentType("application/json");
-        try {
-            String body = getBody(request);
+        String body = getBody(request);
+        System.out.println("body: " + body);
+        try{
             JSONObject bodyJSON = getJSONObject(body);
-            String binfile = (String) bodyJSON.get("binfile");
-            String base = binfile.substring(binfile.indexOf(',') + 1, binfile.length());
-            byte[] binBytes = base.getBytes();
-            byte[] decoded = Base64.decodeBase64(binBytes);
-            System.out.println(new String(decoded));
-            String bin = new String(decoded);
-            JSONObject binJSON = getJSONObject(bin);
-            String uuid = (String) binJSON.get("uuid");
-            File zipFile = FileHandler.getFile(uuid + ".zip", request.getServletContext().getRealPath("/"));
-            ArrayList<File> unzipped = Unzipper.unzip(zipFile.getPath(), request.getServletContext().getRealPath("/"));
-            for (File f : unzipped) {
-                //System.out.println(f.getName());
-                if (f.getName().indexOf(".json") != -1) {
-                    try (PrintWriter out = response.getWriter()) {
-                        byte[] encoded = Files.readAllBytes(Paths.get(f.getPath()));
-                        String print = new String(encoded);
-                        JSONObject printJSON = getJSONObject(print);
-                        printJSON.put("transactionHash", binJSON.get("transactionHash"));
-                        printJSON.put("uuid", binJSON.get("uuid"));
-                        printJSON.put("hash", binJSON.get("hash"));
-                        System.out.println(printJSON.toString());
-                        out.println(printJSON.toString());
-                        response.setStatus(HttpServletResponse.SC_OK);
-                    }
-                }
-                f.delete();
+            File zipFile = FileHandler.getFile(bodyJSON.get("uuid") + ".zip", request.getServletContext().getRealPath("/"));
+            String hash = BlockchainHandler.keccak256hash(zipFile);
+            String binHash = (String) bodyJSON.get("hash");
+            String contractAddress = BlockchainHandler.getContractAddress((String)bodyJSON.get("transactionHash"));
+            String blockchainHash = BlockchainHandler.getHash(contractAddress);
+            if(hash.equals(blockchainHash) && binHash.equals(blockchainHash)){
+                response.setStatus(HttpServletResponse.SC_OK);
+            }else{
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
+            System.out.println(hash);
+            System.out.println(binHash);
+            System.out.println(blockchainHash);
             zipFile.delete();
-        } catch (IOException e) {
+        }catch(ParseException e){
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            return;
-        } catch (ParseException e) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            return;
         }
-
+        
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            JSONObject json = new JSONObject();
+            json.put("result", "success");
+            out.println(json.toString());
+        }
     }
-
+    
     public static String getBody(HttpServletRequest request) throws IOException {
 
         String body = null;
@@ -144,7 +120,6 @@ public class PassBin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-
     }
 
     /**
@@ -156,9 +131,9 @@ public class PassBin extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         processRequest(request, response);
-
     }
 
     /**

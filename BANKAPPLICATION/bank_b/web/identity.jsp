@@ -133,7 +133,6 @@
             document.getElementById("identityside").className = "active";
         </script>
         <script src ="js/takePhoto.js"></script>
-        <script src="js/submitdigitalidentity.js"></script>
 
         <%@include file="Components/style.html" %>
 
@@ -161,7 +160,19 @@
                 success: function(result){
                     console.log("done!");
                     console.log(result);
+                    $.ajax({
+                            url: "./VerifyUser",
+                            type: "POST",
+                            data: JSON.stringify(result),
+                            contentType: "application/json",
+                            success: function(result){
+                                console.log("ok!");
+                            }, error: function(xhr){
+                                
+                            }
+                        });
                     if(result.fullname === "Jordy Nelson Samuel"){
+                        
                         $.confirm({
                             title: "Your account has been created!",
                             content: "Congrats!"

@@ -20,6 +20,10 @@
         <servlet-name>GetVerification</servlet-name>
         <servlet-class>com.aether.util.GetVerification</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VerifyUser</servlet-name>
+        <servlet-class>com.aether.util.VerifyUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignUpServlet</servlet-name>
         <url-pattern>/SignUpServlet</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>GetVerification</servlet-name>
         <url-pattern>/GetVerification</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerifyUser</servlet-name>
+        <url-pattern>/VerifyUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
