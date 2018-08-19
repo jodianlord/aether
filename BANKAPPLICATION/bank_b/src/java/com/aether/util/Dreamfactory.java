@@ -95,7 +95,7 @@ public class Dreamfactory {
                 String key = (String) pair.getKey();
                 String value = (String) pair.getValue();
                 if (hasPrevious) {
-                    params += "%3D";
+                    params += "%20&%20";
                 }
                 params += key + "=" + value;
                 hasPrevious = true;

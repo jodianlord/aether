@@ -16,6 +16,10 @@
         <servlet-name>ParseJson</servlet-name>
         <servlet-class>com.aether.util.ParseJson</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetVerification</servlet-name>
+        <servlet-class>com.aether.util.GetVerification</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignUpServlet</servlet-name>
         <url-pattern>/SignUpServlet</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>ParseJson</servlet-name>
         <url-pattern>/ParseJson</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetVerification</servlet-name>
+        <url-pattern>/GetVerification</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

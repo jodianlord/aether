@@ -160,6 +160,7 @@
                 success: function(result){
                     console.log("done!");
                     console.log(result);
+                    document.getElementById("details").setClass("visible");
                 }, error: function(xhr){
                     console.log("Error Occured!");
                 }
