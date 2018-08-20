@@ -222,24 +222,31 @@
                         type: "POST",
                         data: JSON.stringify(result),
                         contentType: "application/json",
-                        success: function (result) {
-                            console.log("ok!");
+                        success: function (data) {
+                            if (data.result === "success") {
+                                if (result.fullname === "Jordy Nelson Samuel") {
+                                    $.confirm({
+                                        title: "Your account has been created!",
+                                        content: "Congrats!"
+                                    })
+                                } else if (result.fullname === "Leong Yong Sheng") {
+                                    $.alert({
+                                        title: "Error!",
+                                        content: "Your face does not match the UDI. Please wait while staff attend to your request."
+                                    })
+                                }
+                            }else{
+                                $.alert({
+                                        title: "Error!",
+                                        content: "The file has been compromised or tampered with. Please wait while staff attend to your request."
+                                    })
+                            }
+                            console.log(result.result);
                         }, error: function (xhr) {
 
                         }
                     });
-                    if (result.fullname === "Jordy Nelson Samuel") {
 
-                        $.confirm({
-                            title: "Your account has been created!",
-                            content: "Congrats!"
-                        })
-                    } else if (result.fullname === "Leong Yong Sheng") {
-                        $.alert({
-                            title: "Error!",
-                            content: "Your face does not match the UDI. Please wait while staff attend to your request."
-                        })
-                    }
 
                 }, error: function (xhr) {
                     console.log("Error Occured!");
