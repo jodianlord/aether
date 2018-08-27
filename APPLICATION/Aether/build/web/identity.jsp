@@ -32,37 +32,43 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Full Name</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="fullname" class="form-control">
+                                            <input type="text" id="fullname" name="fullname" class="form-control">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">NRIC</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" name="nric" class="form-control">
+                                        <div class="col-sm-10" id="nricdiv">
+                                            <input type="text" id="nric" name="nric" class="form-control">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Email</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" name="email" class="form-control">
+                                        <div class="col-sm-10" id="emaildiv">
+                                            <input type="text" id="email" name="email" class="form-control">
+                                            <div id="emailerror" style="visibility:hidden">
+                                                Please enter a valid email address!
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Mobile</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="mobile" class="form-control">
+                                            <input type="text" id="mobile" name="mobile" class="form-control">
+                                            <div id="mobileerror" style="visibility:hidden">
+                                                Please enter a valid mobile number!
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Gender</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="gender" class="form-control">
+                                            <input type="text" id="gender" name="gender" class="form-control">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Nationality</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="nationality" class="form-control">
+                                            <input type="text" id="nationality" name="nationality" class="form-control">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -136,7 +142,7 @@
         </script>
         <script src ="js/takePhoto.js"></script>
         <script src="js/submitdigitalidentity.js"></script>
-
+        <script src="js/formvalidation.js"></script>
         <%@include file="Components/style.html" %>
 
     </body>
