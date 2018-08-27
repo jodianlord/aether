@@ -45,7 +45,7 @@
                                         <label class="col-sm-2 col-sm-2 control-label">Email</label>
                                         <div class="col-sm-10" id="emaildiv">
                                             <input type="text" id="email" name="email" class="form-control">
-                                            <div id="emailerror" style="visibility:hidden">
+                                            <div id="emailerror" style="display:none">
                                                 Please enter a valid email address!
                                             </div>
                                         </div>
@@ -54,7 +54,7 @@
                                         <label class="col-sm-2 col-sm-2 control-label">Mobile</label>
                                         <div class="col-sm-10">
                                             <input type="text" id="mobile" name="mobile" class="form-control">
-                                            <div id="mobileerror" style="visibility:hidden">
+                                            <div id="mobileerror" style="display:none">
                                                 Please enter a valid mobile number!
                                             </div>
                                         </div>

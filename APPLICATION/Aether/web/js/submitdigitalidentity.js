@@ -4,6 +4,14 @@
  * and open the template in the editor.
  */
 document.getElementById("submit").onclick = function () {
+    if(!document.getElementById('email').value.includes('@') || document.getElementById('mobile').value.match(/^[0-9]+$/) == null){
+        $.alert({
+            title: 'Sorry!',
+            content: 'You have some input errors'
+        });
+        return;
+    }
+    
     if (pondScum.getFile() === null) {
         $.alert({
             title: 'Sorry!',

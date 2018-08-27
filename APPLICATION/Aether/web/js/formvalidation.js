@@ -8,9 +8,9 @@ $("#email").keyup(function(){
     console.log("hid");
     var val = document.getElementById('email').value;
     if(!val.includes('@')){
-        document.getElementById("emailerror").style.visibility =  "visible";
+        document.getElementById("emailerror").style.display =  "block";
     }else{
-        document.getElementById("emailerror").style.visibility =  "hidden";
+        document.getElementById("emailerror").style.display =  "none";
     }
 });
 
@@ -18,8 +18,8 @@ $("#mobile").keyup(function(){
     console.log("hid");
     var val = document.getElementById('mobile').value;
     if(val.match(/^[0-9]+$/) == null){
-        document.getElementById("mobileerror").style.visibility =  "visible";
+        document.getElementById("mobileerror").style.display =  "block";
     }else{
-        document.getElementById("mobileerror").style.visibility =  "hidden";
+        document.getElementById("mobileerror").style.display =  "none";
     }
 });
