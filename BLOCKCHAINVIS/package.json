@@ -1,0 +1,15 @@
+{
+  "name": "blockchainvis",
+  "version": "1.0.0",
+  "description": "Blockchain Visualisation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aether",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3"
+  }
+}
