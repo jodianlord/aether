@@ -24,17 +24,7 @@
             <!--main content start-->
             <section id="main-content">
                 <section class="wrapper">
-                    <div class="row mt">
-                        
-                    </div>
-                    <div class="row mt">
-                        <div class="col-lg-3">
-                            <i class="fas fa-file-contract"></i>
-                        </div>
-                    </div>
-                    <div class="row mt">
-                        
-                    </div>
+                    <canvas id="blockchaincanvas" width="1500" height="800" class="canvas"></canvas>
                 </section>
             </section>
 
@@ -57,15 +47,26 @@
 <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
 
 <script>
-    var pondScum = FilePond.create(document.getElementById("fileupload"));
-    pondScum.setOptions({
-        maxFiles: 10,
-        required: true
-    });
-    //FilePond.parse(document.body);
+    var canvas = document.getElementById("blockchaincanvas");
+    var ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#DCDCDC";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#3366ff"
+    var my_gradient = ctx.createLinearGradient(0, 0, 0, 170);
+    my_gradient.addColorStop(0, "#3366ff");
+    my_gradient.addColorStop(1, "#404040");
+    ctx.fillStyle = my_gradient;
+    ctx.fillRect(0, 0, canvas.width, 100);
 </script>
 
 <style>
+    .canvas { 
+        border: 1px solid black; 
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: auto;
+        margin-right: auto;
+    }
     .filepond--root {
         max-height: 10em;
         width: 75%;
