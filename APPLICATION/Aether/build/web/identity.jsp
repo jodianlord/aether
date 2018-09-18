@@ -25,7 +25,8 @@
             <section id="main-content">
                 <section class="wrapper">
                     <div class="row mt">
-                        <div class="col-lg-12">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-6">
                             <div class="form-panel">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> User Details</h4>
                                 <form class="form-horizontal style-form" id="userdata">
@@ -110,7 +111,8 @@
                         </div>
                     </div>
                     <div class="row mt">
-                        <div class="col-lg-12">
+                        <div class ="col-lg-3"></div>
+                        <div class="col-lg-6">
                             <div class="form-panel" style="height:170px">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> Upload Documents</h4>
                                 <input type="file" class="filepond" id="fileupload">
@@ -118,7 +120,8 @@
                         </div>
                     </div>
                     <div class="row mt">
-                        <div class="col-lg-12">
+                        <div class ="col-lg-3"></div>
+                        <div class="col-lg-6">
                             <div class="form-panel col-lg-12"
                                  <h4 class="mb"><i class="fa fa-angle-right"></i> Take Picture</h4>
                                 <div id="media">
@@ -128,7 +131,7 @@
                             </div>
                         </div>
                     </div>
-                    <button id="submit" type="button" class="btn btn-primary btn-lg btn-block">Submit Digital Identity</button>
+                    <button id="submit" type="button" class="btn btn-primary">Submit Digital Identity</button>
                 </section>
             </section>
 
@@ -182,4 +185,9 @@
         width: 50%;
         margin: 0 auto;
     }
+    .center-div
+    {
+        margin: 0 auto;
+    }
+
 </style>
