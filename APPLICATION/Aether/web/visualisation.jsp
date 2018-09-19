@@ -24,7 +24,7 @@
             <!--main content start-->
             <section id="main-content">
                 <section class="wrapper">
-                    <canvas id="blockchaincanvas" width="1500" height="800" class="canvas"></canvas>
+                    <div id='canvas' class='canvas'></div>
                 </section>
             </section>
 
@@ -36,36 +36,19 @@
         <script type="application/javascript">
             document.getElementById("visualisationside").className = "active";
         </script>
-        <script src ="js/takePhoto.js"></script>
-        <script src="js/submitdigitalidentity.js"></script>
-        <script src="js/formvalidation.js"></script>
         <%@include file="Components/style.html" %>
-
     </body>
 </html>
 
-<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-
-<script>
-    var canvas = document.getElementById("blockchaincanvas");
-    var ctx = canvas.getContext("2d");
-    ctx.fillStyle = "#DCDCDC";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#3366ff"
-    var my_gradient = ctx.createLinearGradient(0, 0, 0, 170);
-    my_gradient.addColorStop(0, "#3366ff");
-    my_gradient.addColorStop(1, "#404040");
-    ctx.fillStyle = my_gradient;
-    ctx.fillRect(0, 0, canvas.width, 100);
-</script>
+<script src="js/canvasvis.js"></script>
 
 <style>
     .canvas { 
-        border: 1px solid black; 
         padding-left: 0;
         padding-right: 0;
         margin-left: auto;
         margin-right: auto;
+        max-height: 50em;
     }
     .filepond--root {
         max-height: 10em;
