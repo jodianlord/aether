@@ -39,7 +39,7 @@
         <%@include file="Components/style.html" %>
     </body>
 </html>
-
+<script src="js/three.min.js"></script>
 <script src="js/canvasvis.js"></script>
 
 <style>
