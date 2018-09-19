@@ -40,7 +40,7 @@
     </body>
 </html>
 <script src="js/three.min.js"></script>
-<script src="js/canvasvis.js"></script>
+<script src="js/threedee.js"></script>
 
 <style>
     .canvas { 
