@@ -1,10 +1,12 @@
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, 1200 / 600, 0.1 / 1000);
 
+//setup renderer
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(1200, 600);
 document.getElementById('canvas').appendChild(renderer.domElement);
 
+//contract spinning model
 var geometry = new THREE.BoxGeometry(5, 5, 0.1);
 var texture = new THREE.TextureLoader().load("img/contract.png");
 var material = new THREE.MeshBasicMaterial({
@@ -26,12 +28,6 @@ var material = new THREE.MeshBasicMaterial({
 var plane = new THREE.Mesh(geometry, material);
 plane.position.set(0, 7, 0);
 scene.add(plane);
-
-dirLight = new THREE.DirectionalLight(0xffffff);
-dirLight.position.set(-1, 0, 1).normalize();
-scene.add(dirLight);
-
-scene.fog = new THREE.FogExp2(0x000000, 0.00000025);
 
 function animate() {
     requestAnimationFrame(animate);

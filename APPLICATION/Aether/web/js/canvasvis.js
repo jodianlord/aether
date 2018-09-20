@@ -18,7 +18,10 @@ function create2DCanvas() {
 function drawTextBox(canvas, ctx, text) {
     ctx.font = "3em Segoe UI";
     ctx.fillStyle = "#ffffff";
-    wrapText(ctx, "This is a contract. It can contain functions, parameters, constructors and the like. Shall we take a look?", 900, 900, 650, 20 * 2);
+    wrapText(ctx, "This is a contract. It can contain functions, parameters, constructors and the like. Shall we take a look?", 900, 950, 650, 20 * 2);
+
+    ctx.font = "6em Segoe UI";
+    wrapText(ctx, "Contract Writing", 900, 100, 800);
 }
 
 function fill2DBlack(canvas, ctx) {
@@ -45,7 +48,7 @@ function draw2DCircles(canvas, ctx) {
     ctx.stroke();
 
     ctx.fillStyle = "#DAA520";
-    ctx.fillRect(circleXIntervals - 25, circleheight + 40, 50, 10);
+    ctx.fillRect(circleXIntervals - 35, circleheight + 40, 75, 10);
 
     //grayed out circles
     ctx.strokeStyle = "#484848";
