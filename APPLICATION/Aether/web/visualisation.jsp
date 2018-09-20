@@ -13,7 +13,7 @@
 
     <body>
 
-        <section id="container" >
+        <section id="overall" >
 
             <%@include  file="Components/topbar.html" %>
             <%@include  file="Components/sidebar.html" %>
@@ -23,9 +23,14 @@
             *********************************************************************************************************************************************************** -->
             <!--main content start-->
             <section id="main-content">
-                <section class="wrapper">
-                    <div id='canvas' class='canvas'></div>
-                </section>
+                <div id="container">
+                    <div id='canvas' class='canvas'>
+                        <div id="overlay">
+                            
+                        </div>
+                    </div>
+
+                </div>
             </section>
 
             <!--main content end-->
@@ -41,14 +46,19 @@
 </html>
 <script src="js/three.min.js"></script>
 <script src="js/threedee.js"></script>
+<script src="js/canvasvis.js"></script>
 
 <style>
-    .canvas { 
-        padding-left: 0;
-        padding-right: 0;
-        margin-left: auto;
-        margin-right: auto;
-        max-height: 50em;
+    #container {
+        position: relative;
+        top: 100px;
+        left: 60px;
+    }
+    #container canvas, #overlay {
+        position: absolute;
+    }
+    #overlay {
+        z-index: 265
     }
     .filepond--root {
         max-height: 10em;
