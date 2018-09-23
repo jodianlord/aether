@@ -1,6 +1,15 @@
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, 1200 / 600, 0.1 / 1000);
 
+var controls = new THREE.TrackballControls(camera);
+controls.rotateSpeed = 1.0;
+controls.zoomSpeed = 1.2;
+controls.panSpeed = 0.8;
+controls.noZoom = false;
+controls.noPan = false;
+controls.staticMoving = true;
+controls.dynamicDampingFactor = 0.3;
+
 //setup renderer
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(1200, 600);
@@ -31,7 +40,7 @@ scene.add(plane);
 
 function animate() {
     requestAnimationFrame(animate);
-    cube.rotation.y += 0.01;
+    //cube.rotation.y += 0.01;
     renderer.render(scene, camera);
 }
 
