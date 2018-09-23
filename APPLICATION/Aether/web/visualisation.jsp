@@ -45,7 +45,6 @@
     </body>
 </html>
 <script src="js/three.min.js"></script>
-<script src="js/trackballcontrols.js"></script>
 <script src="js/threedee.js"></script>
 <script src="js/canvasvis.js"></script>
 
