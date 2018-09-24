@@ -29,7 +29,7 @@
                                 <table>
                                     <tr style="text-align: center"align="center">
                                         <td style="width: 10%;text-align: center"align="center">
-                                            <button onclick="window.location.href='FRsuccess.jsp'" style="width: 150px;"class="btn btn-round btn-success">Correct</button>
+                                            <button id="submitaccept" style="width: 150px;" class="btn btn-round btn-success">Correct</button>
                                             </br></br></br>
                                             <button id="submitreject" style="width: 150px;" class="btn btn-round btn-danger">Incorrect</button>
                                         </td>
@@ -49,7 +49,6 @@
     </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-        
         var uuid = getUrlVars()["uuid"];
         var obj = {};
         obj["uuid"] = uuid;
@@ -91,19 +90,25 @@
         }
     </script>
     <script>
-    
-    $(submitreject).click(function(){
-        alert("Account Creation Failed : A notification has been sent to the customer!");
-        window.setTimeout(function(){
-        
-        // Move to a new location or you can do something else
-        window.location.href = "verificationlist.jsp";
+        $(submitaccept).click(function(){
+            
+            window.location.href='FRsuccess.jsp?=' + uuid;
+            
+        });
+    </script>
+    <script>
+        $(submitreject).click(function(){
+            alert("Account Creation Failed : A notification has been sent to the customer!");
+            window.setTimeout(function(){
 
-    }, 1500);
-    });
+            // Move to a new location or you can do something else
+            window.location.href = "verificationlist.jsp";
+
+        }, 1500);
+        });
     </script>
     <script type="application/javascript">
             document.getElementById("verifyface").className = "active";
-        </script>
+    </script>
 </html>
 

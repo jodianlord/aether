@@ -139,6 +139,7 @@
     var testuuid = sessionStorage.getItem("testuuid");
     //window.alert(testuuid);
     var uuid = "2239fa1f-3c37-4893-b040-22bb29c3ede3";
+    //
     var obj = {};
     obj["uuid"] = uuid;
     $.ajax({
@@ -181,32 +182,7 @@
         }
     });
 </script>
-<!--<script>
-    var uuid = "2d6668b3-81a1-404e-9f09-e6c4a22ca40b";
-    var obj = {};
-    obj["uuid"] = uuid;
-    $.ajax({
-        url: "http://localhost:8084/bank_b/TableRetrieve",
-        type: "POST",
-        data: JSON.stringify(obj),
-        success: function (data) {
-            $("#fullname").val(data.fullname);
-            $("#nric").val(data.nric);
-            $("#email").val(data.email);
-            $("#mobile").val(data.mobile);
-            $("#gender").val(data.gender);
-            $("#nationality").val(data.nationality);
-            $("#marital").val(data.marital);
-            $("#residencetype").val(data.residencetype);
-            $("#address").val(data.address);
-            $("#occupation").val(data.occupation);
-            $("#industry").val(data.industry);
-        },
-        error: function () {
 
-        }
-    });
-</script>-->
 <script>
     
     $(submitaccconfirm).click(function(){
@@ -214,7 +190,7 @@
         window.setTimeout(function(){
 
         // Move to a new location or you can do something else
-        window.location.href = "verifyface.jsp";
+        window.location.href = "verificationlist.jsp";
 
     }, 1500);
     });
