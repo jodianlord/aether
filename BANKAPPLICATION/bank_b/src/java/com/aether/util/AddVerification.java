@@ -5,12 +5,14 @@
  */
 package com.aether.util;
 
+import static com.aether.util.Dreamfactory.createRecords;
 import static com.aether.util.Dreamfactory.getRecordsFromTable;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -27,8 +29,8 @@ import org.json.simple.parser.ParseException;
  *
  * @author Jordy
  */
-@WebServlet(name = "GetVerification", urlPatterns = {"/GetVerification"})
-public class GetVerification extends HttpServlet {
+@WebServlet(name = "AddVerification", urlPatterns = {"/AddVerification"})
+public class AddVerification extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,24 +44,32 @@ public class GetVerification extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
-        /*
+        
+        String uuid = "";
+        String transHash = "";
         String body = getBody(request);
-        try{
+        System.out.println("body:" + body);
+        try{  
             JSONObject bodyJSON = getJSONObject(body);
-            
+            uuid = (String) bodyJSON.get("uuid");
+            transHash = (String) bodyJSON.get("transactionHash");
         }catch(ParseException e){
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
-        */
-        Map<String, String> filter = new HashMap<>();
-        //filter.put("bank", "DBS");
-        filter.put("verified%20", "%20false");
-        JSONArray resultArray = Dreamfactory.getRecordsFromTable("application", filter);
         
+        System.out.println("Entered AddVerification");
+        HashMap<String, String> record = new HashMap<String, String>();
+        record.put("uuid", uuid);
+        record.put("TransactionHash", transHash);
+        record.put("bank", "tBank");
+        record.put("verified", "false");
+        ArrayList<Map<String,String>> toFeed = new ArrayList<Map<String,String>>();
+        toFeed.add(record);
+        System.out.println(createRecords("application", toFeed));
         
         try (PrintWriter out = response.getWriter()) {
             System.out.println("success");
-            out.println(resultArray.toString());
+            //out.println(resultArray.toString());
             response.setStatus(HttpServletResponse.SC_OK);
         }
     }

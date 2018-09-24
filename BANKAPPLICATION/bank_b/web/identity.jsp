@@ -221,6 +221,7 @@
                     var jsonObject = {};
                     
                     var uuid = data.uuid;
+                    var transactionHash = data.transactionHash;
                     jsonObject["uuid"] = data.uuid;
                     var sampleimage = data.picture.replace("data:image/png;base64,","");
                     jsonObject["sampleimage"] = sampleimage;
@@ -241,6 +242,7 @@
                                     content: "Congrats!"
                                 });
                             } else if (data.status === "Do Not Match") {
+                                AddVerification(uuid, transactionHash);
                                 $.alert({
                                     title: "Error!",
                                     content: "Your face does not match the UDI. Please wait while staff attend to your request."
@@ -257,12 +259,28 @@
                         }
                     });
 
-
                 }, error: function (xhr) {
                     console.log("The file has been compromised or tampered with. Please wait while staff attend to your request.");
                 }
             });
         }
+    }
+    
+    function AddVerification(uuid, transactionHash) {
+        var object = {};
+        object["uuid"] = uuid;
+        object["transactionHash"] = transactionHash;
+    
+        $.ajax({
+            method: "POST",
+            url: "./AddVerification",
+            type: "POST",
+            data: JSON.stringify(object),
+            contentType: "application/json",
+            success: function(data){
+                console.log(data);
+            }
+        });
     }
 </script>
 <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
