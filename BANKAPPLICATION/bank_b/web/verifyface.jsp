@@ -113,7 +113,7 @@
     $(submitreject).click(function(){
         alert("Account Creation Failed : A notification has been sent to the customer!");
         window.setTimeout(function(){
-
+        
         // Move to a new location or you can do something else
         window.location.href = "verificationlist.jsp";
 
