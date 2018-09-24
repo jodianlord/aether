@@ -164,6 +164,8 @@
             verificationImage.src = verificationBase64;
             tbody.appendChild(verificationImage);
             
+            sessionStorage.clear();
+            
             $("#fullname").val(data.fullname);
             $("#nric").val(data.nric);
             $("#email").val(data.email);

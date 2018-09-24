@@ -39,6 +39,7 @@
     </body>
     <script type="application/javascript">
             document.getElementById("verifyface").className = "active";
+            sessionStorage.clear();
         </script>
 </html>
 
