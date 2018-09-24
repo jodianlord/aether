@@ -57,7 +57,6 @@ public class AddVerification extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
         
-        System.out.println("Entered AddVerification");
         HashMap<String, String> record = new HashMap<String, String>();
         record.put("uuid", uuid);
         record.put("TransactionHash", transHash);

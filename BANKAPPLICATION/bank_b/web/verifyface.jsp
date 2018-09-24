@@ -50,7 +50,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         //var uuid = "2d6668b3-81a1-404e-9f09-e6c4a22ca40b";
-        var uuid = "2239fa1f-3c37-4893-b040-22bb29c3ede3";
+        //var uuid = "2239fa1f-3c37-4893-b040-22bb29c3ede3";
+        var uuid = $.urlParam('uuid');
         var obj = {};
         obj["uuid"] = uuid;
         $.ajax({

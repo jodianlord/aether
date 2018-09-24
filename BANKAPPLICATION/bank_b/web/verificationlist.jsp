@@ -54,14 +54,17 @@
             success: function (data) {
                 console.log(data);
                 var tbody = document.getElementById("tablebody");
+                var uuid = "";
                 var verifyString = "Verify"
                 for(var i = 0; i < data.length; i += 1){
                     var toAdd = "<tr>";
                     toAdd += "<td>" + (i+1) + "</td>";
+                    uuid = data[i].uuid;
                     toAdd += "<td>" + data[i].uuid + "</td>";
                     toAdd += "<td>" + data[i].transactionHash + "</td>";
                     toAdd += "<td>" + data[i].verified + "</td>";
-                    toAdd += "<td><a href=" + "./verifyface.jsp>" +  verifyString + "</a></td>";
+                    toAdd += "<td><a href=" + "./verifyface.jsp?uuid=" + uuid + ">" +  verifyString + "</a></td>";
+                    uuid = "";
                     toAdd+= "</tr>";
                     tbody.innerHTML += toAdd;
                 }
