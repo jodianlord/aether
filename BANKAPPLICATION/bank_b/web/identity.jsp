@@ -243,6 +243,7 @@
                                 });
                             } else if (data.status === "Do Not Match") {
                                 AddVerification(uuid, transactionHash);
+                                sessionStorage.setItem("faced", data.facedetect);
                                 $.alert({
                                     title: "Error!",
                                     content: "Your face does not match the UDI. Please wait while staff attend to your request."

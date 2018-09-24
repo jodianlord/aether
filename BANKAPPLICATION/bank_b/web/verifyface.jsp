@@ -49,7 +49,8 @@
     </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-        var uuid = "2d6668b3-81a1-404e-9f09-e6c4a22ca40b";
+        //var uuid = "2d6668b3-81a1-404e-9f09-e6c4a22ca40b";
+        var uuid = "2239fa1f-3c37-4893-b040-22bb29c3ede3";
         var obj = {};
         obj["uuid"] = uuid;
         $.ajax({
@@ -61,8 +62,10 @@
                 var tbody = document.getElementById("picTable");
                 var div = document.createElement("div");
                 var pictureBase64 = data.picture;
-                var verificationBase64 = "data:image/png;base64," + data.verification;
                 
+                var fr = sessionStorage.getItem("faced");
+               // window.alert(fr);
+                var verificationBase64 = "data:image/png;base64," + fr;
                 var pictureImage = new Image();
                 pictureImage.src = pictureBase64;
                 tbody.appendChild(pictureImage);
