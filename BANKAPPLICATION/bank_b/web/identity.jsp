@@ -243,6 +243,7 @@
                                 });
                             } else if (data.status === "Do Not Match") {
                                 AddVerification(uuid, transactionHash);
+                                sessionStorage.setItem("testuuid", uuid);
                                 sessionStorage.setItem("faced", data.facedetect);
                                 $.alert({
                                     title: "Error!",
