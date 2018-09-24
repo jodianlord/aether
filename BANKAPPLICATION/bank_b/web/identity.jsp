@@ -214,42 +214,52 @@
                 type: "POST",
                 data: JSON.stringify(object),
                 contentType: "application/json",
-                success: function (result) {
+                success: function (data) {
                     console.log("done!");
-                    console.log(result);
+                    console.log(data);
+                    
+                    var jsonObject = {};
+                    
+                    var uuid = data.uuid;
+                    jsonObject["uuid"] = data.uuid;
+                    var sampleimage = data.picture.replace("data:image/png;base64,","");
+                    jsonObject["sampleimage"] = sampleimage;
+                    var camimage = canvasbase.replace("data:image/png;base64,","");
+                    jsonObject["camimage"] = camimage;
+                    
+                    console.log("json: " + JSON.stringify(jsonObject));
+
                     $.ajax({
-                        url: "./VerifyUser",
+                        url: "http://127.0.0.1:5000/facialreg", //edit address accordingly
                         type: "POST",
-                        data: JSON.stringify(result),
+                        data: JSON.stringify(jsonObject),
                         contentType: "application/json",
                         success: function (data) {
-                            if (data.result === "success") {
-                                if (result.fullname === "Jordy Nelson Samuel") {
-                                    $.confirm({
-                                        title: "Your account has been created!",
-                                        content: "Congrats!"
-                                    })
-                                } else if (result.fullname === "Leong Yong Sheng") {
-                                    $.alert({
-                                        title: "Error!",
-                                        content: "Your face does not match the UDI. Please wait while staff attend to your request."
-                                    })
-                                }
-                            }else{
+                            if (data.status === "Match") {
+                                $.confirm({
+                                    title: "Your account has been created!",
+                                    content: "Congrats!"
+                                });
+                            } else if (data.status === "Do Not Match") {
                                 $.alert({
-                                        title: "Error!",
-                                        content: "The file has been compromised or tampered with. Please wait while staff attend to your request."
-                                    })
+                                    title: "Error!",
+                                    content: "Your face does not match the UDI. Please wait while staff attend to your request."
+                                });
+                            } else {
+                                $.alert({
+                                    title: "Error!",
+                                    content: "The file has been compromised or tampered with. Please wait while staff attend to your request."
+                                });
                             }
                             console.log(result.result);
                         }, error: function (xhr) {
-
+                            
                         }
                     });
 
 
                 }, error: function (xhr) {
-                    console.log("Error Occured!");
+                    console.log("The file has been compromised or tampered with. Please wait while staff attend to your request.");
                 }
             });
         }
