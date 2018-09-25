@@ -115,6 +115,17 @@ public class TWOFA extends HttpServlet {
             JSONObject responseObj = new JSONObject(resp);
             System.out.println(responseObj.toString(4)); // indent 4 spaces
             System.out.println();
+            
+            
+//            String OTPStatus = "";
+            String OTPConfirmationNumber = request.getParameter("OTP_Number");
+            if(!OTP_Number.equals(OTPConfirmationNumber)){
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }else{
+                response.setStatus(HttpServletResponse.SC_OK);
+            }
+            
+            
 
         } catch (Exception e) {
             e.printStackTrace(System.out);

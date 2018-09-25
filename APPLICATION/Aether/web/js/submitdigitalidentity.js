@@ -5,10 +5,7 @@
  */
 document.getElementById("submit").onclick = function () {
     
-    $.get('TWOFA', function(data) {
-        alert(data);
-    });
-    
+   
     
     if(!document.getElementById('email').value.includes('@') || document.getElementById('mobile').value.match(/^[0-9]+$/) == null){
         $.alert({
@@ -62,6 +59,7 @@ document.getElementById("submit").onclick = function () {
                 '<div class="form-group">' +
                 '<label>OTP Number</label>' +
                 '<input type="text" placeholder="Your OTP" class="name form-control" id="OTP_Number" required />' +
+//                '<input type="text" id="reply"/>' +
                 '</div>' +
                 '</form>',
         buttons: {
@@ -79,6 +77,13 @@ document.getElementById("submit").onclick = function () {
                         object["userdata"] = filebase;
                         object["OTP_Number"] = OTP_Number;
                         console.log(object);
+                        
+//                        $.get('TWOFA', function(data) {
+//                            
+//                        });
+                        
+
+
                         $.ajax({
                             url: "./IdentityServlet",
                             type: "POST",
@@ -98,6 +103,8 @@ document.getElementById("submit").onclick = function () {
                                 });
                             }
                         });
+                        
+                        
                     };
                     reader.onerror = function (error) {
                         console.log('Error: ', error);

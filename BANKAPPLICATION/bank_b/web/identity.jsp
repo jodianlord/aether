@@ -236,6 +236,7 @@
                         data: JSON.stringify(jsonObject),
                         contentType: "application/json",
                         success: function (data) {
+                            console.log("FR Return=" + data.facedetect); //
                             if (data.status === "Match") {
                                 $.confirm({
                                     title: "Your account has been created!",

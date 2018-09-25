@@ -92,7 +92,7 @@
     <script>
         $(submitaccept).click(function(){
             
-            window.location.href='FRsuccess.jsp?=' + uuid;
+            window.location.href='FRsuccess.jsp?uuid=' + uuid;
             
         });
     </script>
