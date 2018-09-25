@@ -12,6 +12,10 @@
         <servlet-name>IdentityServlet</servlet-name>
         <servlet-class>com.aether.controller.IdentityServlet</servlet-class>
     </servlet>
+<!--    <servlet>
+        <servlet-name>TWOFA</servlet-name>
+        <servlet-class>com.aether.util.TWOFA</servlet-class>
+    </servlet>-->
     <servlet-mapping>
         <servlet-name>SignUpServlet</servlet-name>
         <url-pattern>/SignUpServlet</url-pattern>
@@ -24,6 +28,10 @@
         <servlet-name>IdentityServlet</servlet-name>
         <url-pattern>/IdentityServlet</url-pattern>
     </servlet-mapping>
+<!--    <servlet-mapping>
+        <servlet-name>TWOFA</servlet-name>
+        <url-pattern>/TWOFA</url-pattern>
+    </servlet-mapping>-->
     <session-config>
         <session-timeout>
             30

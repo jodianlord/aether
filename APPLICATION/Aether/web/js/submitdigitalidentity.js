@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 document.getElementById("submit").onclick = function () {
+    
+    $.get('TWOFA', function(data) {
+        alert(data);
+    });
+    
+    
     if(!document.getElementById('email').value.includes('@') || document.getElementById('mobile').value.match(/^[0-9]+$/) == null){
         $.alert({
             title: 'Sorry!',
@@ -45,13 +51,17 @@ document.getElementById("submit").onclick = function () {
         });
         return;
     }
+    
+    
+    
+    
 
     $.confirm({
-        title: "Input your password!",
+        title: "Input your OTP!",
         content: '<form action="" class="formName">' +
                 '<div class="form-group">' +
-                '<label>Password</label>' +
-                '<input type="password" placeholder="Your Password" class="name form-control" id="password" required />' +
+                '<label>OTP Number</label>' +
+                '<input type="text" placeholder="Your OTP" class="name form-control" id="OTP_Number" required />' +
                 '</div>' +
                 '</form>',
         buttons: {
@@ -59,7 +69,7 @@ document.getElementById("submit").onclick = function () {
                 text: "Submit",
                 btnClass: 'btn-red',
                 action: function () {
-                    var password = document.getElementById("password").value;
+                    var OTP_Number = document.getElementById("OTP_Number").value;
                     var canvasbase = canvas.toDataURL();
                     object["picture"] = canvasbase;
                     var reader = new FileReader();
@@ -67,7 +77,7 @@ document.getElementById("submit").onclick = function () {
                     reader.onload = function () {
                         var filebase = reader.result;
                         object["userdata"] = filebase;
-                        object["password"] = password;
+                        object["OTP_Number"] = OTP_Number;
                         console.log(object);
                         $.ajax({
                             url: "./IdentityServlet",
