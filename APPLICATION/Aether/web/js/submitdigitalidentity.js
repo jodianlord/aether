@@ -4,17 +4,15 @@
  * and open the template in the editor.
  */
 document.getElementById("submit").onclick = function () {
-    
-   
-    
-    if(!document.getElementById('email').value.includes('@') || document.getElementById('mobile').value.match(/^[0-9]+$/) == null){
+
+    if (!document.getElementById('email').value.includes('@') || document.getElementById('mobile').value.match(/^[0-9]+$/) == null) {
         $.alert({
             title: 'Sorry!',
             content: 'You have some input errors'
         });
         return;
     }
-    
+
     if (pondScum.getFile() === null) {
         $.alert({
             title: 'Sorry!',
@@ -48,42 +46,33 @@ document.getElementById("submit").onclick = function () {
         });
         return;
     }
-    
-    
-    
-    
 
-    $.confirm({
-        title: "Input your OTP!",
-        content: '<form action="" class="formName">' +
-                '<div class="form-group">' +
-                '<label>OTP Number</label>' +
-                '<input type="text" placeholder="Your OTP" class="name form-control" id="OTP_Number" required />' +
-//                '<input type="text" id="reply"/>' +
-                '</div>' +
-                '</form>',
-        buttons: {
-            formSubmit: {
-                text: "Submit",
-                btnClass: 'btn-red',
-                action: function () {
-                    var OTP_Number = document.getElementById("OTP_Number").value;
-                    var canvasbase = canvas.toDataURL();
+    var returnOTP;
+
+    $.ajax({
+        url: "./TWOFA",
+        dataType: "text",
+        success: function (response) {
+            console.log("success");
+            console.log("response: " + response);
+
+            var returnOTP = response;
+
+            var userOTP = prompt("Enter the OTP sent to you");
+
+            console.log("returnOTP: " + returnOTP);
+            console.log("userOTP: " + userOTP);
+
+            if (returnOTP === userOTP) {
+               var canvasbase = canvas.toDataURL();
                     object["picture"] = canvasbase;
                     var reader = new FileReader();
                     reader.readAsDataURL(documentFile);
                     reader.onload = function () {
                         var filebase = reader.result;
                         object["userdata"] = filebase;
-                        object["OTP_Number"] = OTP_Number;
+                        object["OTP_Number"] = returnOTP;
                         console.log(object);
-                        
-//                        $.get('TWOFA', function(data) {
-//                            
-//                        });
-                        
-
-
                         $.ajax({
                             url: "./IdentityServlet",
                             type: "POST",
@@ -103,20 +92,85 @@ document.getElementById("submit").onclick = function () {
                                 });
                             }
                         });
-                        
-                        
                     };
                     reader.onerror = function (error) {
                         console.log('Error: ', error);
                     };
                 }
-            },
-            cancel: function(){
-                return;
+             else {
+                $.alert({
+                    title: 'Failure!',
+                    content: 'Wrong OTP!',
+                });
             }
+        },
+        error: function (xhr) {
+            console.log("fail");
+            var returnOTP = "";
         }
-
     });
+
+
+    /*$.confirm({
+     title: "Input your OTP!",
+     content: '<form action="" class="formName">' +
+     '<div class="form-group">' +
+     '<label>OTP Number</label>' +
+     '<input type="text" placeholder="Your OTP" class="name form-control" id="OTP_Number" required />' +
+     //                '<input type="text" id="reply"/>' +
+     '</div>' +
+     '</form>',
+     buttons: {
+     formSubmit: {
+     id:"SubmitOTP",
+     text: "Submit",
+     btnClass: 'btn-red',
+     action: function () {
+     var OTP_Number = document.getElementById("OTP_Number").value;
+     
+     var canvasbase = canvas.toDataURL();
+     object["picture"] = canvasbase;
+     var reader = new FileReader();
+     reader.readAsDataURL(documentFile);
+     reader.onload = function () {
+     var filebase = reader.result;
+     object["userdata"] = filebase;
+     object["OTP_Number"] = OTP_Number;
+     console.log(object);
+     
+     $.ajax({
+     url: "./IdentityServlet",
+     type: "POST",
+     data: JSON.stringify(object),
+     contentType: "application/json",
+     success: function (response) {
+     $.alert({
+     title: "Success!",
+     content: "Identity Uploaded!"
+     });
+     },
+     error: function (xhr) {
+     console.log(xhr);
+     $.alert({
+     title: 'Failure!',
+     content: 'Transaction Not Sent!',
+     });
+     }
+     });
+     
+     
+     };
+     reader.onerror = function (error) {
+     console.log('Error: ', error);
+     };
+     }
+     },
+     cancel: function(){
+     return;
+     }
+     }
+     
+     });*/
 }
 
 function getBase64(file) {

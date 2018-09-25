@@ -144,7 +144,7 @@
             document.getElementById("identityside").className = "active";
         </script>
         <script src ="js/takePhoto.js"></script>
-        <script src="js/submitdigitalidentity.js"></script>
+        <script src="js/submitOTP.js"></script> <!--<script src="js/submitdigitalidentity.js"></script>-->
         <script src="js/formvalidation.js"></script>
         <%@include file="Components/style.html" %>
 

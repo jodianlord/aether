@@ -29,21 +29,20 @@ public class TWOFA extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @return 
+     * @return
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
-    public static String genRandomPin(){
+    public static String genRandomPin() {
         String randomPin = "";
         Random random = new Random();
-        for(int i = 0;i < 6;i++){
+        for (int i = 0; i < 6; i++) {
             //Math.random(0,10);
             randomPin = randomPin + (int) Math.floor(random.nextInt(10));
         }
         return randomPin;
-    }   
-    
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //response.setContentType("text/html;charset=UTF-8");
@@ -62,7 +61,9 @@ public class TWOFA extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                String apiServiceUrl = "http://tbankonline.com/SMUtBank_API/Gateway";
+        response.setContentType("text/plain;charset=UTF-8");
+        
+        String apiServiceUrl = "http://tbankonline.com/SMUtBank_API/Gateway";
 
         try {
 
@@ -78,11 +79,10 @@ public class TWOFA extends HttpServlet {
 
             // build content
             jo = new JSONObject();
-            jo.put("mobileNumber", "6581275524");  // this should be the agent's mobile number
-            
-            
+            jo.put("mobileNumber", "6596192562");  // this should be the agent's mobile number 6581275524
+
             String OTP_Number = genRandomPin();
-            
+
             jo.put("message", "Your OTP is " + OTP_Number);
             JSONObject contentObj = new JSONObject();
             contentObj.put("Content", jo);
@@ -115,17 +115,25 @@ public class TWOFA extends HttpServlet {
             JSONObject responseObj = new JSONObject(resp);
             System.out.println(responseObj.toString(4)); // indent 4 spaces
             System.out.println();
-            
-            
-//            String OTPStatus = "";
-            String OTPConfirmationNumber = request.getParameter("OTP_Number");
-            if(!OTP_Number.equals(OTPConfirmationNumber)){
-                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            }else{
-                response.setStatus(HttpServletResponse.SC_OK);
+
+            try (PrintWriter out = response.getWriter()) {
+                //String OTPConfirmationNumber = request.getParameter("OTP_Number");
+                
+                //System.out.println("OTPConfirmationNumber: " + OTPConfirmationNumber);
+                
+                //if (!OTP_Number.equals(OTPConfirmationNumber)) {
+                    //out.println();
+                    //response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                //} else {
+                    //response.setStatus(HttpServletResponse.SC_OK);
+                //}
+                
+                System.out.println(OTP_Number);
+                out.print(OTP_Number);
+                //out.append(OTP_Number);
+                //out.write(OTP_Number);
+                //response.
             }
-            
-            
 
         } catch (Exception e) {
             e.printStackTrace(System.out);
