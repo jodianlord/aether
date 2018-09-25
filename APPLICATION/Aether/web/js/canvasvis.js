@@ -1,8 +1,57 @@
 var canvas = create2DCanvas();
 var ctx = canvas.getContext('2d');
 
-draw2DCircles(canvas, ctx);
-drawTextBox(canvas, ctx, "Hello");
+var currentEvent = "Contract";
+
+var contractSize = 400;
+
+initCanvas(canvas, ctx);
+drawContract(canvas, ctx);
+contractAnimate();
+
+canvas.addEventListener('click', function (evt) {
+    xCoordinate = evt.clientX;
+    yCoordinate = evt.clientY;
+    if (xCoordinate > 700) {
+        contractAnimate();
+    } else {
+
+    }
+    console.log("xCoordinate: " + xCoordinate + " yCoordinate: " + yCoordinate);
+}, false);
+
+function initCanvas(canvas, ctx) {
+    fill2DBlack(canvas, ctx);
+    draw2DCircles(canvas, ctx);
+    drawTextBox(canvas, ctx, "Hello");
+    drawArrows(canvas, ctx);
+}
+
+function contractAnimate() {
+    requestAnimationFrame(contractAnimate);
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    initCanvas(canvas, ctx);
+
+    console.log("increment");
+
+    var img = new Image();
+
+    ctx.fillRect(contractSize, contractSize, contractSize, contractSize);
+
+
+    img.onload = function () {
+        ctx.drawImage(img, canvas.width / 2 - 200, contractSize, 400, 400);
+    }
+    img.src = "img/diploma.svg";
+
+    if (contractSize > 50) {
+        contractSize = contractSize - 1;
+    } else {
+
+    }
+
+}
 
 function create2DCanvas() {
     canvas = document.createElement('canvas');
@@ -15,6 +64,19 @@ function create2DCanvas() {
     return canvas;
 }
 
+function drawArrows(canvas, ctx) {
+    var img = new Image();
+    img.onload = function () {
+        ctx.drawImage(img, canvas.width / 10, canvas.height / 2, 100, 100);
+    }
+    var img2 = new Image();
+    img2.onload = function () {
+        ctx.drawImage(img2, (canvas.width / 10) * 9, canvas.height / 2, 100, 100);
+    }
+    img.src = "img/left-arrow.svg";
+    img2.src = "img/right-arrow.svg";
+}
+
 function drawTextBox(canvas, ctx, text) {
     ctx.font = "3em Segoe UI";
     ctx.fillStyle = "#ffffff";
@@ -24,9 +86,21 @@ function drawTextBox(canvas, ctx, text) {
     wrapText(ctx, "Contract Writing", 900, 100, 800);
 }
 
+
+
+function drawContract(canvas, ctx) {
+    var img = new Image();
+    img.onload = function () {
+        ctx.drawImage(img, canvas.width / 2 - 200, canvas.height / 2 - 200, contractSize, contractSize);
+    }
+    img.src = "img/diploma.svg";
+}
+
 function fill2DBlack(canvas, ctx) {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#505050";
+    ctx.fillRect(0, 0, canvas.width, canvas.height / 8);
 }
 
 function fill2Dtop(canvas, ctx) {
