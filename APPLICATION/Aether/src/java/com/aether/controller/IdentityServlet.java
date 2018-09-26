@@ -9,7 +9,6 @@ import com.aether.blockchain.BlockchainHandler;
 import com.aether.util.Dreamfactory;
 import com.aether.util.FileHandler;
 import com.aether.util.SendEmailSSL;
-import static com.aether.util.TWOFA.genRandomPin;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -32,17 +31,12 @@ import sun.misc.BASE64Decoder;
 import java.util.UUID;
 import org.apache.commons.io.FileUtils;
 import com.aether.util.Zipper;
-import java.io.BufferedWriter;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import org.json.simple.JSONArray;
@@ -65,7 +59,6 @@ public class IdentityServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/zip");
-
         String body = getBody(request);
         UUID uuid = UUID.randomUUID();
         String randomUUIDString = uuid.toString();
@@ -127,30 +120,30 @@ public class IdentityServlet extends HttpServlet {
             System.out.println("Bad Public Key: " + publicKey);
             publicKey = publicKey.replace("\u0000", "");
             System.out.println("Public Key: " + publicKey);
-            if (BlockchainHandler.unlockAccount(publicKey, "password")) {
+            if(BlockchainHandler.unlockAccount(publicKey, password)){
                 String transactionHash = BlockchainHandler.deployContract(publicKey, randomUUIDString, hash);
                 JSONObject toCustomer = new JSONObject();
                 toCustomer.put("transactionHash", transactionHash);
                 toCustomer.put("uuid", randomUUIDString);
                 toCustomer.put("hash", hash);
                 String finalJSON = toCustomer.toString();
-                try (FileOutputStream outputStream = new FileOutputStream(request.getServletContext().getRealPath("/") + "UDI_" + fullname + ".bin")) {
+                try(FileOutputStream outputStream = new FileOutputStream(request.getServletContext().getRealPath("/") + "UDI_" + fullname + ".bin")){
                     byte[] strToBytes = finalJSON.getBytes();
                     outputStream.write(strToBytes);
                     SendEmailSSL.generateAndSendEmail(email, new File(request.getServletContext().getRealPath("/") + "UDI_" + fullname + ".bin"));
-                } catch (IOException e) {
-
-                } catch (AddressException e) {
-
-                } catch (MessagingException e) {
-
+                }catch(IOException e){
+                    
+                }catch(AddressException e){
+                    
+                }catch(MessagingException e){
+                    
                 }
-            } else {
+            }else{
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
-
+            
             FileHandler.uploadFile(finalZip);
-
+            
             pictureOut.close();
             userdataFileOut.close();
             if (jsonFile.delete() && pictureFile.delete() && userdataFile.delete()) {

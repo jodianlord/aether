@@ -78,8 +78,9 @@ public class TWOFA extends HttpServlet {
             String header = headerObj.toString();
 
             // build content
+            String mobileNumber = request.getParameter("mobileNumber");
             jo = new JSONObject();
-            jo.put("mobileNumber", "6596192562");  // this should be the agent's mobile number 6581275524
+            jo.put("mobileNumber", mobileNumber);  // this should be the agent's mobile number 6581275524
 
             String OTP_Number = genRandomPin();
 
@@ -117,22 +118,8 @@ public class TWOFA extends HttpServlet {
             System.out.println();
 
             try (PrintWriter out = response.getWriter()) {
-                //String OTPConfirmationNumber = request.getParameter("OTP_Number");
-                
-                //System.out.println("OTPConfirmationNumber: " + OTPConfirmationNumber);
-                
-                //if (!OTP_Number.equals(OTPConfirmationNumber)) {
-                    //out.println();
-                    //response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                //} else {
-                    //response.setStatus(HttpServletResponse.SC_OK);
-                //}
-                
                 System.out.println(OTP_Number);
                 out.print(OTP_Number);
-                //out.append(OTP_Number);
-                //out.write(OTP_Number);
-                //response.
             }
 
         } catch (Exception e) {

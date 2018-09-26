@@ -51,10 +51,10 @@ document.getElementById("submit").onclick = function () {
 
     $.ajax({
         url: "./TWOFA",
+        data: {"mobileNumber": document.getElementById('mobile').value},
         dataType: "text",
         success: function (response) {
-            console.log("success");
-            console.log("response: " + response);
+            console.log(document.getElementById('mobile').value);
 
             var returnOTP = response;
 
@@ -64,51 +64,51 @@ document.getElementById("submit").onclick = function () {
             console.log("userOTP: " + userOTP);
 
             if (returnOTP === userOTP) {
-               var canvasbase = canvas.toDataURL();
-                    object["picture"] = canvasbase;
-                    var reader = new FileReader();
-                    reader.readAsDataURL(documentFile);
-                    reader.onload = function () {
-                        var filebase = reader.result;
-                        object["userdata"] = filebase;
-                        object["OTP_Number"] = returnOTP;
-                        console.log(object);
-                        $.ajax({
-                            url: "./IdentityServlet",
-                            type: "POST",
-                            data: JSON.stringify(object),
-                            contentType: "application/json",
-                            success: function (response) {
-                                $.alert({
-                                    title: "Success!",
-                                    content: "Identity Uploaded!"
-                                });
-                            },
-                            error: function (xhr) {
-                                console.log(xhr);
-                                $.alert({
-                                    title: 'Failure!',
-                                    content: 'Transaction Not Sent!',
-                                });
-                            }
-                        });
-                    };
-                    reader.onerror = function (error) {
-                        console.log('Error: ', error);
-                    };
-                }
-             else {
-                $.alert({
-                    title: 'Failure!',
-                    content: 'Wrong OTP!',
-                });
+                var canvasbase = canvas.toDataURL();
+                object["picture"] = canvasbase;
+                var reader = new FileReader();
+                reader.readAsDataURL(documentFile);
+                reader.onload = function () {
+                    var filebase = reader.result;
+                    object["userdata"] = filebase;
+                    object["password"] = "password";
+                    console.log("password: " + object["password"]);
+                    $.ajax({
+                        url: "./IdentityServlet",
+                        type: "POST",
+                        data: JSON.stringify(object),
+                        contentType: "application/json",
+                        success: function (response) {
+                            $.alert({
+                                title: "Success!",
+                                content: "Identity Uploaded!"
+                            });
+                        },
+                        error: function (xhr) {
+                            console.log(xhr);
+                            $.alert({
+                                title: 'Failure!',
+                                content: 'Transaction Not Sent!',
+                            });
+                        }
+                    });
+                };
+                reader.onerror = function (error) {
+                    console.log('Error: ', error);
+                };
             }
-        },
-        error: function (xhr) {
-            console.log("fail");
-            var returnOTP = "";
+         else {
+            $.alert({
+                title: 'Failure!',
+                content: 'Wrong OTP!',
+            });
         }
-    });
+    },
+    error: function (xhr) {
+        console.log("fail");
+        var returnOTP = "";
+    }
+});
 
 
     /*$.confirm({
