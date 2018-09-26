@@ -47,21 +47,14 @@ document.getElementById("submit").onclick = function () {
         return;
     }
 
-    var returnOTP;
-
     $.ajax({
         url: "./TWOFA",
         data: {"mobileNumber": document.getElementById('mobile').value},
         dataType: "text",
         success: function (response) {
-            console.log(document.getElementById('mobile').value);
-
             var returnOTP = response;
-
+     
             var userOTP = prompt("Enter the OTP sent to you");
-
-            console.log("returnOTP: " + returnOTP);
-            console.log("userOTP: " + userOTP);
 
             if (returnOTP === userOTP) {
                 var canvasbase = canvas.toDataURL();
@@ -72,7 +65,6 @@ document.getElementById("submit").onclick = function () {
                     var filebase = reader.result;
                     object["userdata"] = filebase;
                     object["password"] = "password";
-                    console.log("password: " + object["password"]);
                     $.ajax({
                         url: "./IdentityServlet",
                         type: "POST",
@@ -104,73 +96,11 @@ document.getElementById("submit").onclick = function () {
             });
         }
     },
-    error: function (xhr) {
-        console.log("fail");
-        var returnOTP = "";
-    }
-});
-
-
-    /*$.confirm({
-     title: "Input your OTP!",
-     content: '<form action="" class="formName">' +
-     '<div class="form-group">' +
-     '<label>OTP Number</label>' +
-     '<input type="text" placeholder="Your OTP" class="name form-control" id="OTP_Number" required />' +
-     //                '<input type="text" id="reply"/>' +
-     '</div>' +
-     '</form>',
-     buttons: {
-     formSubmit: {
-     id:"SubmitOTP",
-     text: "Submit",
-     btnClass: 'btn-red',
-     action: function () {
-     var OTP_Number = document.getElementById("OTP_Number").value;
-     
-     var canvasbase = canvas.toDataURL();
-     object["picture"] = canvasbase;
-     var reader = new FileReader();
-     reader.readAsDataURL(documentFile);
-     reader.onload = function () {
-     var filebase = reader.result;
-     object["userdata"] = filebase;
-     object["OTP_Number"] = OTP_Number;
-     console.log(object);
-     
-     $.ajax({
-     url: "./IdentityServlet",
-     type: "POST",
-     data: JSON.stringify(object),
-     contentType: "application/json",
-     success: function (response) {
-     $.alert({
-     title: "Success!",
-     content: "Identity Uploaded!"
-     });
-     },
-     error: function (xhr) {
-     console.log(xhr);
-     $.alert({
-     title: 'Failure!',
-     content: 'Transaction Not Sent!',
-     });
-     }
-     });
-     
-     
-     };
-     reader.onerror = function (error) {
-     console.log('Error: ', error);
-     };
-     }
-     },
-     cancel: function(){
-     return;
-     }
-     }
-     
-     });*/
+        error: function (xhr) {
+            console.log("fail");
+            var returnOTP = "";
+        }
+    });
 }
 
 function getBase64(file) {
