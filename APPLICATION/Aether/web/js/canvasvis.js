@@ -4,28 +4,36 @@ var ctx = canvas.getContext('2d');
 var currentEvent = "Contract";
 
 var contractSize = 400;
+var canvasX = canvas.width / 2 - 200;
+var canvasY = canvas.height / 2 - 200;
 
 initCanvas(canvas, ctx);
 drawContract(canvas, ctx);
-contractAnimate();
+//contractAnimate();
 
 canvas.addEventListener('click', function (evt) {
     xCoordinate = evt.clientX;
     yCoordinate = evt.clientY;
-    if (xCoordinate > 700) {
-        contractAnimate();
+    if (xCoordinate > 700 && currentEvent == "Contract") {
+        var img = new Image;
+        img.src = "img/diploma.svg";
+        img.addEventListener('load', function () {
+            var interval = setInterval(function () {
+                return function () {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    initCanvas(canvas, ctx);
+                    ctx.drawImage(img, canvasX, canvasY, contractSize, contractSize);
+
+                    canvasX -= 1;
+                };
+            }(), 0.001);
+        }, false);
+
     } else {
 
     }
     console.log("xCoordinate: " + xCoordinate + " yCoordinate: " + yCoordinate);
 }, false);
-
-function initCanvas(canvas, ctx) {
-    fill2DBlack(canvas, ctx);
-    draw2DCircles(canvas, ctx);
-    drawTextBox(canvas, ctx, "Hello");
-    drawArrows(canvas, ctx);
-}
 
 function contractAnimate() {
     requestAnimationFrame(contractAnimate);
@@ -37,11 +45,8 @@ function contractAnimate() {
 
     var img = new Image();
 
-    ctx.fillRect(contractSize, contractSize, contractSize, contractSize);
-
-
     img.onload = function () {
-        ctx.drawImage(img, canvas.width / 2 - 200, contractSize, 400, 400);
+        ctx.drawImage(img, canvasX, canvasY, contractSize, contractSize);
     }
     img.src = "img/diploma.svg";
 
@@ -51,6 +56,43 @@ function contractAnimate() {
 
     }
 
+}
+
+function drawContract(canvas, ctx) {
+    var img = new Image();
+    img.onload = function () {
+        ctx.drawImage(img, canvasX, canvasY, contractSize, contractSize);
+    }
+    img.src = "img/diploma.svg";
+}
+
+function initCanvas(canvas, ctx) {
+    fill2DBlack(canvas, ctx);
+    draw2DCircles(canvas, ctx);
+    drawTextBox(canvas, ctx, "Hello");
+    //drawArrows(canvas, ctx);
+    drawCanvasArrows(canvas, ctx);
+}
+
+function drawCanvasArrows(canvas, ctx) {
+    ctx.beginPath();
+    ctx.lineWidth = 7;
+    ctx.strokeStyle = "#ffffff";
+    ctx.moveTo(100, 600);
+    ctx.lineTo(150, 550);
+    ctx.stroke();
+
+    ctx.moveTo(105, 600);
+    ctx.lineTo(150, 650);
+    ctx.stroke();
+
+    ctx.moveTo(2300, 600);
+    ctx.lineTo(2250, 550);
+    ctx.stroke();
+
+    ctx.moveTo(2305, 600);
+    ctx.lineTo(2250, 650);
+    ctx.stroke();
 }
 
 function create2DCanvas() {
@@ -86,16 +128,6 @@ function drawTextBox(canvas, ctx, text) {
     wrapText(ctx, "Contract Writing", 900, 100, 800);
 }
 
-
-
-function drawContract(canvas, ctx) {
-    var img = new Image();
-    img.onload = function () {
-        ctx.drawImage(img, canvas.width / 2 - 200, canvas.height / 2 - 200, contractSize, contractSize);
-    }
-    img.src = "img/diploma.svg";
-}
-
 function fill2DBlack(canvas, ctx) {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -111,7 +143,7 @@ function fill2Dtop(canvas, ctx) {
 function draw2DCircles(canvas, ctx) {
     //active circles 
     ctx.strokeStyle = "#ffffff";
-    ctx.lineWidth = 7.5;
+    ctx.lineWidth = 5;
 
     var circleSize = 30;
     var circleheight = 80;
