@@ -23,10 +23,14 @@ canvas.addEventListener('click', function (evt) {
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
                     initCanvas(canvas, ctx);
                     ctx.drawImage(img, canvasX, canvasY, contractSize, contractSize);
+                    if (contractSize > 200) {
+                        contractSize -= 1;
+                    } else {
+                        canvasX -= 5;
+                    }
 
-                    canvasX -= 1;
                 };
-            }(), 0.001);
+            }(), 1);
         }, false);
 
     } else {
