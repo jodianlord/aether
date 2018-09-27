@@ -5,13 +5,23 @@
 --%>
 
 <%@page import="java.math.BigInteger"%>
+<%@page import="javax.servlet.http.HttpSession"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="com.aether.dao.UserDAO, com.aether.blockchain.BlockchainHandler" %>
 <!DOCTYPE html>
 <html lang="en">
     <%@include  file="Components/head.html" %>
-
+    
     <body>
+    <%
+        if (session.getAttribute("groupid") == null) { 
+    %>
+            <!-- <script src ="js/takePhoto.js"></script>-->
+    <%        
+        } else {
+            
+        }        
+    %>
 
         <section id="container" >
 
@@ -143,7 +153,7 @@
         <script type="application/javascript">
             document.getElementById("identityside").className = "active";
         </script>
-        <script src ="js/takePhoto.js"></script>
+        <script src ="js/takePhoto.js"></script> 
         <script src="js/submitdigitalidentity.js"></script> <!--<script src="js/submitdigitalidentity.js"></script>-->
         <script src="js/formvalidation.js"></script>
         <%@include file="Components/style.html" %>

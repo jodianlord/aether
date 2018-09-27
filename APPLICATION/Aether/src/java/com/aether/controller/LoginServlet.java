@@ -30,12 +30,14 @@ public class LoginServlet extends HttpServlet {
 //        HttpSession session = request.getSession();
         String userid = request.getParameter("userid");
         String password = request.getParameter("password");
+        String groupid = request.getParameter("groupid");
         HttpSession session = request.getSession();
         String authPassword = UserDAO.authenticate(userid);
         
         if(authPassword != null){
             if (BCrypt.checkpw(password, authPassword)) {
                 session.setAttribute("userid", userid);
+                session.setAttribute("groupid",groupid);
                 response.sendRedirect("identity.jsp");
                 // Invalid username or password
             }

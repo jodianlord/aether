@@ -63,6 +63,29 @@
 
                                     <p class="forgot"><a href="#">Forgot Password?</a></p>
 
+                                    <div class="field-wrap"> <!-- <div class="field-wrap"> -->
+                                       <label>
+                                            Group ID
+                                       </label> 
+                                    </div>
+                                    <br>
+                                    <div class="field-wrap">  
+                                        <select id="groupid" name="groupid" required autocomplete="off">
+                                            <option value= null selected> No Group </option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                        </select>
+                                     </div>                                           
+                                    
+                                    <br> 
+
                                     <button class="button button-block"/>LOG IN</button>
                                 </form>
                             </div>
@@ -95,9 +118,9 @@
                                                                         </div>-->
 
                                     <button type="submit" id="signupbutton" class="button button-block"/>SIGN UP</button>
-<!--                                <div id="other">
-                                    Trigger the handler
-                                </div>-->
+                                    <!--                                <div id="other">
+                                                                        Trigger the handler
+                                                                    </div>-->
                                 </form>
                             </div>
                         </div><!-- tab-content -->
@@ -130,8 +153,8 @@
                     }
                 });
             });
-            
-            
+
+
             $('.form').find('input, textarea').on('keyup blur focus', function (e) {
 
                 var $this = $(this),
