@@ -18,7 +18,8 @@
                 <section class="wrapper">
 
                     <div class="row mt">
-                        <div class="col-lg-12">
+                        <div class ="col-lg-3"></div>
+                        <div class="col-lg-6">
                             <div class="form-panel" style="height:170px">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> Upload .bin UDI File</h4>
                                 <input type="file" class="filepond" id="fileupload">
@@ -27,8 +28,9 @@
                     </div>
 
                     <div class="row mt">
-                        <div class="col-lg-12">
-                            <div class="form-panel col-lg-12" style="width:98%">
+                        <div class ="col-lg-3"></div>
+                        <div class="col-lg-6">
+                            <div class="form-panel col-lg-12">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> Take Picture</h4>
                                 <div id="media">
                                 </div>
@@ -38,92 +40,100 @@
                         </div>
                     </div>
 
-                    <div class="row mt" id="details">
-                        <div class="col-lg-12">
+                     <div class="row mt">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-6">
                             <div class="form-panel">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> User Details</h4>
                                 <form class="form-horizontal style-form" id="userdata">
-
                                     <div class="form-group">
-
-                                        <div style="margin-top: 10px">
-                                            <label class="col-sm-2 col-sm-2 control-label">Full Name</label>
-                                            <div class="col-sm-10">
-                                                <input  type="text" id="fullname" name="fullname" class="form-control-static" style="width:50%">
-                                            </div>
+                                        <label class="col-sm-2 col-sm-2 control-label">Full Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" id="fullname" name="fullname" class="form-control">
                                         </div>
-                                        <div style="margin-top: 10px">
-                                            <label class="col-sm-2 col-sm-2 control-label">NRIC</label>
-                                            <div class="col-sm-10">
-                                                <input id="nric" type="text" name="nric" class="form-control-static" style="width:50%">
-                                            </div>
-                                        </div>
-                                        <div style="margin-top: 10px">
-                                            <label class="col-sm-2 col-sm-2 control-label">Email</label>
-                                            <div class="col-sm-10">
-                                                <input id="email" type="text" name="email" class="form-control-static"  style="width:50%">
-                                            </div>
-                                        </div>
-                                        <div style="margin-top: 10px">
-                                            <label class="col-sm-2 col-sm-2 control-label">Mobile</label>
-                                            <div class="col-sm-10">
-                                                <input id="mobile" type="text" name="mobile" class="form-control-static"  style="width:50%">
-                                            </div>
-                                        </div>
-                                        <div style="margin-top: 10px">
-                                            <label class="col-sm-2 col-sm-2 control-label">Gender</label>
-                                            <div class="col-sm-10">
-                                                <input id="gender" type="text" name="gender" class="form-control-static"  style="width:50%">
-                                            </div>
-                                        </div>
-                                        <div style="margin-top: 10px">
-                                            <label class="col-sm-2 col-sm-2 control-label">Nationality</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" id="nationality" name="nationality" class="form-control-static"  style="width:50%">
-                                            </div>
-                                        </div>
-                                        <div style="margin-top: 10px">
-                                            <label class="col-sm-2 col-sm-2 control-label">Marital Status</label>
-                                            <div class="col-sm-10">
-                                                <select class="form-control-static" name="marital" id="marital"  style="width:50%">
-                                                    <option>Single</option>
-                                                    <option>Married</option>
-                                                    <option>Divorced</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div style="margin-top: 10px">
-                                            <label class="col-sm-2 col-sm-2 control-label">Residence Type</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" id="residencetype" name="residencetype" class="form-control-static"  style="width:50%">
-                                            </div>
-                                        </div>
-                                        <div style="margin-top: 10px">
-                                            <label class="col-sm-2 col-sm-2 control-label">Address</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" id="address" name="address" class="form-control-static"  style="width:50%">
-                                            </div>
-                                        </div>
-                                        <div style="margin-top: 10px">
-                                            <label class="col-sm-2 col-sm-2 control-label">Occupation</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" id="occupation" name="occupation" class="form-control-static"  style="width:50%">
-                                            </div>
-                                        </div>
-                                        <div style="margin-top: 10px">
-                                            <label class="col-sm-2 col-sm-2 control-label">Industry</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" id="industry" name="industry" class="form-control-static"  style="width:50%">
-                                            </div>
-                                        </div>
-
-                                        <button id="populate" type="button" class="btn btn-danger btn-lg btn-block">Populate</button>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">NRIC</label>
+                                        <div class="col-sm-10" id="nricdiv">
+                                            <input type="text" id="nric" name="nric" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Email</label>
+                                        <div class="col-sm-10" id="emaildiv">
+                                            <input type="text" id="email" name="email" class="form-control">
+                                            <div id="emailerror" style="display:none">
+                                                Please enter a valid email address!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Mobile</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" id="mobile" name="mobile" class="form-control">
+                                            <div id="mobileerror" style="display:none">
+                                                Please enter a valid mobile number!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Gender</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" id="gender" name="gender" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Nationality</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" id="nationality" name="nationality" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Marital Status</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" name="marital">
+                                                <option>Single</option>
+                                                <option>Married</option>
+                                                <option>Divorced</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Residence Type</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" id="residencetype" name="residencetype" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Address</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" id="address" name="address" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Occupation</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" id="occupation" name="occupation" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Industry</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" id="industry" name="industry" class="form-control">
+                                        </div>
+                                        
+
+                                    </div>
+                                    <button id="populate" type="button" class="btn btn-danger btn-lg btn-block">Populate</button>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <button id="submit" type="button" class="btn btn-danger btn-lg btn-block">Submit Account Creation</button>
+                     <div class ="col-lg-3"></div>
+                        <div class="col-lg-6">
+                            <button id="submit" type="button" class="btn btn-danger btn-lg btn-block">Submit Account Creation</button>
+                        </div>
+                     
                 </section>
             </section>
 
