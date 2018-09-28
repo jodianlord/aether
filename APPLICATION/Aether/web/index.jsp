@@ -64,12 +64,12 @@
                                     <p class="forgot"><a href="#">Forgot Password?</a></p>
 
                                     <div class="field-wrap"> <!-- <div class="field-wrap"> -->
-                                       <label>
+                                        <label style="margin-top:2.3%">
                                             Group ID
-                                       </label> 
-                                    </div>
+                                        </label> 
+                                    
                                     <br>
-                                    <div class="field-wrap">  
+                                    <div class="field-wrap" style="margin-left:18%">  
                                         <select id="groupid" name="groupid" required autocomplete="off">
                                             <option value= null selected> No Group </option>
                                             <option value="1">1</option>
@@ -82,8 +82,8 @@
                                             <option value="8">8</option>
                                             <option value="9">9</option>
                                         </select>
-                                     </div>                                           
-                                    
+                                    </div>                                           
+     </div>
                                     <br> 
 
                                     <button class="button button-block"/>LOG IN</button>
@@ -145,6 +145,66 @@
                     buttons: {
                         confirm: function () {
                             $("#SignUpForm").submit();
+
+                            $('.form').find('input, textarea').on('keyup blur focus', function (e) {
+
+                                var $this = $(this),
+                                        label = $this.prev('label');
+
+                                if (e.type === 'keyup') {
+                                    if ($this.val() === '') {
+                                        label.removeClass('active highlight');
+                                    } else {
+                                        label.addClass('active highlight');
+                                    }
+                                } else if (e.type === 'blur') {
+                                    if ($this.val() === '') {
+                                        label.removeClass('active highlight');
+                                    } else {
+                                        label.removeClass('highlight');
+                                    }
+                                } else if (e.type === 'focus') {
+
+                                    if ($this.val() === '') {
+                                        label.removeClass('highlight');
+                                    } else if ($this.val() !== '') {
+                                        label.addClass('highlight');
+                                    }
+                                }
+
+                            });
+                            
+                            $.confirm({
+                                title: 'Account Creation Successful!',
+                                content: 'Your account has been successfully created! You can now log in using your credentials.',
+                                columnClass: 'col-md-4 col-md-offset-4',
+                                buttons: {
+                                    confirm: function () {
+
+                                    },
+                                    cancel: function () {
+                                        //                            $.alert('Sign Up Failed!');
+                                        //                            return false;
+                                    }
+                                }
+                            });
+
+                            $('.tab a').on('click', function (e) {
+
+                                e.preventDefault();
+
+                                $(this).parent().addClass('active');
+                                $(this).parent().siblings().removeClass('active');
+
+                                target = $(this).attr('href');
+
+                                $('.tab-content > div').not(target).hide();
+
+                                $(target).fadeIn(600);
+
+                            });
+                            
+
                         },
                         cancel: function () {
 //                            $.alert('Sign Up Failed!');
@@ -197,6 +257,23 @@
                 $(target).fadeIn(600);
 
             });
+
+            /*$.confirm({
+                title: 'Account Creation Successful!',
+                content: 'Your account has been successfully created! You can now log in using your credentials.',
+                columnClass: 'col-md-4 col-md-offset-4',
+                buttons: {
+                    confirm: function () {
+
+                    },
+                    cancel: function () {
+                        //                            $.alert('Sign Up Failed!');
+                        //                            return false;
+                    }
+                }
+            });*/
+
+
         </script>
     </body>
 </html>
