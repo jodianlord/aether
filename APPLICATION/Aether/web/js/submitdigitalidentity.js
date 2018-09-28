@@ -36,6 +36,7 @@ document.getElementById("submit").onclick = function () {
             title: 'Sorry!',
             content: 'Please set all fields!',
         });
+        return;
     }
     var formJSON = JSON.stringify(object);
     var canvas = document.getElementById("canvas");
