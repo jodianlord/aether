@@ -48,12 +48,18 @@
                             <div class="large-12 columns" style="height:800px">
                                 <div class="owl-carousel owl-theme">
                                     <div class="item">
-                                        <h1 style="color:white">1</h4>
-                                        <img src="img/diploma.svg" style="width:200px;height:200px">
+
+                                        <h1 style="color:white">1: Contract Fundamentals</h1>
+
+                                        <img id="contractImg" src="img/diploma.svg" style="width:200px;height:200px">
+
+                                        <p style="color:white; font-size:20px">
+                                            This is a visualisation of what a contract is. You can think of a contract as an agreement between an account and the blockchain. Click the contract to take a look!
+                                        </p>
                                     </div>
-                                    <div class="item"><h1>2</h4></div>
-                                    <div class="item"><h1>3</h4></div>
-                                    <div class="item"><h1>4</h4></div>
+                                    <div class="item"><h1 style="color:white">2</h1></div>
+                                    <div class="item"><h1 style="color:white">3</h1></div>
+                                    <div class="item"><h1 style="color:white">4</h1></div>
                                 </div>
                             </div>
                         </div>
@@ -76,10 +82,10 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $(".owl-carousel").owlCarousel({
-            margin: 10,
-            loop: true,
+            navigation: true,
+            singleItem: true,
             autoWidth: true,
-            items: 4
+            margin: 10,
         });
     });
 </script>
@@ -94,8 +100,32 @@
     }
     .item {
         background-color: rgb(94, 110, 148);
-        width: 600px;
-        height: 300px;
+        width: 1000px;
+        height: 500px;
+        position: relative;
+    }
+
+    #contractImg {
+        position:absolute;
+        top:0;
+        bottom:0;
+        margin:auto;
+    }
+
+    .h1{
+        display: block;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+
+    p {
+        display: block;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        margin-left: 30px;
+        margin-right: 30px;
     }
 
 </style>
