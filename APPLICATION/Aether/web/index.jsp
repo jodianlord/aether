@@ -1,3 +1,4 @@
+<%@page import="javax.servlet.http.HttpSession"%>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
     <head>
@@ -31,6 +32,10 @@
 
     </head>
     <body>
+        <%
+            session.invalidate(); 
+        %>
+        
         <div class="container demo-1">
             <div class="content">
                 <div id="large-header" class="large-header">
