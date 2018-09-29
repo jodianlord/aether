@@ -11,14 +11,14 @@
 <html lang="en">
     <%@include  file="Components/head.html" %>
     <style>
-    html, body {
-        margin: 0; 
-        height: 100%; 
-        overflow: hidden
-    }    
-        
+        html, body {
+            margin: 0; 
+            height: 100%; 
+            overflow: hidden
+        }    
+
     </style>
-    
+
 
     <body>
 
@@ -45,35 +45,16 @@
                     <!--  Demos -->
                     <section id="demos">
                         <div class="row">
-                            <div class="large-12 columns">
+                            <div class="large-12 columns" style="height:800px">
                                 <div class="owl-carousel owl-theme">
-                                    <div class="item" data-hash="zero">
-                                        
-                                        <img src ="img/diploma.svg">
-                                        <h4>1) Contract</h4>
-                                        
+                                    <div class="item">
+                                        <h1 style="color:white">1</h4>
+                                        <img src="img/diploma.svg" style="width:200px;height:200px">
                                     </div>
-                                    <div class="item" data-hash="one">
-                                        <h4>2) Contract Code </h4>
-                                    </div>
-                                    <div class="item" data-hash="two">
-                                        <h4>3) </h4>
-                                    </div>
-                                    <div class="item" data-hash="three">
-                                        <h4>3</h4>
-                                    </div>
-                                    <div class="item" data-hash="four">
-                                        <h4>4</h4>
-                                    </div>
-                                    
-                                    
+                                    <div class="item"><h1>2</h4></div>
+                                    <div class="item"><h1>3</h4></div>
+                                    <div class="item"><h1>4</h4></div>
                                 </div>
-                                <hr>
-                                <a class="button secondary url" href="#zero">zero</a> 
-                                <a class="button secondary url" href="#one">one</a> 
-                                <a class="button secondary url" href="#two">two</a> 
-                                <a class="button secondary url" href="#three">three</a> 
-                                <a class="button secondary url" href="#four">four</a> 
                             </div>
                         </div>
                     </section>
@@ -93,14 +74,13 @@
     </body>
 </html>
 <script type="text/javascript">
-    $('.owl-carousel').owlCarousel({
-        items: 4,
-        loop: false,
-        center: true,
-        margin: 10,
-        URLhashListener: true,
-        autoplayHoverPause: true,
-        startPosition: 'URLHash'
+    $(document).ready(function () {
+        $(".owl-carousel").owlCarousel({
+            margin: 10,
+            loop: true,
+            autoWidth: true,
+            items: 4
+        });
     });
 </script>
 <style>
@@ -112,6 +92,10 @@
     #container canvas, #overlay {
         position: absolute;
     }
-
+    .item {
+        background-color: rgb(94, 110, 148);
+        width: 600px;
+        height: 300px;
+    }
 
 </style>
