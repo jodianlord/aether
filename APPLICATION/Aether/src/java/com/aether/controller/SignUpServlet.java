@@ -31,24 +31,20 @@ public class SignUpServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         String userid = request.getParameter("userid");
         String password = request.getParameter("password");
         String publickey = BlockchainHandler.createAccount(password);
 //        publickey = "test";
 
         //String privatekey = request.getParameter("privatekey");
-
-        
         // Hash a password for the first time
 //        String hashedPWD = BCrypt.hashpw(password, BCrypt.gensalt());
-
         // gensalt's log_rounds parameter determines the complexity
         // the work factor is 2**log_rounds, and the default is 10
         String hashedPWD = BCrypt.hashpw(password, BCrypt.gensalt(12));
-        
+
 //        System.out.print(hashedPWD);
-        
         // Check that an unencrypted password matches one that has
         // previously been hashed
 //        if (BCrypt.checkpw(candidate, hashed))
@@ -57,12 +53,27 @@ public class SignUpServlet extends HttpServlet {
 //                System.out.println("It does not match");
 
         
-        User user = new User(userid, hashedPWD, publickey);
-        userdao.insertUser(user);
+        //if do not exist, return null 
+        User existingUser =  userdao.getUser(userid);
+        
+        if(existingUser == null) { //do not exist
+            User user = new User(userid, hashedPWD, publickey);
+            userdao.insertUser(user);
+            session.setAttribute("userError","donotexists");
+            //request.getRequestDispatcher("index.jsp").forward(request,response);
+            //response.sendRedirect("index.jsp");
+        } 
+        else {
+            session.setAttribute("userError","exist");
+            //request.getRequestDispatcher("index.jsp").forward(request,response);
+        }
+        //System.out.println(existingUser);
+        
 
 //        session.setAttribute("error", hashedPWD);
+    
         response.sendRedirect("index.jsp");
-        
+
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -105,4 +116,3 @@ public class SignUpServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-

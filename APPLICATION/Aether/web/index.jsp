@@ -1,4 +1,5 @@
-<%@page import="javax.servlet.http.HttpSession"%>
+<%@page import="javax.servlet.http.*"%>
+
 <!DOCTYPE html>
 <html lang="en" class="no-js">
     <head>
@@ -32,10 +33,8 @@
 
     </head>
     <body>
-        <%
-            session.invalidate(); 
-        %>
-        
+
+
         <div class="container demo-1">
             <div class="content">
                 <div id="large-header" class="large-header">
@@ -72,23 +71,23 @@
                                         <label style="margin-top:2.3%">
                                             Group ID
                                         </label> 
-                                    
-                                    <br>
-                                    <div class="field-wrap" style="margin-left:18%">  
-                                        <select id="groupid" name="groupid" required autocomplete="off">
-                                            <option value= null selected> No Group </option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
-                                            <option value="7">7</option>
-                                            <option value="8">8</option>
-                                            <option value="9">9</option>
-                                        </select>
-                                    </div>                                           
-     </div>
+
+                                        <br>
+                                        <div class="field-wrap" style="margin-left:18%">  
+                                            <select id="groupid" name="groupid" required autocomplete="off">
+                                                <option value= null selected> No Group </option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                            </select>
+                                        </div>                                           
+                                    </div>
                                     <br> 
 
                                     <button class="button button-block"/>LOG IN</button>
@@ -139,87 +138,6 @@
         <script src='js/jquery-1.8.3.min.js'></script>
         <script src="js/jquery-confirm.js"></script>
         <script>
-
-
-            $("#signupbutton").click(function (event) {
-                event.preventDefault();
-                $.confirm({
-                    title: 'Sign Up!',
-                    content: 'Are you sure you want to Sign Up?',
-                    columnClass: 'col-md-4 col-md-offset-4',
-                    buttons: {
-                        confirm: function () {
-                            $("#SignUpForm").submit();
-
-                            $('.form').find('input, textarea').on('keyup blur focus', function (e) {
-
-                                var $this = $(this),
-                                        label = $this.prev('label');
-
-                                if (e.type === 'keyup') {
-                                    if ($this.val() === '') {
-                                        label.removeClass('active highlight');
-                                    } else {
-                                        label.addClass('active highlight');
-                                    }
-                                } else if (e.type === 'blur') {
-                                    if ($this.val() === '') {
-                                        label.removeClass('active highlight');
-                                    } else {
-                                        label.removeClass('highlight');
-                                    }
-                                } else if (e.type === 'focus') {
-
-                                    if ($this.val() === '') {
-                                        label.removeClass('highlight');
-                                    } else if ($this.val() !== '') {
-                                        label.addClass('highlight');
-                                    }
-                                }
-
-                            });
-                            
-                            $.confirm({
-                                title: 'Account Creation Successful!',
-                                content: 'Your account has been successfully created! You can now log in using your credentials.',
-                                columnClass: 'col-md-4 col-md-offset-4',
-                                buttons: {
-                                    confirm: function () {
-
-                                    },
-                                    cancel: function () {
-                                        //                            $.alert('Sign Up Failed!');
-                                        //                            return false;
-                                    }
-                                }
-                            });
-
-                            $('.tab a').on('click', function (e) {
-
-                                e.preventDefault();
-
-                                $(this).parent().addClass('active');
-                                $(this).parent().siblings().removeClass('active');
-
-                                target = $(this).attr('href');
-
-                                $('.tab-content > div').not(target).hide();
-
-                                $(target).fadeIn(600);
-
-                            });
-                            
-
-                        },
-                        cancel: function () {
-//                            $.alert('Sign Up Failed!');
-//                            return false;
-                        }
-                    }
-                });
-            });
-
-
             $('.form').find('input, textarea').on('keyup blur focus', function (e) {
 
                 var $this = $(this),
@@ -263,12 +181,84 @@
 
             });
 
-            /*$.confirm({
-                title: 'Account Creation Successful!',
-                content: 'Your account has been successfully created! You can now log in using your credentials.',
+        </script>
+
+    <script>
+
+
+        $("#signupbutton").click(function (event) {
+            event.preventDefault();
+            $.confirm({
+                title: 'Sign Up!',
+                content: 'Are you sure you want to Sign Up?',
                 columnClass: 'col-md-4 col-md-offset-4',
                 buttons: {
                     confirm: function () {
+                        $("#SignUpForm").submit();
+    </script>
+    <%
+        String userError = (String) session.getAttribute("userError");
+        System.out.println("userError is");
+        System.out.println(userError);
+        if (userError == "exist") {
+            session.removeAttribute("userError");
+
+    %>
+    <script>
+                        $.confirm({
+                            title: 'User Exists!',
+                            content: 'User already exists! Please try again using a different User ID.',
+                            columnClass: 'col-md-4 col-md-offset-4',
+                            buttons: {
+                                confirm: function () {
+
+                                },
+                                cancel: function () {
+                                    //                            $.alert('Sign Up Failed!');
+                                    //                            return false;
+                                }
+                            }
+                        });
+                        
+                        $('.form').find('input, textarea').on('keyup blur focus', function (e) {
+
+    </script>
+    <%
+            } else {
+        session.removeAttribute("userError");
+    %>
+
+    <script>
+                        $.confirm({
+                            title: 'Account Creation Successful!',
+                            content: 'Your account has been successfully created! You can now log in using your credentials.',
+                            columnClass: 'col-md-4 col-md-offset-4',
+                            buttons: {
+                                confirm: function () {
+
+                                },
+                                cancel: function () {
+                                    //                            $.alert('Sign Up Failed!');
+                                    //                            return false;
+                                }
+                            }
+                        });
+
+                        $('.tab a').on('click', function (e) {
+
+                            e.preventDefault();
+
+                            $(this).parent().addClass('active');
+                            $(this).parent().siblings().removeClass('active');
+
+                            target = $(this).attr('href');
+
+                            $('.tab-content > div').not(target).hide();
+
+                            $(target).fadeIn(600);
+
+                        });
+
 
                     },
                     cancel: function () {
@@ -276,9 +266,59 @@
                         //                            return false;
                     }
                 }
-            });*/
+            });
+        });
 
 
-        </script>
-    </body>
+        $('.form').find('input, textarea').on('keyup blur focus', function (e) {
+
+            var $this = $(this),
+                    label = $this.prev('label');
+
+            if (e.type === 'keyup') {
+                if ($this.val() === '') {
+                    label.removeClass('active highlight');
+                } else {
+                    label.addClass('active highlight');
+                }
+            } else if (e.type === 'blur') {
+                if ($this.val() === '') {
+                    label.removeClass('active highlight');
+                } else {
+                    label.removeClass('highlight');
+                }
+            } else if (e.type === 'focus') {
+
+                if ($this.val() === '') {
+                    label.removeClass('highlight');
+                } else if ($this.val() !== '') {
+                    label.addClass('highlight');
+                }
+            }
+
+        });
+
+        $('.tab a').on('click', function (e) {
+
+            e.preventDefault();
+
+            $(this).parent().addClass('active');
+            $(this).parent().siblings().removeClass('active');
+
+            target = $(this).attr('href');
+
+            $('.tab-content > div').not(target).hide();
+
+            $(target).fadeIn(600);
+
+        });
+
+    </script>
+    <%
+        }
+
+        session.invalidate();
+    %>
+
+</body>
 </html>
