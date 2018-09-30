@@ -102,17 +102,13 @@
             </section>
 
             <%@include file="Components/script.html" %>
-            <!--set dashboard button to active-->
-            <script type="application/javascript">
-                document.getElementById("visualisationside").className = "active";
-            </script>
             <%@include file="Components/style.html" %>
 
-            <script src="js/jquery-1.8.3.min.js"></script>
-            <script src="js/owlcarousel/js/owl.carousel.js"></script>
     </body>
 </html>
 <script type="text/javascript">
+    document.getElementById("visualisationside").className = "active";
+    
     $(document).ready(function () {
         $(".owl-carousel").owlCarousel({
             navigation: true,
@@ -123,6 +119,7 @@
         });
     });
 </script>
+<script src="js/owlvisualisation.js"></script>
 <style>
     #progressbar{
         position: relative;
@@ -172,6 +169,9 @@
         height: 55px;
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8df291e84a54687993cf7cbff348acdc66893e08
 
 </style>
