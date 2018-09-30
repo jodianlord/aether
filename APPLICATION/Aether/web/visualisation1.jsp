@@ -74,17 +74,13 @@
             </section>
 
             <%@include file="Components/script.html" %>
-            <!--set dashboard button to active-->
-            <script type="application/javascript">
-                document.getElementById("visualisationside").className = "active";
-            </script>
             <%@include file="Components/style.html" %>
 
-            <script src="js/jquery-1.8.3.min.js"></script>
-            <script src="js/owlcarousel/js/owl.carousel.js"></script>
     </body>
 </html>
 <script type="text/javascript">
+    document.getElementById("visualisationside").className = "active";
+    
     $(document).ready(function () {
         $(".owl-carousel").owlCarousel({
             navigation: true,
@@ -95,6 +91,7 @@
         });
     });
 </script>
+<script src="js/owlvisualisation.js"></script>
 <style>
     #container {
         position: relative;
@@ -134,12 +131,5 @@
         margin-right: 30px;
     }
 
-    .row {
-        display: flex;
-    }
-
-    .column {
-        flex: 50%;
-    }
 
 </style>
