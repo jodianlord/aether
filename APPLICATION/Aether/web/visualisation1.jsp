@@ -47,24 +47,52 @@
                         <div class="row">
                             <div class="large-12 columns" style="height:800px">
                                 <div class="owl-carousel owl-theme">
-                                    <div class="item">
 
-                                        <h1 style="color:white">1: Contract Fundamentals</h1>
-                                        <div class="row"></div>
-                                        <div class="row">
-                                            <div class = "column">
-                                                <img id="contractImg" src="img/diploma.svg" style="width:200px;height:200px">
-                                            </div>
-                                            <div class = "column">
-                                                <p style="color:white; font-size:20px">
-                                                    This is a visualisation of what a contract is. You can think of a contract as an agreement between an account and the blockchain. Click the contract to take a look!
-                                                </p>
-                                            </div>
-                                        </div>
+                                    <!-- 1. Contract Fundamentals-->
+                                    <div class="item">
+                                        </br>
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">1: Contract Fundamentals</h1>
+                                        <p style="color:white;margin-left:30px; font-size:20px">
+                                            This is a visualisation of what a contract is. You can think of a contract as an agreement between an account and the blockchain. Click the contract to take a look!
+                                        </p>
+                                        <img id="contractImg" src="img/diploma.svg" style="position: relative;width:200px;height:200px">
+                                        <div id="progressbar"></div>
                                     </div>
-                                    <div class="item"><h1 style="color:white">2</h1></div>
-                                    <div class="item"><h1 style="color:white">3</h1></div>
-                                    <div class="item"><h1 style="color:white">4</h1></div>
+
+                                    <!-- 2. Second -->
+                                    <div class="item">
+                                        </br>
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">2: Step 2</h1>
+                                        <p style="color:white;margin-left:30px; font-size:20px">
+                                            Step 2
+                                        </p>
+                                        <img id="contractImg" src="img/diploma.svg" style="position: relative;width:200px;height:200px">
+                                        <div id="progressbar"></div>
+                                    </div>
+
+                                    <!-- 3. Third-->
+                                    <div class="item">
+                                        </br>
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">3: Step 3</h1>
+                                        <p style="color:white;margin-left:30px; font-size:20px">
+                                            Step 3
+                                        </p>
+                                        <img id="contractImg" src="img/diploma.svg" style="position: relative;width:200px;height:200px">
+                                        <div id="progressbar"></div>
+                                    </div>
+                                    
+                                    <!-- 4. Fourth-->
+                                    <div class="item">
+                                        </br>
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">4: Step 4</h1>
+                                        <p style="color:white;margin-left:30px; font-size:20px">
+                                            Step 4
+                                        </p>
+                                        <img id="contractImg" src="img/diploma.svg" style="position: relative;width:200px;height:200px">
+                                        <div id="progressbar"></div>
+                                    </div>
+                                    
+                                    
                                 </div>
                             </div>
                         </div>
@@ -96,6 +124,15 @@
     });
 </script>
 <style>
+    #progressbar{
+        position: relative;
+        width: 100%;
+        margin-top: 108px;
+        height: 10px;
+        background-color: #00ff33;
+        
+    }
+    
     #container {
         position: relative;
         top: 100px;
@@ -105,7 +142,7 @@
         position: absolute;
     }
     .item {
-        background-color: rgb(94, 110, 148);
+        background-color: #3F5F90;
         width: 1000px;
         height: 500px;
         position: relative;
@@ -132,14 +169,9 @@
         margin-bottom: 1em;
         margin-left: 30px;
         margin-right: 30px;
+        height: 55px;
     }
 
-    .row {
-        display: flex;
-    }
 
-    .column {
-        flex: 50%;
-    }
 
 </style>
