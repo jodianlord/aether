@@ -153,8 +153,12 @@
         <script type="application/javascript">
             document.getElementById("identityside").className = "active";
         </script>
-        <script src ="js/takePhoto.js"></script> 
-        <script src="js/submitdigitalidentity.js"></script> <!--<script src="js/submitdigitalidentity.js"></script>-->
+        <!-- test gameTakePhoto.js -->
+        <script src ="js/gameTakePhoto.js"></script>
+        <!--<script src ="js/takePhoto.js"></script>-->
+        
+        <!-- test gameSubmitDigitalIdentity.js -->
+        <script src="js/gameSubmitDigitalIdentity.js"></script> <!--<script src="js/submitdigitalidentity.js"></script>-->
         <script src="js/formvalidation.js"></script>
         <%@include file="Components/style.html" %>
 
