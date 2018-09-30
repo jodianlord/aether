@@ -50,12 +50,17 @@
                                     <div class="item">
 
                                         <h1 style="color:white">1: Contract Fundamentals</h1>
-
-                                        <img id="contractImg" src="img/diploma.svg" style="width:200px;height:200px">
-
-                                        <p style="color:white; font-size:20px">
-                                            This is a visualisation of what a contract is. You can think of a contract as an agreement between an account and the blockchain. Click the contract to take a look!
-                                        </p>
+                                        <div class="row"></div>
+                                        <div class="row">
+                                            <div class = "column">
+                                                <img id="contractImg" src="img/diploma.svg" style="width:200px;height:200px">
+                                            </div>
+                                            <div class = "column">
+                                                <p style="color:white; font-size:20px">
+                                                    This is a visualisation of what a contract is. You can think of a contract as an agreement between an account and the blockchain. Click the contract to take a look!
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="item"><h1 style="color:white">2</h1></div>
                                     <div class="item"><h1 style="color:white">3</h1></div>
@@ -85,7 +90,8 @@
             navigation: true,
             singleItem: true,
             autoWidth: true,
-            margin: 10,
+            margin: 100,
+            center: true
         });
     });
 </script>
@@ -126,6 +132,14 @@
         margin-bottom: 1em;
         margin-left: 30px;
         margin-right: 30px;
+    }
+
+    .row {
+        display: flex;
+    }
+
+    .column {
+        flex: 50%;
     }
 
 </style>
