@@ -24,8 +24,21 @@ $("#contractImg").click(function(){
 
 $("#deployImg").click(function(){
     console.log("deploying contract");
-    $.alert({
+    
+    $.confirm({
         title: "These are the fields you'll be using",
-        content: uuid + " " + hash
+        content: uuid + " " + hash,
+        buttons:{
+            deploy: function(){
+                $.ajax({
+                    beforeSend: function(request) {
+                        request.setRequestHeader("X-Blockchain-Key", "513091f8-ffb1-4e52-ac6b-a5e09021ef91");
+                      },
+                });
+            },
+            cancel: function(){
+                $.alert("Cancelled!");
+            }
+        }
     });
 });
