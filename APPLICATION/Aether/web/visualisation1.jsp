@@ -4,10 +4,30 @@
     Author     : jodia
 --%>
 
+<%@page import="java.nio.charset.Charset"%>
+<%@page import="java.util.Random"%>
 <%@page import="java.math.BigInteger"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="com.aether.dao.UserDAO, com.aether.blockchain.BlockchainHandler" %>
+<%@page import="java.math.BigInteger"%>
+<%@page import="java.util.UUID"%>
 <!DOCTYPE html>
+<%
+    String publickey = UserDAO.getUser((String) session.getAttribute("userid")).getPublicKey();
+    BigInteger balance = new BigInteger("0");
+    BigInteger eth = new BigInteger("0");
+    try {
+        balance = BlockchainHandler.getBalance(publickey);
+        eth = BlockchainHandler.convertToEth(balance);
+    } catch (NumberFormatException e) {
+    }
+
+    byte[] array = new byte[7]; // length is bounded by 7
+    new Random().nextBytes(array);
+    String generatedString = new String(array, Charset.forName("UTF-8"));
+    String randomHash = BlockchainHandler.keccak256hash(generatedString);
+    String randomUUID = UUID.randomUUID().toString();
+%>
 <html lang="en">
     <%@include  file="Components/head.html" %>
     <style>
@@ -62,37 +82,72 @@
                                     <!-- 2. Second -->
                                     <div class="item">
                                         </br>
-                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">2: Step 2</h1>
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">2: Let's check your cash!</h1>
                                         <p style="color:white;margin-left:30px; font-size:20px">
-                                            Step 2
+                                            This is the amount of 'money' you have in your account. This eth was transferred to you just now while you were answering questions. If you don't have enough, get your friends to transfer some to you! (for a price)
+
                                         </p>
-                                        <img id="contractImg" src="img/diploma.svg" style="position: relative;width:200px;height:200px">
+                                        <br>
+                                        <div class="col-md-6 mb">
+                                            <div class="darkblue-panel pn">
+                                                <div class="darkblue-header">
+                                                    <h5>BALANCE</h5>
+                                                </div>
+                                                <h1 class="ml15">
+                                                    <span class="word"><%= eth%> ETH</span>
+                                                </h1>
+                                                <!---
+                                                <h1 class="ml15">
+                                                    <span class="word"> WEI</span>
+                                                </h1>
+                                                -->
+                                            </div><! -- /darkblue panel -->
+                                        </div><!-- /col-md-4 -->
                                         <div id="progressbar"></div>
                                     </div>
 
                                     <!-- 3. Third-->
                                     <div class="item">
                                         </br>
-                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">3: Step 3</h1>
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">3: Let's deploy a contract!</h1>
                                         <p style="color:white;margin-left:30px; font-size:20px">
-                                            Step 3
+                                            Click the button to generate some values to deploy into your contract!
                                         </p>
-                                        <img id="contractImg" src="img/diploma.svg" style="position: relative;width:200px;height:200px">
+                                        UUID:
+                                        <div id="uuid">
+
+                                        </div>
+                                        Hash:
+                                        <div id="hash">
+
+                                        </div>
+                                        <button id="valuesGenerator" class="btn btn-successs">Generate!!!</button>
+                                        <div id="progressbar"></div>
+                                    </div>
+
+                                    <!-- 4. Fourth-->
+                                    <div class="item">
+                                        </br>
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">4: Sending the contract to the server</h1>
+                                        <p style="color:white;margin-left:30px; font-size:20px">
+                                            Click the icon to deploy the contract to the server!
+                                        </p>
+                                        <img id="deployImg" src="img/exchange.svg" style="position: relative;width:200px;height:200px">
                                         <div id="progressbar"></div>
                                     </div>
                                     
-                                    <!-- 4. Fourth-->
+                                    <!-- 5. Fifth-->
                                     <div class="item">
                                         </br>
                                         <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">4: Step 4</h1>
                                         <p style="color:white;margin-left:30px; font-size:20px">
-                                            Step 4
+                                            Step 5
                                         </p>
                                         <img id="contractImg" src="img/diploma.svg" style="position: relative;width:200px;height:200px">
                                         <div id="progressbar"></div>
                                     </div>
-                                    
-                                    
+
+
                                 </div>
                             </div>
                         </div>
@@ -108,7 +163,7 @@
 </html>
 <script type="text/javascript">
     document.getElementById("visualisationside").className = "active";
-    
+
     $(document).ready(function () {
         $(".owl-carousel").owlCarousel({
             navigation: true,
@@ -118,6 +173,14 @@
             center: true
         });
     });
+    var uuid = "<%= randomUUID%>";
+    var hash = "<%= randomHash%>";
+    
+    $("#valuesGenerator").click(function () {
+        console.log("hi");
+        document.getElementById("uuid").innerHTML = "<%= randomUUID%>";
+        document.getElementById("hash").innerHTML = "<%= randomHash %>"
+    })
 </script>
 <script src="js/owlvisualisation.js"></script>
 <style>
@@ -127,9 +190,9 @@
         margin-top: 108px;
         height: 10px;
         background-color: #00ff33;
-        
+
     }
-    
+
     #container {
         position: relative;
         top: 100px;

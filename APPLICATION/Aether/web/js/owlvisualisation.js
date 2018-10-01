@@ -21,3 +21,11 @@ $("#contractImg").click(function(){
                     "}</code></pre>" 
     });
 });
+
+$("#deployImg").click(function(){
+    console.log("deploying contract");
+    $.alert({
+        title: "These are the fields you'll be using",
+        content: uuid + " " + hash
+    });
+});
