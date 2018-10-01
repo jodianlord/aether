@@ -127,11 +127,19 @@
                                                                     </div>-->
                                 </form>
                             </div>
+                            
                         </div><!-- tab-content -->
                     </div> 
+                    
+
+            <h1>${returnMsg}</h1>        
+                    
+                
+                
                 </div>
             </div>
         </div><!-- /container -->
+
         <script src="js/TweenLite.min.js"></script>
         <script src="js/EasePack.min.js"></script>
         <script src="js/demo-1.js"></script>
@@ -213,10 +221,10 @@
                                 confirm: function () {
 
                                 },
-                                cancel: function () {
-                                    //                            $.alert('Sign Up Failed!');
-                                    //                            return false;
-                                }
+//                                cancel: function () {
+//                                    //                            $.alert('Sign Up Failed!');
+//                                    //                            return false;
+//                                }
                             }
                         });
                         

@@ -35,25 +35,10 @@ public class SignUpServlet extends HttpServlet {
         String userid = request.getParameter("userid");
         String password = request.getParameter("password");
         String publickey = BlockchainHandler.createAccount(password);
-//        publickey = "test";
 
-        //String privatekey = request.getParameter("privatekey");
-        // Hash a password for the first time
-//        String hashedPWD = BCrypt.hashpw(password, BCrypt.gensalt());
-        // gensalt's log_rounds parameter determines the complexity
-        // the work factor is 2**log_rounds, and the default is 10
         String hashedPWD = BCrypt.hashpw(password, BCrypt.gensalt(12));
 
-//        System.out.print(hashedPWD);
-        // Check that an unencrypted password matches one that has
-        // previously been hashed
-//        if (BCrypt.checkpw(candidate, hashed))
-//                System.out.println("It matches");
-//        else
-//                System.out.println("It does not match");
 
-        
-        //if do not exist, return null 
         User existingUser =  userdao.getUser(userid);
         
         if(existingUser == null) { //do not exist
@@ -62,8 +47,10 @@ public class SignUpServlet extends HttpServlet {
             session.setAttribute("userError","donotexists");
             //request.getRequestDispatcher("index.jsp").forward(request,response);
             //response.sendRedirect("index.jsp");
+            session.setAttribute("returnMsg", "User Created! Please Login!");
         } 
         else {
+            session.setAttribute("returnMsg", "Error in creating account");
             session.setAttribute("userError","exist");
             //request.getRequestDispatcher("index.jsp").forward(request,response);
         }
