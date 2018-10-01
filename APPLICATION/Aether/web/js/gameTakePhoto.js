@@ -45,7 +45,7 @@ document.getElementById("startstream").onclick = function () {
                 });
             },
             cancel: function () {
-                $.alert('Canceled!');
+              
             }
 
         }
@@ -74,7 +74,7 @@ document.getElementById("capture").onclick = function () {
                 });
             },
             cancel: function () {
-                $.alert('Canceled!');
+                
             }
         }
     });  

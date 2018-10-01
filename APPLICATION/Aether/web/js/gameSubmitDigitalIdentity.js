@@ -127,7 +127,7 @@ document.getElementById("submit").onclick = function () {
                 });
             },
             cancel: function () {
-                $.alert('Canceled!');
+                
             }
         }
     });  
