@@ -14,8 +14,9 @@ var streamObj;
 document.getElementById("startstream").onclick = function () {
 
     $.confirm({
-        title: 'Confirm!',
-        content: 'Simple confirm!',
+        title: 'Start Camera',
+        content: 'By taking a photo of the consumer, we will be utilizing facial recognition technologies to use it as a form of 2FA.',
+        type: 'blue',
         buttons: {
             confirm: function () {
                 var video = document.createElement("video"),
@@ -55,7 +56,8 @@ document.getElementById("capture").onclick = function () {
     
     $.confirm({
         title: 'Capture Picture!',
-        content: 'Capture Picture!',
+        content: 'Take a picture of yourself!!',
+        type: 'red',
         buttons: {
             confirm: function () {
                 canvas = document.createElement("canvas");

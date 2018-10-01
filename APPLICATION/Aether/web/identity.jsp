@@ -13,16 +13,6 @@
     <%@include  file="Components/head.html" %>
     
     <body>
-    <%
-        if (session.getAttribute("groupid") == null) { 
-    %>
-            <!-- <script src ="js/takePhoto.js"></script>-->
-    <%        
-        } else {
-            
-        }        
-    %>
-
         <section id="container" >
 
             <%@include  file="Components/topbar.html" %>
@@ -153,12 +143,28 @@
         <script type="application/javascript">
             document.getElementById("identityside").className = "active";
         </script>
+        
+        <%
+            String gID = session.getAttribute("groupid").toString();
+            String t="test1";
+            if(!gID.equals("0")){
+                %>
+                <script src ="js/gameTakePhoto.js"></script>
+                <script src="js/gameSubmitDigitalIdentity.js"></script>
+                <%
+            }
+            else{
+            %>
+                <script src ="js/takePhoto.js"></script>  
+                <script src ="js/submitdigitalidentity.js"></script>
+        <% }
+            %>
         <!-- test gameTakePhoto.js -->
-        <script src ="js/gameTakePhoto.js"></script>
+        
         <!--<script src ="js/takePhoto.js"></script>-->
         
         <!-- test gameSubmitDigitalIdentity.js -->
-        <script src="js/gameSubmitDigitalIdentity.js"></script> <!--<script src="js/submitdigitalidentity.js"></script>-->
+        <!--<script src="js/gameSubmitDigitalIdentity.js"></script> <!--<script src="js/submitdigitalidentity.js"></script>-->
         <script src="js/formvalidation.js"></script>
         <%@include file="Components/style.html" %>
 

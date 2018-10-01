@@ -67,7 +67,8 @@ document.getElementById("submit").onclick = function () {
         //cfm
         $.confirm({
         title: 'Submit Digital Identity!',
-        content: 'Submit Digital Identity!',
+        content: 'Submit Digital Identity and lol!',
+        type: 'blue',
         buttons: {
             confirm: function () {
                 $.ajax({
