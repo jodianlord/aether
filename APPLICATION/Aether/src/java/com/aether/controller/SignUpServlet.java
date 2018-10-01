@@ -44,18 +44,12 @@ public class SignUpServlet extends HttpServlet {
         if(existingUser == null) { //do not exist
             User user = new User(userid, hashedPWD, publickey);
             userdao.insertUser(user);
-            session.setAttribute("userError","donotexists");
-            //request.getRequestDispatcher("index.jsp").forward(request,response);
-            //response.sendRedirect("index.jsp");
-            session.setAttribute("returnMsg", "User Created! Please Login!");
+            session.setAttribute("userError","donotexists");  
         } 
         else {
-            session.setAttribute("returnMsg", "Error in creating account");
             session.setAttribute("userError","exist");
-            //request.getRequestDispatcher("index.jsp").forward(request,response);
+            
         }
-        //System.out.println(existingUser);
-        
 
 //        session.setAttribute("error", hashedPWD);
     

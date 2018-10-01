@@ -127,15 +127,9 @@
                                                                     </div>-->
                                 </form>
                             </div>
-                            
+
                         </div><!-- tab-content -->
                     </div> 
-                    
-
-            <h1>${returnMsg}</h1>        
-                    
-                
-                
                 </div>
             </div>
         </div><!-- /container -->
@@ -191,156 +185,139 @@
 
         </script>
 
-    <script>
+        <script>
+            $("#signupbutton").click(function (event) {
+                //event.preventDefault();
 
+                $("#SignUpForm").submit();
+            });
+        </script>
+        <%
+            String userError = (String) session.getAttribute("userError");
+            System.out.println("userError is");
+            System.out.println(userError);
+            if (userError == "exist") {
+                session.removeAttribute("userError");
 
-        $("#signupbutton").click(function (event) {
-            event.preventDefault();
-            $.confirm({
-                title: 'Sign Up!',
-                content: 'Are you sure you want to Sign Up?',
-                columnClass: 'col-md-4 col-md-offset-4',
-                buttons: {
-                    confirm: function () {
-                        $("#SignUpForm").submit();
-    </script>
-    <%
-        String userError = (String) session.getAttribute("userError");
-        System.out.println("userError is");
-        System.out.println(userError);
-        if (userError == "exist") {
-            session.removeAttribute("userError");
+        %>
+        <script>
+                $.confirm({
+                    title: 'User Exists!',
+                    content: 'User already exists! Please try again using a different User ID.',
+                    columnClass: 'col-md-4 col-md-offset-4',
+                    buttons: {
+                        confirm: function () {
 
-    %>
-    <script>
-                        $.confirm({
-                            title: 'User Exists!',
-                            content: 'User already exists! Please try again using a different User ID.',
-                            columnClass: 'col-md-4 col-md-offset-4',
-                            buttons: {
-                                confirm: function () {
-
-                                },
+                        }
 //                                cancel: function () {
 //                                    //                            $.alert('Sign Up Failed!');
 //                                    //                            return false;
 //                                }
-                            }
-                        });
-                        
-                        $('.tab a').on('click', function (e) {
+                    }
+                });
 
-                            e.preventDefault();
+                /*$('.tab a').on('click', function (e) {
 
-                            $(this).parent().addClass('active');
-                            $(this).parent().siblings().removeClass('active');
+                    e.preventDefault();
 
-                            target = $(this).attr('href');
+                    $(this).parent().addClass('active');
+                    $(this).parent().siblings().removeClass('active');
 
-                            $('.tab-content > div').not(target).hide();
+                    target = $(this).attr('href');
 
-                            $(target).fadeIn(600);
+                    $('.tab-content > div').not(target).hide();
 
-                        });
-                        
+                    $(target).fadeIn(600);
 
-    </script>
-    <%
-            } else {
-        session.removeAttribute("userError");
-    %>
-
-    <script>
-                        $.confirm({
-                            title: 'Account Creation Successful!',
-                            content: 'Your account has been successfully created! You can now log in using your credentials.',
-                            columnClass: 'col-md-4 col-md-offset-4',
-                            buttons: {
-                                confirm: function () {
-
-                                },
-                                cancel: function () {
-                                    //                            $.alert('Sign Up Failed!');
-                                    //                            return false;
-                                }
-                            }
-                        });
-
-                        $('.tab a').on('click', function (e) {
-
-                            e.preventDefault();
-
-                            $(this).parent().addClass('active');
-                            $(this).parent().siblings().removeClass('active');
-
-                            target = $(this).attr('href');
-
-                            $('.tab-content > div').not(target).hide();
-
-                            $(target).fadeIn(600);
-
-                        });
+                });*/
 
 
-                    },
-                    cancel: function () {
-                        //                            $.alert('Sign Up Failed!');
-                        //                            return false;
+        </script>
+        <%    } else if (userError == "donotexists") {
+                    session.removeAttribute("userError");
+        %>
+
+        <script>
+                $.confirm({
+                    title: 'Account Creation Successful!',
+                    content: 'Your account has been successfully created! You can now log in using your credentials.',
+                    columnClass: 'col-md-4 col-md-offset-4',
+                    buttons: {
+                        confirm: function () {
+
+                        }//,
+                    }
+                });
+
+                /*$('.tab a').on('click', function (e) {
+
+                    e.preventDefault();
+
+                    $(this).parent().addClass('active');
+                    $(this).parent().siblings().removeClass('active');
+
+                    target = $(this).attr('href');
+
+                    $('.tab-content > div').not(target).hide();
+
+                    $(target).fadeIn(600);
+
+                });*/
+            //});
+
+
+            $('.form').find('input, textarea').on('keyup blur focus', function (e) {
+
+                var $this = $(this),
+                        label = $this.prev('label');
+
+                if (e.type === 'keyup') {
+                    if ($this.val() === '') {
+                        label.removeClass('active highlight');
+                    } else {
+                        label.addClass('active highlight');
+                    }
+                } else if (e.type === 'blur') {
+                    if ($this.val() === '') {
+                        label.removeClass('active highlight');
+                    } else {
+                        label.removeClass('highlight');
+                    }
+                } else if (e.type === 'focus') {
+
+                    if ($this.val() === '') {
+                        label.removeClass('highlight');
+                    } else if ($this.val() !== '') {
+                        label.addClass('highlight');
                     }
                 }
+
             });
-        });
 
+            $('.tab a').on('click', function (e) {
 
-        $('.form').find('input, textarea').on('keyup blur focus', function (e) {
+                e.preventDefault();
 
-            var $this = $(this),
-                    label = $this.prev('label');
+                $(this).parent().addClass('active');
+                $(this).parent().siblings().removeClass('active');
 
-            if (e.type === 'keyup') {
-                if ($this.val() === '') {
-                    label.removeClass('active highlight');
-                } else {
-                    label.addClass('active highlight');
-                }
-            } else if (e.type === 'blur') {
-                if ($this.val() === '') {
-                    label.removeClass('active highlight');
-                } else {
-                    label.removeClass('highlight');
-                }
-            } else if (e.type === 'focus') {
+                target = $(this).attr('href');
 
-                if ($this.val() === '') {
-                    label.removeClass('highlight');
-                } else if ($this.val() !== '') {
-                    label.addClass('highlight');
-                }
-            }
+                $('.tab-content > div').not(target).hide();
 
-        });
+                $(target).fadeIn(600);
 
-        $('.tab a').on('click', function (e) {
+            });
+        //});
 
-            e.preventDefault();
+        </script>
+        <%
+            } else {
 
-            $(this).parent().addClass('active');
-            $(this).parent().siblings().removeClass('active');
+            } 
 
-            target = $(this).attr('href');
+            session.invalidate();
+        %>
 
-            $('.tab-content > div').not(target).hide();
-
-            $(target).fadeIn(600);
-
-        });
-
-    </script>
-    <%
-        }
-
-        session.invalidate();
-    %>
-
-</body>
+    </body>
 </html>
