@@ -22,6 +22,12 @@ $("#contractImg").click(function () {
     });
 });
 
+$("#addressImg").click(function () {
+    $.confirm({
+        title: "Copy paste your contract transaction hash to retrieve your contract address!"
+    })
+})
+
 $("#deployImg").click(function () {
     console.log("deploying contract");
     var blockchainobj = {};

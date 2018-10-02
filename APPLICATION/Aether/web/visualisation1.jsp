@@ -139,12 +139,24 @@
                                     <!-- 5. Fifth-->
                                     <div class="item">
                                         </br>
-                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">5: Contract Address</h1>
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">5: Transaction Hash</h1>
                                         <p style="color:white;margin-left:30px; font-size:20px">
                                             This is the transaction hash of your contract.
                                         </p>
 
                                         <div id="contractInfo"></div>
+                                        <div id="progressbar"></div>
+                                    </div>
+                                    
+                                    <!-- 6. Sixth-->
+                                    <div class="item">
+                                        </br>
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">6: Contract Address</h1>
+                                        <p style="color:white;margin-left:30px; font-size:20px">
+                                            Click the icon and input the transaction hash from the previous transaction to retrieve your contract address!
+                                        </p>
+                                        <img id="addressImg" src="img/notebook.svg" style="position: relative;width:200px;height:200px">
+                                        
                                         <div id="progressbar"></div>
                                     </div>
 
