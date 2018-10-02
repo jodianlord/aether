@@ -17,7 +17,11 @@
 <html lang="en">
     <%@include  file="Components/head.html" %>
     <link rel=¨stylesheet¨ type=¨text/css¨ src="css\quiz.css">
-
+    <script src="https://unpkg.com/jquery"></script>
+    <script src="https://surveyjs.azureedge.net/1.0.46/survey.jquery.js"></script>
+    <link href="https://surveyjs.azureedge.net/1.0.46/survey.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="./index.css">
+    
     <body>
 
         <section id="container" >
@@ -55,7 +59,10 @@
                                                     <h4 class="modal-title">Modal Header</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    
+                                                    <div id="surveyElement"></div>
+                                                    <div id="surveyResult"></div>
+
+                                                    <script type="text/javascript" src="js/testQuiz.js"></script>
                                                     
                                                     
                                                 </div>
