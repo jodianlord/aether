@@ -15,7 +15,7 @@ document.getElementById("startstream").onclick = function () {
 
     $.confirm({
         title: 'Start Camera',
-        content: 'By taking a photo of the consumer, we will be utilizing facial recognition technologies to use it as a form of 2FA.',
+        content: 'By taking a photo of the consumer, we will be utilizing facial recognition technology using Python web service to use it as a form of 2FA.',
         type: 'blue',
         buttons: {
             confirm: function () {
@@ -56,7 +56,7 @@ document.getElementById("capture").onclick = function () {
     
     $.confirm({
         title: 'Capture Picture!',
-        content: 'Take a picture of yourself!!',
+        content: 'Aether’s facial recognition capabilities are invoked based on a deployed web service that detects the facial features of the 2 uploaded image and compares them. The result will either be true or false.',
         type: 'red',
         buttons: {
             confirm: function () {

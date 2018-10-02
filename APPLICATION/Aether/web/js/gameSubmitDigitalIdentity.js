@@ -67,8 +67,9 @@ document.getElementById("submit").onclick = function () {
         //cfm
         $.confirm({
         title: 'Submit Digital Identity!',
-        content: 'Submit Digital Identity and lol!',
+        content: 'Firstly, submitting digital identity validates the bin file submitted by user. Secondly, it will perform the OTP 2FA function and send out the request to the webservice once the user keys in the correct OTP. Lastly, our facial recognition web service would retrieve the image encoded in base-64 within the bin file and compare it with the photo taken by the consumer now',
         type: 'blue',
+        columnClass: 'col-md-6 col-md-offset-3',
         buttons: {
             confirm: function () {
                 $.ajax({
