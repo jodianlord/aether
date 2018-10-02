@@ -96,6 +96,7 @@
                                                     <th>Correct Answer</th>
                                                     <th>User Answer</th>
                                                     <th>Points Obtained</th>
+                                                    <th>Time Taken</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -106,6 +107,7 @@
                                                     <td>A</td>
                                                     <td>A</td>
                                                     <td>100 ETH</td>
+                                                    <td>00:50</td>
                                                 </tr>
                                                 <tr>
                                                     <td>1</td>
@@ -114,6 +116,7 @@
                                                     <td>A</td>
                                                     <td>A</td>
                                                     <td>100 ETH</td>
+                                                    <td>01:30</td>
                                                 </tr>
                                                 <tr>
                                                     <td>1</td>
@@ -122,6 +125,7 @@
                                                     <td>A</td>
                                                     <td>A</td>
                                                     <td>100 ETH</td>
+                                                    <td>00:27</td>
                                                 </tr>
 
                                             </tbody>
