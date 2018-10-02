@@ -26,35 +26,43 @@ $("#addressImg").click(function () {
     $.confirm({
         title: "Copy paste your contract transaction hash to retrieve your contract address!",
         content: '' +
-        '<form action="" class="formName">' +
-        '<div class="form-group">' +
-        '<label>Enter transaction hash here</label>' +
-        '<input type="text" placeholder="Transaction Hash" class="name form-control" required />' +
-        '</div>' +
-        '</form>',
-        buttons:{
+            '<form action="" class="formName">' +
+            '<div class="form-group">' +
+            '<label>Enter transaction hash here</label>' +
+            '<input type="text" placeholder="Transaction Hash" class="name form-control" required />' +
+            '</div>' +
+            '</form>',
+        buttons: {
             formSubmit: {
                 text: 'Submit',
                 btnClass: 'btn-blue',
-                action: function(){
-                    var transactionHash = this.$content.find('.name').val();
-                    if(!name){
+                action: function () {
+                    name = transactionHash;
+                    if (!name) {
                         $.alert("Please provide a valid transaction hash!");
                         return false;
                     }
+
                     $.ajax({
                         beforeSend: function (request) {
                             request.setRequestHeader("X-Blockchain-Key", "513091f8-ffb1-4e52-ac6b-a5e09021ef91");
                         },
-                        url: "http://vm.jordysamuel.com:30301/Blockchain/?method=getReceipt&transactionHash=" +,
-                        type: "GET", 
+                        url: "http://vm.jordysamuel.com:30301/Blockchain/?method=getReceipt&transactionHash=" + transactionHash,
+                        type: "GET",
+                        success: function (response) {
+                            $.alert(JSON.stringify(response));
+                        },
+                        error: function (xhr) {
+                            $.alert("Error!");
+                        }
                     });
+
                 }
             },
             cancel: {
                 text: 'Cancel',
                 btnClass: 'btn-red',
-                action: function(){
+                action: function () {
                     return;
                 }
             }
