@@ -24,8 +24,36 @@ $("#contractImg").click(function () {
 
 $("#addressImg").click(function () {
     $.confirm({
-        title: "Copy paste your contract transaction hash to retrieve your contract address!"
-    })
+        title: "Copy paste your contract transaction hash to retrieve your contract address!",
+        content: '' +
+        '<form action="" class="formName">' +
+        '<div class="form-group">' +
+        '<label>Enter transaction hash here</label>' +
+        '<input type="text" placeholder="Transaction Hash" class="name form-control" required />' +
+        '</div>' +
+        '</form>',
+        buttons:{
+            formSubmit: {
+                text: 'Submit',
+                btnClass: 'btn-blue',
+                action: function(){
+                    var transactionHash = this.$content.find('.name').val();
+                    if(!name){
+                        $.alert("Please provide a valid transaction hash!");
+                        return false;
+                    }
+                    
+                }
+            },
+            cancel: {
+                text: 'Cancel',
+                btnClass: 'btn-red',
+                action: function(){
+                    return;
+                }
+            }
+        }
+    });
 })
 
 $("#deployImg").click(function () {
@@ -48,7 +76,7 @@ $("#deployImg").click(function () {
     unlockobj["param"] = unlockparam;
     $.confirm({
         title: "These are the fields you'll be using",
-        content: uuid + " " + hash,
+        content: "uuid: " + uuid + " hash: " + hash,
         buttons: {
             deploy: function () {
                 $.ajax({
