@@ -1,5 +1,5 @@
 var currentStage = "Contract";
-
+var transactionHash;
 $("#contractImg").click(function () {
     console.log("hi");
     $.alert({
@@ -42,7 +42,13 @@ $("#addressImg").click(function () {
                         $.alert("Please provide a valid transaction hash!");
                         return false;
                     }
-                    
+                    $.ajax({
+                        beforeSend: function (request) {
+                            request.setRequestHeader("X-Blockchain-Key", "513091f8-ffb1-4e52-ac6b-a5e09021ef91");
+                        },
+                        url: "http://vm.jordysamuel.com:30301/Blockchain/?method=getReceipt&transactionHash=" +,
+                        type: "GET", 
+                    });
                 }
             },
             cancel: {
@@ -104,6 +110,8 @@ $("#deployImg").click(function () {
                                 })
                                 $("#contractInfo").append(JSON.stringify(response));
                                 console.log("done");
+                                transactionHash = response["result"];
+                                console.log(transactionHash);
                             },
                             error: function (xhr) {
                                 $.alert({
