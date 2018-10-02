@@ -72,10 +72,19 @@
                                     <div class="item">
                                         </br>
                                         <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">1: Contract Fundamentals</h1>
-                                        <p style="color:white;margin-left:30px; font-size:20px">
-                                            This is a visualisation of what a contract is. You can think of a contract as an agreement between an account and the blockchain. Click the contract to take a look!
-                                        </p>
-                                        <img id="contractImg" src="img/diploma.svg" style="position: relative;width:200px;height:200px">
+
+                                        <div style="height:260px">
+                                            <p style="color:white;margin-left:30px; font-size:20px;height:60px">
+                                                This is a visualisation of what a contract is. You can think of a contract as an agreement between an account and the blockchain. Click the contract to take a look!
+                                            </p>
+
+
+
+                                            <img id="contractImg" src="img/diploma.svg" style="position: relative;width:200px;height:200px">
+
+
+
+                                        </div>
                                         <div id="progressbar"></div>
                                     </div>
 
@@ -83,80 +92,129 @@
                                     <div class="item">
                                         </br>
                                         <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">2: Let's check your cash!</h1>
-                                        <p style="color:white;margin-left:30px; font-size:20px">
-                                            This is the amount of 'money' you have in your account. This eth was transferred to you just now while you were answering questions. If you don't have enough, get your friends to transfer some to you! (for a price)
 
-                                        </p>
-                                        <br>
-                                        <div class="col-md-6 mb">
-                                            <div class="darkblue-panel pn">
-                                                <div class="darkblue-header">
-                                                    <h5>BALANCE</h5>
+                                        <div style = "height:260px">
+
+
+                                            <p style="color:white;margin-left:30px; font-size:20px;height:60px">
+                                                This is the amount of 'money' you have in your account. This eth was transferred to you just now while you were answering questions. If you don't have enough, get your friends to transfer some to you! (for a price)
+
+                                            </p>
+                                            <br>
+                                            <div class="" style="margin:0px 50px 0px 50px">
+
+
+                                                <div class="darkblue-panel" style="height:200px">
+                                                    <div class="darkblue-header">
+                                                        <h5>BALANCE</h5>
+                                                    </div>
+                                                    <h1 class="ml15" >
+                                                        <span class="word"><%= eth%> ETH</span>
+                                                    </h1>
+                                                    <!---
+                                                    <h1 class="ml15">
+                                                        <span class="word"> WEI</span>
+                                                    </h1>
+                                                    -->
                                                 </div>
-                                                <h1 class="ml15">
-                                                    <span class="word"><%= eth%> ETH</span>
-                                                </h1>
-                                                <!---
-                                                <h1 class="ml15">
-                                                    <span class="word"> WEI</span>
-                                                </h1>
-                                                -->
-                                            </div><! -- /darkblue panel -->
-                                        </div><!-- /col-md-4 -->
-                                        <div id="progressbar"></div>
+
+
+                                            </div>
+
+
+                                        </div><!-- /col-md-4 --><div id="progressbar"></div>
+
                                     </div>
 
                                     <!-- 3. Third-->
                                     <div class="item">
                                         </br>
                                         <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">3: Let's deploy a contract!</h1>
-                                        <p style="color:white;margin-left:30px; font-size:20px">
-                                            Click the button to generate some values to deploy into your contract!
-                                        </p>
-                                        UUID:
-                                        <div id="uuid">
+
+                                        <div style = "height:260px">
+
+                                            <p style="color:white;margin-left:30px; font-size:20px;height:60px">
+                                                Click the button to generate some values to deploy into your contract!
+                                            </p>
+
+
+
+
+
+                                            <div style="color:white;margin-left:30px; font-size:20px">
+                                                UUID:
+
+                                                <div id="uuid" style="color:greenyellow;margin:10px 10px 10px 10px"></div>
+
+                                            </div>
+
+
+
+                                            <div style="color:white;margin-left:30px; font-size:20px">
+                                                Hash:
+
+                                                <div id="hash" style="color:greenyellow;margin:10px 10px 10px 10px"></div>
+
+                                            </div>
+
+                                            <button id="valuesGenerator" class="btn btn-success" style="margin-left:30px;">Generate!!!</button>
 
                                         </div>
-                                        Hash:
-                                        <div id="hash">
 
-                                        </div>
-                                        <button id="valuesGenerator" class="btn btn-successs">Generate!!!</button>
                                         <div id="progressbar"></div>
                                     </div>
 
-                                    <!-- 4. Fourth-->
+                                    <!-- 4. Fourth deployImg img/exchange.svg-->
                                     <div class="item">
                                         </br>
-                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">4: Sending the contract to the server</h1>
-                                        <p style="color:white;margin-left:30px; font-size:20px">
-                                            Click the icon to deploy the contract to the server!
-                                        </p>
-                                        <img id="deployImg" src="img/exchange.svg" style="position: relative;width:200px;height:200px">
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">4: Sending the contract to the servwe</h1>
+
+                                        <div style="height:260px">
+                                            <p style="color:white;margin-left:30px; font-size:20px;height:60px">
+                                                Click the icon to deploy the contract to the server!
+                                            </p>
+
+
+
+                                            <img id="deployImg" src="img/exchange.svg" style="position: relative;width:200px;height:200px;left:40%">
+
+
+
+                                        </div>
                                         <div id="progressbar"></div>
                                     </div>
 
                                     <!-- 5. Fifth-->
                                     <div class="item">
                                         </br>
-                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">5: Transaction Hash</h1>
-                                        <p style="color:white;margin-left:30px; font-size:20px">
-                                            This is the transaction hash of your contract.
-                                        </p>
 
-                                        <div id="contractInfo"></div>
+
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">5: Transaction Hash</h1>
+
+                                        <div style = "height:260px">
+                                            <p style="color:white;margin-left:30px; font-size:20px;height: 60px">
+                                                This is the transaction hash of your contract.
+                                            </p>
+
+                                            <div id="contractInfo"></div>
+
+                                        </div>
+
+
                                         <div id="progressbar"></div>
                                     </div>
-                                    
+
                                     <!-- 6. Sixth-->
                                     <div class="item">
                                         </br>
                                         <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">6: Contract Address</h1>
-                                        <p style="color:white;margin-left:30px; font-size:20px">
-                                            Click the icon and input the transaction hash from the previous transaction to retrieve your contract address!
-                                        </p>
-                                        <img id="addressImg" src="img/notebook.svg" style="position: relative;width:200px;height:200px">
-                                        
+                                        <div style = "height:260px">
+
+                                            <p style="color:white;margin-left:30px; font-size:20px;height:60px">
+                                                Click the icon and input the transaction hash from the previous transaction to retrieve your contract address!
+                                            </p>
+                                            <img id="addressImg" src="img/notebook.svg" style="position: relative;width:200px;height:200px">
+                                        </div>
                                         <div id="progressbar"></div>
                                     </div>
 
@@ -198,9 +256,9 @@
 <script src="js/owlvisualisation.js"></script>
 <style>
     #progressbar{
-        position: relative;
+        position: absolute;
         width: 100%;
-        margin-top: 108px;
+        margin-top: 125px;
         height: 10px;
         background-color: #00ff33;
 
