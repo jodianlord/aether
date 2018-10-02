@@ -135,15 +135,16 @@
                                         <img id="deployImg" src="img/exchange.svg" style="position: relative;width:200px;height:200px">
                                         <div id="progressbar"></div>
                                     </div>
-                                    
+
                                     <!-- 5. Fifth-->
                                     <div class="item">
                                         </br>
-                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">4: Step 4</h1>
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">5: Contract Address</h1>
                                         <p style="color:white;margin-left:30px; font-size:20px">
-                                            Step 5
+                                            This is the transaction hash of your contract.
                                         </p>
-                                        <img id="contractImg" src="img/diploma.svg" style="position: relative;width:200px;height:200px">
+
+                                        <div id="contractInfo"></div>
                                         <div id="progressbar"></div>
                                     </div>
 
@@ -175,11 +176,11 @@
     });
     var uuid = "<%= randomUUID%>";
     var hash = "<%= randomHash%>";
-    
+
     $("#valuesGenerator").click(function () {
         console.log("hi");
         document.getElementById("uuid").innerHTML = "<%= randomUUID%>";
-        document.getElementById("hash").innerHTML = "<%= randomHash %>"
+        document.getElementById("hash").innerHTML = "<%= randomHash%>"
     })
 </script>
 <script src="js/owlvisualisation.js"></script>

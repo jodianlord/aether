@@ -68,6 +68,8 @@ $("#deployImg").click(function () {
                                     title: "Success!",
                                     content: JSON.stringify(response)
                                 })
+                                $("#contractInfo").append(JSON.stringify(response));
+                                console.log("done");
                             },
                             error: function (xhr) {
                                 $.alert({
