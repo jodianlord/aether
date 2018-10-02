@@ -213,17 +213,9 @@
                                             <p style="color:white;margin-left:30px; font-size:20px;height:60px">
                                                 Click the icon and input the transaction hash from the previous transaction to retrieve your contract address!
                                             </p>
-<<<<<<< HEAD
-
-
 
                                             <img id="addressImg" src="img/notebook.svg" style="position: relative;width:200px;height:200px;left:40%">
 
-
-
-=======
-                                            <img id="addressImg" src="img/notebook.svg" style="position: relative;width:200px;height:200px;left:40%">
->>>>>>> 5af95d54beb14b8dce0ca45c4e07cb1c159a893f
                                         </div>
                                         <div id="progressbar"></div>
                                     </div>
