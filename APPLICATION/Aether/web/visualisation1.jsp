@@ -164,8 +164,12 @@
                                             <p style="color:white;margin-left:30px; font-size:20px;height: 60px">
                                                 This is the transaction hash of your contract.
                                             </p>
-                                            <div id="contractInfo"></div>
-
+                                            
+                                            <div style="color:white;margin-left:30px; font-size:20px">
+                                                Contract Info:
+                                                <div id="contractInfo" style="color:greenyellow;margin:10px 10px 10px 10px"></div>
+                                            </div>
+                                            
                                         </div>
 
                                         <div id="progressbar"></div>
