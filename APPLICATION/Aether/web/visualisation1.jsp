@@ -204,20 +204,25 @@
                                         <div id="progressbar"></div>
                                     </div>
 
-                                    <!-- 6. Sixth-->
+                                    <!-- 6. Sixth  -->
                                     <div class="item">
                                         </br>
                                         <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">6: Contract Address</h1>
-                                        <div style = "height:260px">
 
+                                        <div style="height:260px">
                                             <p style="color:white;margin-left:30px; font-size:20px;height:60px">
                                                 Click the icon and input the transaction hash from the previous transaction to retrieve your contract address!
                                             </p>
-                                            <img id="addressImg" src="img/notebook.svg" style="position: relative;width:200px;height:200px">
+
+
+
+                                            <img id="addressImg" src="img/notebook.svg" style="position: relative;width:200px;height:200px;left:40%">
+
+
+
                                         </div>
                                         <div id="progressbar"></div>
                                     </div>
-
 
                                 </div>
                             </div>
