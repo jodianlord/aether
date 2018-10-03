@@ -48,6 +48,7 @@ public class BlockchainVis extends HttpServlet {
             try{
                 String body = getBody(request);
                 JSONObject resultJSON = getJSONObject(body);
+                
             }catch(ParseException e){
                 resp = "Error: Parse Exception Ocurred";
             }
