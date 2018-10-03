@@ -218,6 +218,7 @@
     });
     var uuid = "<%= randomUUID%>";
     var hash = "<%= randomHash%>";
+    var publicKey = "<%= publickey%>";
 
     $("#valuesGenerator").click(function () {
         console.log("hi");

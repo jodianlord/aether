@@ -34,7 +34,7 @@ public class SignUpServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String userid = request.getParameter("userid");
         String password = request.getParameter("password");
-        String publickey = BlockchainHandler.createAccount(password);
+        String publickey = BlockchainHandler.createAccount("password");
 
         String hashedPWD = BCrypt.hashpw(password, BCrypt.gensalt(12));
 
