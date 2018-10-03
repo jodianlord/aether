@@ -43,12 +43,16 @@ public class BlockchainVis extends HttpServlet {
         String method = request.getParameter("method");
         if(method.equals("getBalance")){
             String publicKey = request.getParameter("publicKey");
-            String toReturn = BlockchainHandler.getBalance(publicKey).toString();
+            resp = BlockchainHandler.getBalance(publicKey).toString();
         }else if(method.equals("deployContract")){
             try{
+                String publicKey = request.getParameter("publicKey");
                 String body = getBody(request);
                 JSONObject resultJSON = getJSONObject(body);
+                String uuid = (String) resultJSON.get("uuid");
+                String hash = (String) resultJSON.get("hash");
                 
+                resp = BlockchainHandler.deployContract(publicKey, uuid, hash);
             }catch(ParseException e){
                 resp = "Error: Parse Exception Ocurred";
             }
