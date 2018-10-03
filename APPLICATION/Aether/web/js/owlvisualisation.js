@@ -72,7 +72,6 @@ $("#deployImg").click(function () {
     var blockchainParam = {};
     blockchainParam["uuid"] = uuid;
     blockchainParam["hash"] = hash;
-    console.log(blockchainobj);
 
     $.confirm({
         title: "These are the fields you'll be using",
@@ -83,11 +82,12 @@ $("#deployImg").click(function () {
                     url: "./BlockchainVis?method=unlock&publicKey=" + publicKey,
                     type: "GET",
                     contentType: "application/json",
-                    success: function (response) {
+                    success: function (resp) {
+                        console.log(resp);
                         $.ajax({
                             url: "./BlockchainVis?method=deployContract&publicKey=" + publicKey,
                             type: "POST",
-                            data: JSON.stringify(blockchainobj),
+                            data: JSON.stringify(blockchainParam),
                             contentType: "application/json",
                             success: function (response) {
                                 console.log(response);

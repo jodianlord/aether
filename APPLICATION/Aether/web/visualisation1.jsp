@@ -14,6 +14,7 @@
 <!DOCTYPE html>
 <%
     String publickey = UserDAO.getUser((String) session.getAttribute("userid")).getPublicKey();
+    publickey = publickey.replace("\u0000", "");
     BigInteger balance = new BigInteger("0");
     BigInteger eth = new BigInteger("0");
     try {
@@ -141,7 +142,7 @@
                                     <!-- 4. Fourth deployImg img/exchange.svg-->
                                     <div class="item">
                                         </br>
-                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">4: Sending the contract to the servwe</h1>
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">4: Sending the contract to the server</h1>
 
                                         <div style="height:260px">
                                             <p style="color:white;margin-left:30px; font-size:20px;height:60px">

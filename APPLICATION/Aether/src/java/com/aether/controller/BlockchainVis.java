@@ -53,12 +53,15 @@ public class BlockchainVis extends HttpServlet {
                 
                 resp = BlockchainHandler.deployContract(publicKey, uuid, hash);
             }catch(ParseException e){
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 resp = "Error: Parse Exception Ocurred";
             }
         }else if(method.equals("unlock")){
             if(BlockchainHandler.unlockAccount(publicKey, "password")){
+                System.out.println("We unlocked it!");
                 resp = "Account Successfully Unlocked!";
             }else{
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 resp = "Account was not unlocked";
             }
         }else if(method.equals("receipt")){
@@ -66,10 +69,18 @@ public class BlockchainVis extends HttpServlet {
             resp = BlockchainHandler.getContractAddress(transactionHash);
         }
         
+        
+        
+        System.out.println("sending response");
+        
+        JSONObject newJSON = new JSONObject();
+        newJSON.put("result", resp);
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println(resp);
+            out.println(newJSON.toJSONString());
         }
+        
+        response.setStatus(HttpServletResponse.SC_OK);
     }
     
     public static JSONObject getJSONObject(String jsonString) throws ParseException {
