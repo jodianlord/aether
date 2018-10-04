@@ -69,7 +69,10 @@
                             <div class="large-12 columns" style="height:800px">
                                 <div class="owl-carousel owl-theme">
                                     
+<<<<<<< HEAD
 
+=======
+>>>>>>> f1ea06d095d4741b438fe6694aa58182c96b9369
                                     <!-- What is a Blockchain?-->
                                     <div class="item" style="background-color:#8a3b3b">
                                         </br>
@@ -118,6 +121,7 @@
                                         <!--<div id="progressbar"></div>-->
                                     </div>
                                     
+<<<<<<< HEAD
                                     
                                     
                                     
@@ -131,6 +135,8 @@
                                     <!-- 1. Contract Fundamentals-->
 
 
+=======
+>>>>>>> f1ea06d095d4741b438fe6694aa58182c96b9369
                                     <!-- 1. Overview-->
                                     <div class="item">
                                         </br>
