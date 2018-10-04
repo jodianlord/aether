@@ -241,7 +241,7 @@
                     console.log("json: " + JSON.stringify(jsonObject));
 
                     $.ajax({
-                        url: "http://127.0.0.1:5000/facialreg", //edit address accordingly
+                        url: "http://10.124.136.163:5000/facialreg", //edit address accordingly
                         type: "POST",
                         data: JSON.stringify(jsonObject),
                         contentType: "application/json",

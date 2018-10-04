@@ -9,7 +9,7 @@ $(window).on('load',function(){
 });
 
 var json = {
-    title: "Aether Learning Module",
+    
     showProgressBar: "bottom",
    
     maxTimeToFinishPage: 0,
