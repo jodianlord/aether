@@ -70,6 +70,64 @@
                                 <div class="owl-carousel owl-theme">
 
                                     
+                                    <!-- What is a Blockchain?-->
+                                    <div class="item" style="background-color:#8a3b3b">
+                                        </br>
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">What is a Blockchain?</h1>
+                                        <div style="height:260px">
+                                            <p style="color:white;margin-left:30px; font-size:20px;height:60px">
+                                                A blockchain is a record of transactions or contracts that are attached to different locations which can be access anywhere. By not having the need of a central authority, it eliminates any form of manipulation by third parties. Once data is stored in a blockchain, it becomes very difficult to change it.    
+                                            </p>
+                                            <!--<img id="contractImg" src="img/diploma.svg" style="position: relative;width:200px;height:200px">-->
+                                        </div>
+
+                                        <!--<div id="progressbar"></div>-->
+                                    </div>
+                                    
+                                    <!-- What is in a Blockchain?-->
+                                    <div class="item" style="background-color:#8a3b3b">
+                                        </br>
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">What is in a Blockchain?</h1>
+                                        <div style="height:260px">
+                                            <p style="color:white;margin-left:30px; font-size:20px;height:60px">
+                                                A block in a blockchain consists of 3 components:</br></br>
+                                                1. Data: Data stored here is dependent on the type of blockchain. For the KYC process, Ethereum is used as it stores smart contracts as its data. </br></br></br>
+                                                2. Hash: The hash uniquely identifies a block and its contents. When the contents change, the hash changes as well.</br></br></br>
+                                                3. Hash of previous block: This is the chain in blockchain as it links one block to one another. 
+                                            <!--</p>-->
+                                            <!--<img id="contractImg" src="img/diploma.svg" style="position: relative;width:200px;height:200px">-->
+                                        </div>
+
+                                        <!--<div id="progressbar"></div>-->
+                                    </div>
+                                    
+                                    
+                                    <!--What are Smart Contracts-->
+                                    <div class="item" style="background-color:#8a3b3b">
+                                        </br>
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">What are Smart Contracts?</h1>
+                                        <div style="height:260px">
+                                            <p style="color:white;margin-left:30px; font-size:20px;height:60px">
+                                                A smart contract is a tiny computer program stored in a block in a blockchain. This can be programmed using a language called Solidity which syntax resembles JavaScript. A smart contract in the blockchain is immutable and distributed. 
+                                                </br></br></br>Immutable – once a smart contract is created, it can never be changed again
+                                                </br></br></br>Distributed – output of contract is validated by everyone on the blockchain network
+                                            </p>
+                                            <!--<img id="contractImg" src="img/diploma.svg" style="position: relative;width:200px;height:200px">-->
+                                        </div>
+
+                                        <!--<div id="progressbar"></div>-->
+                                    </div>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
                                     <!-- 1. Contract Fundamentals-->
                                     <div class="item">
                                         </br>
@@ -192,6 +250,28 @@
                                         </div>
                                         <div id="progressbar"></div>
                                     </div>
+                                    
+                                    
+                                    <!--Why Blockchain and Smart Contracts in KYC?-->
+                                    <div class="item" style="background-color:#8a3b3b">
+                                        </br>
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">Why Blockchain and Smart Contracts in KYC?</h1>
+                                        <div style="height:260px">
+                                            <p style="color:white;margin-left:30px; font-size:20px;height:60px">
+                                                Blockchain uses a peer-to-peer network. You can think of the banks and KYC agents as part of the network. 
+                                                When a new block which contains a smart contract is created, it is sent to everyone in the network. 
+                                                This means that each bank in the network will get a copy of the customer block which the contains the smart contract.
+                                                </br></br>However, they cannot access this block of customer data unless the customer provides them with their transaction hash to unlock the smart contract. This means that a bank cannot create a bank account for the customer unless the customer provides “authorisation”. This “authorisation” comes in the form of the bin file sent to the customer and the use of facial recognition.
+
+                                            </p>
+                                            <!--<img id="contractImg" src="img/diploma.svg" style="position: relative;width:200px;height:200px">-->
+                                        </div>
+
+                                        <!--<div id="progressbar"></div>-->
+                                    </div>
+                                    
+                                    
+                                    
                                 </div>
                             </div>
                         </div>
