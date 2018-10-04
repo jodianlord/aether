@@ -11,6 +11,7 @@ var stage = new Konva.Stage({
 
 var layer = new Konva.Layer();
 
+//add background
 var rect = new Konva.Rect({
     width: 600,
     height: 300,
@@ -18,14 +19,14 @@ var rect = new Konva.Rect({
     stroke: 'black',
     strokeWidth: 5
 });
+//layer.add(rect);
 
-layer.add(rect);
-
+//blockchain image
 var blockchainImg = new Konva.Image({
     x: 250,
     y: 190,
     width: 100,
-    height: 100
+    height: 90
 });
 layer.add(blockchainImg);
 
@@ -36,13 +37,13 @@ blockchainObj.onload = function(){
 };
 blockchainObj.src = "img/blockchain.svg";
 
+//boy image
 var boyImg = new Konva.Image({
     x: 250,
     y: 5,
-    image: boyObj,
     width: 100,
-    height:100
-})
+    height: 100
+});
 layer.add(boyImg);
 
 var boyObj = new Image();
@@ -52,11 +53,123 @@ boyObj.onload = function(){
 }
 boyObj.src = "img/boy.svg";
 
+//girl image
+var girlImg = new Konva.Image({
+    x: 50,
+    y: 5,
+    width: 100,
+    height: 100
+});
+layer.add(girlImg);
+
+var girlObj = new Image();
+girlObj.onload = function(){
+    girlImg.image(girlObj);
+    layer.draw();
+}
+girlObj.src = "img/girl.svg";
+
+//man image
+var manImg = new Konva.Image({
+    x: 450,
+    y: 5,
+    width: 100,
+    height: 100
+});
+layer.add(manImg);
+
+var manObj = new Image();
+manObj.onload = function(){
+    manImg.image(manObj);
+    layer.draw();
+}
+manObj.src = "img/man.svg";
+
+
+
+//contact1 image animation
+var con1Img = new Konva.Image({
+    x: 450,
+    y: 100,
+    width: 50,
+    height: 50
+});
+layer.add(con1Img);
+
+var con1Obj = new Image();
+con1Obj.onload = function(){
+    con1Img.image(con1Obj);
+    layer.draw();
+}
+con1Obj.src = "img/diploma.svg";
+
+var contractAnim = new Konva.Animation(function(frame){
+    if(con1Img.getY() < 300 && con1Img.getX() > 350){
+        con1Img.setY(con1Img.getY() + frame.timeDiff / 10);
+        con1Img.setX(con1Img.getX() - frame.timeDiff / 10);
+    }else{
+        con1Img.setX(450);
+        con1Img.setY(100);
+    }
+}, layer);
+
+contractAnim.start();
+
+//contract 2 image animation
+var con2Img = new Konva.Image({
+    x: 275,
+    y: 100,
+    width: 50,
+    height: 50
+});
+layer.add(con2Img);
+
+var con2Obj = new Image();
+con2Obj.onload = function(){
+    con2Img.image(con2Obj);
+    layer.draw();
+}
+con2Obj.src = "img/diploma.svg";
+
+var contract2Anim = new Konva.Animation(function(frame){
+    if(con2Img.getY() < 150){
+        con2Img.setY(con2Img.getY() + frame.timeDiff / 10);
+    }else{
+        con2Img.setY(100);
+    }
+}, layer);
+
+contract2Anim.start();
+
+//contact3 image animation
+var con3Img = new Konva.Image({
+    x: 150,
+    y: 100,
+    width: 50,
+    height: 50
+});
+layer.add(con3Img);
+
+var con3Obj = new Image();
+con3Obj.onload = function(){
+    con3Img.image(con1Obj);
+    layer.draw();
+}
+con3Obj.src = "img/diploma.svg";
+
+var contract3Anim = new Konva.Animation(function(frame){
+    if(con3Img.getY() < 300 && con3Img.getX() < 250){
+        con3Img.setY(con3Img.getY() + frame.timeDiff / 10);
+        con3Img.setX(con3Img.getX() + frame.timeDiff / 10);
+    }else{
+        con3Img.setX(150);
+        con3Img.setY(100);
+    }
+}, layer);
+
+contract3Anim.start();
+
 stage.add(layer);
-
-//layer.add(rect);
-
-
 
 
 /*
