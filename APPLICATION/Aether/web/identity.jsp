@@ -146,7 +146,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Aether Learning Module: Part One</h4>
+                                    <h4 class="modal-title">Aether Learning Module</h4>
                                 </div>
                                 <div class="modal-body">
                                     <div id="surveyElement"></div>
@@ -159,10 +159,6 @@
                                     <%
                                         }
                                     %>
-
-
-
-
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -171,6 +167,10 @@
 
                         </div>
                     </div>
+                    <!--end of Modal -->
+                    
+                  
+                    
                 </section>
 
             </section>

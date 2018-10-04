@@ -98,8 +98,9 @@ document.getElementById("submit").onclick = function () {
                                     success: function (response) {
                                         $.alert({
                                             title: "Success!",
-                                            content: "Identity Uploaded!"
+                                            content: "At this stage, your customer digital identity has been created and stored as a smart contract in the blockchain . Head over to Blockchain Visualisation to find out more about blockchain and smart contracts!"
                                         });
+                                        
                                     },
                                     error: function (xhr) {
                                         console.log(xhr);
