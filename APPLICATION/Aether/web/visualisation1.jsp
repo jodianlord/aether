@@ -69,7 +69,7 @@
                             <div class="large-12 columns" style="height:800px">
                                 <div class="owl-carousel owl-theme">
                                     
-<<<<<<< HEAD
+
                                     <!-- What is a Blockchain?-->
                                     <div class="item" style="background-color:#8a3b3b">
                                         </br>
@@ -129,7 +129,7 @@
                                     
                                     
                                     <!-- 1. Contract Fundamentals-->
-=======
+
 
                                     <!-- 1. Overview-->
                                     <div class="item">
@@ -146,7 +146,7 @@
                                     </div>
 
                                     <!-- 2. Encoding -->
->>>>>>> a885fd5d42375d3f801d8b230c6fcab485e64d64
+
                                     <div class="item">
                                         </br>
                                         <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">2: Encoding</h1>
