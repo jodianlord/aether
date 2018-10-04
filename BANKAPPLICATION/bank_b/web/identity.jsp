@@ -243,21 +243,20 @@
                     console.log("json: " + JSON.stringify(jsonObject));
 
                     $.ajax({
-                        url: "http://10.124.136.163:5000/facialreg", //edit address accordingly
+                        url: "./SendFR", //edit address accordingly
                         type: "POST",
                         data: JSON.stringify(jsonObject),
                         contentType: "application/json",
                         success: function (data) {
-                            console.log("FR Return=" + data.facedetect); //
                             if (data.status === "Match") {
                                 $.confirm({
                                     title: "Your account has been created!",
                                     content: "Congrats!"
                                 });
                             } else if (data.status === "Do Not Match") {
-                                AddVerification(uuid, transactionHash);
-                                sessionStorage.setItem("testuuid", uuid);
-                                sessionStorage.setItem("faced", data.facedetect);
+                                //AddVerification(uuid, transactionHash);
+                                //sessionStorage.setItem("testuuid", uuid);
+                                //sessionStorage.setItem("faced", data.facedetect);
                                 $.alert({
                                     title: "Error!",
                                     content: "Your face does not match the UDI. Please wait while staff attend to your request."
