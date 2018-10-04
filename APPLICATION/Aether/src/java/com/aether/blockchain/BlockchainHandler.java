@@ -265,7 +265,7 @@ public class BlockchainHandler {
             System.out.println("Parse Exception!");
         }
         return null;
-    }
+    }   
 
     /**
      * Unlocks account, necessary before performing any transaction or
