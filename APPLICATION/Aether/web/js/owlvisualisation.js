@@ -44,10 +44,7 @@ $("#addressImg").click(function () {
                     }
 
                     $.ajax({
-                        beforeSend: function (request) {
-                            request.setRequestHeader("X-Blockchain-Key", "513091f8-ffb1-4e52-ac6b-a5e09021ef91");
-                        },
-                        url: "http://vm.jordysamuel.com:30301/Blockchain/?method=getReceipt&transactionHash=" + transactionHash,
+                        url: "./BlockchainVis?receipt=" + transactionHash,
                         type: "GET",
                         success: function (response) {
                             $.alert(JSON.stringify(response));
@@ -72,53 +69,35 @@ $("#addressImg").click(function () {
 
 $("#deployImg").click(function () {
     console.log("deploying contract");
-    var blockchainobj = {};
     var blockchainParam = {};
-    blockchainobj["method"] = "deployContract";
-    blockchainParam["publicKey"] = "0x2d117903f7b2dc16abe2d6272d11d84233ff7c1f";
-    blockchainParam["password"] = "password";
     blockchainParam["uuid"] = uuid;
     blockchainParam["hash"] = hash;
-    blockchainobj["param"] = blockchainParam;
-    console.log(blockchainobj);
 
-    var unlockobj = {};
-    var unlockparam = {};
-    unlockobj["method"] = "unlockAccount";
-    unlockparam["publicKey"] = "0x2d117903f7b2dc16abe2d6272d11d84233ff7c1f";
-    unlockparam["password"] = "password";
-    unlockobj["param"] = unlockparam;
     $.confirm({
         title: "These are the fields you'll be using",
         content: "uuid: " + uuid + " hash: " + hash,
         buttons: {
             deploy: function () {
                 $.ajax({
-                    beforeSend: function (request) {
-                        request.setRequestHeader("X-Blockchain-Key", "513091f8-ffb1-4e52-ac6b-a5e09021ef91");
-                    },
-                    url: "http://vm.jordysamuel.com:30301/Blockchain/",
-                    type: "POST",
-                    data: JSON.stringify(unlockobj),
+                    url: "./BlockchainVis?method=unlock&publicKey=" + publicKey,
+                    type: "GET",
                     contentType: "application/json",
-                    success: function (response) {
+                    success: function (resp) {
+                        console.log(resp);
                         $.ajax({
-                            beforeSend: function (request) {
-                                request.setRequestHeader("X-Blockchain-Key", "513091f8-ffb1-4e52-ac6b-a5e09021ef91");
-                            },
-                            url: "http://vm.jordysamuel.com:30301/Blockchain/",
+                            url: "./BlockchainVis?method=deployContract&publicKey=" + publicKey,
                             type: "POST",
-                            data: JSON.stringify(blockchainobj),
+                            data: JSON.stringify(blockchainParam),
                             contentType: "application/json",
                             success: function (response) {
                                 console.log(response);
                                 $.alert({
                                     title: "Success!",
                                     content: JSON.stringify(response)
-                                })
+                                });
                                 $("#contractInfo").append(JSON.stringify(response));
                                 console.log("done");
-                                transactionHash = response["result"];
+                                transactionHash = JSON.stringify(response);
                                 console.log(transactionHash);
                             },
                             error: function (xhr) {
