@@ -78,7 +78,7 @@
                                             <p style="color:white;margin-left:30px; font-size:20px;height:60px">
                                                 A blockchain is a record of transactions or contracts that are attached to different locations which can be access anywhere. By not having the need of a central authority, it eliminates any form of manipulation by third parties. Once data is stored in a blockchain, it becomes very difficult to change it.    
                                             </p>
-                                            <div id ="canvasdiv"></div>
+                                            <div style="position: relative;left:20%;margin-top:10px" id ="canvasdiv"></div>
                                             <!--<img id="contractImg" src="img/diploma.svg" style="position: relative;width:200px;height:200px">-->
                                         </div>
 
