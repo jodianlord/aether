@@ -337,6 +337,7 @@
 
     </body>
 </html>
+<script src="js/konva.min.js"></script>
 <script type="text/javascript">
     document.getElementById("visualisationside").className = "active";
 

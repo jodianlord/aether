@@ -2,6 +2,64 @@ var currentStage = "Contract";
 var transactionHash;
 
 
+//Konva 
+var stage = new Konva.Stage({
+    container: 'canvasdiv',
+    width: 600,
+    height: 300
+});
+
+var layer = new Konva.Layer();
+
+var rect = new Konva.Rect({
+    width: 600,
+    height: 300,
+    fill: 'black',
+    stroke: 'black',
+    strokeWidth: 5
+});
+
+layer.add(rect);
+
+var blockchainImg = new Konva.Image({
+    x: 250,
+    y: 190,
+    width: 100,
+    height: 100
+});
+layer.add(blockchainImg);
+
+var blockchainObj = new Image();
+blockchainObj.onload = function(){
+    blockchainImg.image(blockchainObj);
+    layer.draw();
+};
+blockchainObj.src = "img/blockchain.svg";
+
+var boyImg = new Konva.Image({
+    x: 250,
+    y: 5,
+    image: boyObj,
+    width: 100,
+    height:100
+})
+layer.add(boyImg);
+
+var boyObj = new Image();
+boyObj.onload = function(){
+    boyImg.image(boyObj);
+    layer.draw();
+}
+boyObj.src = "img/boy.svg";
+
+stage.add(layer);
+
+//layer.add(rect);
+
+
+
+
+/*
 //1st canvas animation
 var canvas = document.createElement('canvas');
 canvas.setAttribute('id', 'blockchaincanvas');
@@ -41,11 +99,15 @@ const depict = options => {
 
 const imgs = [
     { uri: 'img/boy.svg', x: 200, y:  50, sw: 500, sh: 500 },
-    { uri: 'img/girl.svg', x: 1200, y:  50, sw: 500, sh: 500 },
-    { uri: 'img/man.svg', x: 1800, y: 50, sw: 500, sh: 500 }
+    { uri: 'img/girl.svg', x: 950, y:  50, sw: 500, sh: 500 },
+    { uri: 'img/man.svg', x: 1800, y: 50, sw: 500, sh: 500 },
+    { uri: 'img/blockchain.svg', x: 1050, y: 800, sw: 300, sh: 300 }
   ];
   
-  imgs.forEach(depict);
+imgs.forEach(depict);
+
+var contractSize = 200;
+*/
 
 $("#contractImg").click(function () {
     console.log("hi");
