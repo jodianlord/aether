@@ -313,7 +313,7 @@
                                     
                                     
                                     <!-- IT's Time to create your Bank Account -->
-                                    <div class="item" style="background-color:white">
+<!--                                    <div class="item" style="background-color:white">
                                         </br>
                                         <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">It's time to create your Bank Account</h1>
                                         <div style="height:260px">
@@ -326,8 +326,8 @@
                                             </a>
                                         </div>
 
-                                        <!--<div id="progressbar"></div>-->
-                                    </div>
+                                        <div id="progressbar"></div>
+                                    </div>-->
                                     
                                     
                                 </div>
