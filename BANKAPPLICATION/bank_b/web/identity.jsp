@@ -9,7 +9,9 @@
 
             <%@include  file="Components/topbar.html" %>
             <%@include  file="Components/sidebar.html" %>
-
+            <script src="https://unpkg.com/jquery"></script>
+            <script src="https://surveyjs.azureedge.net/1.0.46/survey.jquery.js"></script>
+            <link href="https://surveyjs.azureedge.net/1.0.46/survey.css" type="text/css" rel="stylesheet"/>
             <!-- **********************************************************************************************************************************************************
             MAIN CONTENT
             *********************************************************************************************************************************************************** -->
@@ -20,7 +22,7 @@
                     <div class="row mt">
                         <div class ="col-lg-3"></div>
                         <div class="col-lg-6">
-                            <div class="form-panel" style="height:170px">
+                            <div class="form-panel col-lg-12" style="height:170px">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> Upload .bin UDI File</h4>
                                 <input type="file" class="filepond" id="fileupload">
                             </div>
@@ -43,7 +45,7 @@
                      <div class="row mt">
                         <div class="col-lg-3"></div>
                         <div class="col-lg-6">
-                            <div class="form-panel">
+                            <div class="form-panel  col-lg-12">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> User Details</h4>
                                 <form class="form-horizontal style-form" id="userdata">
                                     <div class="form-group">
@@ -131,7 +133,7 @@
                     </div>
                      <div class ="col-lg-3"></div>
                         <div class="col-lg-6">
-                            <button id="submit" type="button" class="btn btn-danger btn-lg btn-block">Submit Account Creation</button>
+                            <button id="submit" type="button" style="width:103%" class="btn btn-danger btn-lg btn-block">Submit Account Creation</button>
                         </div>
                      
                 </section>
