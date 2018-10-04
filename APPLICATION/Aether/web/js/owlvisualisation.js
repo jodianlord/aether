@@ -29,7 +29,7 @@ $("#addressImg").click(function () {
             '<form action="" class="formName">' +
             '<div class="form-group">' +
             '<label>Enter transaction hash here</label>' +
-            '<input type="text" placeholder="Transaction Hash" class="name form-control" required />' +
+            '<input type="text" id="trans" placeholder="Transaction Hash" class="name form-control" required />' +
             '</div>' +
             '</form>',
         buttons: {
@@ -37,7 +37,7 @@ $("#addressImg").click(function () {
                 text: 'Submit',
                 btnClass: 'btn-blue',
                 action: function () {
-                    name = transactionHash;
+                    console.log(document.getElementById("trans").values);
                     if (!name) {
                         $.alert("Please provide a valid transaction hash!");
                         return false;

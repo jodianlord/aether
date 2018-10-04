@@ -68,8 +68,8 @@
                         <div class="row">
                             <div class="large-12 columns" style="height:800px">
                                 <div class="owl-carousel owl-theme">
-
                                     
+<<<<<<< HEAD
                                     <!-- What is a Blockchain?-->
                                     <div class="item" style="background-color:#8a3b3b">
                                         </br>
@@ -129,12 +129,66 @@
                                     
                                     
                                     <!-- 1. Contract Fundamentals-->
+=======
+
+                                    <!-- 1. Overview-->
                                     <div class="item">
                                         </br>
-                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">1: Contract Fundamentals</h1>
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">1: Overview</h1>
                                         <div style="height:260px">
                                             <p style="color:white;margin-left:30px; font-size:20px;height:60px">
-                                                This is a visualisation of what a contract is. You can think of a contract as an agreement between an account and the blockchain. Click the contract to take a look!
+                                                Let's wind back to the activity just now. Remember when we were keying the customer's details? This is something similar. Key in some values here.
+                                            </p>
+                                            <input type="text" class="form-control" id="fields" style="position: relative;width:200px;height:20px">
+                                        </div>
+
+                                        <div id="progressbar"></div>
+                                    </div>
+
+                                    <!-- 2. Encoding -->
+>>>>>>> a885fd5d42375d3f801d8b230c6fcab485e64d64
+                                    <div class="item">
+                                        </br>
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">2: Encoding</h1>
+                                        <div style="height:260px">
+                                            <p style="color:white;margin-left:30px; font-size:20px;height:60px">
+                                                In the case of this application, we do not encode (you can think of this as 'uploading') the values directly to the blockchain. Instead we generate a Keccak256 hash (a line of text that changes depending on what's in the file). Press the button below to generate the hash for the values you just put in.
+                                            </p>
+                                            <button class="btn btn-red">
+                                        </div>
+
+                                        <div id="progressbar"></div>
+                                    </div>
+
+                                    <!-- 3. Third-->
+                                    <div class="item">
+                                        </br>
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">3: Let's deploy a contract!</h1>
+                                        <div style = "height:260px">
+                                            <p style="color:white;margin-left:30px; font-size:20px;height:60px">
+                                                Now that you have the Keccak 256 Hash of the data you want to encode, click the button below to generate a unique ID for your data.
+                                            </p>
+                                            <div style="color:white;margin-left:30px; font-size:20px">
+                                                UUID:
+                                                <div id="uuid" style="color:greenyellow;margin:10px 10px 10px 10px"></div>
+                                            </div>
+                                            <div style="color:white;margin-left:30px; font-size:20px">
+                                                Hash:
+                                                <div id="hash" style="color:greenyellow;margin:10px 10px 10px 10px"></div>
+                                            </div>
+                                            <button id="valuesGenerator" class="btn btn-success" style="margin-left:30px;">Generate!!!</button>
+                                        </div>
+                                        <div id="progressbar"></div>
+                                    </div>
+
+
+                                    <!-- 4. Contract Fundamentals-->
+                                    <div class="item">
+                                        </br>
+                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">4: Contract Fundamentals</h1>
+                                        <div style="height:260px">
+                                            <p style="color:white;margin-left:30px; font-size:20px;height:60px">
+                                                This is the contract that we'll be using to deploy your information onto the blockchain. Click the image below to look at the code of the contract!
                                             </p>
                                             <img id="contractImg" src="img/diploma.svg" style="position: relative;width:200px;height:200px">
                                         </div>
@@ -142,9 +196,9 @@
                                         <div id="progressbar"></div>
                                     </div>
 
-                                    
-                                    
-                                    
+
+
+
                                     <!-- 2. Second -->
                                     <div class="item">
                                         </br>
@@ -172,31 +226,11 @@
                                         </div><!-- /col-md-4 --><div id="progressbar"></div>
                                     </div>
 
-                                                    
-                                                    
-                                    <!-- 3. Third-->
-                                    <div class="item">
-                                        </br>
-                                        <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">3: Let's deploy a contract!</h1>
-                                        <div style = "height:260px">
-                                            <p style="color:white;margin-left:30px; font-size:20px;height:60px">
-                                                Click the button to generate some values to deploy into your contract!
-                                            </p>
-                                            <div style="color:white;margin-left:30px; font-size:20px">
-                                                UUID:
-                                                <div id="uuid" style="color:greenyellow;margin:10px 10px 10px 10px"></div>
-                                            </div>
-                                            <div style="color:white;margin-left:30px; font-size:20px">
-                                                Hash:
-                                                <div id="hash" style="color:greenyellow;margin:10px 10px 10px 10px"></div>
-                                            </div>
-                                            <button id="valuesGenerator" class="btn btn-success" style="margin-left:30px;">Generate!!!</button>
-                                        </div>
-                                        <div id="progressbar"></div>
-                                    </div>
 
-                                    
-                                    
+
+
+
+
                                     <!-- 4. Fourth deployImg img/exchange.svg-->
                                     <div class="item">
                                         </br>
@@ -212,9 +246,9 @@
                                         <div id="progressbar"></div>
                                     </div>
 
-                                    
-                                    
-                                    
+
+
+
                                     <!-- 5. Fifth-->
                                     <div class="item">
                                         </br>
@@ -223,21 +257,21 @@
                                             <p style="color:white;margin-left:30px; font-size:20px;height: 60px">
                                                 This is the transaction hash of your contract.
                                             </p>
-                                            
+
                                             <div style="color:white;margin-left:30px; font-size:20px">
                                                 Contract Info:
                                                 <div id="contractInfo" style="color:greenyellow;margin:10px 10px 10px 10px"></div>
                                             </div>
-                                            
+
                                         </div>
 
                                         <div id="progressbar"></div>
                                     </div>
 
-                                    
-                                    
-                                    
-                                    
+
+
+
+
                                     <!-- 6. Sixth  -->
                                     <div class="item">
                                         </br>
