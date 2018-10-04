@@ -34,7 +34,9 @@
             <!--main content start-->
             <section id="main-content">
                 <section class="wrapper">
-
+                    <h1>
+                        Hold on! This page is still in development! 
+                    </h1>
                     <div class="row">
                         <div class="col-lg-12 main-chart">
                             <div class="row mt">
