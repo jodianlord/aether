@@ -8,8 +8,8 @@ var json = {
     title: "Aether Gamification Quiz",
     showProgressBar: "bottom",
     showTimerPanel: "top",
-    maxTimeToFinishPage: 10,
-    maxTimeToFinish: 25,
+    maxTimeToFinishPage: 60,
+    maxTimeToFinish: 360,
     firstPageIsStarted: true,
     startSurveyText: "Start Quiz",
     pages: [
@@ -46,7 +46,7 @@ var json = {
                 }
             ]
         }, {
-            maxTimeToFinish: 15,
+            maxTimeToFinish: 360,
             questions: [
                 {
                     type: "radiogroup",
