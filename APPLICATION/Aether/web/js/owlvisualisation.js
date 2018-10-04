@@ -16,6 +16,36 @@ var ctx = canvas.getContext('2d');
 ctx.fillStyle = "#000000";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+const getContext = () => canvas.getContext('2d');
+
+// It's better to use async image loading.
+const loadImage = url => {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error(`load ${url} fail`));
+    img.src = url;
+  });
+};
+
+// Here, I created a function to draw image.
+const depict = options => {
+  const ctx = getContext();
+  // And this is the key to this solution
+  // Always remember to make a copy of original object, then it just works :)
+  const myOptions = Object.assign({}, options);
+  return loadImage(myOptions.uri).then(img => {
+    ctx.drawImage(img, myOptions.x, myOptions.y, myOptions.sw, myOptions.sh);
+  });
+};
+
+const imgs = [
+    { uri: 'img/boy.svg', x: 200, y:  50, sw: 500, sh: 500 },
+    { uri: 'img/girl.svg', x: 1200, y:  50, sw: 500, sh: 500 },
+    { uri: 'img/man.svg', x: 1800, y: 50, sw: 500, sh: 500 }
+  ];
+  
+  imgs.forEach(depict);
 
 $("#contractImg").click(function () {
     console.log("hi");
