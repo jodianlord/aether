@@ -65,7 +65,7 @@ public class BlockchainVis extends HttpServlet {
                 resp = "Account was not unlocked";
             }
         }else if(method.equals("receipt")){
-            String transactionHash = request.getParameter("transactionHash");
+            String transactionHash = request.getParameter("transactionhash");
             resp = BlockchainHandler.getContractAddress(transactionHash);
         }else if(method.equals("hash")){
             String randomstring = request.getParameter("randomstring");

@@ -259,14 +259,15 @@ $("#addressImg").click(function () {
                 text: 'Submit',
                 btnClass: 'btn-blue',
                 action: function () {
-                    console.log(document.getElementById("trans").values);
-                    if (!name) {
+                    console.log(this.$content.find('.name').val());
+                    var transactionHash = this.$content.find('.name').val();
+                    if (!transactionHash) {
                         $.alert("Please provide a valid transaction hash!");
                         return false;
                     }
 
                     $.ajax({
-                        url: "./BlockchainVis?receipt=" + transactionHash,
+                        url: "./BlockchainVis?method=receipt&transactionhash=" + transactionHash,
                         type: "GET",
                         success: function (response) {
                             $.alert(JSON.stringify(response));

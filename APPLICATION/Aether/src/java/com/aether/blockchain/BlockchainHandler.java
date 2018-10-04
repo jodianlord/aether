@@ -161,7 +161,11 @@ public class BlockchainHandler {
         try {
             String result = RESTHandler.sendGetRequest(requestURL, "bc.key");
             JSONObject resultJSON = getJSONObject(result);
+            System.out.println(resultJSON.toString());
             JSONObject resultExtract = (JSONObject) resultJSON.get("result");
+            if(resultExtract == null){
+                return "Contract Has Not Been Mined!";
+            }
             String contractAddress = (String) resultExtract.get("contractAddress");
             return contractAddress;
         } catch (MalformedURLException e) {
