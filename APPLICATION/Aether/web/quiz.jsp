@@ -60,9 +60,9 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div id="surveyElement"></div>
-                                                    <div id="surveyResult"></div>
+                                                    <script src="js/gameAfterSubmit.js"></script>
 
-                                                    <script type="text/javascript" src="js/testQuiz.js"></script>
+                                                    <!--<script type="text/javascript" src="js/testQuiz.js"></script>-->
                                                     
                                                     
                                                 </div>
