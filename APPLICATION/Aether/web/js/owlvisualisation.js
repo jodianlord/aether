@@ -1,5 +1,22 @@
 var currentStage = "Contract";
 var transactionHash;
+
+
+//1st canvas animation
+var canvas = document.createElement('canvas');
+canvas.setAttribute('id', 'blockchaincanvas');
+canvas.setAttribute('width', '2400');
+canvas.setAttribute('height', '1200');
+canvas.style.width = "600";
+canvas.style.height = "300px";
+document.getElementById('canvasdiv').appendChild(canvas);
+
+var ctx = canvas.getContext('2d');
+
+ctx.fillStyle = "#000000";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+
 $("#contractImg").click(function () {
     console.log("hi");
     $.alert({
