@@ -138,7 +138,10 @@
                                             <p style="color:white;margin-left:30px; font-size:20px;height:60px">
                                                 Let's wind back to the activity just now. Remember when we were keying the customer's details? This is something similar. Key in some values here.
                                             </p>
-                                            <input type="text" class="form-control" id="fields" style="position: relative;width:200px;height:20px">
+                                            <div>
+                                                <input type="text" class="form-control" id="fields" style="position: relative;margin-left: 30px;width:300px;" placeholder="Enter Values here!">
+                                        
+                                            </div>
                                         </div>
 
                                         <div id="progressbar"></div>
@@ -153,7 +156,10 @@
                                             <p style="color:white;margin-left:30px; font-size:20px;height:60px">
                                                 In the case of this application, we do not encode (you can think of this as 'uploading') the values directly to the blockchain. Instead we generate a Keccak256 hash (a line of text that changes depending on what's in the file). Press the button below to generate the hash for the values you just put in.
                                             </p>
-                                            <button class="btn btn-red">
+                                            </br></br></br></br>
+                                            <input type="button" class="btn btn-red" id="" value="Encode" style="position: relative;margin-left: 30px;width:300px;">
+                                        
+                                            <!--<button class="btn btn-red">-->
                                         </div>
 
                                         <div id="progressbar"></div>
@@ -199,7 +205,7 @@
 
 
                                     <!-- 2. Second -->
-                                    <div class="item">
+<!--                                    <div class="item">
                                         </br>
                                         <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">2: Let's check your cash!</h1>
                                         <div style = "height:260px">
@@ -213,17 +219,17 @@
                                                         <h5>BALANCE</h5>
                                                     </div>
                                                     <h1 class="ml15" >
-                                                        <span class="word"><%= eth%> ETH</span>
+                                                        <span class="word"><!%= eth%> ETH</span>
                                                     </h1>
-                                                    <!---
+                                                    -
                                                     <h1 class="ml15">
                                                         <span class="word"> WEI</span>
                                                     </h1>
-                                                    -->
+                                                    
                                                 </div>
                                             </div>
-                                        </div><!-- /col-md-4 --><div id="progressbar"></div>
-                                    </div>
+                                        </div> /col-md-4 <div id="progressbar"></div>
+                                    </div>-->
 
 
 
