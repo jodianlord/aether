@@ -11,7 +11,9 @@
 <!DOCTYPE html>
 <html lang="en">
     <%@include  file="Components/head.html" %>
-    
+    <script src="https://unpkg.com/jquery"></script>
+    <script src="https://surveyjs.azureedge.net/1.0.46/survey.jquery.js"></script>
+    <link href="https://surveyjs.azureedge.net/1.0.46/survey.css" type="text/css" rel="stylesheet"/>
     <body>
         <section id="container" >
 
@@ -131,11 +133,46 @@
                             </div>
                         </div>
                     </div>
-                     <div class ="col-lg-3"></div>
-                        <div class="col-lg-6">
-                    <button id="submit" type="button" class="btn btn-primary btn-lg btn-block">Submit Digital Identity</button>
+                    <div class ="col-lg-3"></div>
+                    <div class="col-lg-6">
+                        <button id="submit" type="button" class="btn btn-primary btn-lg btn-block">Submit Digital Identity</button>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Modal Header</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="surveyElement"></div>
+                                    <%
+                                        String learningIDVal = session.getAttribute("groupid").toString();
+                                        //String t = "test1";
+                                        if (!learningIDVal.equals("0")) {
+                                    %>
+                                            <script src ="js/gameIntro.js"></script>
+                                    <%
+                                        }
+                                    %>
+
+
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
                         </div>
+                    </div>
                 </section>
+
             </section>
 
             <!--main content end-->
@@ -146,28 +183,22 @@
         <script type="application/javascript">
             document.getElementById("identityside").className = "active";
         </script>
-        
+
+        <%            String gID = session.getAttribute("groupid").toString();
+            String t = "test1";
+            if (!gID.equals("0")) {
+        %>
+        <script src ="js/gameTakePhoto.js"></script>
+        <script src="js/gameSubmitDigitalIdentity.js"></script>
+        <script src ="js/gameIntro.js"></script>
         <%
-            String gID = session.getAttribute("groupid").toString();
-            String t="test1";
-            if(!gID.equals("0")){
-                %>
-                <script src ="js/gameTakePhoto.js"></script>
-                <script src="js/gameSubmitDigitalIdentity.js"></script>
-                <%
-            }
-            else{
-            %>
-                <script src ="js/takePhoto.js"></script>  
-                <script src ="js/submitdigitalidentity.js"></script>
+        } else {
+        %>
+        <script src ="js/takePhoto.js"></script>  
+        <script src ="js/submitdigitalidentity.js"></script>
         <% }
-            %>
-        <!-- test gameTakePhoto.js -->
-        
-        <!--<script src ="js/takePhoto.js"></script>-->
-        
-        <!-- test gameSubmitDigitalIdentity.js -->
-        <!--<script src="js/gameSubmitDigitalIdentity.js"></script> <!--<script src="js/submitdigitalidentity.js"></script>-->
+        %>
+
         <script src="js/formvalidation.js"></script>
         <%@include file="Components/style.html" %>
 

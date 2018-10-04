@@ -15,11 +15,13 @@
         <link rel="stylesheet" href="./index.css">
 
     </head>
-    <body>
+    <body onload="myFunction()">
         <div id="surveyElement"></div>
-        <div id="surveyResult"></div>
+       
 
         <script type="text/javascript" src="js/testQuiz.js"></script>
+        
 
     </body>
+    
 </html>

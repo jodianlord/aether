@@ -22,7 +22,7 @@
     <link href="https://surveyjs.azureedge.net/1.0.46/survey.css" type="text/css" rel="stylesheet"/>
     <link rel="stylesheet" href="./index.css">
     
-    <body>
+    <body onload='myFunction()'>
 
         <section id="container" >
 
@@ -73,6 +73,8 @@
 
                                         </div>
                                     </div>
+                                    
+                                    
 
                                 </div>
 
@@ -103,7 +105,25 @@
             });
             });
         </script>
-
+        <script type="text/javascript">
+            $(window).on('load',function(){
+            $('#myModal').modal('show');
+            });
+        </script>
+        
+     <!--   <script>
+            function myFunction(){
+            $.confirm({
+            title: 'Start Camera',
+            content: '<div id="surveyElement"></div>',
+            type: 'blue',
+            columnClass : 'col-md-12',
+            containerFluid: true
+            
+            });
+        }
+        </script>
+-->
 
         <%@include file="Components/style.html" %>
 
