@@ -139,9 +139,10 @@
                                                 Let's wind back to the activity just now. Remember when we were keying the customer's details? This is something similar. Key in some values here.
                                             </p>
                                             <div>
-                                                <input type="text" class="form-control" id="fields" style="position: relative;margin-left: 30px;width:300px;" placeholder="Enter Values here!">
-                                        
+                                                <input type="text" class="form-control" id="randomval" style="position: relative;margin-left: 30px;width:300px;" placeholder="Enter Values here!">
+                                   
                                             </div>
+                                            
                                         </div>
 
                                         <div id="progressbar"></div>
@@ -154,11 +155,11 @@
                                         <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">2: Encoding</h1>
                                         <div style="height:260px">
                                             <p style="color:white;margin-left:30px; font-size:20px;height:60px">
-                                                In the case of this application, we do not encode (you can think of this as 'uploading') the values directly to the blockchain. Instead we generate a Keccak256 hash (a line of text that changes depending on what's in the file). Press the button below to generate the hash for the values you just put in.
+                                                In the case of this application, we do not encode (you can think of this as 'uploading') the values directly to the blockchain. Instead we generate a Keccak256 hash (a line of text that changes depending on what's in the file). Press the button below to generate the hash for the values you just put in. If you want to see this change, type different text on the previous screen!
                                             </p>
                                             </br></br></br></br>
-                                            <input type="button" class="btn btn-red" id="" value="Encode" style="position: relative;margin-left: 30px;width:300px;">
-                                        
+                                            <input type="button" class="btn btn-red" id="encodebtn" value="Encode" style="position: relative;margin-left: 30px;width:300px;">
+                                            <div id="generatedhash" style="color:greenyellow;margin:10px 10px 10px 10px"></div>
                                             <!--<button class="btn btn-red">-->
                                         </div>
 
@@ -363,7 +364,30 @@
     $("#valuesGenerator").click(function () {
         console.log("hi");
         document.getElementById("uuid").innerHTML = "<%= randomUUID%>";
-        document.getElementById("hash").innerHTML = "<%= randomHash%>"
+        $.ajax({
+           url: "./BlockchainVis?method=hash&randomstring=" +  $("#randomval").val(),
+           type: "GET",
+           success: function(response){
+               document.getElementById("hash").innerHTML = response.result;
+               transactionHash = response.result;
+           },
+           error: function(xhr){
+           }
+        });
+    })
+    
+    $("#encodebtn").click(function(){
+        console.log($("#randomval").val());
+        $.ajax({
+           url: "./BlockchainVis?method=hash&randomstring=" +  $("#randomval").val(),
+           type: "GET",
+           success: function(response){
+               document.getElementById("generatedhash").innerHTML = response.result;
+               transactionHash = response.result;
+           },
+           error: function(xhr){
+           }
+        });
     })
 </script>
 <script src="js/owlvisualisation.js"></script>

@@ -67,6 +67,9 @@ public class BlockchainVis extends HttpServlet {
         }else if(method.equals("receipt")){
             String transactionHash = request.getParameter("transactionHash");
             resp = BlockchainHandler.getContractAddress(transactionHash);
+        }else if(method.equals("hash")){
+            String randomstring = request.getParameter("randomstring");
+            resp = BlockchainHandler.keccak256hash(randomstring);
         }
         
         
