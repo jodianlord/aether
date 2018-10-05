@@ -205,7 +205,7 @@
                                         <h1 style="color:#EFD67F;margin-left:30px;margin-top: 30px">3: Let's deploy a contract!</h1>
                                         <div style = "height:260px">
                                             <p style="color:white;margin-left:30px; font-size:20px;height:60px">
-                                                Now that you have the Keccak 256 Hash of the data you want to encode, click the button below to generate a unique ID for your data.
+                                                Now that you have the Keccak 256 Hash of the data you want to encode, click the button below to generate a unique ID for your data. This is randomly generated and serves to identify your data from the rest.
                                             </p>
                                             <div style="color:white;margin-left:30px; font-size:20px">
                                                 UUID:
