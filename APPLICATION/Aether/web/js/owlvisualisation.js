@@ -251,7 +251,7 @@ $("#addressImg").click(function () {
             '<form action="" class="formName">' +
             '<div class="form-group">' +
             '<label>Enter transaction hash here</label>' +
-            '<input type="text" id="trans" placeholder="Transaction Hash" class="name form-control" required />' +
+            '<input type="text" id="trans" placeholder="Transaction Hash" class="name form-control" value="' + transactionHash + '" required />' +
             '</div>' +
             '</form>',
         buttons: {
@@ -321,7 +321,7 @@ $("#deployImg").click(function () {
                                 });
                                 $("#contractInfo").append(JSON.stringify(response));
                                 console.log("done");
-                                transactionHash = JSON.stringify(response);
+                                transactionHash = response.result;
                                 console.log(transactionHash);
                             },
                             error: function (xhr) {
