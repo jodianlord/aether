@@ -104,6 +104,7 @@ public class BlockchainHandler {
         try {
             String result = RESTHandler.sendPostRequest(URL, body, "bc.key");
             JSONObject jsonResult = getJSONObject(result);
+            System.out.println("transaction" + result);
             String transactionHash = (String) jsonResult.get("result");
             return transactionHash;
         } catch (MalformedURLException e) {

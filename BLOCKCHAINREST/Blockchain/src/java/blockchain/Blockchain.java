@@ -138,7 +138,7 @@ public class Blockchain extends HttpServlet {
                     JSONObject param = (JSONObject) requestChecker.get("param");
                     String from = (String) param.get("from");
                     String to = (String) param.get("to");
-                    int value = (Integer) param.get("value");
+                    long value = (Long) param.get("value");
                     String result = BlockchainHandler.sendTransaction(from, to, value);
                     try (PrintWriter out = response.getWriter()) {
                         out.println(result);

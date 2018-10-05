@@ -292,6 +292,7 @@ $("#addressImg").click(function () {
 
 $("#deployImg").click(function () {
     console.log("deploying contract");
+    console.log(publicKey);
     var blockchainParam = {};
     blockchainParam["uuid"] = uuid;
     blockchainParam["hash"] = hash;

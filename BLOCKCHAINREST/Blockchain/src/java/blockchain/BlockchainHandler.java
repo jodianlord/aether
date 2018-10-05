@@ -35,6 +35,7 @@ public class BlockchainHandler {
     public static String sendPostRequest(JSONObject body) throws MalformedURLException,
             ProtocolException, IOException {
         byte[] postData = body.toString().getBytes(StandardCharsets.UTF_8);
+        System.out.println(body.toString());
         try {
             URL myurl = new URL(URL);
             con = (HttpURLConnection) myurl.openConnection();
@@ -80,6 +81,10 @@ public class BlockchainHandler {
 
     public static String toHexValue(int toHex) {
         return Integer.toHexString(toHex);
+    }
+    
+    public static String toHexValue(long toHex) {
+        return Long.toHexString(toHex);
     }
 
     public static String getReceipt(String transactionHash) {
@@ -204,7 +209,7 @@ public class BlockchainHandler {
         return null;
     }
 
-    public static String sendTransaction(String from, String to, int value) {
+    public static String sendTransaction(String from, String to, long value) {
         JSONObject body = new JSONObject();
         body.put("jsonrpc", "2.0");
         body.put("method", "eth_sendTransaction");
@@ -213,12 +218,13 @@ public class BlockchainHandler {
         params.put("from", from);
         params.put("to", to);
         params.put("value", toHexValue(value));
+        //System.out.println("hex value: " + Integer.toHexString(10000) + " , long = " + value);
         JSONArray parameters = new JSONArray();
         parameters.add(params);
         body.put("params", parameters);
         body.put("id", 1);
 
-        System.out.println("body: " + body.toJSONString());
+        //System.out.println("body: " + body.toJSONString());
 
         try {
             String result = sendPostRequest(body);
