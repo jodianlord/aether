@@ -28,7 +28,7 @@ var json = {
             questions: [
                 {
                     type: "html",
-                    html : "<b>What is a Know-Your-Customer (KYC) process?</b></br></br>KYC process is used by the bank to verify the identity of its clients and assessing potential risk of illegal intentions.",
+                    html : "<b>What is a Know-Your-Customer (KYC) process?</b></br></br>KYC is a process by which banks obtain information about the identity and address of customers. This process helps to ensure that banks' services are not misused, hence when you open a new bank account, you will be asked to provide a proof of identity and/or address.</br></br>By first verifying customers' identities and then understanding their transcation patterns,banks are more able to pinpoint suspicious activities.",
                     
                 }
             ]
