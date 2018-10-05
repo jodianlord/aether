@@ -217,14 +217,14 @@ public class BlockchainHandler {
         JSONObject params = new JSONObject();
         params.put("from", from);
         params.put("to", to);
-        params.put("value", toHexValue(value));
+        params.put("value", "0x" + toHexValue(value));
         //System.out.println("hex value: " + Integer.toHexString(10000) + " , long = " + value);
         JSONArray parameters = new JSONArray();
         parameters.add(params);
         body.put("params", parameters);
         body.put("id", 1);
 
-        //System.out.println("body: " + body.toJSONString());
+        System.out.println("body: " + body.toJSONString());
 
         try {
             String result = sendPostRequest(body);
