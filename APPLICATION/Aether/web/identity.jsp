@@ -382,6 +382,8 @@
                                 </div>
                                 <button id="startstream" type="button" class="btn btn-primary">Start Camera</button>
                                 <button id="capture" type="button" class="btn btn-theme04">Take Photo</button>
+                                <button id="captureagain" type="button" class="btn btn-primary" style="display:none;">Take Another Photo</button>
+                                
                             </div>
                         </div>
                     </div>
