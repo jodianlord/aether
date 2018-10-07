@@ -183,6 +183,8 @@
         <script type="application/javascript">
             document.getElementById("identityside").className = "active";
         </script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
         <%            String gID = session.getAttribute("groupid").toString();
             String t = "test1";
