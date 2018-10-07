@@ -4,7 +4,7 @@
     <%@include  file="Components/head.html" %>
 
     <body style="background-color: #f2f2f2">
-
+        <div class="se-pre-con"> </div>
         <section id="container" >
 
             <%--<%@//include  file="Components/topbar.html" %>--%>
@@ -314,7 +314,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Marital Status</label>
                                         <div class="col-sm-10">
-                                            <select class="form-control" name="marital">
+                                            <select class="form-control" id="marital" name="marital">
                                                 <option disabled="disabled" selected="selected">Please Select</option>
                                                 <!--<optgroup label="Please Select">-->
                                                     <option>Single</option>
@@ -329,7 +329,7 @@
                                         <label class="col-sm-2 col-sm-2 control-label">Residence Type</label>
                                         <div class="col-sm-10">
                                             <!--<input type="text" id="residencetype" name="residencetype" class="form-control">-->
-                                            <select class="form-control" name="residencetype">
+                                            <select class="form-control" id="residencetype" name="residencetype">
                                                 <option disabled="disabled" selected="selected">Please Select</option>
                                                 <!--<optgroup label="Please Select">-->
                                                     <option value = "hdb_SEM">HDB - Standard / Executive / Maisonette</option>
@@ -545,8 +545,14 @@
                                 console.log("aft servlet");
                             //end
                                 $.confirm({
-                                    title: "Your account has been created!",
-                                    content: "Congrats!"
+                                    title: "Your account has been created! ",
+                                    content: "You can now login to your tBank account.",
+                                    
+                                    buttons: {
+                                        OK: function () {
+                                           window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
+                                        },
+                                    }                                   
                                 });
                             } else if (data.status === "Do Not Match") {
                                 //AddVerification(uuid, transactionHash);

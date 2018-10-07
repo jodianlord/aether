@@ -19,12 +19,6 @@
             }
         </style>
 
-
-
-
-
-
-
     </head>
     <body>
         <div class="se-pre-con">                        
