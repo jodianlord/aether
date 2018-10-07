@@ -56,6 +56,10 @@
         <servlet-name>TableRetrieve</servlet-name>
         <url-pattern>/TableRetrieve</url-pattern>
     </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>CreateCustomerServlet</servlet-name>
+        <url-pattern>/CreateCustomerServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
