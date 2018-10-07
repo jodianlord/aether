@@ -7,6 +7,7 @@
 var streamObj;
 
 document.getElementById("startstream").onclick = function () {
+    document.getElementById("startstream").style.visibility = "hidden"; //make invisible
     var video = document.createElement("video"),
             vendorUrl = window.URL || window.webkitURL;
     video.id = "video";
@@ -31,19 +32,64 @@ document.getElementById("startstream").onclick = function () {
         //An error occured
         //error.code
     });
+
+
+    document.getElementById("capture").style.visibility = "visible"; //make visible
+
 }
 
 document.getElementById("capture").onclick = function () {
+    //var vis = document.getElementById("startstream").style.visibility;
+    //console.log(vis);
+
     canvas = document.createElement("canvas");
     canvas.id = "canvas";
     context = canvas.getContext("2d");
-    canvas.width = 400;
+    canvas.width = 600;
     canvas.style.width = '45%';
     canvas.height = canvas.width * .75;
     context.drawImage(document.getElementById("video"), 0, 0, 400, 300);
     document.getElementById("media").innerHTML = "";
     document.getElementById("media").appendChild(canvas);
-    streamObj.getTracks().forEach(function(track){
+    streamObj.getTracks().forEach(function (track) {
         track.stop();
     });
+    
+    document.getElementById("capture").style.visibility = "hidden"; //make invisible
+    document.getElementById("captureagain").style.visibility = "visible"; //make visible
+}
+
+document.getElementById("captureagain").onclick = function () {
+    document.getElementById("captureagain").style.visibility = "hidden";
+    document.getElementById("capture").style.visibility = "visible"; //make invisible
+    var video = document.createElement("video"),
+            vendorUrl = window.URL || window.webkitURL;
+    video.id = "video";
+    video.classList.add("col-md-6");
+    video.classList.add("col-sm-6");
+    video.classList.add("mb");
+    document.getElementById("media").innerHTML = "";
+    document.getElementById("media").appendChild(video);
+
+    navigator.getMedia = navigator.getUserMedia ||
+            navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia ||
+            navigator.msGetUserMedia;
+    navigator.getMedia({
+        video: true,
+        audio: false
+    }, function (stream) {
+        streamObj = stream
+        video.srcObject = stream;
+        video.play();
+    }, function (error) {
+        //An error occured
+        //error.code
+    });
+    
+     
+
+
+    //document.getElementById("capture").style.visibility = "visible"; //make visible
+
 }
