@@ -19,12 +19,6 @@
             }
         </style>
 
-
-
-
-
-
-
     </head>
     <body>
         Successs!
