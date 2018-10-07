@@ -55,11 +55,13 @@ document.getElementById("capture").onclick = function () {
         track.stop();
     });
     
+    document.getElementById("capture").style.visibility = "hidden"; //make invisible
     document.getElementById("captureagain").style.visibility = "visible"; //make visible
 }
 
 document.getElementById("captureagain").onclick = function () {
-    document.getElementById("startstream").style.visibility = "hidden"; //make invisible
+    document.getElementById("captureagain").style.visibility = "hidden";
+    document.getElementById("capture").style.visibility = "visible"; //make invisible
     var video = document.createElement("video"),
             vendorUrl = window.URL || window.webkitURL;
     video.id = "video";
@@ -84,8 +86,10 @@ document.getElementById("captureagain").onclick = function () {
         //An error occured
         //error.code
     });
+    
+     
 
 
-    document.getElementById("capture").style.visibility = "visible"; //make visible
+    //document.getElementById("capture").style.visibility = "visible"; //make visible
 
 }
