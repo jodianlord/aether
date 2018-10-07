@@ -7,6 +7,7 @@
 var streamObj;
 
 document.getElementById("startstream").onclick = function () {
+    document.getElementById("startstream").style.visibility = "hidden"; //make invisible
     var video = document.createElement("video"),
             vendorUrl = window.URL || window.webkitURL;
     video.id = "video";
@@ -31,9 +32,16 @@ document.getElementById("startstream").onclick = function () {
         //An error occured
         //error.code
     });
+
+
+    document.getElementById("capture").style.visibility = "visible"; //make visible
+
 }
 
 document.getElementById("capture").onclick = function () {
+    var vis = document.getElementById("startstream").style.visibility;
+    console.log(vis);
+
     canvas = document.createElement("canvas");
     canvas.id = "canvas";
     context = canvas.getContext("2d");
@@ -43,7 +51,7 @@ document.getElementById("capture").onclick = function () {
     context.drawImage(document.getElementById("video"), 0, 0, 400, 300);
     document.getElementById("media").innerHTML = "";
     document.getElementById("media").appendChild(canvas);
-    streamObj.getTracks().forEach(function(track){
+    streamObj.getTracks().forEach(function (track) {
         track.stop();
     });
 }
