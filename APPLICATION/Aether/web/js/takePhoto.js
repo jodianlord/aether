@@ -86,10 +86,5 @@ document.getElementById("captureagain").onclick = function () {
         //An error occured
         //error.code
     });
-    
-     
-
-
-    //document.getElementById("capture").style.visibility = "visible"; //make visible
 
 }
