@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        HttpSession session = request.getSession();
+        //HttpSession session = request.getSession();
         String userid = request.getParameter("userid");
         String password = request.getParameter("password");
         String groupid = request.getParameter("groupid");
@@ -39,13 +39,16 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("userid", userid);
                 session.setAttribute("groupid",groupid);
                 response.sendRedirect("identity.jsp");
+                
                 // Invalid username or password
             }
         }
         else {
-            session.setAttribute("error", password);
-            response.sendRedirect("Error.jsp");
+            session.setAttribute("loginerror", "Wrong userid/password");
+            response.sendRedirect("index.jsp");
         }
+        
+        
 
     }
 
