@@ -387,6 +387,8 @@
                                 </div>
                                 <button id="startstream" type="button" class="btn btn-primary">Start Camera</button>
                                 <button id="capture" type="button" class="btn btn-theme04">Take Photo</button>
+                                <button id="captureagain" type="button" class="btn btn-primary">Take Another Photo</button>
+                                
                             </div>
                         </div>
                     </div>
@@ -463,6 +465,16 @@
 
     </body>
 </html>
+<script>
+    document.getElementById("captureagain").style.visibility = "hidden"; 
+    var startstream = document.getElementById("startstream").style.visibility;
+    var capture = document.getElementById("capture").style.visibility;
+    if(startstream === "hidden") {
+        document.getElementById("captureagain").style.visibility = "visible"; 
+    } else if (capture === "hidden") {
+        document.getElementById("captureagain").style.visibility = "visible"; 
+    }
+</script>
 
 <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
 
