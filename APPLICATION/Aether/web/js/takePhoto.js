@@ -37,7 +37,7 @@ document.getElementById("capture").onclick = function () {
     canvas = document.createElement("canvas");
     canvas.id = "canvas";
     context = canvas.getContext("2d");
-    canvas.width = 400;
+    canvas.width = 600;
     canvas.style.width = '45%';
     canvas.height = canvas.width * .75;
     context.drawImage(document.getElementById("video"), 0, 0, 400, 300);
