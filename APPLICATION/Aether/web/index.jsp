@@ -50,7 +50,7 @@
                         <div class="tab-content">
 
                             <div id="login">   
-                                <form action="LoginServlet" method="post">
+                                <form id="LoginForm" action="LoginServlet" method="post">
                                     <div class="field-wrap">
                                         <label>
                                             Username<span class="req">*</span>
@@ -90,7 +90,7 @@
                                     </div>
                                     <br> 
 
-                                    <button class="button button-block"/>LOG IN</button>
+                                    <button type="submit" id="loginbutton" class="button button-block"/>LOG IN</button>
                                 </form>
                             </div>
 
@@ -114,17 +114,8 @@
                                         </div>
                                     </div>
 
-                                    <!--                                    <div class="field-wrap">
-                                                                            <label>
-                                                                                Private Key<span class="req">*</span>
-                                                                            </label>
-                                                                            <input type="text" name='privatekey' required autocomplete="off"/>
-                                                                        </div>-->
 
                                     <button type="submit" id="signupbutton" class="button button-block"/>SIGN UP</button>
-                                    <!--                                <div id="other">
-                                                                        Trigger the handler
-                                                                    </div>-->
                                 </form>
                             </div>
 
@@ -294,6 +285,107 @@
 
             });
 
+            $('.tab a').on('click', function (e) {
+
+                e.preventDefault();
+
+                $(this).parent().addClass('active');
+                $(this).parent().siblings().removeClass('active');
+
+                target = $(this).attr('href');
+
+                $('.tab-content > div').not(target).hide();
+
+                $(target).fadeIn(600);
+
+            });
+        //});
+
+        </script>
+        <%
+            } else {
+
+            } 
+
+            //session.invalidate();
+        %>
+        
+        <script>
+            $("#loginbutton").click(function (event) {
+                //event.preventDefault();
+
+                $("#LoginForm").submit();
+            });
+        </script>
+        <%
+            String loginError = (String) session.getAttribute("loginerror");
+            System.out.println("login is");
+            System.out.println(loginError);
+            if (loginError == "Wrong userid/password") {
+                session.removeAttribute("userError");
+
+        %>
+        <script>
+                $.confirm({
+                    title: 'Unable to login!',
+                    content: 'Wrong userid/password! Please try again!',
+                    columnClass: 'col-md-4 col-md-offset-4',
+                    buttons: {
+                        confirm: function () {
+
+                        }
+                    }
+                });
+
+        </script>
+        
+
+        <script>
+
+                $('.tab a').on('click', function (e) {
+
+                    e.preventDefault();
+
+                    $(this).parent().addClass('active');
+                    $(this).parent().siblings().removeClass('active');
+
+                    target = $(this).attr('href');
+
+                    $('.tab-content > div').not(target).hide();
+
+                    $(target).fadeIn(600);
+
+                });
+            //});
+
+
+            $('.form').find('input, textarea').on('keyup blur focus', function (e) {
+
+                var $this = $(this),
+                        label = $this.prev('label');
+
+                if (e.type === 'keyup') {
+                    if ($this.val() === '') {
+                        label.removeClass('active highlight');
+                    } else {
+                        label.addClass('active highlight');
+                    }
+                } else if (e.type === 'blur') {
+                    if ($this.val() === '') {
+                        label.removeClass('active highlight');
+                    } else {
+                        label.removeClass('highlight');
+                    }
+                } else if (e.type === 'focus') {
+
+                    if ($this.val() === '') {
+                        label.removeClass('highlight');
+                    } else if ($this.val() !== '') {
+                        label.addClass('highlight');
+                    }
+                }
+
+            });
             $('.tab a').on('click', function (e) {
 
                 e.preventDefault();

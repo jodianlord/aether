@@ -61,7 +61,7 @@
                         <div class="col-lg-6">
                             <div class="form-panel  col-lg-12">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> User Details</h4>
-                                <form class="form-horizontal style-form" id="userdata">
+                                <form class="form-horizontal style-form" id="userdata" action="/CreateCustomerServlet" method="post">
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Full Name</label>
                                         <div class="col-sm-10">
@@ -518,6 +518,31 @@
                         contentType: "application/json",
                         success: function (data) {
                             if (data.status === "Match") {
+                            //create tbank customer
+                            var createJson ={};
+                            createJson["nric"]=$("#nric").val();
+                            createJson["fullname"]=$("#fullname").val();
+                            createJson["email"]=$("#email").val();
+                            createJson["mobile"]=$("#mobile").val();
+                            createJson["gender"]=$("#gender").val();
+                            createJson["marital"]=$("#marital").val();
+                            createJson["address"]=$("#address").val();
+                            createJson["occupation"]=$("#occupation").val();
+                            console.log("working for createjson");
+                                $.ajax({
+                                    url: "./CreateCustomerServlet", //edit address accordingly
+                                    type: "POST",
+                                    data: JSON.stringify(createJson),
+                                    contentType: "application/json",
+                                    success: function (createData) {  
+                                        
+
+                                    }, error: function (xhr) {
+                                            console.log("fk u");
+                                    }
+                                });    
+                                console.log("aft servlet");
+                            //end
                                 $.confirm({
                                     title: "Your account has been created!",
                                     content: "Congrats!"
