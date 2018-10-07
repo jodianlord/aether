@@ -35,7 +35,7 @@
                         <div class ="col-lg-3"></div>
                         <div class="col-lg-6">
                             <div class="form-panel col-lg-12">
-                                <h4 class="mb"><i class="fa fa-angle-right"></i> Take Picture</h4>
+                                <h4 class="mb"><i class="fa fa-angle-right"></i>Take Picture</h4>
                                 <div id="media">
                                 </div>
                                 <button id="startstream" type="button" class="btn btn-primary">Start Camera</button>
@@ -48,7 +48,7 @@
                     <div class="row mt">
                         <div class ="col-lg-3"></div>
                         <div class="col-lg-6">
-                            <button id="populate" type="button" style="margin-top:-20px;margin-left: 10px"class="btn btn-danger btn-lg btn-block">Populate</button>
+                            <button id="populate" type="button" style="margin-top:-20px;margin-left: 10px"class="btn btn-danger btn-lg btn-block">Verify</button>
                     
                         </div>
                     </div>
