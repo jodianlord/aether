@@ -66,16 +66,18 @@ document.getElementById("submit").onclick = function () {
                     var filebase = reader.result;
                     object["userdata"] = filebase;
                     object["password"] = "password";
-                    $.ajax({
+                    var jc = $.ajax({
                         url: "./IdentityServlet",
                         type: "POST",
                         data: JSON.stringify(object),
                         contentType: "application/json",
                         success: function (response) {
+                            
                             $.alert({
                                 title: "Success!",
                                 content: "Identity Uploaded!"
                             });
+      
                         },
                         error: function (xhr) {
                             console.log(xhr);

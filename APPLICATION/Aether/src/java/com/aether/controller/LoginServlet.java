@@ -43,11 +43,16 @@ public class LoginServlet extends HttpServlet {
                 
                 // Invalid username or password
             }
+            else {
+                session.setAttribute("loginerror", "Wrong userid/password");
+                response.sendRedirect("index.jsp");
+            }
         }
         else {
-            session.setAttribute("loginerror", "Wrong userid/password");
-            response.sendRedirect("index.jsp");
+                session.setAttribute("loginerror", "Wrong userid/password");
+                response.sendRedirect("index.jsp");
         }
+
         
         
 
