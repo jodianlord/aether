@@ -615,6 +615,8 @@
         document.getElementById("captureagain").style.visibility = "visible"; 
     } else if (capture === "hidden") {
         document.getElementById("captureagain").style.visibility = "visible"; 
+    } else {
+        document.getElementById("capture").style.visibility = "hidden"
     }
 </script>
 

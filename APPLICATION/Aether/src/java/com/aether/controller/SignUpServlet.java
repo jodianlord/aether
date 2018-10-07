@@ -33,6 +33,7 @@ public class SignUpServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         String userid = request.getParameter("userid");
+        userid = userid.toLowerCase();
         String password = request.getParameter("password");
         String publickey = BlockchainHandler.createAccount("password");
         publickey = publickey.replace("\u0000", "");

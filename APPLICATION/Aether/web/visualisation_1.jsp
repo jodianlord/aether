@@ -146,7 +146,7 @@
                                 <div class="col-md-4 col-sm-4 mb">
                                     <div id="encrypt" class="blockchainoverview vispanel pn">
                                         <i class="fa fa-fingerprint fa-4x"></i>
-                                        <h2>The Basics of Encryption</h2>
+                                        <h2>The Basics of Hashing</h2>
                                         <h4>Click to start</h4>
                                     </div>
                                 </div><!-- /col-md-4--> 
@@ -227,6 +227,26 @@
                         '<h5>Now comes time to link everything together.'
             });
         });
+        
+        $('#encrypt').click(function(){
+            $.confirm({
+               theme: 'material',
+               title: 'Why do we hash?',
+               content: '<img src="img/encryption.gif">' + 
+                       '<h5>Imagine you have a bunch of data. Someone hacks into your server/machine/laptop and instead of stealing it, changes it ever so slightly.<br>' +
+                       'How do we detect this?</h5>',
+               buttons: {
+                   next: function(){
+                       $.confirm({
+                          theme: 'material',
+                          title: 'The rundown on hashing',
+                          content: "<img src='img/hashing.png'>" +
+                                  "<h5>The important thing to note is that when hashing ANY information, the resulting text will always be the same length. You can try this in the 'Hashing' link later on. With this in mind, the moment you change any part of the data, the resulting hashed text will change.</h5>"
+                       });
+                   }
+               }
+            });
+        })
 
         $('#smartcon').click(function () {
             $.confirm({

@@ -75,8 +75,6 @@
                                                 <!--<optgroup label="Please Select">-->
                                                     <option>Male</option>
                                                     <option>Female</option>
-                                                    <option>I do not wish to disclose</option>
-
                                                 <!--</optgroup>-->
                                             </select>
                                         </div>
@@ -482,6 +480,8 @@
         document.getElementById("captureagain").style.visibility = "visible"; 
     } else if (capture === "hidden") {
         document.getElementById("captureagain").style.visibility = "visible"; 
+    } else {
+        document.getElementById("capture").style.visibility = "hidden"
     }
 </script>
 
