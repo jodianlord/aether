@@ -15,6 +15,10 @@
     <script src="https://surveyjs.azureedge.net/1.0.46/survey.jquery.js"></script>
     <link href="https://surveyjs.azureedge.net/1.0.46/survey.css" type="text/css" rel="stylesheet"/>
     <body>
+        <!-- Loading Screen -->
+        <div class="se-pre-con">                        
+        </div>
+        
         <section id="container" >
 
             <%@include  file="Components/topbar.html" %>
@@ -71,8 +75,6 @@
                                                 <!--<optgroup label="Please Select">-->
                                                     <option>Male</option>
                                                     <option>Female</option>
-                                                    <option>I do not wish to disclose</option>
-
                                                 <!--</optgroup>-->
                                             </select>
                                         </div>
@@ -387,7 +389,7 @@
                                 </div>
                                 <button id="startstream" type="button" class="btn btn-primary">Start Camera</button>
                                 <button id="capture" type="button" class="btn btn-theme04">Take Photo</button>
-                                <button id="captureagain" type="button" class="btn btn-primary">Take Another Photo</button>
+                                <button id="captureagain" type="button" class="btn btn-primary">Retake Photo</button>
                                 
                             </div>
                         </div>
@@ -437,6 +439,8 @@
             <!--main content end-->
         </section>
 
+        
+                                
         <%@include file="Components/script.html" %>
         <!--set dashboard button to active-->
         <script type="application/javascript">
@@ -465,6 +469,9 @@
 
     </body>
 </html>
+
+
+
 <script>
     document.getElementById("captureagain").style.visibility = "hidden"; 
     var startstream = document.getElementById("startstream").style.visibility;
@@ -473,6 +480,8 @@
         document.getElementById("captureagain").style.visibility = "visible"; 
     } else if (capture === "hidden") {
         document.getElementById("captureagain").style.visibility = "visible"; 
+    } else {
+        document.getElementById("capture").style.visibility = "hidden"
     }
 </script>
 

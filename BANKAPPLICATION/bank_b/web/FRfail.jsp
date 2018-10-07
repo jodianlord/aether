@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <%@include  file="Components/head.html" %>
-
+    <div class="se-pre-con">                        
+        </div>
     <body style="background-color: black">
 
         <section id="container" >

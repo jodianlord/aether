@@ -32,6 +32,8 @@
 <html lang="en">
     <%@include  file="Components/head.html" %>
     <body>
+        <div class="se-pre-con">                        
+        </div>
         <style>
             .row:after {
                 content: "";
@@ -58,7 +60,7 @@
                 text-align: center;
                 background-position: center center;
             }
-            
+
             .vispanel i {
                 color: white;
                 margin-top: 45px;
@@ -73,7 +75,7 @@
                 letter-spacing: 1px;
             }
 
-           
+
         </style>
         <section id="container" >
             <%@include  file="Components/topbar.html" %>
@@ -101,10 +103,10 @@
 
                                 <!-- WHATIS PANEL -->
                                 <div class="col-md-4 col-sm-4 mb" id="box2">
-                                    <div class="whatisblockchain vispanel pn">
-                                        <i class="fa fa-question fa-4x"></i>
-                                        <h2>What Is Blockchain?</h2>
-                                        <h4>An Explanation</h4>
+                                    <div id="secure" class="whatisblockchain vispanel pn">
+                                        <i class="fa fa-user-secret fa-4x"></i>
+                                        <h2>Data Handling & Encryption</h2>
+                                        <h4>Keeping things safe</h4>
                                     </div>
                                 </div><!-- /col-md-4-->
                             </div>
@@ -139,6 +141,25 @@
                                 </div><!-- /col-md-4-->
 
                             </div>
+                            <div class="row hiddenrow" id="hidden2">
+                                <!-- OVERVIEW PANEL -->
+                                <div class="col-md-4 col-sm-4 mb">
+                                    <div id="encrypt" class="blockchainoverview vispanel pn">
+                                        <i class="fa fa-fingerprint fa-4x"></i>
+                                        <h2>The Basics of Hashing</h2>
+                                        <h4>Click to start</h4>
+                                    </div>
+                                </div><!-- /col-md-4--> 
+
+                                <!-- OVERVIEW PANEL -->
+                                <div class="col-md-4 col-sm-4 mb">
+                                    <div id="hashtest" class="blockchainoverview vispanel pn">
+                                        <i class="fa fa-hashtag fa-4x"></i>
+                                        <h2>Hashing</h2>
+                                        <h4>Let's Test Hashing!</h4>
+                                    </div>
+                                </div><!-- /col-md-4--> 
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -149,21 +170,83 @@
 
     </body>
     <script type="text/javascript">
+        var toHash;
+
         $('#blockover').click(function () {
             console.log("hi");
             document.getElementById("hidden1").style.display = "block";
+            document.getElementById("hidden2").style.display = "none";
             //document.getElementById("box2").style.opacity = 0.5;
             $("#hidden1").delay(100).animate({opacity: 1}, 700);
+            $('#box1').delay(100).animate({opacity: 1}, 700);
             $('#box2').delay(100).animate({opacity: 0.2}, 700);
         });
-        
-        $('#overblck').click(function(){
+
+        $('#secure').click(function () {
+            console.log("hi again");
+            document.getElementById("hidden1").style.display = "none";
+            document.getElementById("hidden2").style.display = "block";
+            $("#hidden2").delay(100).animate({opacity: 1}, 700);
+            $('#box1').delay(100).animate({opacity: 0.2}, 700);
+            $('#box2').delay(100).animate({opacity: 1}, 700);
+        });
+
+        $('#hashtest').click(function () {
             $.confirm({
-               theme: 'material',
-               title: 'Linking Everything Together',
-               content: '<img src="img/linking.gif"></img'
+                theme: 'material',
+                columnClass: 'large',
+                title: 'Let\'s hash something!',
+                content: '<input type="text" id="tohash" class="form-control round-form" placeholder="Type your string here" id="hashstring">' +
+                        '<div id="hashresult"></div>',
+                onContentReady: function () {
+                    $('#tohash').keyup(function () {
+                        var value = $('#tohash').val();
+                        toHash = value;
+                        console.log('hi');
+                        $.ajax({
+                            url: "./BlockchainVis?method=hash&randomstring=" + value,
+                            type: "GET",
+                            contentType: "application/json",
+                            success: function (resp) {
+                                $('#hashresult').html(resp.result);
+                            }, error: function (xhr) {
+
+                            }
+                        });
+                    });
+
+                }
+            })
+        });
+
+        $('#overblck').click(function () {
+            $.confirm({
+                theme: 'material',
+                title: 'Linking Everything Together',
+                content: '<img src="img/linking.gif"></img' +
+                        '<h5>Now comes time to link everything together.'
             });
         });
+        
+        $('#encrypt').click(function(){
+            $.confirm({
+               theme: 'material',
+               title: 'Why do we hash?',
+               content: '<img src="img/encryption.gif">' + 
+                       '<h5>Imagine you have a bunch of data. Someone hacks into your server/machine/laptop and instead of stealing it, changes it ever so slightly.<br>' +
+                       'How do we detect this?</h5>',
+               buttons: {
+                   next: function(){
+                       $.confirm({
+                          theme: 'material',
+                          title: 'The rundown on hashing',
+                          content: "<img src='img/hashing.png'>" +
+                                  "<h5>The important thing to note is that when hashing ANY information, the resulting text will always be the same length. You can try this in the 'Hashing' link later on. With this in mind, the moment you change any part of the data, the resulting hashed text will change.</h5>"
+                       });
+                   }
+               }
+            });
+        })
 
         $('#smartcon').click(function () {
             $.confirm({

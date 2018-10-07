@@ -42,7 +42,8 @@
 
 
     <body>
-
+        <div class="se-pre-con">                        
+        </div>
         <section id="overall" >
 
             <%@include  file="Components/topbar.html" %>
@@ -473,36 +474,6 @@
         margin-left: 30px;
         margin-right: 30px;
         height: 55px;
-    }
-
-    .owl-buttons {
-        display: none;
-    }
-    .owl-carousel:hover .owl-buttons {
-        display: block;
-    }
-
-    .owl-item {
-        text-align: center;
-    }
-
-    .owl-theme .owl-controls .owl-buttons div {
-        background: transparent;
-        color: #869791;
-        font-size: 40px;
-        line-height: 300px;
-        margin: 0;
-        padding: 0 60px;
-        position: absolute;
-        top: 0;
-    }
-    .owl-theme .owl-controls .owl-buttons .owl-prev {
-        left: 0;
-        padding-left: 20px;
-    }
-    .owl-theme .owl-controls .owl-buttons .owl-next {
-        right: 0;
-        padding-right: 20px;
     }
 
 </style>

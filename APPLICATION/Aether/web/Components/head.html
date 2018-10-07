@@ -33,7 +33,23 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     
+    
+    <!--LOADING SCREEN -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+    <link href="css/loadingscreen.css" type="text/css" rel="stylesheet"/>
+    <!--LOADING SCREEN END -->
+    
+    
     <link rel="stylesheet" href="js/owlcarousel/css/owl.carousel.min.css">
     <link rel="stylesheet" href="js/owlcarousel/css/owl.theme.default.min.css">
+    
+    <script>
+    $(window).load(function() {
+        
+        // Animate loader off screen
+        $(".se-pre-con").fadeOut("slow");
+    });
+    </script>
     
 </head>

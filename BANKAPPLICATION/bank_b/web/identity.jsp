@@ -4,7 +4,7 @@
     <%@include  file="Components/head.html" %>
 
     <body style="background-color: #f2f2f2">
-
+        <div class="se-pre-con"> </div>
         <section id="container" >
 
             <%--<%@//include  file="Components/topbar.html" %>--%>
@@ -25,8 +25,8 @@
                             <div class="form-panel col-lg-12" style="height:250px;margin-top: -5em">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> Upload .bin UDI File</h4>
                                 <input type="file" class="filepond" id="fileupload">
-                                </br>
-                                <button id="populate" type="button" style="width:20%;margin-left: 67.5%"class="btn btn-danger btn-lg btn-block">Populate</button>
+                                
+                                
                             </div>
                         </div>
                     </div>
@@ -40,9 +40,22 @@
                                 </div>
                                 <button id="startstream" type="button" class="btn btn-primary">Start Camera</button>
                                 <button id="capture" type="button" class="btn btn-theme04">Take Photo</button>
+                                <button id="captureagain" type="button" class="btn btn-primary">Retake Photo</button>
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="row mt">
+                        <div class ="col-lg-3"></div>
+                        <div class="col-lg-6">
+                            <button id="populate" type="button" style="margin-top:-20px;margin-left: 10px"class="btn btn-danger btn-lg btn-block">Populate</button>
+                    
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
 
                      <div class="row mt">
                         <div class="col-lg-3"></div>
@@ -301,7 +314,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Marital Status</label>
                                         <div class="col-sm-10">
-                                            <select class="form-control" name="marital">
+                                            <select class="form-control" id="marital" name="marital">
                                                 <option disabled="disabled" selected="selected">Please Select</option>
                                                 <!--<optgroup label="Please Select">-->
                                                     <option>Single</option>
@@ -316,7 +329,7 @@
                                         <label class="col-sm-2 col-sm-2 control-label">Residence Type</label>
                                         <div class="col-sm-10">
                                             <!--<input type="text" id="residencetype" name="residencetype" class="form-control">-->
-                                            <select class="form-control" name="residencetype">
+                                            <select class="form-control" id="residencetype" name="residencetype">
                                                 <option disabled="disabled" selected="selected">Please Select</option>
                                                 <!--<optgroup label="Please Select">-->
                                                     <option value = "hdb_SEM">HDB - Standard / Executive / Maisonette</option>
@@ -388,7 +401,7 @@
                             </div>
                         </div>
                     </div>
-                     <div class ="col-lg-3"></div>
+                    <div class ="col-lg-3"></div>
                         <div class="col-lg-6">
                             <button id="submit" type="button" style="width:103%" class="btn btn-danger btn-lg btn-block">Submit Account Creation</button>
                         </div>
@@ -532,8 +545,14 @@
                                 console.log("aft servlet");
                             //end
                                 $.confirm({
-                                    title: "Your account has been created!",
-                                    content: "Congrats!"
+                                    title: "Your account has been created! ",
+                                    content: "You can now login to your tBank account.",
+                                    
+                                    buttons: {
+                                        OK: function () {
+                                           window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
+                                        },
+                                    }                                   
                                 });
                             } else if (data.status === "Do Not Match") {
                                 //AddVerification(uuid, transactionHash);
@@ -579,6 +598,9 @@
         });
     }
 </script>
+
+
+
 <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
 
 <script>
@@ -589,6 +611,19 @@
     })
             ;
     //FilePond.parse(document.body);
+</script>
+
+<script>
+    document.getElementById("captureagain").style.visibility = "hidden"; 
+    var startstream = document.getElementById("startstream").style.visibility;
+    var capture = document.getElementById("capture").style.visibility;
+    if(startstream === "hidden") {
+        document.getElementById("captureagain").style.visibility = "visible"; 
+    } else if (capture === "hidden") {
+        document.getElementById("captureagain").style.visibility = "visible"; 
+    } else {
+        document.getElementById("capture").style.visibility = "hidden"
+    }
 </script>
 
 <style>

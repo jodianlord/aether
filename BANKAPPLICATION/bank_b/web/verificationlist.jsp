@@ -4,7 +4,8 @@
     <%@include  file="Components/head.html" %>
 
     <body style="background-color: black">
-
+        <div class="se-pre-con">                        
+        </div>
         <section id="container" >
 
             <%@include  file="Components/topbar.html" %>
