@@ -80,7 +80,9 @@ public class CreateCustomerServlet extends HttpServlet {
 
         String apiServiceUrl = "http://tbankonline.com/SMUtBank_API/Gateway";
         String body = getBody(request);
-        try {
+        try(PrintWriter out = response.getWriter()){
+            org.json.simple.JSONObject printCreateJSON = new org.json.simple.JSONObject();
+            boolean createResult=false;
             org.json.simple.JSONObject jsonContent = getJSONObject(body);
             //org.json.simple.JSONObject resultJSON = getJSONObject(body);
             String nric = (String) jsonContent.get("nric");
@@ -173,22 +175,42 @@ System.out.println("wtf buffer");
                 resp += s.nextLine();
             }
             s.close();
-System.out.println("wtf resp");
+            System.out.println("wtf resp");
             // get response object
             JSONObject responseObj = new JSONObject(resp);
             System.out.println(responseObj.toString(4)); // indent 4 spaces
             System.out.println();
             //parse {"Content"}
-System.out.println("wtf parse content");
+            System.out.println("wtf parse content");
             contentObj = responseObj.getJSONObject("Content");
             //parse {"ServiceResponse"}
             JSONObject serviceRespObj = contentObj.getJSONObject("ServiceResponse");
             //parse {"customer details"}
             JSONObject customerDetailsObj = serviceRespObj.getJSONObject("CustomerDetails");
-            String accID = (String) customerDetailsObj.get("AccountID");
+            Object accID = customerDetailsObj.get("AccountID");
+            String AccountIDText = "";
+            if(accID==null){
+                printCreateJSON.put("createStatus", "fail");
+                
+            }
+            else{
+                createResult=true;
+                AccountIDText = accID.toString();
+            }
             String custID = customerDetailsObj.getString("CustomerID");
-            String custPIN = customerDetailsObj.getString("PIN");
-           
+            Object custPIN = customerDetailsObj.get("PIN");
+            String customerPINText = "";
+            if(custPIN==null){
+                printCreateJSON.put("createStatus", "fail");
+                
+                
+                System.out.println("WHY NOT FALSE"+createResult);
+                
+            }
+            else{
+                createResult=true;
+                customerPINText = custPIN.toString();
+            }
             System.out.println("wtf parse custdetails");
             //parseHeader
             JSONObject serviceRespHeaderObj = serviceRespObj.getJSONObject("ServiceRespHeader");
@@ -197,14 +219,25 @@ System.out.println("wtf parse content");
             Object errorDetails =  serviceRespHeaderObj.get("ErrorDetails");
             System.out.println("wtf parse error");
             //check for error:
+            if(customerPINText!=null){
+                SendSMSDAO msg = new SendSMSDAO();
+                msg.sendMessage( mobile, "Your account has been created! "
+                            + "Please use your NRIC as the username and "+"this is your PIN: "+customerPINText+"");
+                printCreateJSON.put("createStatus", "success");
+            }
+            else{
+                printCreateJSON.put("createStatus", "fail");
+            }
+            //send response using printJSON
+            //org.json.simple.JSONObject printCreateJSON = new org.json.simple.JSONObject();
+            //printCreateJSON.put("createStatus", "success");
             
-            SendSMSDAO msg = new SendSMSDAO();
-            msg.sendMessage( "96480053", "Your account has been created!"
-                        + "Please use your NRIC as the username and "+"this is your PIN: "+custPIN+"");
-            
-System.out.println("wtf parse help");
+           
+            out.println(printCreateJSON.toString());
+            System.out.println("wtf parse help");   
         } catch (Exception e) {
             System.out.println("wtf exception");
+            
             e.printStackTrace(System.out);
 
         }
