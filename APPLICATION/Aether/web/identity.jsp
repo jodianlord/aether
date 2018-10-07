@@ -67,12 +67,13 @@
                                         <div class="col-sm-10">
                                             <!--<input type="text" id="gender" name="gender" class="form-control">-->
                                             <select class="form-control" id = "gender" name="gender">
-                                                <optgroup label="Please Select">
+                                                <option disabled="disabled" selected="selected">Please Select</option>
+                                                <!--<optgroup label="Please Select">-->
                                                     <option>Male</option>
                                                     <option>Female</option>
                                                     <option>I do not wish to disclose</option>
 
-                                                </optgroup>
+                                                <!--</optgroup>-->
                                             </select>
                                         </div>
                                     </div>
@@ -81,7 +82,8 @@
                                         <div class="col-sm-10">
                                             <!--<input type="text" id="nationality" name="nationality" class="form-control">-->
                                             <select class="form-control" id="nationality"  name="nationality">
-                                                <optgroup label="Please Select">
+                                                <option disabled="disabled" selected="selected">Please Select</option>
+                                                <!--<optgroup label="Please Select">-->
                                                     <option value="singaporean">Singaporean</option>
                                                     <option value="afghan">Afghan</option>
                                                     <option value="albanian">Albanian</option>
@@ -274,7 +276,7 @@
                                                     <option value="yemenite">Yemenite</option>
                                                     <option value="zambian">Zambian</option>
                                                     <option value="zimbabwean">Zimbabwean</option>
-                                                </optgroup>
+                                                <!--</optgroup>-->
                                             </select>
                                         </div>
                                     </div>
@@ -282,12 +284,13 @@
                                         <label class="col-sm-2 col-sm-2 control-label">Marital Status</label>
                                         <div class="col-sm-10">
                                             <select class="form-control" name="marital">
-                                                <optgroup label="Please Select">
+                                                <option disabled="disabled" selected="selected">Please Select</option>
+                                                <!--<optgroup label="Please Select">-->
                                                     <option>Single</option>
                                                     <option>Married</option>
                                                     <option>Divorced</option
-                                                </optgroup>
-                                                >
+                                                <!--</optgroup>-->
+                                                
                                             </select>
                                         </div>
                                     </div>
@@ -296,14 +299,15 @@
                                         <div class="col-sm-10">
                                             <!--<input type="text" name="residencetype" class="form-control">-->
                                             <select class="form-control" name="residencetype">
-                                                <optgroup label="Please Select">
+                                                <option disabled="disabled" selected="selected">Please Select</option>
+                                                <!--<optgroup label="Please Select">-->
                                                     <option value = "hdb_SEM">HDB - Standard / Executive / Maisonette</option>
                                                     <option value = "hdb_studioSC">HDB - Studio Apartment for Senior Citizens</option>
                                                     <option value = "hdb_hudc">HDB - HUDC / Executive Condominium</option>
                                                     <option value = "hdb_shop">HDB - Shop with Accomodation</option>
                                                     <option value = "private_condo">Condominium / Private Apartment</option>
                                                     <option value = "terrace_bungalow">Terrace / Bungalow</option>
-                                                </optgroup>
+                                                <!--</optgroup>-->
                                             </select>
                                         </div>
                                     </div>
@@ -324,7 +328,8 @@
                                         <div class="col-sm-10">
                                             <!--<input type="text" name="industry" class="form-control">-->
                                             <select id="industry" class="form-control"  name="industry">
-                                                <optgroup label="Please Select">
+                                                <option disabled="disabled" selected="selected">Please Select</option>
+                                                <!--<optgroup label="Please Select">-->
                                                     <option value="Arms / Defence">Arms / Defence</option>
                                                     <option value="Arts / Antique Dealer / Auctioneer">Arts / Antique Dealer / Auctioneer</option>
                                                     <option value="Bakery Outlet">Bakery Outlet</option>
@@ -354,7 +359,7 @@
                                                     <option value="Transport Related Provider">Transport Related Provider (Taxi Driver / Quasi Driver / Uber / Grab Car Driver)</option>
                                                     <option value="Trusts / Foundations">Trusts / Foundations</option>
                                                     <!--<option value="others">Others</option>-->
-                                                </optgroup>
+                                                <!--</optgroup>-->
                                             </select>
 
 
