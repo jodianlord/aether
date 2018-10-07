@@ -32,6 +32,8 @@
 <html lang="en">
     <%@include  file="Components/head.html" %>
     <body>
+        <div class="se-pre-con">                        
+        </div>
         <style>
             .row:after {
                 content: "";

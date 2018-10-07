@@ -23,7 +23,8 @@
     <link rel="stylesheet" href="./index.css">
     
     <body onload='myFunction()'>
-
+        <div class="se-pre-con">                        
+        </div>
         <section id="container" >
 
             <%@include  file="Components/topbar.html" %>

@@ -42,7 +42,8 @@
 
 
     <body>
-
+        <div class="se-pre-con">                        
+        </div>
         <section id="overall" >
 
             <%@include  file="Components/topbar.html" %>

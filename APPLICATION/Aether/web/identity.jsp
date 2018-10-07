@@ -15,6 +15,10 @@
     <script src="https://surveyjs.azureedge.net/1.0.46/survey.jquery.js"></script>
     <link href="https://surveyjs.azureedge.net/1.0.46/survey.css" type="text/css" rel="stylesheet"/>
     <body>
+        <!-- Loading Screen -->
+        <div class="se-pre-con">                        
+        </div>
+        
         <section id="container" >
 
             <%@include  file="Components/topbar.html" %>
@@ -437,6 +441,8 @@
             <!--main content end-->
         </section>
 
+        
+                                
         <%@include file="Components/script.html" %>
         <!--set dashboard button to active-->
         <script type="application/javascript">
@@ -465,6 +471,9 @@
 
     </body>
 </html>
+
+
+
 <script>
     document.getElementById("captureagain").style.visibility = "hidden"; 
     var startstream = document.getElementById("startstream").style.visibility;

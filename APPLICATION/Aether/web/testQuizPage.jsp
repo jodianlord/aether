@@ -16,6 +16,8 @@
 
     </head>
     <body onload="myFunction()">
+        <div class="se-pre-con">                        
+        </div>
         <div id="surveyElement"></div>
        
 

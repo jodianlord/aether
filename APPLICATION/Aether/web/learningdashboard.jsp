@@ -22,7 +22,8 @@
     <%@include  file="Components/head.html" %>
 
     <body>
-
+        <div class="se-pre-con">                        
+        </div>
         <section id="container" >
 
             <%@include  file="Components/topbar.html" %>
