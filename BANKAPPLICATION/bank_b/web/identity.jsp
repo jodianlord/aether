@@ -25,8 +25,8 @@
                             <div class="form-panel col-lg-12" style="height:250px;margin-top: -5em">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> Upload .bin UDI File</h4>
                                 <input type="file" class="filepond" id="fileupload">
-                                </br>
-                                <button id="populate" type="button" style="width:20%;margin-left: 67.5%"class="btn btn-danger btn-lg btn-block">Populate</button>
+                                
+                                
                             </div>
                         </div>
                     </div>
@@ -43,6 +43,18 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="row mt">
+                        <div class ="col-lg-3"></div>
+                        <div class="col-lg-6">
+                            <button id="populate" type="button" style="margin-top:-20px;margin-left: 10px"class="btn btn-danger btn-lg btn-block">Populate</button>
+                    
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
 
                      <div class="row mt">
                         <div class="col-lg-3"></div>
@@ -388,7 +400,7 @@
                             </div>
                         </div>
                     </div>
-                     <div class ="col-lg-3"></div>
+                    <div class ="col-lg-3"></div>
                         <div class="col-lg-6">
                             <button id="submit" type="button" style="width:103%" class="btn btn-danger btn-lg btn-block">Submit Account Creation</button>
                         </div>
