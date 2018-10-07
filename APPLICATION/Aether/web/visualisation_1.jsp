@@ -102,7 +102,7 @@
                             <div class="row">
 
                                 <!-- OVERVIEW PANEL -->
-                                <div class="col-md-4 col-sm-4 mb">
+                                <div class="col-md-4 col-sm-4 mb" id="box1">
                                     <div id="blockover" class="blockchainoverview pn">
                                         <i class="fa fa-th-large fa-4x"></i>
                                         <h2>Blockchain</h2>
@@ -111,7 +111,7 @@
                                 </div><!-- /col-md-4-->
 
                                 <!-- WHATIS PANEL -->
-                                <div class="col-md-4 col-sm-4 mb">
+                                <div class="col-md-4 col-sm-4 mb" id="box2">
                                     <div class="whatisblockchain pn">
                                         <i class="fa fa-question fa-4x"></i>
                                         <h2>What Is Blockchain?</h2>
@@ -122,14 +122,23 @@
 
                             <div class="row hiddenrow" id="hidden1">
 
-                                <!-- TWITTER PANEL -->
-                                <div class="col-lg-4 col-md-4 col-sm-4 mb">
-                                    <div id="whatis" class="twitter-panel pn" style="background-color:#ff6600;">
+                                <!-- OVERVIEW PANEL -->
+                                <div class="col-md-4 col-sm-4 mb">
+                                    <div id="whatis" class="blockchainoverview pn">
                                         <i class="fa fa-lock fa-4x"></i>
-                                        <p>The basics: What's a blockchain?</p>
-                                        <p class="user">Click To Get Started</p>
+                                        <h2>The Basics: What's A Blockchain?</h2>
+                                        <h4>Click to start</h4>
                                     </div>
-                                </div><!-- /col-md-4 -->
+                                </div><!-- /col-md-4-->
+
+                                <!-- OVERVIEW PANEL -->
+                                <div class="col-md-4 col-sm-4 mb">
+                                    <div id="smartcon" class="blockchainoverview pn">
+                                        <i class="fa fa-file-contract fa-4x"></i>
+                                        <h2>Smart Contrats</h2>
+                                        <h4>Click to start</h4>
+                                    </div>
+                                </div><!-- /col-md-4-->
 
                             </div>
                         </div>
@@ -141,22 +150,38 @@
             <%@include file="Components/style.html" %>
 
     </body>
-    <script type="text/javascript">
+    <script type="text/javascript"> 
         $('#blockover').click(function () {
             console.log("hi");
             document.getElementById("hidden1").style.display = "block";
+            //document.getElementById("box2").style.opacity = 0.5;
             $("#hidden1").delay(100).animate({opacity: 1}, 700);
+            $('#box2').delay(100).animate({opacity: 0.2}, 700);
         });
-        
-        $('#whatis').click(function(){
+
+        $('#whatis').click(function () {
             $.confirm({
                 theme: 'material',
                 title: 'So this is a blockchain.',
                 content: '<img src="img/blockchain-broadcast-varification.gif"></img>' +
-                            'It\'s not as complicated as you think. Think of each block as a bit of data, that stores information about other blocks of data. Because everyone has copies of these blocks, it\'s easy to tell if something\'s not right.',
+                        '<h4>It\'s not as complicated as you think. Think of each block as a bit of data, that stores information about other blocks of data. Because everyone has copies of these blocks, it\'s easy to tell if something\'s not right.</h4>',
                 buttons: {
-                    next: {
-                        text: 'NEXT'
+                    next: function () {
+                        $.confirm({
+                            theme: 'material',
+                            title: 'What\'s in a blockchain?',
+                            content: '<img src="img/BTY_2.gif"></img>' +
+                                    "<h4>A blockchain consists of 3 basic parts: data, hashes and reference hashes.</h4>" +
+                                    "<h3>Data</h3>" +
+                                    "<h4>Transactions on the blockchain can be sent, attached with data.</h4>" +
+                                    "<h3>Hash</h3>" +
+                                    "<h4>A hash is a unique identifier as a representation of the data in the block itself. If any data in the block changes, so does this.</h4>" +
+                                    "<h3>Reference Hash</h3>" +
+                                    "<h4>Same as above, but instead this is representative of another block's data.",
+                            buttons: {
+                                close: {}
+                            }
+                        });
                     }
                 }
             })
