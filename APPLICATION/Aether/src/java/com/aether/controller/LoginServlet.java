@@ -29,6 +29,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         //HttpSession session = request.getSession();
         String userid = request.getParameter("userid");
+        userid = userid.toLowerCase();
         String password = request.getParameter("password");
         String groupid = request.getParameter("groupid");
         HttpSession session = request.getSession();
