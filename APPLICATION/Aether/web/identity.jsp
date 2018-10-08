@@ -46,13 +46,16 @@
                                         <label class="col-sm-2 col-sm-2 control-label">NRIC</label>
                                         <div class="col-sm-10" id="nricdiv">
                                             <input type="text" id="nric" name="nric" class="form-control" placeholder="e.g. S1234567D">
+                                            <div id="nricerror" style="display:none;color: red">
+                                                Please enter a valid NRIC number!
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Email</label>
                                         <div class="col-sm-10" id="emaildiv">
                                             <input type="text" id="email" name="email" class="form-control" placeholder="e.g. johndoe@mail.com">
-                                            <div id="emailerror" style="display:none">
+                                            <div id="emailerror" style="display:none;color: red">
                                                 Please enter a valid email address!
                                             </div>
                                         </div>
@@ -61,7 +64,7 @@
                                         <label class="col-sm-2 col-sm-2 control-label">Mobile</label>
                                         <div class="col-sm-10">
                                             <input type="text" id="mobile" name="mobile" class="form-control" placeholder="e.g. 81245678">
-                                            <div id="mobileerror" style="display:none">
+                                            <div id="mobileerror" style="display:none;color: red">
                                                 Please enter a valid mobile number!
                                             </div>
                                         </div>

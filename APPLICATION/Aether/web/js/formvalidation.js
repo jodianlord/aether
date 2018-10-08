@@ -4,22 +4,44 @@
  * and open the template in the editor.
  */
 
-$("#email").keyup(function(){
-    console.log("hid");
-    var val = document.getElementById('email').value;
-    if(!val.includes('@')){
-        document.getElementById("emailerror").style.display =  "block";
-    }else{
-        document.getElementById("emailerror").style.display =  "none";
+$("#nric").keyup(function(){
+    var val = document.getElementById('nric').value;
+    if(val.match(/^[STFG]\d{7}[A-Z]$/)){
+        document.getElementById("nricerror").style.display =  "none";
+    }else if (val.length == 9) {
+        document.getElementById("nricerror").style.display =  "none";
+    }else {
+        document.getElementById("nricerror").style.display =  "block";
     }
 });
 
+
+$("#email").keyup(function(){
+    var val = document.getElementById('email').value;
+    if(val.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+        document.getElementById("emailerror").style.display =  "none";
+    }else{
+        document.getElementById("emailerror").style.display =  "block";
+    }
+    /*if(!val.includes('@')){
+        document.getElementById("emailerror").style.display =  "block";
+    }else{
+        document.getElementById("emailerror").style.display =  "none";
+    }*/
+});
+
 $("#mobile").keyup(function(){
-    console.log("hid");
     var val = document.getElementById('mobile').value;
-    if(val.match(/^[0-9]+$/) == null){
+    if(val.match(/(8|9)\d{7}/)){
+        document.getElementById("mobileerror").style.display =  "none";
+    }else{
+        document.getElementById("mobileerror").style.display =  "block";
+    }
+    /*if(val.match(/^[0-9]+$/) == null){
         document.getElementById("mobileerror").style.display =  "block";
     }else{
         document.getElementById("mobileerror").style.display =  "none";
-    }
+    }*/
 });
+
+
