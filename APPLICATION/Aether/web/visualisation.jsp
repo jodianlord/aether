@@ -191,6 +191,7 @@
     <script type="text/javascript">
         var toHash;
         var ethBalance = "<%=eth%>";
+        var publickey = "<%=publickey%>";
         $('#blockover').click(function () {
             console.log("hi");
             document.getElementById("hidden1").style.display = "block";
@@ -237,8 +238,37 @@
                         '</h1>' +
                         '</div>' +
                         '</div>' +
-                        '<h4>This is your account balance, accumulated while you were answering questions just now.' +
-                        '</h4>'
+                        '<h4>This is your account balance, accumulated while you were answering questions just now. <br><br>' +
+                        'There\'s no actual value to the currency here, but on a real ethereum network what you have here could buy you a nice rolex.</h4>',
+                buttons: {
+                    next: function () {
+                        $.confirm({
+                            theme: 'material',
+                            title: 'What\'s your account number?',
+                            columnClass: 'large',
+                            content: '<h2>Public Key<h2>' +
+                                    '<h3>' + publickey + '<h3>' +
+                                    '<h4>Your public key is like your address: it allows you to find your account. By keying in a public key next, you\'ll be able to find out what your friends\' balance is.</h4><br>' +
+                                    '<input id="friendkey" class="form-control round-form" type="text" placeholder="Enter your friend\'s public key here!">' +
+                                    '<div id="balancediv"></div>',
+                            onContentReady: function () {
+                                $('#friendkey').keyup(function () {
+                                    $.ajax({
+                                        url: "./BlockchainVis?method=getBalance&publickey=" + $('#friendkey').val(),
+                                        type: "GET",
+                                        contentType: "application/json",
+                                        success: function(resp){
+                                            $("#balancediv").html(resp.result);
+                                        }, error: function(xhr){
+                                            
+                                        }
+                                    });
+                                });
+
+                            }
+                        });
+                    }
+                }
             });
         });
 
