@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <%
     String publickey = UserDAO.getUser((String) session.getAttribute("userid")).getPublicKey();
+    System.out.println(publickey);
     BigInteger balance = new BigInteger("0");
     BigInteger eth = new BigInteger("0");
     try{

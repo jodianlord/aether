@@ -170,7 +170,14 @@
                                 </div><!-- /col-md-4--> 
                             </div>
                             <div class="row hiddenrow" id="hidden3">
-                                
+                                <!-- OVERVIEW PANEL -->
+                                <div class="col-md-4 col-sm-4 mb">
+                                    <div id="account" class="blockchainoverview vispanel pn">
+                                        <i class="fa fa-dollar-sign fa-4x"></i>
+                                        <h2>Accounts and Balance</h2>
+                                        <h4>View your ether!</h4>
+                                    </div>
+                                </div><!-- /col-md-4--> 
                             </div>
                         </div>
                     </div>
@@ -183,7 +190,7 @@
     </body>
     <script type="text/javascript">
         var toHash;
-
+        var ethBalance = "<%=eth%>";
         $('#blockover').click(function () {
             console.log("hi");
             document.getElementById("hidden1").style.display = "block";
@@ -195,7 +202,6 @@
             $('#box2').delay(100).animate({opacity: 0.2}, 700);
             $('#box3').delay(100).animate({opacity: 0.2}, 700);
         });
-
         $('#secure').click(function () {
             console.log("hi again");
             document.getElementById("hidden1").style.display = "none";
@@ -206,15 +212,34 @@
             $('#box2').delay(100).animate({opacity: 1}, 700);
             $('#box3').delay(100).animate({opacity: 0.2}, 700);
         });
-        
-        $('#tryout').click(function(){
+        $('#tryout').click(function () {
             console.log("nice seeing you again");
             document.getElementById("hidden1").style.display = "none";
             document.getElementById("hidden2").style.display = "none";
             document.getElementById("hidden3").style.display = "block";
+            $("#hidden3").delay(100).animate({opacity: 1}, 700);
             $('#box1').delay(100).animate({opacity: 0.2}, 700);
             $('#box2').delay(100).animate({opacity: 0.2}, 700);
             $('#box3').delay(100).animate({opacity: 1}, 700);
+        });
+        $('#account').click(function () {
+            $.confirm({
+                theme: 'material',
+                title: 'How much money do you have?',
+                columnClass: 'large',
+                content: '<div class="col-md-6 mb">' +
+                        '<div class="darkblue-panel pn">' +
+                        '<div class="darkblue-header">' +
+                        '<h5>BALANCE</h5>' +
+                        '</div>' +
+                        '<h1 class="ml15">' +
+                        '<span class="word">' + ethBalance + 'ETH</span>' +
+                        '</h1>' +
+                        '</div>' +
+                        '</div>' +
+                        '<h4>This is your account balance, accumulated while you were answering questions just now.' +
+                        '</h4>'
+            });
         });
 
         $('#hashtest').click(function () {
