@@ -361,6 +361,8 @@
                                             <select id="industry" class="form-control"  name="industry">
                                                 <option disabled="disabled" selected="selected">Please Select</option>
                                                 <!--<optgroup label="Please Select">-->
+                                                    <option value="Student">Education (Student) </option>
+                                                    <option value="Education">Education</option>    
                                                     <option value="Arms / Defence">Arms / Defence</option>
                                                     <option value="Arts / Antique Dealer / Auctioneer">Arts / Antique Dealer / Auctioneer</option>
                                                     <option value="Bakery Outlet">Bakery Outlet</option>
