@@ -11,12 +11,12 @@ document.getElementById("startstream").onclick = function () {
     var video = document.createElement("video"),
             vendorUrl = window.URL || window.webkitURL;
     video.id = "video";
-//    video.classList.add("col-md-6");
+    video.classList.add("col-md-6");
     video.classList.add("col-sm-6");
     video.classList.add("mb");
     document.getElementById("media").innerHTML = "";
     document.getElementById("media").appendChild(video);
-
+    
     navigator.getMedia = navigator.getUserMedia ||
             navigator.webkitGetUserMedia ||
             navigator.mozGetUserMedia ||
@@ -33,7 +33,7 @@ document.getElementById("startstream").onclick = function () {
         //error.code
     });
 
-
+    document.getElementById("capture").style.margin = "-50px 20px 0px 15px";
     document.getElementById("capture").style.visibility = "visible"; //make visible
 
 }
@@ -55,7 +55,11 @@ document.getElementById("capture").onclick = function () {
         track.stop();
     });
     
+    //document.getElementById("capture").style.margin = "-50px 20px 0px 15px";
     document.getElementById("capture").style.visibility = "hidden"; //make invisible
+    
+    document.getElementById("captureagain").style.margin = "-290px 0px 0px 0px";
+    document.getElementById("camerapanel").style.height = "650px";
     document.getElementById("captureagain").style.visibility = "visible"; //make visible
 }
 
