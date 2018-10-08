@@ -16,7 +16,7 @@ document.getElementById("startstream").onclick = function () {
     video.classList.add("mb");
     document.getElementById("media").innerHTML = "";
     document.getElementById("media").appendChild(video);
-
+    
     navigator.getMedia = navigator.getUserMedia ||
             navigator.webkitGetUserMedia ||
             navigator.mozGetUserMedia ||
@@ -33,7 +33,7 @@ document.getElementById("startstream").onclick = function () {
         //error.code
     });
 
-
+    document.getElementById("capture").style.margin = "-50px 20px 0px 15px";
     document.getElementById("capture").style.visibility = "visible"; //make visible
 
 }
@@ -45,17 +45,21 @@ document.getElementById("capture").onclick = function () {
     canvas = document.createElement("canvas");
     canvas.id = "canvas";
     context = canvas.getContext("2d");
-    canvas.width = 600;
-    canvas.style.width = '45%';
+    canvas.width = 1000;
+//    canvas.style.width = '100%';
     canvas.height = canvas.width * .75;
-    context.drawImage(document.getElementById("video"), 0, 0, 400, 300);
+    context.drawImage(document.getElementById("video"), 0, 0, 675, 500);
     document.getElementById("media").innerHTML = "";
     document.getElementById("media").appendChild(canvas);
     streamObj.getTracks().forEach(function (track) {
         track.stop();
     });
     
+    //document.getElementById("capture").style.margin = "-50px 20px 0px 15px";
     document.getElementById("capture").style.visibility = "hidden"; //make invisible
+    
+    document.getElementById("captureagain").style.margin = "-290px 0px 0px 0px";
+    document.getElementById("camerapanel").style.height = "650px";
     document.getElementById("captureagain").style.visibility = "visible"; //make visible
 }
 
@@ -86,10 +90,5 @@ document.getElementById("captureagain").onclick = function () {
         //An error occured
         //error.code
     });
-    
-     
-
-
-    //document.getElementById("capture").style.visibility = "visible"; //make visible
 
 }
