@@ -388,15 +388,15 @@
                     <div class="row mt">
                         <div class ="col-lg-3"></div>
                         <div class="col-lg-6">
-                            <div class="form-panel col-lg-12">
+                            <div class="form-panel col-lg-12" id="camerapanel">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> Take Picture</h4>
-                                <div id="media" style="width:200%;">
+                                <div id="media" style="width:198%;">
                                 </div>
                                 
                                 <div style="position:relative;float:left;clear:left;margin-top: 10px">
-                                    <button style="" id="startstream" type="button" class="btn btn-primary">Start Camera</button>
-                                    <button style="" id="capture" type="button" class="btn btn-theme04">Take Photo</button>
-                                    <button style="" id="captureagain" type="button" class="btn btn-primary">Retake Photo</button>
+                                    <button style="float:left;clear:left;margin-left: 0px" id="startstream" type="button" class="btn btn-primary">Start Camera</button>
+                                    <button style="float:left;clear:left;margin-left: 15px" id="capture" type="button" class="btn btn-theme04">Take Photo</button>
+                                    <button style="float:left;clear:left;margin-left: 15px" id="captureagain" type="button" class="btn btn-primary">Retake Photo</button>
                                 </div>
                                 
                                 
