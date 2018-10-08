@@ -387,11 +387,15 @@
                         <div class="col-lg-6">
                             <div class="form-panel col-lg-12">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> Take Picture</h4>
-                                <div id="media">
+                                <div id="media" style="width:200%;">
                                 </div>
-                                <button id="startstream" type="button" class="btn btn-primary">Start Camera</button>
-                                <button id="capture" type="button" class="btn btn-theme04">Take Photo</button>
-                                <button id="captureagain" type="button" class="btn btn-primary">Retake Photo</button>
+                                
+                                <div style="position:relative;float:left;clear:left;margin-top: 10px">
+                                    <button style="" id="startstream" type="button" class="btn btn-primary">Start Camera</button>
+                                    <button style="" id="capture" type="button" class="btn btn-theme04">Take Photo</button>
+                                    <button style="" id="captureagain" type="button" class="btn btn-primary">Retake Photo</button>
+                                </div>
+                                
                                 
                             </div>
                         </div>
