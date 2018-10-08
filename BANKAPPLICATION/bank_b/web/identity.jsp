@@ -519,41 +519,76 @@
                         contentType: "application/json",
                         success: function (data) {
                             if (data.status === "Match") {
-                            //create tbank customer
-                            var createJson ={};
-                            createJson["nric"]=$("#nric").val();
-                            createJson["fullname"]=$("#fullname").val();
-                            createJson["email"]=$("#email").val();
-                            createJson["mobile"]=$("#mobile").val();
-                            createJson["gender"]=$("#gender").val();
-                            createJson["marital"]=$("#marital").val();
-                            createJson["address"]=$("#address").val();
-                            createJson["occupation"]=$("#occupation").val();
-                            console.log("working for createjson");
-                                $.ajax({
-                                    url: "./CreateCustomerServlet", //edit address accordingly
-                                    type: "POST",
-                                    data: JSON.stringify(createJson),
-                                    contentType: "application/json",
-                                    success: function (createData) {  
-                                        
+                                //create tbank customer
+                                var createJson ={};
+                                createJson["nric"]=$("#nric").val();
+                                createJson["fullname"]=$("#fullname").val();
+                                createJson["email"]=$("#email").val();
+                                createJson["mobile"]=$("#mobile").val();
+                                createJson["gender"]=$("#gender").val();
+                                createJson["marital"]=$("#marital").val();
+                                createJson["address"]=$("#address").val();
+                                createJson["occupation"]=$("#occupation").val();
+                                console.log("working for createjson");
+                                    $.ajax({
+                                        url: "./CreateCustomerServlet", //edit address accordingly
+                                        type: "POST",
+                                        data: JSON.stringify(createJson),
+                                        contentType: "application/json",
+                                        success: function (createData) {  
+                                            if(createData.createStatus==="success"){
+                                                $.confirm({
+                                                    title: "Your account has been created! ",
+                                                    content: "You can now login to your tBank account.",
 
-                                    }, error: function (xhr) {
-                                            console.log("fk u");
-                                    }
-                                });    
-                                console.log("aft servlet");
+                                                    buttons: {
+                                                        OK: function () {
+                                                           window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
+                                                            },
+                                                        }                                   
+                                                    });
+                                            }
+                                            else{
+                                                $.confirm({
+                                                    title: "Duplicated NRIC. Customer already exist in tBank ",
+                                                    content: "Please check your information again as there are already an existing account with tBank",
+
+                                                    buttons: {
+                                                        OK: function () {
+                                                           //window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
+                                                            },
+                                                        }                                   
+                                                    });
+                                            }
+
+                                        }, error: function (xhr) {
+                                                console.log("Create Customer failed");
+                                                $.confirm({
+                                                    title: "Create Customer failed",
+                                                    content: "Create customer failed please validate your information again.",
+
+                                                    buttons: {
+                                                        OK: function () {
+                                                           //window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
+                                                            },
+                                                        }                                   
+                                                    });
+                                        }
+                                    });    
+                                    console.log("aft servlet");
                             //end
-                                $.confirm({
-                                    title: "Your account has been created! ",
-                                    content: "You can now login to your tBank account.",
-                                    
-                                    buttons: {
-                                        OK: function () {
-                                           window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
-                                        },
-                                    }                                   
-                                });
+                            /*
+                                    $.confirm({
+                                        title: "Your account has been created! ",
+                                        content: "You can now login to your tBank account.",
+
+                                        buttons: {
+                                            OK: function () {
+                                               window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
+                                            },
+                                        }                                   
+                                    });
+                                    */
                             } else if (data.status === "Do Not Match") {
                                 //AddVerification(uuid, transactionHash);
                                 //sessionStorage.setItem("testuuid", uuid);

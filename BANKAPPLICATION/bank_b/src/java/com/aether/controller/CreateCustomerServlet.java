@@ -219,14 +219,16 @@ System.out.println("wtf buffer");
             Object errorDetails =  serviceRespHeaderObj.get("ErrorDetails");
             System.out.println("wtf parse error");
             //check for error:
-            if(customerPINText!=null){
-                SendSMSDAO msg = new SendSMSDAO();
-                msg.sendMessage( mobile, "Your account has been created! "
-                            + "Please use your NRIC as the username and "+"this is your PIN: "+customerPINText+"");
-                printCreateJSON.put("createStatus", "success");
+            if(globalErrorID.equals("010009")){
+                printCreateJSON.put("createStatus", "fail");
+                System.out.println("NV NV NV SEND SMS!!!!!!!!!!!!!!!!!!!!");
             }
             else{
-                printCreateJSON.put("createStatus", "fail");
+                System.out.println("SEND SMS!!!!!!!!!!!!!!!!!!!!");
+                SendSMSDAO msg = new SendSMSDAO();
+                msg.sendMessage( mobile, "Your account has been created! Please use your NRIC as the username and this is your PIN: "+customerPINText+"");
+                printCreateJSON.put("createStatus", "success");
+                
             }
             //send response using printJSON
             //org.json.simple.JSONObject printCreateJSON = new org.json.simple.JSONObject();
