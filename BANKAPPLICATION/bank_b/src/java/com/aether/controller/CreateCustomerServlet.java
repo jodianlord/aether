@@ -93,7 +93,7 @@ public class CreateCustomerServlet extends HttpServlet {
             String marital = (String) jsonContent.get("marital");
             String address = (String) jsonContent.get("address");
             String occupation = (String) jsonContent.get("occupation");
-            
+            String prefUsername = (String) jsonContent.get("prefUsername");
             
             
             // build header
@@ -122,7 +122,7 @@ public class CreateCustomerServlet extends HttpServlet {
             jo.put("emailAddress", email);
             jo.put("countryCode", "+65");
             jo.put("mobileNumber", mobile);
-            jo.put("preferredUserID", nric);
+            jo.put("preferredUserID", prefUsername);
             jo.put("currency", "SGD");
             jo.put("bankID", "1");
             

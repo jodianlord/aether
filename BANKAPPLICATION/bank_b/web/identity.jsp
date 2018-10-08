@@ -64,6 +64,12 @@
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> User Details</h4>
                                 <form class="form-horizontal style-form" id="userdata" action="/CreateCustomerServlet" method="post">
                                     <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Preferred Username</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" id="prefUsername" name="prefUsername" value="" class="form-control" placeholder="e.g. S9445002A or Johndoe2014">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Full Name</label>
                                         <div class="col-sm-10">
                                             <input type="text" id="fullname" name="fullname" class="form-control" placeholder="e.g. John Doe">
@@ -490,6 +496,15 @@
                 });
                 return;
             }
+            var prefUser = document.getElementById("prefUsername").value;
+            var p =prefUser.toString();
+            if(p===null || p===""){
+                $.alert({
+                    title: 'Sorry!',
+                    content: 'Please enter your preferred username!',
+                });
+                return;
+            }
 
             var canvasbase = canvas.toDataURL();
             object["verificationfile"] = canvasbase;
@@ -531,6 +546,7 @@
                                 createJson["marital"]=$("#marital").val();
                                 createJson["address"]=$("#address").val();
                                 createJson["occupation"]=$("#occupation").val();
+                                createJson["prefUsername"]=$("#prefUsername").val();
                                 console.log("working for createjson");
                                     $.ajax({
                                         url: "./CreateCustomerServlet", //edit address accordingly
