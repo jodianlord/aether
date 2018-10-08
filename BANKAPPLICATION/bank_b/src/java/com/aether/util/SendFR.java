@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
+import java.net.ProtocolException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -49,34 +50,37 @@ public class SendFR extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
-        try (PrintWriter out = response.getWriter()){
+        try (PrintWriter out = response.getWriter()) {
             String bodyJSON = getBody(request);
             JSONObject body = getJSONObject(bodyJSON);
 
             /*String uuid = (String) bodyJSON.get("uuid");
             String sampleimage = (String) bodyJSON.get("sampleimage");
             String camimage = (String) bodyJSON.get("camimage");*/
-
+            //System.out.println("here");
+            System.out.println("Trying to get result");
             String result = RESTHandler.sendPostRequest(URL, body, null);
+
             JSONObject jsonResult = getJSONObject(result);
             String status = (String) jsonResult.get("status");
             String facedetect = (String) jsonResult.get("facedetect");
-            
-            System.out.println("status: ");
-            
-            System.out.println("status: " + status);
-            
+            System.out.println(result);
+
             JSONObject printJSON = new JSONObject();
             printJSON.put("status", status);
             printJSON.put("facedetect", facedetect);
-           
+
             out.println(printJSON.toString());
 
         } catch (IOException e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            JSONObject printJSON = new JSONObject();
+            printJSON.put("status", "Error");
             return;
         } catch (ParseException e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            JSONObject printJSON = new JSONObject();
+            printJSON.put("status", "Error");
             return;
         }
     }

@@ -48,14 +48,10 @@
                     <div class="row mt">
                         <div class ="col-lg-3"></div>
                         <div class="col-lg-6">
-                            <button id="populate" type="button" style="margin-top:-20px;margin-left: 10px"class="btn btn-danger btn-lg btn-block">Verify</button>
+                            <button id="populate" type="button" style="margin-top:-20px;margin-left: 10px"class="btn btn-danger btn-lg btn-block">Populate User Details</button>
                     
                         </div>
                     </div>
-                    
-                    
-                    
-                    
 
                      <div class="row mt">
                         <div class="col-lg-3"></div>
@@ -599,6 +595,11 @@
                                     title: "Error!",
                                     content: "Your face does not match the UDI. Please wait while staff attend to your request."
                                 });
+                            } else if(data.status === "Error") {
+                                $.alert({
+                                    title: "Error!",
+                                    content: "Your face does not match the UDI. Please wait while staff attend to your request."
+                                });
                             } else {
                                 $.alert({
                                     title: "Error!",
@@ -607,13 +608,17 @@
                             }
                             console.log(result.result);
                         }, error: function (xhr) {
-                            
-                        }
+                                $.alert({
+                                        title: "Error!",
+                                        content: "Your face does not match the UDI. Please wait while staff attend to your request."
+                                });
+                        },
                     });
 
                 }, error: function (xhr) {
                     console.log("The file has been compromised or tampered with. Please wait while staff attend to your request.");
                 }
+                
             });
         }
     }
