@@ -71,10 +71,10 @@ document.getElementById("capture").onclick = function () {
                 canvas = document.createElement("canvas");
                 canvas.id = "canvas";
                 context = canvas.getContext("2d");
-                canvas.width = 1000;
+                canvas.width = 500;
 //    canvas.style.width = '100%';
                 canvas.height = canvas.width * .75;
-                context.drawImage(document.getElementById("video"), 0, 0, 675, 500);
+                context.drawImage(document.getElementById("video"), 0, 0, 405, 325);
                 document.getElementById("media").innerHTML = "";
                 document.getElementById("media").appendChild(canvas);
                 streamObj.getTracks().forEach(function (track) {
