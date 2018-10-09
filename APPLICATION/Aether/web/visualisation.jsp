@@ -444,7 +444,12 @@
                 theme: 'material',
                 title: 'Linking Everything Together',
                 content: '<img src="img/linking.gif"></img' +
-                        '<h5>Now comes time to link everything together.'
+                        '<h5>Now comes time to link everything together. Move on to Data Handling and Encryption!</h5>',
+                buttons: {
+                    close: {
+                        
+                    }
+                }
             });
         });
         $('#encrypt').click(function () {
