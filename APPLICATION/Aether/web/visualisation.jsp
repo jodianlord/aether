@@ -248,13 +248,22 @@
                         "       hash = ha;<br>" +
                         "   }<br><br>" +
                         "}</code></pre>",
-                buttons:{
-                    next: function(){
+                buttons: {
+                    next: function () {
                         $.confirm({
-                           theme: 'material',
-                           title: 'Generate some values!',
-                           columnClass: 'large',
-                           
+                            theme: 'material',
+                            title: 'Generate some values!',
+                            columnClass: 'large',
+                            content: '<h3>UUID</h3>' +
+                                    '<h4> This value is randomly generated. Click the button below to generate a value until you find one you like.</h4>' +
+                                    '<button class="btn btn-blue" id="uuidbtn">Generate UUID</button>' +
+                                    '<h3>Hash</h3>' +
+                                    '<h4> Input some text here to be hashed</h4>' +
+                                    '<input class="btn btn-green" id="hashbtn" placeholder="Input some text!">' +
+                                    '<button class="btn btn-red" id="contractsubmit">Submit Contract</button>',
+                            onContentReady: function(){
+                                
+                            }
                         });
                     }
                 }
