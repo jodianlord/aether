@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
+import java.util.UUID;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -48,6 +49,7 @@ public class BlockchainVis extends HttpServlet {
         }else if(method.equals("deployContract")){
             try{               
                 String body = getBody(request);
+                BlockchainHandler.unlockAccount(publicKey, "password");
                 JSONObject resultJSON = getJSONObject(body);
                 String uuid = (String) resultJSON.get("uuid");
                 String hash = (String) resultJSON.get("hash");
@@ -84,6 +86,9 @@ public class BlockchainVis extends HttpServlet {
             BlockchainHandler.unlockAccount(from, "password");
             String result = BlockchainHandler.sendTransaction(from, to, value);
             resp = result;
+        }else if(method.equals("uuid")){
+            String uuid = UUID.randomUUID().toString();
+            resp = uuid;
         }
         
         

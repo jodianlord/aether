@@ -257,19 +257,70 @@
                             content: '<h3>UUID</h3>' +
                                     '<h4> This value is randomly generated. Click the button below to generate a value until you find one you like.</h4>' +
                                     '<button class="btn btn-blue" id="uuidbtn">Generate UUID</button>' +
+                                    '<div id="uuidresult"></div>' +
                                     '<h3>Hash</h3>' +
                                     '<h4> Input some text here to be hashed</h4>' +
-                                    '<input class="btn btn-green" id="hashbtn" placeholder="Input some text!">' +
-                                    '<button class="btn btn-red" id="contractsubmit">Submit Contract</button>',
-                            onContentReady: function(){
-                                
+                                    '<input class="form-control round-form" id="hashbtn" placeholder="Input some text!">' +
+                                    '<div id="hashresult"></div>' +
+                                    '<button class="btn btn-red" id="contractsubmit">Submit Contract</button>' +
+                                    '<div id="transactionresult"></div>',
+                            onContentReady: function () {
+                                $('#uuidbtn').click(function () {
+                                    $.ajax({
+                                        url: "./BlockchainVis?method=uuid",
+                                        type: "GET",
+                                        contentType: "application/json",
+                                        success: function (resp) {
+                                            $('#uuidresult').html('<h4>' + resp.result + '</h4>');
+                                        }, error: function (xhr) {
+
+                                        }
+                                    });
+                                });
+                                $('#hashbtn').keyup(function () {
+                                    console.log('hi');
+                                    $.ajax({
+                                        url: "./BlockchainVis?method=hash&randomstring=" + $('#hashbtn').val(),
+                                        type: "GET",
+                                        contentType: "application/json",
+                                        success: function (resp) {
+                                            $('#hashresult').html('<h4>' + resp.result + '</h4>');
+                                        }, error: function (xhr) {
+
+                                        }
+                                    });
+                                });
+                                $('#contractsubmit').click(function () {
+                                    if ($('#hashresult').html().length == 0 || $('#uuidresult').html().length == 0) {
+                                        $('#transactionresult').html('<h4> Please put in all the values! </h4>');
+                                    }
+                                    var hashsub = $('#hashresult').html().substring(4, $('#hashresult').html().length - 5);
+                                    var uuidsub = $('#uuidresult').html().substring(4, $('#uuidresult').html().length - 5);
+                                    console.log(hashsub + ' ' + uuidsub);
+                                    var conObject = {};
+                                    conObject["uuid"] = uuidsub;
+                                    conObject["hashsub"] = hashsub;
+                                    $.ajax({
+                                        url: "./BlockchainVis?method=deployContract&publicKey=" + publickey,
+                                        type: "POST",
+                                        data: conObject,
+                                        contentType: "application/json",
+                                        success: function (resp) {
+                                            $('#transactionresult').html('<h4>' + resp.result + '</h4>');
+                                        }, error: function (xhr) {
+
+                                        }
+                                    });
+                                });
+                            }, 
+                            buttons: {
+                                close: {}
                             }
                         });
                     }
                 }
             });
         });
-
         $('#account').click(function () {
             $.confirm({
                 theme: 'material',
