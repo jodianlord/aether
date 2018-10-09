@@ -48,7 +48,7 @@ document.getElementById("capture").onclick = function () {
     canvas.width = 500;
 //    canvas.style.width = '100%';
     canvas.height = canvas.width * .75;
-    context.drawImage(document.getElementById("video"), 0, 0, 405, 325);
+    context.drawImage(document.getElementById("video"), 0, 0, 470, 470*0.75);
     document.getElementById("media").innerHTML = "";
     document.getElementById("media").appendChild(canvas);
     streamObj.getTracks().forEach(function (track) {
@@ -58,7 +58,7 @@ document.getElementById("capture").onclick = function () {
     //document.getElementById("capture").style.margin = "-50px 20px 0px 15px";
     document.getElementById("capture").style.visibility = "hidden"; //make invisible
     
-    document.getElementById("captureagain").style.margin = "-130px 0px 0px 0px";
+    document.getElementById("captureagain").style.margin = "-60px 0px 0px 0px";
     document.getElementById("camerapanel").style.height = "480px";
     document.getElementById("captureagain").style.visibility = "visible"; //make visible
 }
