@@ -25,7 +25,7 @@ import javax.xml.bind.DatatypeConverter;
 public class BlockchainHandler {
 
     private static HttpURLConnection con;
-    private static final String URL = "http://vm.jordysamuel.com:30301/Blockchain/";
+    private static final String URL = "http://127.0.0.1:8080/Blockchain/";
     private static final BigInteger ETHTOWEI = new BigInteger("1000000000000000000");
 
     /**

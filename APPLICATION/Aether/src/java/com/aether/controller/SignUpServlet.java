@@ -38,8 +38,8 @@ public class SignUpServlet extends HttpServlet {
         String publickey = BlockchainHandler.createAccount("password");
         publickey = publickey.replace("\u0000", "");
         
-        BlockchainHandler.unlockAccount("0x2d117903f7b2dc16abe2d6272d11d84233ff7c1f", "password");
-        BlockchainHandler.sendTransaction("0x2d117903f7b2dc16abe2d6272d11d84233ff7c1f", publickey, 1000000000);
+        //BlockchainHandler.unlockAccount("0x2d117903f7b2dc16abe2d6272d11d84233ff7c1f", "password");
+        //BlockchainHandler.sendTransaction("0x2d117903f7b2dc16abe2d6272d11d84233ff7c1f", publickey, 1000000000);
 
         String hashedPWD = BCrypt.hashpw(password, BCrypt.gensalt(12));
 

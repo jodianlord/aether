@@ -358,7 +358,7 @@
                                                                                         Please select the Bank that you want to create your account with!
                                                                                     </p>
                                                                                     
-                                                                                    <a href="https://vm.jordysamuel.com:30307/bank_b/">
+                                                                                    <a href="https://sm.jordysamuel.com:30307/bank_b/">
                                                                                         <img src="img/logo_tbank_alt.png" style="position: relative;height:50%;width:30%;margin-left:30px;margin-top: 30px">
                                                                                     </a>
                                                                                 </div>

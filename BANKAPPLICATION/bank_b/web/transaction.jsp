@@ -100,7 +100,7 @@
                                             beforeSend: function (request) {
                                                 request.setRequestHeader("X-DreamFactory-API-Key", "a552bede56b69bb18c9f0dbe41d58939d90f88db17c71d3bc08c5428ec94fbe3");
                                             },
-                                            url: "http://vm.jordysamuel.com:30308/api/v2/mysql/_table/user",
+                                            url: "http://sm.jordysamuel.com:30308/api/v2/mysql/_table/user",
                                             data: {"filter": filter},
                                             success: function (result) {
                                                 console.log(result);
