@@ -15,6 +15,7 @@ import com.aether.blockchain.BlockchainHandler;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -70,9 +71,19 @@ public class BlockchainVis extends HttpServlet {
         }else if(method.equals("hash")){
             String randomstring = request.getParameter("randomstring");
             resp = BlockchainHandler.keccak256hash(randomstring);
-        }else if(method.equals("getBalance")){
+        }else if(method.equals("getBalanceTest")){
             String publickey = request.getParameter("publickey");
-            resp = BlockchainHandler.getBalance(publickey).toString();
+            System.out.println("publickey : " + publickey);
+            BigInteger weiBalance = BlockchainHandler.getBalance(publickey);
+            BigInteger ethBalance = BlockchainHandler.convertToEth(weiBalance);
+            resp = ethBalance.toString();
+        }else if(method.equals("transferEth")){
+            String from = request.getParameter("from");
+            String to = request.getParameter("to");
+            int value = Integer.parseInt(request.getParameter("value"));
+            BlockchainHandler.unlockAccount(from, "password");
+            String result = BlockchainHandler.sendTransaction(from, to, value);
+            resp = result;
         }
         
         

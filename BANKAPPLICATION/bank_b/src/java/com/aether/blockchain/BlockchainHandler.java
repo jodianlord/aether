@@ -340,6 +340,7 @@ public class BlockchainHandler {
         try {
             String result = RESTHandler.sendGetRequest(requestURL, "bc.key");
             JSONObject jsonResult = getJSONObject(result);
+            System.out.println(jsonResult.toString());
             String hex = (String) jsonResult.get("result");
             BigInteger balance = new BigInteger(hex.substring(2, hex.length()), 16);
             return balance;
@@ -347,6 +348,7 @@ public class BlockchainHandler {
             System.out.println("Malformed URL!");
         } catch (ProtocolException f) {
             System.out.println("Protocol Exception!");
+            return new BigInteger("0");
         } catch (IOException e) {
             System.out.println("IO Exception!");
         } catch (ParseException e) {

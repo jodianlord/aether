@@ -178,6 +178,14 @@
                                         <h4>View your ether!</h4>
                                     </div>
                                 </div><!-- /col-md-4--> 
+                                <!-- OVERVIEW PANEL -->
+                                <div class="col-md-4 col-sm-4 mb">
+                                    <div id="contracts" class="blockchainoverview vispanel pn">
+                                        <i class="fa fa-file-signature fa-4x"></i>
+                                        <h2>Contracts And Deployment</h2>
+                                        <h4>Deploy a contract!</h4>
+                                    </div>
+                                </div><!-- /col-md-4--> 
                             </div>
                         </div>
                     </div>
@@ -223,6 +231,36 @@
             $('#box2').delay(100).animate({opacity: 0.2}, 700);
             $('#box3').delay(100).animate({opacity: 1}, 700);
         });
+
+        $('#contracts').click(function () {
+            $.confirm({
+                theme: 'material',
+                title: 'Time to deploy a contract!',
+                columnClass: 'large',
+                content: '<h4>Now that you\'ve transferred some funds, it\'s time to deploy a contract.<br>' +
+                        'On the next page, you\'ll generate some values to be deployed! For now have a look at the smart contract code you saw earlier.</h4>' +
+                        "<pre><code>pragma solidity ^ 0.4.2; <br>" +
+                        "contract KYC{<br>" +
+                        "   string public uuid;<br>" +
+                        "   string public hash;<br>" +
+                        "   constructor(string id, string ha) public{<br>" +
+                        "       uuid = id;<br>" +
+                        "       hash = ha;<br>" +
+                        "   }<br><br>" +
+                        "}</code></pre>",
+                buttons:{
+                    next: function(){
+                        $.confirm({
+                           theme: 'material',
+                           title: 'Generate some values!',
+                           columnClass: 'large',
+                           
+                        });
+                    }
+                }
+            });
+        });
+
         $('#account').click(function () {
             $.confirm({
                 theme: 'material',
@@ -253,25 +291,68 @@
                                     '<div id="balancediv"></div>',
                             onContentReady: function () {
                                 $('#friendkey').keyup(function () {
-                                    $.ajax({
-                                        url: "./BlockchainVis?method=getBalance&publickey=" + $('#friendkey').val(),
-                                        type: "GET",
-                                        contentType: "application/json",
-                                        success: function(resp){
-                                            $("#balancediv").html(resp.result);
-                                        }, error: function(xhr){
-                                            
+                                    var key = $('#friendkey').val();
+                                    if (key.length == 42) {
+                                        $.ajax({
+                                            url: "./BlockchainVis?method=getBalanceTest&publickey=" + $('#friendkey').val(),
+                                            type: "GET",
+                                            contentType: "application/json",
+                                            success: function (resp) {
+                                                $("#balancediv").html("<h3>" + resp.result + " ETH <h3>");
+                                            }, error: function (xhr) {
+
+                                            }
+                                        });
+                                    }
+
+                                });
+                            },
+                            buttons: {
+                                next: function () {
+                                    $.confirm({
+                                        theme: 'material',
+                                        title: 'Transferring Ether',
+                                        columnClass: 'large',
+                                        content: '<h2>Public Key<h2>' +
+                                                '<h3>' + publickey + '<h3>' +
+                                                '<h4>Next we\'re going to transfer some currency to your friends! Simply put in their public key and the amount you want to transfer.</h4><br>' +
+                                                '<input id="friendkey" class="form-control round-form" type="text" placeholder="Enter your friend\'s public key here!">' +
+                                                '<input id="transferbalance" class="form-control round-form" type="number" placeholder="Enter the amount to transfer in WEI! ">' +
+                                                '<div id="balancediv"></div>' +
+                                                '<div id="statusdiv"></div>' +
+                                                '<button id="submittrans" class="btn btn-red">Submit</button>',
+                                        onContentReady: function () {
+                                            $('#submittrans').click(function () {
+                                                var friendkey = $('#friendkey').val();
+                                                var balance = $('#transferbalance').val();
+                                                if (friendkey.length == 42 && balance > 0) {
+                                                    $.ajax({
+                                                        url: "./BlockchainVis?method=transferEth&from=" + publickey + "&to=" + friendkey + "&value=" + balance,
+                                                        type: "GET",
+                                                        contentType: "application/json",
+                                                        success: function (resp) {
+                                                            $('#statusdiv').html("<h4>Transactionhash: " + resp.result + "</h4>");
+                                                            console.log(resp);
+                                                        }, error: function (xhr) {
+
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        },
+                                        buttons: {
+                                            close: function () {
+
+                                            }
                                         }
                                     });
-                                });
-
+                                }
                             }
                         });
                     }
                 }
             });
         });
-
         $('#hashtest').click(function () {
             $.confirm({
                 theme: 'material',
@@ -295,11 +376,9 @@
                             }
                         });
                     });
-
                 }
             })
         });
-
         $('#overblck').click(function () {
             $.confirm({
                 theme: 'material',
@@ -308,7 +387,6 @@
                         '<h5>Now comes time to link everything together.'
             });
         });
-
         $('#encrypt').click(function () {
             $.confirm({
                 theme: 'material',
@@ -390,7 +468,6 @@
                 }
             });
         });
-
         $('#whatis').click(function () {
             $.confirm({
                 theme: 'material',
