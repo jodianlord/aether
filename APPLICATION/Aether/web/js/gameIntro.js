@@ -28,7 +28,7 @@ var json = {
             questions: [
                 {
                     type: "html",
-                    html : "<b>What is a Know-Your-Customer (KYC) process?</b></br></br>KYC is a process by which banks obtain information about the identity and address of customers. This process helps to ensure that banks' services are not misused, hence when you open a new bank account, you will be asked to provide a proof of identity and/or address.</br></br>By first verifying customers' identities and then understanding their transcation patterns,banks are more able to pinpoint suspicious activities.",
+                    html : "<b>What is a Know-Your-Customer (KYC) process?</b></br></br>KYC is a process by which banks obtain information about the identity and address of customers. This process helps to ensure that banks' services are not misused, hence when you open a new bank account, you will be asked to provide a proof of identity and/or address.</br></br>By first verifying customers' identities and then understanding their transaction patterns,banks are more able to pinpoint suspicious activities.",
                     
                 }
             ]
@@ -36,7 +36,7 @@ var json = {
             questions: [
                     {
                     type: "html",
-                    html : "<b>What is a 'KYC agent'?</b></br></br>A KYC agent is a 3rd party personnel authorised by a central authority to collect personal particulars of potential banking customers so as create digital identity for them.</br></br><b>As a KYC Agent, your role is to:</b><ul><li>>Key in the customer particulars</li><li>>Upload the scan of the customer personal identification document</li><li>>Take a facial photograph of the customer</li></ui></br></br>",
+                    html : "<b>What is a 'KYC agent'?</b></br></br>A KYC agent is a 3rd party personnel authorised by a central authority to collect personal particulars of potential banking customers so as create digital identity for them.</br></br><b>As a KYC Agent, your role is to:</b></br><ul></br><li>>Key in the customer particulars</li><li>>Upload the scan of the customer personal identification document</li><li>>Take a facial photograph of the customer</li></ui></br></br>",
                     
                 }
             ]
