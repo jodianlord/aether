@@ -13,8 +13,9 @@
 <%@page import="java.util.UUID"%>
 <!DOCTYPE html>
 <%
-    String publickey = UserDAO.getUser((String) session.getAttribute("userid")).getPublicKey();
-    publickey = publickey.replace("\u0000", "");
+    //String publickey = UserDAO.getUser((String) session.getAttribute("userid")).getPublicKey();
+    //publickey = publickey.replace("\u0000", "");
+    String publickey = "0x377206b688d07eea952189577d82e92309b1f22a";
     BigInteger balance = new BigInteger("0");
     BigInteger eth = new BigInteger("0");
     try {
@@ -299,11 +300,12 @@
                                     console.log(hashsub + ' ' + uuidsub);
                                     var conObject = {};
                                     conObject["uuid"] = uuidsub;
-                                    conObject["hashsub"] = hashsub;
+                                    conObject["hash"] = hashsub;
+                                    console.log(JSON.stringify(conObject));
                                     $.ajax({
                                         url: "./BlockchainVis?method=deployContract&publicKey=" + publickey,
                                         type: "POST",
-                                        data: conObject,
+                                        data: JSON.stringify(conObject),
                                         contentType: "application/json",
                                         success: function (resp) {
                                             $('#transactionresult').html('<h4>' + resp.result + '</h4>');
