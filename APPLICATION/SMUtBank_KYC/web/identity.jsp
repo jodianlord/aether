@@ -511,17 +511,19 @@
         opacity: 0.8; /* Firefox */
     }
     .filepond--root {
-        max-height: 10em;
+        max-height: 170px;
         width: 75%;
         margin: auto;
     }
     .filepond--panel-root {
         background-color: #5e7496;
+        height: 80px;
     }
     .filepond--drop-label {
         margin: auto;
         color: white;
         font-size: 22px;
+        margin-top: -10px;
     }
     .filepond--file {
         font-weight: 200;
