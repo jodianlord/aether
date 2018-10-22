@@ -51,20 +51,24 @@ public class UserDAO {
         record.put("publickey", user.getPublicKey());
         ArrayList<Map<String,String>> toFeed = new ArrayList<Map<String,String>>();
         toFeed.add(record);
-        System.out.println(Dreamfactory.createRecords("user", toFeed));
-        
-        /*
-        try (Connection conn = ConnectionManager.getConnection();
-                PreparedStatement preparedStatement = conn.prepareStatement("insert into aether.user(userid,password,publickey) values (?,?,?)");) {
+        try {
+            System.out.println(JDBCHandler.createRecords("user", record));
+            
+            /*
+            try (Connection conn = ConnectionManager.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement("insert into aether.user(userid,password,publickey) values (?,?,?)");) {
             preparedStatement.setString(1, user.getUserid());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getPublicKey());
 
             preparedStatement.executeUpdate();
-        } catch (SQLException ex) {
+            } catch (SQLException ex) {
             ex.printStackTrace();
+            }
+            */
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        */
     }
     
     public static User getUser(String userid){
@@ -86,32 +90,37 @@ public class UserDAO {
     
     public static String authenticate(String username) {
 
-        // Retrieve username from Dreamfactory
-        
-        HashMap<String, String> filter = new HashMap<String, String>();
-        filter.put("userid", username);
-        JSONArray record = Dreamfactory.getRecordsFromTable("user", filter);
-        if(record == null || record.size() == 0){
-            return null;
-        }
-        
-        JSONObject user = (JSONObject) record.get(0);
-        return (String) user.get("password");
-        
-        /*
-        try (Connection conn = ConnectionManager.getConnection();
-                PreparedStatement pstmt = conn.prepareStatement("select password from aether.user where userid = ? ");) {
+        try {
+            // Retrieve username from Dreamfactory
+            
+            HashMap<String, String> filter = new HashMap<String, String>();
+            filter.put("userid", username);
+            JSONArray record = JDBCHandler.getRecordsFromTable("user", filter);
+            if(record == null || record.size() == 0){
+                return null;
+            }
+            
+            JSONObject user = (JSONObject) record.get(0);
+            return (String) user.get("password");
+            
+            /*
+            try (Connection conn = ConnectionManager.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement("select password from aether.user where userid = ? ");) {
             pstmt.setString(1, username);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                password = rs.getString("password");
+            password = rs.getString("password");
             }
             // Invalid username
+            } catch (SQLException ex) {
+            return null;
+            }
+            return password;
+            */
         } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-        return password;
-        */
     }
 
     public void deleteUser(String userid) {
