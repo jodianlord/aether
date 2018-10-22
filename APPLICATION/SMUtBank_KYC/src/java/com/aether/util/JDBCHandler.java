@@ -40,7 +40,7 @@ public class JDBCHandler {
         }
     }
 
-    public static ResultSet getRecord(String table, Map<String, String> criteria) throws SQLException {
+    public static ResultSet getRecordsFromTable(String table, Map<String, String> criteria) throws SQLException {
         Connection con = ConnectionManager.getConnection();
         int questionCount = 0;
 
