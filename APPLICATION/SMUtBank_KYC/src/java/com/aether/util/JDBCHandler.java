@@ -16,6 +16,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -28,34 +30,16 @@ public class JDBCHandler {
         queryMap.put("userid", "beebee");
         queryMap.put("password", "wheeee");
         queryMap.put("publickey", "wjeja");
-        try {
-            ResultSet rs = createRecord("user", queryMap);
-            while(rs.next()){
-                System.out.println(rs.getString("userid"));
-                System.out.println(rs.getString("password"));
-                System.out.println(rs.getString("publickey"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(JDBCHandler.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
-    public static ResultSet getRecordsFromTable(String table, Map<String, String> criteria) throws SQLException {
+    public static JSONArray getRecordsFromTable(String table, Map<String, String> criteria) throws SQLException {
         Connection con = ConnectionManager.getConnection();
         int questionCount = 0;
 
         String query = "SELECT * FROM " + table + " WHERE ";
 
-        if (criteria == null || criteria.size() == 0) {
-            query = "SELECT * FROM " + table;
-            //System.out.println(query);
-            PreparedStatement pstmt = con.prepareStatement(query);
-            
-            System.out.println(pstmt.toString());
-
-            ResultSet rs = pstmt.executeQuery();
-            con.close();
-            return rs;
+        if (criteria == null || criteria.isEmpty()) {
+            return null;
         }
 
         Iterator it = criteria.entrySet().iterator();
@@ -78,11 +62,21 @@ public class JDBCHandler {
         }
         
         ResultSet rs = pstmt.executeQuery();
+        
+        JSONArray resultArray = new JSONArray();
+        while(rs.next()){
+            JSONObject resultObj = new JSONObject();
+            resultObj.put("userid", rs.getString(1));
+            resultObj.put("password", rs.getString(2));
+            resultObj.put("publickey", rs.getString(3));
+            resultArray.add(resultObj);
+        }
+        
         con.close();
-        return rs;
+        return resultArray;
     }
 
-    public static ResultSet createRecord(String table, Map<String, String> data) throws SQLException{
+    public static ResultSet createRecords(String table, Map<String, String> data) throws SQLException{
         Connection con = ConnectionManager.getConnection();
         
         String query = "INSERT INTO " + table + "(";

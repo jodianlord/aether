@@ -8,6 +8,7 @@ package com.aether.controller;
 import com.aether.blockchain.BlockchainHandler;
 import com.aether.util.Dreamfactory;
 import com.aether.util.FileHandler;
+import com.aether.util.JDBCHandler;
 import com.aether.util.SendEmailSSL;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -34,9 +35,12 @@ import com.aether.util.Zipper;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import org.json.simple.JSONArray;
@@ -114,7 +118,14 @@ public class IdentityServlet extends HttpServlet {
             HashMap<String, String> filterKey = new HashMap<String, String>();
             filterKey.put("userid", userID);
 
-            JSONArray userJSON = Dreamfactory.getRecordsFromTable("user", filterKey);
+            JSONArray userJSON;
+            try {
+                userJSON = JDBCHandler.getRecordsFromTable("user", filterKey);
+            } catch (SQLException ex) {
+                Logger.getLogger(IdentityServlet.class.getName()).log(Level.SEVERE, null, ex);
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                return;
+            }
             JSONObject record = (JSONObject) userJSON.get(0);
             String publicKey = (String) record.get("publickey");
             System.out.println("Bad Public Key: " + publicKey);

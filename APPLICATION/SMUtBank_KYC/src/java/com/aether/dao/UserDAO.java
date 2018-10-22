@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.aether.util.Dreamfactory;
+import com.aether.util.JDBCHandler;
 import java.util.ArrayList;
 import java.util.Map;
 import org.json.simple.JSONArray;
@@ -36,6 +37,11 @@ public class UserDAO {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         */
+    }
+    
+    public static void main(String[] args){
+        User s = getUser("admin");
+        System.out.println(s.getUserid() + " " + s.getPassword());
     }
 
     public void insertUser(User user) {
@@ -64,7 +70,12 @@ public class UserDAO {
     public static User getUser(String userid){
         HashMap<String, String> filter = new HashMap<String, String>();
         filter.put("userid", userid);
-        JSONArray record = Dreamfactory.getRecordsFromTable("user", filter);
+        JSONArray record = null;
+        try {
+            record = JDBCHandler.getRecordsFromTable("user", filter);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if(record == null || record.size() == 0){
             return null;
         }
