@@ -9,6 +9,8 @@ import com.aether.blockchain.BlockchainHandler;
 import com.aether.util.Dreamfactory;
 import com.aether.util.FileHandler;
 import com.aether.util.JDBCHandler;
+import com.aether.util.RESTHandler;
+import static com.aether.util.RESTHandler.sendMultipartPost;
 import com.aether.util.SendEmailSSL;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -97,7 +99,13 @@ public class IdentityServlet extends HttpServlet {
             FileOutputStream pictureOut = new FileOutputStream(pictureFile);
             BufferedImage image = decodeToImage(picture.substring((picture.indexOf(',') + 1), picture.length()));
             ImageIO.write(image, pictureType, pictureOut);
-
+            
+            HashMap<String, File> encodeMap = new HashMap<String, File>();
+            encodeMap.put("image", pictureFile);
+            
+            String encodedPicture = sendMultipartPost(RESTHandler.facialURL += "getencoding", encodeMap);
+            JSONObject encodeObject = getJSONObject(encodedPicture);
+            
             String userdata = (String) resultJSON.get("userdata");
             String userdataType = userdata.substring((userdata.indexOf('/') + 1), userdata.indexOf(';')).toUpperCase();
             String userdataPath = path + randomUUIDString + "_userdata." + userdataType;

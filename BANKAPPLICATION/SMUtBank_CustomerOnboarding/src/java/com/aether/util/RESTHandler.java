@@ -79,6 +79,7 @@ public class RESTHandler {
         List<String> response = multipart.finish();
         for (String line : response) {
                 System.out.println(line);
+                System.out.print("divide");
             }
         return ":";
     }

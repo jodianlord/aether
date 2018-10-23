@@ -7,6 +7,7 @@ package com.aether.util;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,6 +16,9 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,9 +33,21 @@ public class RESTHandler {
     private static HttpURLConnection con;
     private static final String PROPS_FILENAME = "dreamfactory.properties";
     private static String apiKey;
+    public static String facialURL = "http://127.0.0.1:5000/";
 
     public static String sendDeleteRequest(String requestURL) {
         return null;
+    }
+    
+    public static void main(String[] args){
+        String requestURL = facialURL += "getencoding";
+        HashMap<String, File> dataMap = new HashMap<String, File>();
+        dataMap.put("image", new File("C:\\Users\\jodia\\Desktop\\download.jpg"));
+        try {
+            sendMultipartPost(requestURL, dataMap);
+        } catch (IOException ex) {
+            Logger.getLogger(RESTHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private static void readAPIKey(String keyType) {
@@ -62,6 +78,22 @@ public class RESTHandler {
                 }
             }
         }
+    }
+
+    public static String sendMultipartPost(String requestURL, Map<String, File> dataFile) throws IOException {
+        MultipartUtility multipart = new MultipartUtility(requestURL, "UTF-8");
+        for (String key : dataFile.keySet()) {
+            File value = dataFile.get(key);
+            multipart.addFilePart(key, value);
+        }
+
+        List<String> response = multipart.finish();
+        for (String line : response) {
+            return line;
+            //System.out.println(line);
+            //System.out.println("divide");
+        }
+        return ":";
     }
 
     public static String sendPostRequest(String requestURL, JSONObject body, String keyType) throws MalformedURLException,
