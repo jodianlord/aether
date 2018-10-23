@@ -8,6 +8,10 @@ from PIL import Image, ImageDraw
 from flask import Flask, jsonify, request, json
 app = Flask(__name__)
 
+@app.route('/getencoding', methods=['POST'])
+def getEncoding():
+    data = request.get_json(force=True)
+
 @app.route('/facialreg', methods=['POST'])
 def facialreg():
     data = request.get_json(force=True)
