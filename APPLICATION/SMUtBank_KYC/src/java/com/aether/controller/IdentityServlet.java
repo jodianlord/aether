@@ -64,6 +64,8 @@ public class IdentityServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json");
         String body = getBody(request);
+        
+        //generate random UUID for this user
         UUID uuid = UUID.randomUUID();
         String randomUUIDString = uuid.toString();
         String path = request.getServletContext().getRealPath("/");
@@ -74,7 +76,7 @@ public class IdentityServlet extends HttpServlet {
             String fullname = (String) resultJSON.get("fullname");
             System.out.println(password);
             resultJSON.remove("password");
-            resultJSON.remove("picture");
+            //resultJSON.remove("picture");
             
             
             //get png file of the person's face and get the encoding
@@ -88,6 +90,8 @@ public class IdentityServlet extends HttpServlet {
             
             HashMap<String, File> encodeMap = new HashMap<String, File>();
             encodeMap.put("image", pictureFile);
+            
+            pictureFile.delete();
             
             String encodedPicture = sendMultipartPost(RESTHandler.facialURL += "getencoding", encodeMap);
             JSONObject encodeObject = getJSONObject(encodedPicture);
@@ -117,6 +121,7 @@ public class IdentityServlet extends HttpServlet {
             String transactionHash;
             if(BlockchainHandler.unlockAccount(publicKey, password)){
                 transactionHash = BlockchainHandler.deployContract(publicKey, randomUUIDString, hash);
+                System.out.println(transactionHash);
                 JSONObject toCustomer = new JSONObject();
                 toCustomer.put("transactionHash", transactionHash);
                 toCustomer.put("uuid", randomUUIDString);
@@ -137,9 +142,9 @@ public class IdentityServlet extends HttpServlet {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 return;
             }
-            
+            resultJSON.remove("picture");
             HashMap<String, String> createMap = new HashMap<String, String>();
-            createMap.put("transaction_address", transactionHash);
+            createMap.put("transaction_address", "test");
             createMap.put("uuid", uuid.toString());
             createMap.put("facial_encoding", encodeObject.toJSONString());
             createMap.put("json_data", resultJSON.toJSONString());
