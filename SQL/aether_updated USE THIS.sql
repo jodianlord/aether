@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 4.6.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Oct 23, 2018 at 03:11 PM
--- Server version: 5.7.23-2ubuntu1
--- PHP Version: 7.2.10-0ubuntu1
+-- Host: 127.0.0.1
+-- Generation Time: Oct 24, 2018 at 01:07 AM
+-- Server version: 5.7.14
+-- PHP Version: 7.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -25,8 +25,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `application`
 --
-CREATE DATABASE  IF NOT EXISTS `aether` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `aether`;
+
 CREATE TABLE `application` (
   `uuid` varchar(40) DEFAULT NULL,
   `bank` char(10) DEFAULT NULL,
@@ -52,7 +51,9 @@ CREATE TABLE `contract` (
   `transaction_address` varchar(64) NOT NULL,
   `uuid` char(36) NOT NULL,
   `facial_encoding` blob,
-  `contract_address` varchar(45) DEFAULT NULL
+  `contract_address` varchar(45) DEFAULT NULL,
+  `json_data` blob,
+  `integrity_hash` varchar(64) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

@@ -6,8 +6,6 @@
 package com.aether.controller;
 
 import com.aether.blockchain.BlockchainHandler;
-import com.aether.util.Dreamfactory;
-import com.aether.util.FileHandler;
 import com.aether.util.JDBCHandler;
 import com.aether.util.RESTHandler;
 import static com.aether.util.RESTHandler.sendMultipartPost;
@@ -64,7 +62,7 @@ public class IdentityServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/zip");
+        response.setContentType("application/json");
         String body = getBody(request);
         UUID uuid = UUID.randomUUID();
         String randomUUIDString = uuid.toString();
@@ -77,21 +75,9 @@ public class IdentityServlet extends HttpServlet {
             System.out.println(password);
             resultJSON.remove("password");
             resultJSON.remove("picture");
-            //resultJSON.remove("userdata");
-
-            String jsonPath = path + randomUUIDString + ".json";
-            File jsonFile = new File(jsonPath);
-            if (!jsonFile.exists()) {
-                jsonFile.createNewFile();
-            }
-            byte[] contentBytes = resultJSON.toString().getBytes();
-            FileOutputStream fileOut = new FileOutputStream(jsonFile);
-            fileOut.write(contentBytes);
-            fileOut.flush();
-            fileOut.close();
-            //Charset charset = Charset.forName("UTF-8");
-            //FileUtils.writeStringToFile(jsonFile, resultJSON.toString(), charset, false);
-
+            
+            
+            //get png file of the person's face and get the encoding
             String picture = (String) resultJSON.get("picture");
             String pictureType = picture.substring((picture.indexOf('/') + 1), picture.indexOf(';')).toUpperCase();
             String picturePath = path + randomUUIDString + "_picture." + pictureType;
@@ -106,23 +92,10 @@ public class IdentityServlet extends HttpServlet {
             String encodedPicture = sendMultipartPost(RESTHandler.facialURL += "getencoding", encodeMap);
             JSONObject encodeObject = getJSONObject(encodedPicture);
             
-            resultJSON.put("encoding", encodeObject.get("encoding"));
+            //resultJSON.put("encoding", encodeObject.get("encoding"));
+            resultJSON.put("uuid", uuid.toString());
             
-            String userdata = (String) resultJSON.get("userdata");
-            String userdataType = userdata.substring((userdata.indexOf('/') + 1), userdata.indexOf(';')).toUpperCase();
-            String userdataPath = path + randomUUIDString + "_userdata." + userdataType;
-            File userdataFile = new File(userdataPath);
-            FileOutputStream userdataFileOut = new FileOutputStream(userdataFile);
-            BufferedImage userImage = decodeToImage(userdata.substring((userdata.indexOf(',') + 1), userdata.length()));
-            ImageIO.write(userImage, userdataType, userdataFileOut);
-
-            List<String> fileNames = new ArrayList<String>();
-            fileNames.add(jsonPath);
-            fileNames.add(picturePath);
-            fileNames.add(userdataPath);
-
-            File finalZip = Zipper.zipFiles(fileNames, path, randomUUIDString);
-            String hash = BlockchainHandler.keccak256hash(finalZip);
+            String hash = BlockchainHandler.keccak256hash(resultJSON.toJSONString() + encodeObject.toJSONString());
             String userID = (String) request.getSession().getAttribute("userid");
 
             HashMap<String, String> filterKey = new HashMap<String, String>();
@@ -141,8 +114,9 @@ public class IdentityServlet extends HttpServlet {
             System.out.println("Bad Public Key: " + publicKey);
             publicKey = publicKey.replace("\u0000", "");
             System.out.println("Public Key: " + publicKey);
+            String transactionHash;
             if(BlockchainHandler.unlockAccount(publicKey, password)){
-                String transactionHash = BlockchainHandler.deployContract(publicKey, randomUUIDString, hash);
+                transactionHash = BlockchainHandler.deployContract(publicKey, randomUUIDString, hash);
                 JSONObject toCustomer = new JSONObject();
                 toCustomer.put("transactionHash", transactionHash);
                 toCustomer.put("uuid", randomUUIDString);
@@ -161,31 +135,24 @@ public class IdentityServlet extends HttpServlet {
                 }
             }else{
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                return;
             }
             
-            FileHandler.uploadFile(finalZip);
+            HashMap<String, String> createMap = new HashMap<String, String>();
+            createMap.put("transaction_address", transactionHash);
+            createMap.put("uuid", uuid.toString());
+            createMap.put("facial_encoding", encodeObject.toJSONString());
+            createMap.put("json_data", resultJSON.toJSONString());
+            createMap.put("integrity_hash", hash);
             
-            pictureOut.close();
-            userdataFileOut.close();
-            if (jsonFile.delete() && pictureFile.delete() && userdataFile.delete()) {
-                System.out.println("File deleted successfully");
-            } else {
-                System.out.println("Files not deleted!");
-            }
-
-            try (OutputStream out = response.getOutputStream()) {
-                Path zipPath = finalZip.toPath();
-                Files.copy(zipPath, out);
-                out.flush();
-            } catch (IOException e) {
-
-            }
+            JDBCHandler.createRecords("contract", createMap);
 
             response.setStatus(HttpServletResponse.SC_OK);
-
-            //ImageIO.write(image, pictureType, response.getOutputStream());
         } catch (ParseException e) {
-
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        } catch (SQLException ex) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            Logger.getLogger(IdentityServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
