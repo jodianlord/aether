@@ -26,17 +26,23 @@ import org.json.simple.JSONObject;
 public class JDBCHandler {
 
     public static void main(String[] args) {
-        Map<String, String> queryMap = new HashMap<String, String>();
-        queryMap.put("userid", "beebee");
-        queryMap.put("password", "wheeee");
-        queryMap.put("publickey", "wjeja");
-
+        String query = "SELECT * FROM contract";
+        PreparedStatement pstmt;
         try {
-            JSONArray bb = getUserRecordsFromTable("user", null);
-            System.out.println(bb.toString());
+            pstmt = ConnectionManager.getConnection().prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+        while(rs.next()){
+            System.out.println(rs.getString(1));
+            System.out.println(rs.getString(2));
+            System.out.println(rs.getString(3));
+            System.out.println(rs.getString(4));
+            System.out.println(rs.getString(5));
+            System.out.println(rs.getString(6));
+        }
         } catch (SQLException ex) {
             Logger.getLogger(JDBCHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     public static JSONArray getUserRecordsFromTable(String table, Map<String, String> criteria) throws SQLException {

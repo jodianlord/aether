@@ -143,7 +143,7 @@ public class IdentityServlet extends HttpServlet {
             }
             resultJSON.remove("picture");
             HashMap<String, String> createMap = new HashMap<String, String>();
-            createMap.put("transaction_address", "test");
+            createMap.put("transaction_address", transactionHash);
             createMap.put("uuid", uuid.toString());
             createMap.put("facial_encoding", encodeObject.toJSONString());
             createMap.put("json_data", resultJSON.toJSONString());
