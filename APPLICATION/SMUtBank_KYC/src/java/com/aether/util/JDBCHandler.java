@@ -30,16 +30,38 @@ public class JDBCHandler {
         queryMap.put("userid", "beebee");
         queryMap.put("password", "wheeee");
         queryMap.put("publickey", "wjeja");
+
+        try {
+            JSONArray bb = getRecordsFromTable("user", null);
+            System.out.println(bb.toString());
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public static JSONArray getRecordsFromTable(String table, Map<String, String> criteria) throws SQLException {
         Connection con = ConnectionManager.getConnection();
         int questionCount = 0;
 
-        String query = "SELECT * FROM " + table + " WHERE ";
+        String query = "SELECT * FROM " + table;
 
         if (criteria == null || criteria.isEmpty()) {
-            return null;
+            PreparedStatement pstmt = con.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+
+            JSONArray resultArray = new JSONArray();
+            while (rs.next()) {
+                JSONObject resultObj = new JSONObject();
+                resultObj.put("userid", rs.getString(1));
+                resultObj.put("password", rs.getString(2));
+                resultObj.put("publickey", rs.getString(3));
+                resultArray.add(resultObj);
+            }
+
+            con.close();
+            return resultArray;
+        } else {
+            query += " WHERE ";
         }
 
         Iterator it = criteria.entrySet().iterator();
@@ -60,63 +82,63 @@ public class JDBCHandler {
             Map.Entry pair = (Map.Entry) it.next();
             pstmt.setString(questionCount, (String) pair.getValue());
         }
-        
+
         ResultSet rs = pstmt.executeQuery();
-        
+
         JSONArray resultArray = new JSONArray();
-        while(rs.next()){
+        while (rs.next()) {
             JSONObject resultObj = new JSONObject();
             resultObj.put("userid", rs.getString(1));
             resultObj.put("password", rs.getString(2));
             resultObj.put("publickey", rs.getString(3));
             resultArray.add(resultObj);
         }
-        
+
         con.close();
         return resultArray;
     }
 
-    public static ResultSet createRecords(String table, Map<String, String> data) throws SQLException{
+    public static ResultSet createRecords(String table, Map<String, String> data) throws SQLException {
         Connection con = ConnectionManager.getConnection();
-        
+
         String query = "INSERT INTO " + table + "(";
-        
+
         Iterator it = data.entrySet().iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             String key = (String) pair.getKey();
             query += key;
-            if(it.hasNext()){
+            if (it.hasNext()) {
                 query += ",";
-            }else{
+            } else {
                 query += ")";
             }
         }
-        
+
         query += " VALUES (";
-        
-        for(int i = 0; i < data.size(); i++){
+
+        for (int i = 0; i < data.size(); i++) {
             query += "?";
-            if(i < data.size() - 1){
+            if (i < data.size() - 1) {
                 query += ",";
-            }else{
+            } else {
                 query += ")";
             }
         }
-        
+
         PreparedStatement pstmt = con.prepareStatement(query);
-        
+
         it = data.entrySet().iterator();
         int qCount = 1;
-        while(it.hasNext()){
+        while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             String value = (String) pair.getValue();
             pstmt.setString(qCount, value);
             qCount++;
         }
-        
+
         pstmt.executeUpdate();
-        
+
         return null;
     }
 }
