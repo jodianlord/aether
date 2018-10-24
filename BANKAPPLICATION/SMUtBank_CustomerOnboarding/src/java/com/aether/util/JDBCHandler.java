@@ -26,27 +26,81 @@ import org.json.simple.JSONObject;
 public class JDBCHandler {
 
     public static void main(String[] args) {
-        String query = "SELECT * FROM contract";
-        PreparedStatement pstmt;
         try {
-            pstmt = ConnectionManager.getConnection().prepareStatement(query);
-            ResultSet rs = pstmt.executeQuery();
-        while(rs.next()){
-            System.out.println(rs.getString(1));
-            System.out.println(rs.getString(2));
-            System.out.println(rs.getString(3));
-            System.out.println(rs.getString(4));
-            System.out.println(rs.getString(5));
-            System.out.println(rs.getString(6));
-        }
+            Map<String, String> criteria = new HashMap<String, String>();
+            criteria.put("uuid", "3d99eca9-25cd-499a-8dd2-d1301f03809a");
+            JSONArray array = getContracts("contract", criteria);
+            JSONObject obj = (JSONObject) array.get(0);
+            //System.out.println(obj.toString());
         } catch (SQLException ex) {
             Logger.getLogger(JDBCHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
-    public static JSONArray getContracts(String table, Map<String, String> criteria) throws SQLException{
-        return null;
+
+    public static JSONArray getContracts(String table, Map<String, String> criteria) throws SQLException {
+        Connection con = ConnectionManager.getConnection();
+        int questionCount = 0;
+
+        String query = "SELECT * FROM " + table;
+
+        if (criteria == null || criteria.isEmpty()) {
+            PreparedStatement pstmt = con.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+
+            JSONArray resultArray = new JSONArray();
+            while (rs.next()) {
+                JSONObject resultObj = new JSONObject();
+                resultObj.put("transaction_address", rs.getString(1));
+                resultObj.put("uuid", rs.getString(2));
+                resultObj.put("facial_encoding", rs.getString(3));
+                resultObj.put("contract_address", rs.getString(4));
+                resultObj.put("json_data", rs.getString(5));
+                resultObj.put("integrity_hash", rs.getString(6));
+                resultArray.add(resultObj);
+            }
+
+            con.close();
+            return resultArray;
+        } else {
+            query += " WHERE ";
+        }
+
+        Iterator it = criteria.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            query += pair.getKey();
+            query += " = ?";
+            if (it.hasNext()) {
+                query += " AND ";
+            }
+        }
+        //System.out.println(query);
+        PreparedStatement pstmt = con.prepareStatement(query);
+
+        it = criteria.entrySet().iterator();
+        while (it.hasNext()) {
+            questionCount++;
+            Map.Entry pair = (Map.Entry) it.next();
+            pstmt.setString(questionCount, (String) pair.getValue());
+        }
+
+        ResultSet rs = pstmt.executeQuery();
+
+        JSONArray resultArray = new JSONArray();
+        while (rs.next()) {
+            JSONObject resultObj = new JSONObject();
+            resultObj.put("transaction_address", rs.getString(1));
+            resultObj.put("uuid", rs.getString(2));
+            resultObj.put("facial_encoding", rs.getString(3));
+            resultObj.put("contract_address", rs.getString(4));
+            resultObj.put("json_data", rs.getString(5));
+            resultObj.put("integrity_hash", rs.getString(6));
+            resultArray.add(resultObj);
+        }
+
+        con.close();
+        return resultArray;
     }
 
     public static JSONArray getUserRecordsFromTable(String table, Map<String, String> criteria) throws SQLException {

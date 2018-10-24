@@ -452,6 +452,8 @@
                 });
                 return;
             }
+            
+            console.log(object);
 
             var canvasbase = canvas.toDataURL();
             object["verificationfile"] = canvasbase;

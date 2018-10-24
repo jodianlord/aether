@@ -22,7 +22,10 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -32,6 +35,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -58,48 +62,104 @@ public class PassBin extends HttpServlet {
         try {
             String body = getBody(request);
             JSONObject bodyJSON = getJSONObject(body);
-            
+            System.out.println("BITCH" + bodyJSON.toJSONString());
+
+            //retrieve binfile and verification image
             String binfile = (String) bodyJSON.get("binfile");
+            System.out.println("THIS IS THE BINFILE");
+            System.out.println(binfile);
+            System.out.println(binfile.indexOf(','));
             String base = binfile.substring(binfile.indexOf(',') + 1, binfile.length());
             byte[] binBytes = base.getBytes();
             byte[] decoded = Base64.decodeBase64(binBytes);
-            System.out.println(new String(decoded));
+            System.out.println("decoded JSON" + new String(decoded));
             String bin = new String(decoded);
             JSONObject binJSON = getJSONObject(bin);
             String uuid = (String) binJSON.get("uuid");
-            File zipFile = FileHandler.getFile(uuid + ".zip", request.getServletContext().getRealPath("/"));
-            ArrayList<File> unzipped = Unzipper.unzip(zipFile.getPath(), request.getServletContext().getRealPath("/"));
-            
+            String hash = (String) binJSON.get("hash");
+
+            //retrieve face encoding from the database
+            System.out.println("get database shit");
+            Map<String, String> criteria = new HashMap<String, String>();
+            criteria.put("uuid", uuid);
+
+            JSONObject faceEncoding = null;
+            JSONObject baseJSON = null;
+            String transactionAddress = null;
+            try {
+                JSONArray data = JDBCHandler.getContracts("contract", criteria);
+                if (data == null || data.isEmpty()) {
+                    System.out.println("data is empyt!");
+                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    return;
+                }
+                JSONObject dataObj = (JSONObject) data.get(0);
+                String baseJSONString = (String) dataObj.get("json_data");
+                baseJSON = getJSONObject(baseJSONString);
+                String faceEncodingString = (String) dataObj.get("facial_encoding");
+                faceEncoding = getJSONObject(faceEncodingString);
+                System.out.println("JSON String");
+                System.out.println(baseJSON.toJSONString());
+                System.out.println("Face Encoding");
+                System.out.println(faceEncoding.toJSONString());
+                transactionAddress = (String) dataObj.get("transaction_address");
+                if (faceEncoding == null || baseJSON == null) {
+                    System.out.println("something is null!");
+                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    return;
+                }
+                String generatedHash = BlockchainHandler.keccak256hash(baseJSON.toJSONString() + faceEncoding.toJSONString());
+                String dataHash = (String) dataObj.get("integrity_hash");
+                System.out.println("Generated Hash: " + generatedHash);
+                System.out.println("bin Hash: " + hash);
+                System.out.println("Database Hash: " + dataHash);
+                if (!(generatedHash.equals(dataHash) && generatedHash.equals(hash))) {
+                    System.out.println("hash is bad!");
+                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    return;
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(PassBin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            //perform facial recognition on the verification picture
             String picture = (String) bodyJSON.get("verificationfile");
-            
+            System.out.println("THIS IS YOUR FACE" + picture);
             String pictureType = picture.substring((picture.indexOf('/') + 1), picture.indexOf(';')).toUpperCase();
             String picturePath = request.getServletContext().getRealPath("/") + uuid + "_verification." + pictureType;
             File pictureFile = new File(picturePath);
             FileOutputStream pictureOut = new FileOutputStream(pictureFile);
             BufferedImage image = decodeToImage(picture.substring((picture.indexOf(',') + 1), picture.length()));
             ImageIO.write(image, pictureType, pictureOut);
-            
-            FileHandler.uploadFile(pictureFile);
-            pictureFile.delete();
-            
-            for (File f : unzipped) {
-                //System.out.println(f.getName());
-                if (f.getName().indexOf(".json") != -1) {
-                    try (PrintWriter out = response.getWriter()) {
-                        byte[] encoded = Files.readAllBytes(Paths.get(f.getPath()));
-                        String print = new String(encoded);
-                        JSONObject printJSON = getJSONObject(print);
-                        printJSON.put("transactionHash", binJSON.get("transactionHash"));
-                        printJSON.put("uuid", binJSON.get("uuid"));
-                        printJSON.put("hash", binJSON.get("hash"));
-                        System.out.println(printJSON.toString());
-                        out.println(printJSON.toString());
-                        response.setStatus(HttpServletResponse.SC_OK);
-                    }
-                }
-                f.delete();
+
+            Map<String, File> dataMap = new HashMap<String, File>();
+            dataMap.put("image", pictureFile);
+
+            String verificationEncodingString = RESTHandler.sendMultipartPost(RESTHandler.facialURL + "getencoding", dataMap);
+            JSONObject verificationEncoding = getJSONObject(verificationEncodingString);
+
+            JSONObject compareImages = new JSONObject();
+            compareImages.put("first_encoding", faceEncoding.get("encoding"));
+            compareImages.put("second_encoding", verificationEncoding.get("encoding"));
+
+            String postResult = RESTHandler.sendPostRequest(RESTHandler.facialURL + "compareimages", compareImages, null);
+
+            JSONObject postJSON = getJSONObject(postResult);
+
+            if (!postJSON.get("match").equals("true")) {
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                return;
             }
-            zipFile.delete();
+
+            baseJSON.put("uuid", uuid);
+            baseJSON.put("transactionHash", transactionAddress);
+            baseJSON.put("hash", hash);
+
+            try (PrintWriter out = response.getWriter()) {
+                out.println(baseJSON.toString());
+                response.setStatus(HttpServletResponse.SC_OK);
+            }
+            pictureFile.delete();
         } catch (IOException e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             return;

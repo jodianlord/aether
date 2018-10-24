@@ -98,7 +98,10 @@ public class IdentityServlet extends HttpServlet {
             //resultJSON.put("encoding", encodeObject.get("encoding"));
             resultJSON.put("uuid", uuid.toString());
             
-            String hash = BlockchainHandler.keccak256hash(resultJSON.toJSONString() + encodeObject.toJSONString());
+            String resultString = resultJSON.toJSONString();
+            String faceString = encodeObject.toJSONString();
+            
+            String hash = BlockchainHandler.keccak256hash(resultString + faceString);
             String userID = (String) request.getSession().getAttribute("userid");
 
             HashMap<String, String> filterKey = new HashMap<String, String>();
@@ -145,8 +148,8 @@ public class IdentityServlet extends HttpServlet {
             HashMap<String, String> createMap = new HashMap<String, String>();
             createMap.put("transaction_address", transactionHash);
             createMap.put("uuid", uuid.toString());
-            createMap.put("facial_encoding", encodeObject.toJSONString());
-            createMap.put("json_data", resultJSON.toJSONString());
+            createMap.put("facial_encoding", faceString);
+            createMap.put("json_data", resultString);
             createMap.put("integrity_hash", hash);
             
             JDBCHandler.createRecords("contract", createMap);
