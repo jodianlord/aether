@@ -115,7 +115,13 @@ public class PassBin extends HttpServlet {
                 System.out.println("Database Hash: " + dataHash);
                 if (!(generatedHash.equals(dataHash) && generatedHash.equals(hash))) {
                     System.out.println("hash is bad!");
-                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    try(PrintWriter out = response.getWriter()){
+                        JSONObject outJSON = new JSONObject();
+                        outJSON.put("status", "Error");
+                        out.println(outJSON.toString());
+                        response.setStatus(HttpServletResponse.SC_OK);
+                    }
+                    
                     return;
                 }
             } catch (SQLException ex) {
@@ -147,7 +153,12 @@ public class PassBin extends HttpServlet {
             JSONObject postJSON = getJSONObject(postResult);
 
             if (!postJSON.get("match").equals("true")) {
-                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                try(PrintWriter out = response.getWriter()){
+                    JSONObject outJSON = new JSONObject();
+                    outJSON.put("status", "Do Not Match");
+                    out.println(outJSON.toString());
+                    response.setStatus(HttpServletResponse.SC_OK);
+                }
                 return;
             }
 
