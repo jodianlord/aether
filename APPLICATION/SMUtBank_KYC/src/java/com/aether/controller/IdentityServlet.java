@@ -91,9 +91,8 @@ public class IdentityServlet extends HttpServlet {
             HashMap<String, File> encodeMap = new HashMap<String, File>();
             encodeMap.put("image", pictureFile);
             
-            pictureFile.delete();
             
-            String encodedPicture = sendMultipartPost(RESTHandler.facialURL += "getencoding", encodeMap);
+            String encodedPicture = sendMultipartPost(RESTHandler.facialURL + "getencoding", encodeMap);
             JSONObject encodeObject = getJSONObject(encodedPicture);
             
             //resultJSON.put("encoding", encodeObject.get("encoding"));
@@ -151,6 +150,7 @@ public class IdentityServlet extends HttpServlet {
             createMap.put("integrity_hash", hash);
             
             JDBCHandler.createRecords("contract", createMap);
+            pictureFile.delete();
 
             response.setStatus(HttpServletResponse.SC_OK);
         } catch (ParseException e) {

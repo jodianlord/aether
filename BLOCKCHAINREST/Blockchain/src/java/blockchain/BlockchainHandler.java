@@ -128,7 +128,7 @@ public class BlockchainHandler {
         JSONArray params = new JSONArray();
         JSONObject contractParams = new JSONObject();
         contractParams.put("from", address);
-        contractParams.put("gas", "0x2DC6C0");
+        contractParams.put("gas", "0x4C4B40");
         contractParams.put("data", contract);
         params.add(contractParams);
         body.put("params", params);
