@@ -32,14 +32,14 @@ public class JDBCHandler {
         queryMap.put("publickey", "wjeja");
 
         try {
-            JSONArray bb = getRecordsFromTable("user", null);
+            JSONArray bb = getUserRecordsFromTable("user", null);
             System.out.println(bb.toString());
         } catch (SQLException ex) {
             Logger.getLogger(JDBCHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public static JSONArray getRecordsFromTable(String table, Map<String, String> criteria) throws SQLException {
+    public static JSONArray getUserRecordsFromTable(String table, Map<String, String> criteria) throws SQLException {
         Connection con = ConnectionManager.getConnection();
         int questionCount = 0;
 

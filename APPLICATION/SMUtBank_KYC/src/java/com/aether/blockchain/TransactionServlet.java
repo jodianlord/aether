@@ -55,10 +55,10 @@ public class TransactionServlet extends HttpServlet {
             HashMap<String,String> filterTo = new HashMap<String,String>();
             filterTo.put("userid", userTo);
             
-            JSONArray fromPublicKey = JDBCHandler.getRecordsFromTable("user", filterFrom);
+            JSONArray fromPublicKey = JDBCHandler.getUserRecordsFromTable("user", filterFrom);
             System.out.println("From: " + fromPublicKey);
             
-            JSONArray toPublicKey = JDBCHandler.getRecordsFromTable("user", filterTo);
+            JSONArray toPublicKey = JDBCHandler.getUserRecordsFromTable("user", filterTo);
             System.out.println("To: " + toPublicKey);
             
             if(fromPublicKey.size() == 0 || toPublicKey.size() == 0){

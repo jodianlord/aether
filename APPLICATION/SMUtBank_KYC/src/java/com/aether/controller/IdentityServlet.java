@@ -76,7 +76,7 @@ public class IdentityServlet extends HttpServlet {
             String fullname = (String) resultJSON.get("fullname");
             System.out.println(password);
             resultJSON.remove("password");
-            //resultJSON.remove("picture");
+            resultJSON.remove("picture");
             //resultJSON.remove("userdata");
 
             String jsonPath = path + randomUUIDString + ".json";
@@ -106,6 +106,8 @@ public class IdentityServlet extends HttpServlet {
             String encodedPicture = sendMultipartPost(RESTHandler.facialURL += "getencoding", encodeMap);
             JSONObject encodeObject = getJSONObject(encodedPicture);
             
+            resultJSON.put("encoding", encodeObject.get("encoding"));
+            
             String userdata = (String) resultJSON.get("userdata");
             String userdataType = userdata.substring((userdata.indexOf('/') + 1), userdata.indexOf(';')).toUpperCase();
             String userdataPath = path + randomUUIDString + "_userdata." + userdataType;
@@ -128,7 +130,7 @@ public class IdentityServlet extends HttpServlet {
 
             JSONArray userJSON;
             try {
-                userJSON = JDBCHandler.getRecordsFromTable("user", filterKey);
+                userJSON = JDBCHandler.getUserRecordsFromTable("user", filterKey);
             } catch (SQLException ex) {
                 Logger.getLogger(IdentityServlet.class.getName()).log(Level.SEVERE, null, ex);
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

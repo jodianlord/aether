@@ -76,7 +76,7 @@ public class UserDAO {
         filter.put("userid", userid);
         JSONArray record = null;
         try {
-            record = JDBCHandler.getRecordsFromTable("user", filter);
+            record = JDBCHandler.getUserRecordsFromTable("user", filter);
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -95,7 +95,7 @@ public class UserDAO {
             
             HashMap<String, String> filter = new HashMap<String, String>();
             filter.put("userid", username);
-            JSONArray record = JDBCHandler.getRecordsFromTable("user", filter);
+            JSONArray record = JDBCHandler.getUserRecordsFromTable("user", filter);
             if(record == null || record.size() == 0){
                 return null;
             }
