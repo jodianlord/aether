@@ -7,8 +7,8 @@
 -- Server version: 5.7.23-2ubuntu1
 -- PHP Version: 7.2.10-0ubuntu1
 
-CREATE DATABASE IF NOT EXISTS `aether`
-USE `aether`
+CREATE DATABASE IF NOT EXISTS `aether`;
+USE `aether`;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
