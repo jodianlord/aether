@@ -13,9 +13,8 @@
 <%@page import="java.util.UUID"%>
 <!DOCTYPE html>
 <%
-    //String publickey = UserDAO.getUser((String) session.getAttribute("userid")).getPublicKey();
-    //publickey = publickey.replace("\u0000", "");
-    String publickey = "0x377206b688d07eea952189577d82e92309b1f22a";
+    String publickey = UserDAO.getUser((String) session.getAttribute("userid")).getPublicKey();
+    publickey = publickey.replace("\u0000", "");
     BigInteger balance = new BigInteger("0");
     BigInteger eth = new BigInteger("0");
     try {
