@@ -90,7 +90,31 @@ document.getElementById("submit").onclick = function () {
                                 var filebase = reader.result;
                                 object["userdata"] = filebase;
                                 object["password"] = "password";
-                                $.ajax({
+                                $.confirm({
+                                    buttons: {
+                                        OK: function () {
+                                            window.location.href = "visualisation.jsp";
+                                        }
+                                    },
+                                    content: function () {
+                                        var self = this;
+                                        return $.ajax({
+                                            url: './IdentityServlet',
+                                            type: "POST",
+                                            data: JSON.stringify(object),
+                                            contentType: "application/json",
+                                        }).done(function (response) {
+                                            self.setContent('At this stage, your customer digital identity has been created and stored as a smart contract in the blockchain . Head over to Blockchain Visualisation to find out more about blockchain and smart contracts!');
+                                            self.setTitle('Success!');
+                                            redirect = true;
+                                        }).fail(function(){
+                                            self.setTitle('Failure!');
+                                            self.setContent('Transaction Not Sent!');
+                                            redirect = true;
+                                        });     
+                                    }
+                                });
+                                /*$.ajax({
                                     url: "./IdentityServlet",
                                     type: "POST",
                                     data: JSON.stringify(object),
@@ -109,7 +133,7 @@ document.getElementById("submit").onclick = function () {
                                             content: 'Transaction Not Sent!',
                                         });
                                     }
-                                });
+                                });*/
                             };
                             reader.onerror = function (error) {
                                 console.log('Error: ', error);

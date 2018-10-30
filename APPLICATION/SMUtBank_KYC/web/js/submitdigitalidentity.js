@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js";
+
 document.getElementById("submit").onclick = function () {
 
     if (!document.getElementById('email').value.includes('@') || document.getElementById('mobile').value.match(/^[0-9]+$/) == null) {
@@ -47,7 +49,9 @@ document.getElementById("submit").onclick = function () {
         });
         return;
     }
-
+    
+    var redirect;
+    
     $.ajax({
         url: "./TWOFA",
         data: {"mobileNumber": document.getElementById('mobile').value},
@@ -66,27 +70,32 @@ document.getElementById("submit").onclick = function () {
                     var filebase = reader.result;
                     object["userdata"] = filebase;
                     object["password"] = "password";
-                    var jc = $.ajax({
-                        url: "./IdentityServlet",
-                        type: "POST",
-                        data: JSON.stringify(object),
-                        contentType: "application/json",
-                        success: function (response) {
-                            
-                            $.alert({
-                                title: "Success!",
-                                content: "Identity Uploaded!"
-                            });
-      
+                   
+                    $.confirm({
+                        buttons: {
+                            OK: function () {
+                                window.location.href = "identity.jsp";
+                            }
                         },
-                        error: function (xhr) {
-                            console.log(xhr);
-                            $.alert({
-                                title: 'Failure!',
-                                content: 'Transaction Not Sent!',
-                            });
+                        content: function () {
+                            var self = this;
+                            return $.ajax({
+                                url: './IdentityServlet',
+                                type: "POST",
+                                data: JSON.stringify(object),
+                                contentType: "application/json",
+                            }).done(function (response) {
+                                self.setContent('Identity Uploaded!');
+                                self.setTitle('Success!');
+                                redirect = true;
+                            }).fail(function(){
+                                self.setTitle('Failure!');
+                                self.setContent('Transaction Not Sent!');
+                                redirect = true;
+                            });     
                         }
                     });
+                    
                 };
                 reader.onerror = function (error) {
                     console.log('Error: ', error);
@@ -104,7 +113,12 @@ document.getElementById("submit").onclick = function () {
             var returnOTP = "";
         }
     });
+    
+    if(redirect === true) {
+        window.location.href = "identity.jsp";
+    }
 }
+    
 
 function getBase64(file) {
     var reader = new FileReader();
@@ -117,4 +131,6 @@ function getBase64(file) {
         console.log('Error: ', error);
     };
 }
+
+
 
