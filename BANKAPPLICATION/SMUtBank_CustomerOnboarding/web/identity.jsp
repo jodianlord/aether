@@ -22,12 +22,17 @@
                     <div class="row mt">
                         <div class ="col-lg-3"></div>
                         <div class="col-lg-6">
-                            <div class="form-panel col-lg-12" style="height:220px;margin-top: -5em">
+                            <div class="form-panel col-lg-12 col-sm-2 col-xs-2 col-md-2" style="margin-top:-5em" >
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> Upload .bin UDI File</h4>
+                                
+                                <!--<div class="col-lg-12 ">-->
                                 <input type="file" class="filepond" id="fileupload">
 
+                        
+                                </br>
+                            <button id="populate" style="margin-top:6em;" type="button" class="btn btn-danger btn-lg btn-block center-block">Populate User Details</button>
 
-                            </div>
+                            </div>  
                         </div>
                     </div>
 
@@ -50,13 +55,7 @@
                         </div>
                     </div>
 
-                    <div class="row mt">
-                        <div class ="col-lg-3"></div>
-                        <div class="col-lg-6">
-                            <button id="populate" type="button" style="margin-top:-20px;margin-left: 10px"class="btn btn-danger btn-lg btn-block">Populate User Details</button>
 
-                        </div>
-                    </div>
 
                     <div class="row mt">
                         <div class="col-lg-3"></div>
@@ -69,23 +68,42 @@
                                         <div class="col-sm-10">
                                             <input type="text" id="prefUsername" name="prefUsername" value="" class="form-control" placeholder="e.g. S9445002A or Johndoe2014">
                                         </div>
+                                      
+                                        
                                     </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Bank Id</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" id="fullname" name="bankID" class="form-control" placeholder="e.g. 1">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label">Currency</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" id="fullname" name="currency" class="form-control" placeholder="e.g. SGD">
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                    
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Full Name</label>
                                         <div class="col-sm-10">
-                                            <input type="text" id="fullname" name="fullname" class="form-control" placeholder="e.g. John Doe">
+                                            <input type="text" id="fullname" disabled name="fullname" class="form-control" placeholder="e.g. John Doe">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">NRIC</label>
                                         <div class="col-sm-10" id="nricdiv">
-                                            <input type="text" id="nric" name="nric" class="form-control" placeholder="e.g. S1234567D">
+                                            <input type="text" id="nric" disabled name="nric" class="form-control" placeholder="e.g. S1234567D">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Email</label>
                                         <div class="col-sm-10" id="emaildiv">
-                                            <input type="text" id="email" name="email" class="form-control" placeholder="e.g. johndoe@mail.com">
+                                            <input type="text" id="email" disabled name="email" class="form-control" placeholder="e.g. johndoe@mail.com">
                                             <div id="emailerror" style="display:none">
                                                 Please enter a valid email address!
                                             </div>
@@ -94,7 +112,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Mobile</label>
                                         <div class="col-sm-10">
-                                            <input type="text" id="mobile" name="mobile" class="form-control" placeholder="e.g. 81245678">
+                                            <input type="text" id="mobile" disabled name="mobile" class="form-control" placeholder="e.g. 81245678">
                                             <div id="mobileerror" style="display:none">
                                                 Please enter a valid mobile number!
                                             </div>
@@ -104,7 +122,7 @@
                                         <label class="col-sm-2 col-sm-2 control-label">Gender</label>
                                         <div class="col-sm-10">
                                             <!--<input type="text" id="gender" name="gender" class="form-control">-->
-                                            <select class="form-control" id = "gender" name="gender">
+                                            <select class="form-control" disabled id = "gender" name="gender">
                                                 <option disabled="disabled" selected="selected">Please Select</option>
                                                 <!--<optgroup label="Please Select">-->
                                                 <option>Male</option>
@@ -119,7 +137,7 @@
                                         <label class="col-sm-2 col-sm-2 control-label">Nationality</label>
                                         <div class="col-sm-10">
                                             <!--<input type="text" id="nationality" name="nationality" class="form-control">-->
-                                            <select class="form-control" id="nationality"  name="nationality">
+                                            <select class="form-control" disabled id="nationality"  name="nationality">
                                                 <option disabled="disabled" selected="selected">Please Select</option>
                                                 <!--<optgroup label="Please Select">-->
                                                 <option value="singaporean">Singaporean</option>
@@ -321,7 +339,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Marital Status</label>
                                         <div class="col-sm-10">
-                                            <select class="form-control" id="marital" name="marital">
+                                            <select class="form-control" disabled id="marital" name="marital">
                                                 <option disabled="disabled" selected="selected">Please Select</option>
                                                 <!--<optgroup label="Please Select">-->
                                                 <option>Single</option>
@@ -336,7 +354,7 @@
                                         <label class="col-sm-2 col-sm-2 control-label">Residence Type</label>
                                         <div class="col-sm-10">
                                             <!--<input type="text" id="residencetype" name="residencetype" class="form-control">-->
-                                            <select class="form-control" id="residencetype" name="residencetype">
+                                            <select class="form-control" disabled id="residencetype" name="residencetype">
                                                 <option disabled="disabled" selected="selected">Please Select</option>
                                                 <!--<optgroup label="Please Select">-->
                                                 <option value = "hdb_SEM">HDB - Standard / Executive / Maisonette</option>
@@ -352,20 +370,20 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Address</label>
                                         <div class="col-sm-10">
-                                            <input type="text" id="address" name="address" class="form-control">
+                                            <input type="text" disabled id="address" name="address" class="form-control">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Occupation</label>
                                         <div class="col-sm-10">
-                                            <input type="text" id="occupation" name="occupation" class="form-control">
+                                            <input type="text" disabled id="occupation" name="occupation" class="form-control">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Industry</label>
                                         <div class="col-sm-10">
                                             <!--<input type="text" id="industry" name="industry" class="form-control">-->
-                                            <select id="industry" class="form-control"  name="industry">
+                                            <select id="industry" disabled class="form-control"  name="industry">
                                                 <option disabled="disabled" selected="selected">Please Select</option>
                                                 <!--<optgroup label="Please Select">-->
                                                 <option value="Student">Education (Student) </option>
@@ -410,7 +428,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class ="col-lg-3"></div>
+                    
                     <div class="col-lg-6">
                         <button id="submit" type="button" style="width:103%" class="btn btn-danger btn-lg btn-block">Submit Account Creation</button>
                     </div>
@@ -694,7 +712,7 @@
         required: true
     })
             ;
-    //FilePond.parse(document.body);
+//    FilePond.parse(document.body);
 </script>
 
 <script>
@@ -716,27 +734,27 @@
         opacity: 0.8; /* Firefox */
     }
     .filepond--root {
-        max-height: 170px;
+        
         width: 75%;
         margin: auto;
     }
     .filepond--panel-root {
         background-color: red;
         height: 80px;
+        
     }
     .filepond--drop-label {
         margin: auto;
         color: white;
         font-size: 22px;
         margin-top: -10px;
+        
     }
     .filepond--file {
         font-weight: 200;
         color: white;
         font-size: 24px;
+        max-height: 170px;
     }
-    .innerVid{
-        width: 50%;
-        margin: 0 auto;
-    }
+    
 </style>
