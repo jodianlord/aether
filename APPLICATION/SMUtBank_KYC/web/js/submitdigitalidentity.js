@@ -70,7 +70,7 @@ document.getElementById("submit").onclick = function () {
                     var filebase = reader.result;
                     object["userdata"] = filebase;
                     object["password"] = "password";
-                   
+                    
                     $.confirm({
                         buttons: {
                             OK: function () {
