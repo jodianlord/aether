@@ -217,6 +217,9 @@
                                         //String learningIDVal = "4";
                                         if (!learningIDVal.equals("0")) {
                                     %>
+                                     <script type="text/javascript">
+                                        var groupID= '<%=learningIDVal%>';
+                                    </script>
                                     <script src ="js/bctest.js"></script>
                                     <%
                                         }

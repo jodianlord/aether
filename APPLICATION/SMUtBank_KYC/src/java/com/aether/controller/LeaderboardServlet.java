@@ -35,6 +35,37 @@ public class LeaderboardServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+        
         response.setContentType("application/json");
         try (PrintWriter out = response.getWriter()) {
             boolean verbose = true;
@@ -53,7 +84,7 @@ public class LeaderboardServlet extends HttpServlet {
             String userID = "";
             String PIN = "";
             String OTP = "";
-            String gameID = "1";
+            String gameID = "0887"; //change game id!
             String start = "2010-01-01 00:00:00";
             String end = "2019-01-01 23:59:59";
             String mode = "*";
@@ -133,7 +164,7 @@ public class LeaderboardServlet extends HttpServlet {
                     Object testObj = leaderObj2.get("Leader");
                     if (testObj instanceof JSONArray) {
                         JSONArray ldrObj = leaderObj2.getJSONArray("Leader");
-
+                        System.out.println("Result = " + ldrObj.toString());
                         out.println(ldrObj.toString());
 
                         /*for (int i = 0; i < ldrObj.length(); i++) {
@@ -146,7 +177,7 @@ public class LeaderboardServlet extends HttpServlet {
                     }*/
                     } else if (testObj instanceof JSONObject) {
                         JSONObject ldrObj = leaderObj2.getJSONObject("Leader");
-
+                        System.out.println("Result = " + ldrObj.toString());
                         out.println(ldrObj.toString());
 
                         /*score = ldrObj.getString("score");
@@ -164,35 +195,6 @@ public class LeaderboardServlet extends HttpServlet {
                 e.printStackTrace(System.out);
             }
         }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**

@@ -26,7 +26,8 @@ var answerOne = "";
 var answerTwo = "";
 var answerThree = "";
 
-
+var groupID1 = groupID;
+console.log("groupID = " + groupID1)
 
 var createJson = {};
 
@@ -175,7 +176,7 @@ $.ajax({
             window.survey.setValue("qnsA", questionOneID);
             window.survey.setValue("qnsB", questionTwoID);
             window.survey.setValue("qnsC", questionThreeID);
-
+            window.survey.setValue("groupID", groupID);
 
             renderTime(seconds);
         }
