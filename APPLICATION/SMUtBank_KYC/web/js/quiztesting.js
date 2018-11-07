@@ -3,6 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+$(window).on('load', function () {
+    $('#myModal').modal('show');
+});
+
+
 
 //set qns using ajax
 var questionOne = "";
@@ -27,14 +32,15 @@ var createJson = {};
 
 $.ajax({
     url: "./QuizServlet",
+    async :false,
     type: "POST",
     data: JSON.stringify(createJson),
     contentType: "application/json",
     success: function (data) {
         var arr = data.setA;
-        console.log(arr);
+        //console.log(arr);
         var qOne = arr[0];
-
+        //console.log("ffffff>>>>" + qOne);
         questionOneID = qOne.questionID;
         questionOne = qOne.question;
         choicesOne = qOne.choices;
@@ -136,7 +142,7 @@ $.ajax({
                     ]
                 }
             ],
-            completedHtml: "<h4>You have answered correctly <b>{correctedAnswers}</b> questions from <b>{questionCount}</b>.</h4>"
+            completedHtml: "<h4>You have completed the quiz! Press 'Close' to carry on creating your unique digital identity!.</h4>"
         };
 
         window.survey = new Survey.Model(json);
@@ -144,8 +150,9 @@ $.ajax({
         var timerId = null;
 
         function renderTime(val) {
-            if (!timeEl)
+            if (!timeEl) {
                 return;
+            }
             var hours = Math.floor(val / 3600);
             var minutes = Math.floor((val - (hours * 3600)) / 60);
             var seconds = Math.floor(val % 60);
@@ -177,8 +184,7 @@ $.ajax({
             timerCallback();
         });
         window.survey.onComplete.add(function (result) {
-            document.querySelector('#surveyResult')
-                    .innerHTML = "result: " + JSON.stringify(result.data);
+            $('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
 
 
             document.getElementById("timeInfo").style.display = "none";
@@ -190,30 +196,29 @@ $.ajax({
                 data: JSON.stringify(result.data),
                 contentType: "application/json",
                 success: function (output) {
-                    console.log(output);
+                    //console.log(output);
                 }
             });
             //document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
         });
+        $("#surveyElement").Survey({model: survey});
 
-
-        $("#surveyElement").Survey({
-            model: window.survey
-        });
+       
 
         timerCallback();
         timerId = window.setInterval(function () {
             timerCallback();
         }, 1000);
-
     },
     error: function (xhr) {
-        console.log(xhr);
+        //console.log(xhr);
         $.alert({
             title: 'Failure!',
-            content: 'Quiz Error!',
+            content: 'Quiz Error!'
         });
     }
 });
+        
+
 
 

@@ -89,7 +89,7 @@ public class ScoringServlet extends HttpServlet {
             org.json.simple.JSONObject resultJSON = new org.json.simple.JSONObject();
             boolean result = false;
             org.json.simple.JSONObject jsonContent = getJSONObject(body);
-
+            
             //System.out.println(jsonContent);
             int timeOne = Integer.parseInt(jsonContent.get("pageNo4").toString());
             int timeTwo = Integer.parseInt(jsonContent.get("pageNo5").toString());
@@ -115,6 +115,7 @@ public class ScoringServlet extends HttpServlet {
             JSONObject getQnsAns = qnsDAO.getQuestionAnswer(qIDOne);
             if (getQnsAns != null) {
                 qAnswerOne = getQnsAns.getString("answer");
+                System.out.print("qqqqq"+qAnswerOne);
                 String correctAns = jsonContent.get("questionID-" + qIDOne).toString();
                 if (qAnswerOne.equals(correctAns)) {
                     scoreA += 100;
@@ -172,6 +173,7 @@ public class ScoringServlet extends HttpServlet {
                 jo.put("gameID", gameID);
                 jo.put("questionID", qObj.get(""+i));
                 jo.put("score", scoreObj.get(""+i) );
+                jo.put("groupID", "1");
                 //test
                 System.out.println(qObj.get(""+i).toString() + ">>>>>>" +scoreObj.get(""+i).toString());
                 jo.put("mode", mode);
