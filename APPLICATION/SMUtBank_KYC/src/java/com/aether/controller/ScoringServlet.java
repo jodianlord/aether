@@ -152,7 +152,7 @@ public class ScoringServlet extends HttpServlet {
             String userID = "test";
             String PIN = "";
             String OTP = "";
-            String gameID = "1118";
+            String gameID = "1119";
             String questionID = "";
             String scoreString = "";
             String mode = "*";
