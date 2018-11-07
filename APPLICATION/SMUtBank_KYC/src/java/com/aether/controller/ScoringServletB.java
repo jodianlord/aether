@@ -155,9 +155,7 @@ public class ScoringServletB extends HttpServlet {
             String questionID = "";
             String scoreString = "";
             String mode = "*";
-            String groupID = jsonContent.get("groupID").toString();
-            
-            //String groupID = "3";
+            String groupID = "3";
 
             JSONObject jo = new JSONObject();
             jo.put("serviceName", serviceName);
