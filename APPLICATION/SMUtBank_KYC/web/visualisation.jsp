@@ -7,6 +7,7 @@
 <%@page import="java.nio.charset.Charset"%>
 <%@page import="java.util.Random"%>
 <%@page import="java.math.BigInteger"%>
+<%@page import="javax.servlet.http.HttpSession"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="com.aether.dao.UserDAO, com.aether.blockchain.BlockchainHandler" %>
 <%@page import="java.math.BigInteger"%>
@@ -31,6 +32,9 @@
 %>
 <html lang="en">
     <%@include  file="Components/head.html" %>
+    <script src="https://unpkg.com/jquery"></script>
+    <script src="https://surveyjs.azureedge.net/1.0.46/survey.jquery.js"></script>
+    <link href="https://surveyjs.azureedge.net/1.0.46/survey.css" type="text/css" rel="stylesheet"/>
     <body>
         <div class="se-pre-con">                        
         </div>
@@ -189,6 +193,45 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Modal -->
+                    <button class="btn btn-lg btn-info open-modal">Time for the final quiz!</button>
+
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog" style="width:740px;">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Aether Learning Module</h4>
+                                    <div id="timeInfo">
+                                        <p>
+                                            <span>The time spent on this page: </span><span id="timeEl"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="surveyElement"></div>
+                                    <%
+                                        String learningIDVal = session.getAttribute("groupid").toString();
+                                        //String learningIDVal = "4";
+                                        if (!learningIDVal.equals("0")) {
+                                    %>
+                                    <script src ="js/bctest.js"></script>
+                                    <%
+                                        }
+                                    %>
+                                    <div id="surveyResult"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--end of Modal -->
+
                 </section>
             </section>
 
@@ -313,7 +356,7 @@
                                         }
                                     });
                                 });
-                            }, 
+                            },
                             buttons: {
                                 close: {}
                             }
@@ -448,7 +491,7 @@
                         '<h5>Now comes time to link everything together. Move on to Data Handling and Encryption!</h5>',
                 buttons: {
                     close: {
-                        
+
                     }
                 }
             });
@@ -562,4 +605,11 @@
             })
         })
     </script>
+    <script type="application/javascript">
+            $(document).on('ready', function() {
+            $('.open-modal').click(function() {
+            $('#myModal').modal();
+            });
+            });
+        </script>
 </html>
