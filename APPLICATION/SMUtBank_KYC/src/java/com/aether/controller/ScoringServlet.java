@@ -152,7 +152,7 @@ public class ScoringServlet extends HttpServlet {
             String userID = "";
             String PIN = "";
             String OTP = "";
-            String gameID = "111";
+            String gameID = "1111";
             String questionID = "";
             String scoreString = "";
             String mode = "*";
@@ -173,7 +173,7 @@ public class ScoringServlet extends HttpServlet {
                 jo.put("gameID", gameID);
                 jo.put("questionID", qObj.get(""+i));
                 jo.put("score", scoreObj.get(""+i) );
-                jo.put("groupID", "1");
+                jo.put("groupID", "7");
                 //test
                 System.out.println(qObj.get(""+i).toString() + ">>>>>>" +scoreObj.get(""+i).toString());
                 jo.put("mode", mode);
