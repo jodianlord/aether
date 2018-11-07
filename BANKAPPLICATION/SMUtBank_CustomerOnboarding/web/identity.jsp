@@ -18,26 +18,16 @@
             <!--main content start-->
             <section id="main-content">
                 <section class="wrapper">
-
-                    <div class="row mt">
-                        <div class ="col-lg-3"></div>
-                        <div class="col-lg-6">
-                            <div class="form-panel col-lg-12 col-sm-2 col-xs-2 col-md-2" style="margin-top:-5em" >
-                                <h4 class="mb"><i class="fa fa-angle-right"></i> Upload .bin UDI File</h4>
-                                
-                                <!--<div class="col-lg-12 ">-->
-                                <input type="file" class="filepond" id="fileupload">
-
-                        
-                                </br>
-                            <button id="populate" style="margin-top:6em;" type="button" class="btn btn-danger btn-lg btn-block center-block">Populate User Details</button>
-
-                            </div>  
-                        </div>
-                    </div>
-
-                    <div class="row mt">
-                        <div class ="col-lg-3"></div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="row mt" style ="margin-top:-4em">
+                        <div class="col-lg-3"></div>
                         <div class="col-lg-6">
                             <div class="form-panel col-lg-12" id="camerapanel">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> Take Picture</h4>
@@ -49,13 +39,38 @@
                                     <button style="float:left;clear:left;margin-left: 15px" id="capture" type="button" class="btn btn-theme04">Take Photo</button>
                                     <button style="float:left;clear:left;margin-left: 15px" id="captureagain" type="button" class="btn btn-primary">Retake Photo</button>
                                 </div>
-
-
+                                
+                                
+                                
                             </div>
+                           
                         </div>
+                        
                     </div>
+                    
+                    
+                    
+                    
+                    <div class="row mt">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-6">
+                            <div class="form-panel  col-lg-12">
+                                <h4 class="mb"><i class="fa fa-angle-right"></i> Upload .bin UDI File</h4>
+                                
+                                <!--<div class="col-lg-12 ">-->
+                                <input type="file" class="filepond" id="fileupload">
 
+                        
+                                
+                                <button id="populate" style="margin-top:6em;" type="button" class="btn btn-danger btn-lg btn-block center-block">Populate User Details</button>
 
+                                
+                                
+                            </div>
+                           
+                        </div>
+                        
+                    </div>
 
                     <div class="row mt">
                         <div class="col-lg-3"></div>
@@ -75,13 +90,13 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Bank Id</label>
                                         <div class="col-sm-10">
-                                            <input type="text" id="fullname" name="bankID" class="form-control" placeholder="e.g. 1">
+                                            <input type="text" id="bankID" name="bankID" class="form-control" placeholder="e.g. 1">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Currency</label>
                                         <div class="col-sm-10">
-                                            <input type="text" id="fullname" name="currency" class="form-control" placeholder="e.g. SGD">
+                                            <input type="text" id="currency" name="currency" class="form-control" placeholder="e.g. SGD">
                                         </div>
                                     </div>
                                     
@@ -426,12 +441,14 @@
 
                                 </form>
                             </div>
+                            <div class="col-lg-12">
+                        <button id="submit" type="button" style="width:28em;margin-left: -5px" class="btn btn-danger btn-lg btn-block">Submit Account Creation</button>
+                    </div>
                         </div>
+                        
                     </div>
                     
-                    <div class="col-lg-6">
-                        <button id="submit" type="button" style="width:103%" class="btn btn-danger btn-lg btn-block">Submit Account Creation</button>
-                    </div>
+                    
 
                 </section>
             </section>
@@ -450,7 +467,7 @@
 
     </body>
 </html>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
@@ -464,43 +481,24 @@
         reader.onload = function () {
             var object = {};
             object["binfile"] = reader.result;
-            //var canvas = document.getElementById("canvas");
-            /*if (canvas === null) {
+            var canvas = document.getElementById("canvas");
+            if (canvas === null) {
                 $.alert({
                     title: 'Sorry!',
                     content: 'Please take your picture!',
                 });
                 return;
-            }*/
+            }
 
-            //var canvasbase = canvas.toDataURL();
+            var canvasbase = canvas.toDataURL();
         
-            //object["verificationfile"] = canvasbase;
-            /*$.ajax({
-                url: "./PassBin",
-                type: "POST",
-                data: JSON.stringify(object),
-                contentType: "application/json",
-                success: function (data) {
-                    $("#fullname").val(data.fullname);
-                    $("#nric").val(data.nric);
-                    $("#email").val(data.email);
-                    $("#mobile").val(data.mobile);
-                    $("#gender").val(data.gender);
-                    $("#nationality").val(data.nationality);
-                    $("#marital").val(data.marital);
-                    $("#residencetype").val(data.residencetype);
-                    $("#address").val(data.address);
-                    $("#occupation").val(data.occupation);
-                    $("#industry").val(data.industry);
-                }, error: function (xhr) {
-                }
-            });*/
+            object["verificationfile"] = canvasbase;
+           
             $.confirm({
                 buttons: {
                     OK: function () {
                         //window.location.href = "identity.jsp";
-                        redirect = true;
+                        //redirect = true;
                     }
                 },
                 content: function () {
@@ -511,24 +509,24 @@
                         data: JSON.stringify(object),
                         contentType: "application/json",
                     }).done(function (response) {
-                        $("#fullname").val(data.fullname);
-                        $("#nric").val(data.nric);
-                        $("#email").val(data.email);
-                        $("#mobile").val(data.mobile);
-                        $("#gender").val(data.gender);
-                        $("#nationality").val(data.nationality);
-                        $("#marital").val(data.marital);
-                        $("#residencetype").val(data.residencetype);
-                        $("#address").val(data.address);
-                        $("#occupation").val(data.occupation);
-                        $("#industry").val(data.industry);
+                        $("#fullname").val(response.fullname);
+                        $("#nric").val(response.nric);
+                        $("#email").val(response.email);
+                        $("#mobile").val(response.mobile); 
+                        $("#gender").val(response.gender);
+                        $("#nationality").val(response.nationality);
+                        $("#marital").val(response.marital);
+                        $("#residencetype").val(response.residencetype);
+                        $("#address").val(response.address);
+                        $("#occupation").val(response.occupation);
+                        $("#industry").val(response.industry);
                         self.setTitle('Success!');
                         self.setContent('Your personal particulars has been populated!');
                         //redirect = true;
                     }).fail(function(){
                         self.setTitle('Failure!');
-                        self.setContent('Your personal particulars cannot be populated! Please wait while a staff attend to your request');
-                        //redirect = true;
+                        //self.setContent('Your personal particulars cannot be populated! Please wait while a staff attend to your request');
+                        self.setContent('Please retake your picture. Ensure that only your face is shown and is not obscured');
                     });     
                 }
             });
@@ -570,7 +568,7 @@
             $.confirm({
                 buttons: {
                     OK: function () {
-                        window.location.href = "identity.jsp";
+                        window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
                     }
                 },
                 content: function () {
@@ -633,7 +631,10 @@
                             contentType: "application/json",
                             success: function (createData) {
                                 if (createData.createStatus === "success") {
-                                    $.confirm({
+                                    self.setTitle('Your account has been created!');
+                                    self.setContent('You can now login to your tBank account.');
+                                    
+                                    /*$.confirm({
                                         title: "Your account has been created! ",
                                         content: "You can now login to your tBank account.",
 
@@ -642,9 +643,11 @@
                                                 window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
                                             },
                                         }
-                                    });
+                                    });*/
                                 } else {
-                                    $.confirm({
+                                    self.setTitle('Duplicated NRIC. Customer already exist in tBank');
+                                    self.setContent('Please check your information again as there are already an existing account with tBank');
+                                    /*$.confirm({
                                         title: "Duplicated NRIC. Customer already exist in tBank ",
                                         content: "Please check your information again as there are already an existing account with tBank",
 
@@ -653,12 +656,16 @@
                                                 //window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
                                             },
                                         }
-                                    });
+                                    });*/
                                 }
 
                             }, error: function (xhr) {
                                 console.log("Create Customer failed");
-                                $.confirm({
+                                $.alert({
+                                    title: "Error!",
+                                    content: "Your face does not match the UDI. Please wait while staff attend to your request."
+                                });
+                                /*$.confirm({
                                     title: "Create Customer failed",
                                     content: "Create customer failed please validate your information again.",
 
@@ -667,7 +674,7 @@
                                             //window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
                                         },
                                     }
-                                });
+                                });*/
                             }
                         });
 
@@ -724,7 +731,6 @@
                         }).fail(function(){
                             self.setTitle('Failure!');
                             self.setContent('The file has been compromised or tampered with. Please wait while staff attend to your request.');
-                            //redirect = true;
                         });     
                     }
                 });
