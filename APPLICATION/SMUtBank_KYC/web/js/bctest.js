@@ -26,7 +26,8 @@ var answerOne = "";
 var answerTwo = "";
 var answerThree = "";
 
-
+var e = document.getElementById("groupid");
+var groupID = e.options[e.selectedIndex].value;
 
 var createJson = {};
 
@@ -116,6 +117,7 @@ $.ajax({
                 }
             ],
             completedHtml: "<h4>You have completed the quiz! Press 'Close' to carry on!</h4>"
+            ,groupID : groupID
         };
 
         window.survey = new Survey.Model(json);
@@ -164,7 +166,7 @@ $.ajax({
             clearInterval(timerId);
             $.ajax({
                 method: "POST",
-                url: "./ScoringServlet",
+                url: "./ScoringServletB",
                 type: "POST",
                 data: JSON.stringify(result.data),
                 contentType: "application/json",

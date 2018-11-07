@@ -126,7 +126,7 @@ public class QuizServlet extends HttpServlet {
             //set B 
             org.json.simple.JSONArray setB = qnsdao.getSetB();
             if (setB != null) {
-                int qID = 11;
+                int qID = 114;
                 
                 for (int num = 0; num < 3; num++) {
                     String qnsIDString = qID + "";
