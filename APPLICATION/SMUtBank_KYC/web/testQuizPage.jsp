@@ -16,12 +16,17 @@
 
     </head>
     <body onload="myFunction()">
-        <div class="se-pre-con">                        
-        </div>
+        
+        <div id="timeInfo">
+    <p>
+      <span>The time spent on this page: </span><span id="timeEl"></span>
+    </p>
+  </div>
         <div id="surveyElement"></div>
+        <div id ="surveyResult"></div>
        
-
-        <script type="text/javascript" src="js/testQuiz.js"></script>
+        <script type="text/javascript" src="js/quiztesting.js"></script>
+        <!--<script type="text/javascript" src="js/quiztesting.js"></script>-->
         
 
     </body>

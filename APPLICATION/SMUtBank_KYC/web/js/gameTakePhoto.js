@@ -87,6 +87,9 @@ document.getElementById("capture").onclick = function () {
                 document.getElementById("captureagain").style.margin = "-60px 0px 0px 0px";
                 document.getElementById("camerapanel").style.height = "480px";
                 document.getElementById("captureagain").style.visibility = "visible"; //make visible
+                var myvar = "Hey Buddy";
+                '<%Session["temp"] = "' + myvar +'"; %>' ;
+                
             },
             cancel: function () {
 

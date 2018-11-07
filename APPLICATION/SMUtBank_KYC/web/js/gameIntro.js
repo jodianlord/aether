@@ -48,9 +48,55 @@ var json = {
                     
                 }
             ]
+        },
+        {
+            questions: [
+                {
+                    type: "radiogroup",
+                    name: "Aether",
+                    title: "How does Aether store the consumer initial data inputted by the KYC Agent (7-11 Staff)",
+                    choices: [
+                        "By attaching the information to a blockchain", "By storing it in a MySQL database", "By using HTML Session", "It doesn't store the information"
+                    ],
+                    correctAnswer: "By attaching the information to a blockchain"
+                }
+                
+            ]
+        
+        },
+        {
+            questions: [
+                {
+                    type: "radiogroup",
+                    name: "binFile",
+                    title: "Which information is not stored in the bin file that is send out to the consumer email.",
+                    choicesOrder: "random",
+                    choices: [
+                        "Marital Status", "NRIC", "Username", "Gender"
+                    ],
+                    correctAnswer: "Username"
+                }
+                
+            ]
+        }
+        ,
+        {
+            questions: [
+                {
+                    type: "radiogroup",
+                    name: "FR",
+                    title: "What are the 2FA Methods that Aether has implemented?",
+                    choicesOrder: "random",
+                    choices: [
+                        "OTP and QR Code Scan", "OTP and Facial Recognition", "TouchID and Facial Recognition", "Touch ID and QR Code Scan"
+                    ],
+                    correctAnswer: "OTP and Facial Recognition"
+                }
+                
+            ]
         }
     ],
-    completedHtml: "<h4>Lets begin to create your first digital identity!</h4>"
+    completedHtml: "<h4>Lets begin to create your first digital identity!</h4></br><h4>You have answered correctly <b>{correctedAnswers}</b> questions from <b>{questionCount}</b>.</h4>"
 };
 
 window.survey = new Survey.Model(json);

@@ -146,18 +146,17 @@ public class CreateCustomerServlet extends HttpServlet {
             jo.put("bankID", "1");
             
             */
-            System.out.println("help see this>>"+nric);
-            System.out.println("wtf jo");
+            
             //set content
             JSONObject contentObj = new JSONObject();
             contentObj.put("Content", jo);
             String content = contentObj.toString();
-            System.out.println("wtf content");
+            
             // connect to API service 
             HttpURLConnection urlConnection = (HttpURLConnection) new URL(apiServiceUrl).openConnection();
             urlConnection.setDoOutput(true);
             urlConnection.setRequestMethod("POST");
-            System.out.println("wtf post");
+            
             // build request parameters
             String parameters
                     = "Header=" + header + "&"
@@ -167,7 +166,7 @@ public class CreateCustomerServlet extends HttpServlet {
             BufferedWriter br = new BufferedWriter(new OutputStreamWriter(urlConnection.getOutputStream()));
             br.write(parameters);
             br.close();
-System.out.println("wtf buffer");
+
             // get response
             String resp = "";
             Scanner s = new Scanner(urlConnection.getInputStream());
@@ -175,7 +174,7 @@ System.out.println("wtf buffer");
                 resp += s.nextLine();
             }
             s.close();
-            System.out.println("wtf resp");
+            
             // get response object
             JSONObject responseObj = new JSONObject(resp);
             System.out.println(responseObj.toString(4)); // indent 4 spaces
@@ -201,11 +200,9 @@ System.out.println("wtf buffer");
             Object custPIN = customerDetailsObj.get("PIN");
             String customerPINText = "";
             if(custPIN==null){
+                
                 printCreateJSON.put("createStatus", "fail");
-                
-                
-                System.out.println("WHY NOT FALSE"+createResult);
-                
+                           
             }
             else{
                 createResult=true;
@@ -228,7 +225,6 @@ System.out.println("wtf buffer");
                 SendSMSDAO msg = new SendSMSDAO();
                 msg.sendMessage( mobile, "Your account has been created! Please use your NRIC as the username and this is your PIN: "+customerPINText+"");
                 printCreateJSON.put("createStatus", "success");
-                
             }
             //send response using printJSON
             //org.json.simple.JSONObject printCreateJSON = new org.json.simple.JSONObject();
@@ -236,9 +232,9 @@ System.out.println("wtf buffer");
             
            
             out.println(printCreateJSON.toString());
-            System.out.println("wtf parse help");   
+             
         } catch (Exception e) {
-            System.out.println("wtf exception");
+            
             
             e.printStackTrace(System.out);
 
