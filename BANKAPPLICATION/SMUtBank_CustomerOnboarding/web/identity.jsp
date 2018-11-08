@@ -19,13 +19,6 @@
             <section id="main-content">
                 <section class="wrapper">
 
-
-
-
-
-
-
-
                     <div class="row mt" style ="margin-top:-4em">
                         <div class="col-lg-3"></div>
                         <div class="col-lg-6">
@@ -461,7 +454,7 @@
             document.getElementById("identityside").className = "active";
         </script>
         <script src ="js/takePhoto.js"></script>
-
+        
         <%@include file="Components/style.html" %>
 
     </body>
@@ -963,3 +956,6 @@
     }
 
 </style>
+
+
+

@@ -379,7 +379,7 @@
                     <div class="row mt">
                         <div class ="col-lg-3"></div>
                         <div class="col-lg-6">
-                            <div class="form-panel" style="height:170px">
+                            <div class="form-panel" style="height:16em">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> Upload Documents</h4>
                                 <input type="file" class="filepond" id="fileupload">
                             </div>
@@ -452,7 +452,12 @@
             <!--main content end-->
         </section>
 
+        <script type='text/javascript'>
+            function leaderboard(){
+                alert('hello');
+            }
 
+        </script>                            
 
         <%@include file="Components/script.html" %>
         <!--set dashboard button to active-->
@@ -516,24 +521,27 @@
         opacity: 0.8; /* Firefox */
     }
     .filepond--root {
-        max-height: 170px;
+
         width: 75%;
         margin: auto;
     }
     .filepond--panel-root {
         background-color: #5e7496;
-        height: 80px;
+        /*height: 80px;*/
+
     }
     .filepond--drop-label {
         margin: auto;
         color: white;
         font-size: 22px;
-        margin-top: -10px;
+
+
     }
     .filepond--file {
         font-weight: 200;
         color: white;
         font-size: 24px;
+        max-height: 170px;
     }
     .innerVid{
         width: 50%;
