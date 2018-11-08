@@ -495,23 +495,49 @@
 
         <script type ='text/javascript'>
                                         function leaderboard() {
-                                            
-                                            $.post('./LeaderboardServlet', function (data) {
-                                                
-                                                alert(data);
-                                                alert(data[1]);
 
-                                                for (var i = 0; i < data.length; i++) {
-                                                    var id = i + 1;
-                                                    var name = data[i].key;
-                                                    var relevance = data[i].value;
-//                                                    alert(id);
-//                                                    alert(name);
-//                                                    alert(relevance);
+                                            $.ajax({
+                                                url: "./LeaderboardServlet", //edit address accordingly
+                                                type: "POST",
+                                                contentType: "application/json",
+                                                success: function (data) {
+                                                    var length = data.Leader.length;
+                                                    console.log("arary length: " + length);
+                                                    console.log("json: " + JSON.stringify(data));
+                                                    var text = "";
+                                                    text += '<table><tr><td> Group </td><td>Score</td></tr>';
                                                     
+                                                    for (i = 0; i < data.Leader.length; i++) {
+                                                        
+                                                                text += '<tr><td>' + data.Leader[i].score + '</td><td>' + data.Leader[i].user_Id + '</td></tr>';
+                                                    }
+                                                    text += '</table>';
+
+                                                    /*for (i = 0; i < data.Leader.length5; i++) {
+                                                     data.Leader[i].score;
+                                                     data.Leader[i].user_Id;
+                                                     }*/
+                                                    console.log(text);
+                                                    console.log("score: " + data.Leader[0].score) //score
+                                                    console.log("user_Id: " + data.Leader[0].user_Id) //group
+
+                                                }, error: function (xhr) {
+
                                                 }
-                                                
                                             });
+
+                                            /*$.post('./LeaderboardServlet', function (data) {
+                                             
+                                             alert(data);
+                                             alert(data[1]);
+                                             
+                                             for (var i = 0; i < data.length; i++) {
+                                             var id = i + 1;
+                                             var name = data[i].key;
+                                             var relevance = data[i].value;
+                                             }
+                                             
+                                             });*/
                                         }
 
 

@@ -164,9 +164,9 @@ public class LeaderboardServlet extends HttpServlet {
                     Object testObj = leaderObj2.get("Leader");
                     if (testObj instanceof JSONArray) {
                         JSONArray ldrObj = leaderObj2.getJSONArray("Leader");
-                        System.out.println("Result = " + ldrObj.toString());
-                        out.println(ldrObj.toString());
-
+                        System.out.println("Result = " + leaderObj2.toString());
+                        //out.println(ldrObj.toString());
+                        out.println(leaderObj2.toString());
                         /*for (int i = 0; i < ldrObj.length(); i++) {
                         JSONObject ldrobj = ldrObj.getJSONObject(i);
                         score = ldrobj.getString("score");
@@ -177,8 +177,9 @@ public class LeaderboardServlet extends HttpServlet {
                     }*/
                     } else if (testObj instanceof JSONObject) {
                         JSONObject ldrObj = leaderObj2.getJSONObject("Leader");
-                        System.out.println("Result = " + ldrObj.toString());
-                        out.println(ldrObj.toString());
+                        System.out.println("Result = " + leaderObj2.toString());
+                        //out.println(ldrObj.toString());
+                        out.println(leaderObj2.toString());
 
                         /*score = ldrObj.getString("score");
                     user_Id = ldrObj.getString("user_Id");
