@@ -10,6 +10,7 @@ import com.aether.util.JDBCHandler;
 import com.aether.util.RESTHandler;
 import static com.aether.util.RESTHandler.sendMultipartPost;
 import com.aether.util.SendEmailSSL;
+import com.aether.util.TBankEmail;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -132,7 +133,8 @@ public class IdentityServlet extends HttpServlet {
                 try(FileOutputStream outputStream = new FileOutputStream(request.getServletContext().getRealPath("/") + "UDI_" + fullname + ".bin")){
                     byte[] strToBytes = finalJSON.getBytes();
                     outputStream.write(strToBytes);
-                    SendEmailSSL.generateAndSendEmail(email, new File(request.getServletContext().getRealPath("/") + "UDI_" + fullname + ".bin"));
+                    TBankEmail.sendEmail(email, "Your Onboarding Details", finalJSON);
+                    //SendEmailSSL.generateAndSendEmail(email, new File(request.getServletContext().getRealPath("/") + "UDI_" + fullname + ".bin"));
                 }catch(IOException e){
                     
                 }catch(AddressException e){
