@@ -63,7 +63,6 @@ $.ajax({
         answerTwo = qThree.answer;
         //console.log(objOne.question);
         var json = {
-
             title: "Aether Gamification Quiz",
             showProgressBar: "bottom",
             showTimerPanel: "top",
@@ -175,7 +174,7 @@ $.ajax({
                     //console.log(output);
                 }
             });
-            document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
+            //document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
         });
         $("#surveyElement").Survey({model: survey});
 

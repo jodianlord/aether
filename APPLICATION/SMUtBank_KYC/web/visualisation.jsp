@@ -205,7 +205,7 @@
                         }
                     %>
 
-                    <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal fade" id="myModal" role="dialog" data-keyboard="false" data-backdrop="static">
                         <div class="modal-dialog" style="width:740px;">
 
                             <!-- Modal content-->
