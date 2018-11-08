@@ -25,7 +25,7 @@
         <div id="surveyElement"></div>
         <div id ="surveyResult"></div>
        
-        <script type="text/javascript" src="js/quiztesting.js"></script>
+        <script type="text/javascript" src="js/gameIntro.js"></script>
         <!--<script type="text/javascript" src="js/quiztesting.js"></script>-->
         
 

@@ -11,7 +11,7 @@ $(window).on('load',function(){
 var json = {
     
     showProgressBar: "bottom",
-   
+    cookieName: "myuniquesurveyid",
     maxTimeToFinishPage: 0,
     maxTimeToFinish: 0,
     firstPageIsStarted: true,
@@ -55,6 +55,7 @@ var json = {
                     type: "radiogroup",
                     name: "Aether",
                     title: "How does Aether store the consumer initial data inputted by the KYC Agent (7-11 Staff)",
+                    isRequired: true,
                     choices: [
                         "By attaching the information to a blockchain", "By storing it in a MySQL database", "By using HTML Session", "It doesn't store the information"
                     ],
@@ -70,6 +71,7 @@ var json = {
                     type: "radiogroup",
                     name: "binFile",
                     title: "Which information is not stored in the bin file that is send out to the consumer email.",
+                    isRequired: true,
                     choicesOrder: "random",
                     choices: [
                         "Marital Status", "NRIC", "Username", "Gender"
@@ -86,6 +88,7 @@ var json = {
                     type: "radiogroup",
                     name: "FR",
                     title: "What are the 2FA Methods that Aether has implemented?",
+                    isRequired: true,
                     choicesOrder: "random",
                     choices: [
                         "OTP and QR Code Scan", "OTP and Facial Recognition", "TouchID and Facial Recognition", "Touch ID and QR Code Scan"
