@@ -62,7 +62,7 @@
 
                         
                                 
-                                <button id="populate" style="margin-top:6em;" type="button" class="btn btn-danger btn-lg btn-block center-block">Populate User Details</button>
+                                <button id="populate" style="margin-top:4em;" type="button" class="btn btn-danger btn-lg btn-block center-block">Populate User Details</button>
 
                                 
                                 
@@ -435,15 +435,14 @@
                                                 <!--</optgroup>-->
                                             </select>
                                         </div>
+                                     </div>   
+<button id="submit" type="button" style="margin-top:1em" class="btn btn-danger btn-lg btn-block">Submit Account Creation</button>
 
-
-                                    </div>
-
+                                    
+                    
                                 </form>
                             </div>
-                            <div class="col-lg-12">
-                        <button id="submit" type="button" style="width:28em;margin-left: -5px" class="btn btn-danger btn-lg btn-block">Submit Account Creation</button>
-                    </div>
+                            
                         </div>
                         
                     </div>
@@ -946,14 +945,14 @@
     }
     .filepond--panel-root {
         background-color: red;
-        height: 80px;
+        /*height: 80px;*/
         
     }
     .filepond--drop-label {
         margin: auto;
         color: white;
         font-size: 22px;
-        margin-top: -10px;
+        
         
     }
     .filepond--file {
