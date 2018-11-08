@@ -149,18 +149,18 @@ public class ScoringServlet extends HttpServlet {
             String status;
 
             String serviceName = "setQuestionScore";
-            String userID = "test";
+            String userID = "yf";
             String PIN = "";
             String OTP = "";
-            String gameID = "0887";
+            String gameID = "5003";
             String questionID = "";
             String scoreString = "";
-            String mode = "*";
+            String mode = "Default";
             String groupID = jsonContent.get("groupID").toString();
 
             JSONObject jo = new JSONObject();
             jo.put("serviceName", serviceName);
-            jo.put("userID", groupID); //userid = groupid
+            jo.put("userID", userID); //userid = groupid
             System.out.println("GID = " + groupID); //
             jo.put("PIN", PIN);
             jo.put("OTP", OTP);
