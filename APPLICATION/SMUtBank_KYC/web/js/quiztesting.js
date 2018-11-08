@@ -179,6 +179,7 @@ $.ajax({
             window.survey.setValue("qnsA", questionOneID);
             window.survey.setValue("qnsB", questionTwoID);
             window.survey.setValue("qnsC", questionThreeID);
+            window.survey.setValue("userID", userID);
             window.survey.setValue("groupID", groupID);
 
             renderTime(seconds);

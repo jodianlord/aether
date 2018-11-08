@@ -149,7 +149,7 @@ public class ScoringServlet extends HttpServlet {
             String status;
 
             String serviceName = "setQuestionScore";
-            String userID = "test";
+            String userID = jsonContent.get("userID").toString(); //pass in from front end //jsonContent.get("userID").toString();
             String PIN = "";
             String OTP = "";
             String gameID = "0887";
@@ -160,7 +160,7 @@ public class ScoringServlet extends HttpServlet {
 
             JSONObject jo = new JSONObject();
             jo.put("serviceName", serviceName);
-            jo.put("userID", groupID); //userid = groupid
+            jo.put("userID", userID); //userid = groupid //
             System.out.println("GID = " + groupID); //
             jo.put("PIN", PIN);
             jo.put("OTP", OTP);
