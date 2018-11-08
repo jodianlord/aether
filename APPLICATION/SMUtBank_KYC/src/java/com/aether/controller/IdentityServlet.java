@@ -137,10 +137,6 @@ public class IdentityServlet extends HttpServlet {
                     //SendEmailSSL.generateAndSendEmail(email, new File(request.getServletContext().getRealPath("/") + "UDI_" + fullname + ".bin"));
                 }catch(IOException e){
                     
-                }catch(AddressException e){
-                    
-                }catch(MessagingException e){
-                    
                 }
             }else{
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
