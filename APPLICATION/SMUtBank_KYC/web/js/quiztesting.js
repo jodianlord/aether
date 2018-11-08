@@ -77,7 +77,7 @@ $.ajax({
                     questions: [
                         {
                             type: "html",
-                            html: "You are about to start quiz for Aether. <br/>You have 10 seconds for every page and 25 seconds for the whole survey of 3 questions.<br/>Please click on <b>'Start Quiz'</b> button when you are ready."
+                            html: "You are about to start quiz for Aether. <br/>You have 60 seconds for every page and 6 minutes for the whole module including 3 questions.<br/>Please click on <b>'Start Quiz'</b> button when you are ready."
                         }
                     ]
                 },
