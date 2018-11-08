@@ -492,29 +492,23 @@
             <!--main content end-->
         </section>
 
-        <script type='text/javascript'>
+        <script type ='text/javascript'>
             function leaderboard(){
                 //alert('je');
                 $.post('./LeaderboardServlet', function(data) {
-                    var tbody = document.getElementById('modal-body');
+                    //var tbody = document.getElementById('modal-body');
+                    alert(data);
+        
                     for (var i = 0; i < data.length; i++) {
-    var tr = "<tr>";
-
-    /* Verification to add the last decimal 0 */
-    if (data[i].value.toString().substring(data[i].value.toString().indexOf('.'), data[i].value.toString().length) < 2) 
-        data[i].value += "0";
-
-    /* Must not forget the $ sign */
-    tr += "<td>" + data[i].key + "</td>" + "<td>$" + data[i].value.toString() + "</td></tr>";
-
-    /* We add the table row to the table body */
-    tbody.innerHTML += tr;
-}
-}
-                    
-                });
+                        var id = i + 1;
+                        var name = data[i].key;
+                        var relevance = data[i].value;
+                        alert(id);
+                };
+            })
+        } 
+       
                 
-            }
 
         </script>
         
