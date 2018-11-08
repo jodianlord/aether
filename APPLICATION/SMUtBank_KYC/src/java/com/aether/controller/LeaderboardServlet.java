@@ -185,7 +185,7 @@ public class LeaderboardServlet extends HttpServlet {
 
                     System.out.println("score = " + score);
                     System.out.println("user_id = " + user_Id);*/
-                        out.println(ldrObj.toString());
+                        //out.println(ldrObj.toString());
 
                     } else {
                         System.out.println("No record");

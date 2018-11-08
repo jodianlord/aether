@@ -28,7 +28,15 @@
             MAIN CONTENT
             *********************************************************************************************************************************************************** -->
             <!--main content start-->
+            
+            
+            
+            
             <section id="main-content">
+                
+                
+                
+                
                 <section class="wrapper">
                     <div class="row mt">
                         <div class="col-lg-3"></div>
@@ -446,18 +454,86 @@
                         </div>
                     </div>
                     <!--end of Modal -->
+                    
+                    
+                    
+                    <!-- Leaderboard Modal -->
+                    <div id="leaderboardModal" class="modal fade" role="dialog">
+                      <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Leaderboard Ranking</h4>
+                          </div>
+                          <div class="modal-body" id="modal-body">
+                            
+                              
+                              
+                              
+                              hdiashiofhiofjwqkj
+                              
+                              
+                              <p>Some text in the modal.</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>              
                 </section>
             </section>
-
+            
+                                
+          
             <!--main content end-->
         </section>
 
         <script type='text/javascript'>
             function leaderboard(){
-                alert('hello');
+                //alert('je');
+                $.post('./LeaderboardServlet', function(data) {
+                    var tbody = document.getElementById('modal-body');
+                    for (var i = 0; i < data.length; i++) {
+    var tr = "<tr>";
+
+    /* Verification to add the last decimal 0 */
+    if (data[i].value.toString().substring(data[i].value.toString().indexOf('.'), data[i].value.toString().length) < 2) 
+        data[i].value += "0";
+
+    /* Must not forget the $ sign */
+    tr += "<td>" + data[i].key + "</td>" + "<td>$" + data[i].value.toString() + "</td></tr>";
+
+    /* We add the table row to the table body */
+    tbody.innerHTML += tr;
+}
+}
+                    
+                });
+                
             }
 
-        </script>                            
+        </script>
+        
+        <style>
+            
+        </style>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
         <%@include file="Components/script.html" %>
         <!--set dashboard button to active-->
