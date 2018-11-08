@@ -28,15 +28,15 @@
             MAIN CONTENT
             *********************************************************************************************************************************************************** -->
             <!--main content start-->
-            
-            
-            
-            
+
+
+
+
             <section id="main-content">
-                
-                
-                
-                
+
+
+
+
                 <section class="wrapper">
                     <div class="row mt">
                         <div class="col-lg-3"></div>
@@ -441,7 +441,7 @@
                                     %>
                                     <script type="text/javascript">
                                         var userID = '<%=userID%>'
-                                        var groupID= '<%=learningIDVal%>';
+                                        var groupID = '<%=learningIDVal%>';
                                     </script>
                                     <script src ="js/quiztesting.js"></script>
                                     <%
@@ -456,80 +456,84 @@
                         </div>
                     </div>
                     <!--end of Modal -->
-                    
-                    
-                    
+
+
+
                     <!-- Leaderboard Modal -->
                     <div id="leaderboardModal" class="modal fade" role="dialog">
-                      <div class="modal-dialog">
+                        <div class="modal-dialog">
 
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Leaderboard Ranking</h4>
-                          </div>
-                          <div class="modal-body" id="modal-body">
-                            
-                              
-                              
-                              
-                              hdiashiofhiofjwqkj
-                              
-                              
-                              <p>Some text in the modal.</p>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                          </div>
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Leaderboard Ranking</h4>
+                                </div>
+                                <div class="modal-body" id="modal-body">
+
+
+                                    <table>
+                                        <tbody id="tbody"></tbody>
+                                    </table>
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+
                         </div>
-
-                      </div>
                     </div>              
                 </section>
             </section>
-            
-                                
-          
+
+
+
             <!--main content end-->
         </section>
 
         <script type ='text/javascript'>
-            function leaderboard(){
-                //alert('je');
-                $.post('./LeaderboardServlet', function(data) {
-                    //var tbody = document.getElementById('modal-body');
-                    alert(data);
-        
-                    for (var i = 0; i < data.length; i++) {
-                        var id = i + 1;
-                        var name = data[i].key;
-                        var relevance = data[i].value;
-                        alert(id);
-                };
-            })
-        } 
-       
-                
+                                        function leaderboard() {
+                                            
+                                            $.post('./LeaderboardServlet', function (data) {
+                                                
+                                                alert(data);
+                                                alert(data[1]);
+
+                                                for (var i = 0; i < data.length; i++) {
+                                                    var id = i + 1;
+                                                    var name = data[i].key;
+                                                    var relevance = data[i].value;
+//                                                    alert(id);
+//                                                    alert(name);
+//                                                    alert(relevance);
+                                                    
+                                                }
+                                                
+                                            });
+                                        }
+
+
 
         </script>
-        
+
         <style>
-            
+
         </style>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <%@include file="Components/script.html" %>
         <!--set dashboard button to active-->
@@ -540,7 +544,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
 
-        <%            
+        <%
             String gID = session.getAttribute("groupid").toString();
             //String t = "test1";
             if (!gID.equals("0")) {
@@ -564,27 +568,27 @@
 
 
 <script>
-    document.getElementById("captureagain").style.visibility = "hidden";
-    var startstream = document.getElementById("startstream").style.visibility;
-    var capture = document.getElementById("capture").style.visibility;
-    if (startstream === "hidden") {
-        document.getElementById("captureagain").style.visibility = "visible";
-    } else if (capture === "hidden") {
-        document.getElementById("captureagain").style.visibility = "visible";
-    } else {
-        document.getElementById("capture").style.visibility = "hidden"
-    }
+                                        document.getElementById("captureagain").style.visibility = "hidden";
+                                        var startstream = document.getElementById("startstream").style.visibility;
+                                        var capture = document.getElementById("capture").style.visibility;
+                                        if (startstream === "hidden") {
+                                            document.getElementById("captureagain").style.visibility = "visible";
+                                        } else if (capture === "hidden") {
+                                            document.getElementById("captureagain").style.visibility = "visible";
+                                        } else {
+                                            document.getElementById("capture").style.visibility = "hidden"
+                                        }
 </script>
 
 <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
 
 <script>
-    var pondScum = FilePond.create(document.getElementById("fileupload"));
-    pondScum.setOptions({
-        maxFiles: 10,
-        required: true
-    });
-    //FilePond.parse(document.body);
+                                        var pondScum = FilePond.create(document.getElementById("fileupload"));
+                                        pondScum.setOptions({
+                                            maxFiles: 10,
+                                            required: true
+                                        });
+                                        //FilePond.parse(document.body);
 </script>
 
 <style>
