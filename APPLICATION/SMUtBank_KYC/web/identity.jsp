@@ -14,6 +14,12 @@
     <script src="https://unpkg.com/jquery"></script>
     <script src="js/surveyJQuery.js"></script>
     <link href="https://surveyjs.azureedge.net/1.0.46/survey.css" type="text/css" rel="stylesheet"/>
+    
+    <!-- Datatable -->
+    <script type="text/javascript" src="./js/datatables.min.js"></script>
+    <link href="./css/datatables.min.css" rel="stylesheet">
+    
+    
     <body>
         <!-- Loading Screen -->
         <div class="se-pre-con">                        
@@ -469,12 +475,10 @@
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     <h4 class="modal-title">Leaderboard Ranking</h4>
                                 </div>
-                                <div class="modal-body" id="modal-body">
+                                <div class="modal-body-grpleaderboard" id="modal-body-grpleaderboard">
 
 
-                                    <table>
-                                        <tbody id="tbody"></tbody>
-                                    </table>
+                                    
 
 
                                 </div>
@@ -484,6 +488,12 @@
                             </div>
 
                         </div>
+                        
+                        
+                        
+                        
+                        
+                        
                     </div>              
                 </section>
             </section>
@@ -505,14 +515,18 @@
                                                     console.log("arary length: " + length);
                                                     console.log("json: " + JSON.stringify(data));
                                                     var text = "";
-                                                    text += '<table><tr><td> Group </td><td>Score</td></tr>';
+                                                    text += '<table class="table table-striped"><tr><td><b> GROUP </b></td><td><b> SCORE </b></td></tr>';
                                                     
                                                     for (i = 0; i < data.Leader.length; i++) {
                                                         
-                                                                text += '<tr><td>' + data.Leader[i].score + '</td><td>' + data.Leader[i].user_Id + '</td></tr>';
+                                                                text += '<tr><td>' + data.Leader[i].user_Id + '</td><td>' + data.Leader[i].score + '</td></tr>';
                                                     }
                                                     text += '</table>';
-
+                                                    //alert(text);
+                                                    
+                                                    var result = document.getElementById("modal-body-grpleaderboard").innerHTML = text;
+//                                                    result.innerHTML(text);
+//                                                    result.appendChild(text);
                                                     /*for (i = 0; i < data.Leader.length5; i++) {
                                                      data.Leader[i].score;
                                                      data.Leader[i].user_Id;
