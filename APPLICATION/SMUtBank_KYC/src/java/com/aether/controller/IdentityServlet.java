@@ -44,7 +44,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
+import org.bouncycastle.util.encoders.Base64Encoder;
 import org.json.simple.JSONArray;
+import sun.misc.BASE64Encoder;
 
 /**
  *
@@ -133,6 +135,9 @@ public class IdentityServlet extends HttpServlet {
                 try(FileOutputStream outputStream = new FileOutputStream(request.getServletContext().getRealPath("/") + "UDI_" + fullname + ".bin")){
                     byte[] strToBytes = finalJSON.getBytes();
                     outputStream.write(strToBytes);
+                    BASE64Encoder encoder = new BASE64Encoder();
+                    String finalBytes = encoder.encode(finalJSON.getBytes());
+                    System.out.println("finalbytes: " + finalBytes);
                     TBankEmail.sendEmail(email, "Your Onboarding Details", finalJSON);
                     //SendEmailSSL.generateAndSendEmail(email, new File(request.getServletContext().getRealPath("/") + "UDI_" + fullname + ".bin"));
                 }catch(IOException e){

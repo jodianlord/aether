@@ -21,7 +21,10 @@ import org.json.simple.JSONObject;
  */
 public class TBankEmail {
     public static void main(String[] args){
-        sendEmail("jordysamuel@gmail.com", "hi", "hihi");
+        sendEmail("jordysamuel@gmail.com", "hi", "eyJ1dWlkIjoiOWZmZTUyODMtMzQwYy00MTIwLThkNjctNGQzZDNkOTEzOTI0IiwidHJhbnNhY3Rp\n" +
+"b25IYXNoIjoiMHg1ZDIxNzAyNjBkNjc2NTM0MGIyOTUwZGVmMWM5YzFiODEwZDUxNDljMDU1MDQ0\n" +
+"NDZkODMxYWQ1OWU4MjA0MWM1IiwiaGFzaCI6IjdhMDY4OWNkNmMxZjc5YjgzNDc5YWMwZDcxM2Nk\n" +
+"ZmE1OTAwNmMxM2U5NGNjNDliMTdkYzIzYWFhYjJiYmI4MTUifQ==");
     }
     
     public static boolean sendEmail(String address, String subject, String contents){
@@ -52,7 +55,7 @@ public class TBankEmail {
             jo = new JSONObject();
             jo.put("emailAddress", emailAddress);
             jo.put("emailSubject", emailSubject);
-            jo.put("emailBidy", emailBody);
+            jo.put("emailBody", emailBody);
             JSONObject contentObj = new JSONObject();
             contentObj.put("Content", jo);
             String content = contentObj.toString();
