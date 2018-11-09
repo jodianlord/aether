@@ -65,10 +65,10 @@ $.ajax({
         //console.log(objOne.question);
         var json = {
 
-            title: "Aether Gamification Quiz",
+            
             showProgressBar: "bottom",
             showTimerPanel: "top",
-            maxTimeToFinishPage: 60,
+            maxTimeToFinishPage: 300,
             maxTimeToFinish: 360,
             firstPageIsStarted: true, //true
             startSurveyText: "Start Quiz",
@@ -147,6 +147,9 @@ $.ajax({
         };
 
         window.survey = new Survey.Model(json);
+        window.survey.pages[4].maxTimeToFinish =60;
+        window.survey.pages[5].maxTimeToFinish =60;
+        window.survey.pages[6].maxTimeToFinish =60;
         var timeEl = document.getElementById("timeEl");
         var timerId = null;
 

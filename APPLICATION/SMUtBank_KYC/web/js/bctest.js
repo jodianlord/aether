@@ -63,7 +63,6 @@ $.ajax({
         answerTwo = qThree.answer;
         //console.log(objOne.question);
         var json = {
-            title: "Aether Gamification Quiz",
             showProgressBar: "bottom",
             showTimerPanel: "top",
             maxTimeToFinishPage: 60,
