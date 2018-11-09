@@ -58,7 +58,11 @@ MAIN SIDEBAR MENU
             </li>
             
             
-            
+            <%
+                String learningIDValue = session.getAttribute("groupid").toString();
+                //String learningIDVal = "4";
+                if (!learningIDValue.equals("0")) {
+            %>
             
             
             <li class="sub-menu">
@@ -68,9 +72,16 @@ MAIN SIDEBAR MENU
                 </a>
             </li>
             
+            <%
+            }
+            
+            %>
+            
+            
+            
             
             <li class="sub-menu">
-                <a id="tbank" target=”” href="https://vm.jordysamuel.com:8443/bank_b" >
+                <a id="tbank" target=?? href="https://vm.jordysamuel.com:8443/bank_b" >
                     <!--<i class="fas fa-unlock-alt"></i>-->
                     
                     <img src="img/logo_tbank_alt.png"  style="position: relative;height:70%;width:50%;margin-left:30px;">
