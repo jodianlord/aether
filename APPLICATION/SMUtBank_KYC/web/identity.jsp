@@ -28,7 +28,7 @@
         <section id="container" >
 
             <%@include  file="Components/topbar.html" %>
-            <%@include  file="Components/sidebar.html" %>
+            <%@include  file="Components/sidebar.jsp" %>
 
             <!-- **********************************************************************************************************************************************************
             MAIN CONTENT
