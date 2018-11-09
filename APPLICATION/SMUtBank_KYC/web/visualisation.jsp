@@ -33,7 +33,7 @@
 <html lang="en">
     <%@include  file="Components/head.html" %>
     <script src="https://unpkg.com/jquery"></script>
-    <script src="https://surveyjs.azureedge.net/1.0.46/survey.jquery.js"></script>
+    <script src="js/surveyJQuery.js"></script>
     <link href="https://surveyjs.azureedge.net/1.0.46/survey.css" type="text/css" rel="stylesheet"/>
     <body>
         <div class="se-pre-con">                        
