@@ -48,12 +48,11 @@
                         <div class="col-lg-3"></div>
                         <div class="col-lg-6">
                             <div class="form-panel  col-lg-12">
-                                <h4 class="mb"><i class="fa fa-angle-right"></i> Upload .bin UDI File</h4>
-
-                                <!--<div class="col-lg-12 ">-->
-                                <input type="file" class="filepond" id="fileupload">
+                                <h4 class="mb"><i class="fa fa-angle-right"></i> Paste Email Contents</h4>
 
 
+
+                                <input type="text" id="pastebin" name="pastebin" class="form-control" placeholder="Paste your email here">
 
                                 <button id="populate" style="margin-top:4em;" type="button" class="btn btn-danger btn-lg btn-block center-block">Populate User Details</button>
 
@@ -454,7 +453,7 @@
             document.getElementById("identityside").className = "active";
         </script>
         <script src ="js/takePhoto.js"></script>
-        
+
         <%@include file="Components/style.html" %>
 
     </body>
@@ -466,139 +465,222 @@
 
 <script>
     document.getElementById("populate").onclick = function () {
-        var binFile = pondScum.getFile().file;
-        var reader = new FileReader();
 
-        reader.readAsDataURL(binFile);
-        reader.onload = function () {
-            var object = {};
-            object["binfile"] = reader.result;
-            var canvas = document.getElementById("canvas");
-            if (canvas === null) {
-                $.alert({
-                    title: 'Sorry!',
-                    content: 'Please take your picture!',
-                });
-                return;
-            }
-
-            var canvasbase = canvas.toDataURL();
-
-            object["verificationfile"] = canvasbase;
-
-            $.confirm({
-                buttons: {
-                    OK: function () {
-                        //window.location.href = "identity.jsp";
-                        //redirect = true;
-                    }
-                },
-                content: function () {
-                    var self = this;
-                    return $.ajax({
-                        url: "./PassBin",
-                        type: "POST",
-                        data: JSON.stringify(object),
-                        contentType: "application/json",
-                    }).done(function (response) {
-                        $("#fullname").val(response.fullname);
-                        $("#nric").val(response.nric);
-                        $("#email").val(response.email);
-                        $("#mobile").val(response.mobile);
-                        $("#gender").val(response.gender);
-                        $("#nationality").val(response.nationality);
-                        $("#marital").val(response.marital);
-                        $("#residencetype").val(response.residencetype);
-                        $("#address").val(response.address);
-                        $("#occupation").val(response.occupation);
-                        $("#industry").val(response.industry);
-                        self.setTitle('Success!');
-                        self.setContent('Your personal particulars has been populated!');
-                        //redirect = true;
-                    }).fail(function () {
-                        self.setTitle('Failure!');
-                        //self.setContent('Your personal particulars cannot be populated! Please wait while a staff attend to your request');
-                        self.setContent('Please retake your picture. Ensure that only your face is shown and is not obscured');
-                    });
-                }
+        var pasty = document.getElementById("pastebin").value;
+        var object = {};
+        object["binfile"] = pasty;
+        var canvas = document.getElementById("canvas");
+        if (canvas === null) {
+            $.alert({
+                title: 'Sorry!',
+                content: 'Please take your picture!',
             });
+            return;
         }
+
+        var canvasbase = canvas.toDataURL();
+
+        object["verificationfile"] = canvasbase;
+
+        $.confirm({
+            buttons: {
+                OK: function () {
+                    //window.location.href = "identity.jsp";
+                    //redirect = true;
+                }
+            },
+            content: function () {
+                var self = this;
+                return $.ajax({
+                    url: "./PassBin",
+                    type: "POST",
+                    data: JSON.stringify(object),
+                    contentType: "application/json",
+                }).done(function (response) {
+                    $("#fullname").val(response.fullname);
+                    $("#nric").val(response.nric);
+                    $("#email").val(response.email);
+                    $("#mobile").val(response.mobile);
+                    $("#gender").val(response.gender);
+                    $("#nationality").val(response.nationality);
+                    $("#marital").val(response.marital);
+                    $("#residencetype").val(response.residencetype);
+                    $("#address").val(response.address);
+                    $("#occupation").val(response.occupation);
+                    $("#industry").val(response.industry);
+                    self.setTitle('Success!');
+                    self.setContent('Your personal particulars has been populated!');
+                    //redirect = true;
+                }).fail(function () {
+                    self.setTitle('Failure!');
+                    //self.setContent('Your personal particulars cannot be populated! Please wait while a staff attend to your request');
+                    self.setContent('Please retake your picture. Ensure that only your face is shown and is not obscured');
+                });
+            }
+        });
+
     }
     document.getElementById("submit").onclick = function () {
+        var pasty = document.getElementById("pastebin").value;
+        var object = {};
+        object["binfile"] = pasty;
+        var canvas = document.getElementById("canvas");
+        if (canvas === null) {
+            $.alert({
+                title: 'Sorry!',
+                content: 'Please take your picture!',
+            });
+            return;
+        }
+        var prefUser = document.getElementById("prefUsername").value;
+        var p = prefUser.toString();
+        if (p === null || p === "") {
+            $.alert({
+                title: 'Sorry!',
+                content: 'Please enter your preferred username!',
+            });
+            return;
+        }
 
-        var binFile = pondScum.getFile().file;
-        var reader = new FileReader();
-        console.log(reader);
-        reader.readAsDataURL(binFile);
-        reader.onload = function () {
-            var filebase = reader.result;
-            console.log(filebase);
-            var object = {};
-            object["binfile"] = filebase;
-            var canvas = document.getElementById("canvas");
-            if (canvas === null) {
-                $.alert({
-                    title: 'Sorry!',
-                    content: 'Please take your picture!',
-                });
-                return;
-            }
-            var prefUser = document.getElementById("prefUsername").value;
-            var p = prefUser.toString();
-            if (p === null || p === "") {
-                $.alert({
-                    title: 'Sorry!',
-                    content: 'Please enter your preferred username!',
-                });
-                return;
-            }
-
-            var canvasbase = canvas.toDataURL();
-            object["verificationfile"] = canvasbase;
+        var canvasbase = canvas.toDataURL();
+        object["verificationfile"] = canvasbase;
 
 
-            $.confirm({
-                buttons: {
-                    OK: function () {
-                        window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
+        $.confirm({
+            buttons: {
+                OK: function () {
+                    window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
+                }
+            },
+            content: function () {
+                var self = this;
+                return $.ajax({
+                    url: "./PassBin",
+                    type: "POST",
+                    data: JSON.stringify(object),
+                    contentType: "application/json",
+                }).done(function (data) {
+                    //self.setContent('Identity Uploaded!');
+                    //self.setTitle('Success!');
+
+                    var jsonObject = {};
+                    var uuid = data.uuid;
+                    var transactionHash = data.transactionHash;
+                    jsonObject["uuid"] = data.uuid;
+                    var sampleimage = data.picture.replace("data:image/png;base64,", "");
+                    jsonObject["sampleimage"] = sampleimage;
+                    var camimage = canvasbase.replace("data:image/png;base64,", "");
+                    jsonObject["camimage"] = camimage;
+
+                    console.log("json: " + JSON.stringify(jsonObject));
+
+                    var createJson = {};
+                    createJson["nric"] = $("#nric").val();
+                    createJson["fullname"] = $("#fullname").val();
+                    createJson["email"] = $("#email").val();
+                    createJson["mobile"] = $("#mobile").val();
+                    createJson["gender"] = $("#gender").val();
+                    createJson["marital"] = $("#marital").val();
+                    createJson["address"] = $("#address").val();
+                    createJson["occupation"] = $("#occupation").val();
+                    createJson["prefUsername"] = $("#prefUsername").val();
+                    console.log("working for createjson");
+
+                    if ("status" in data) {
+                        if (data.status === "Do Not Match") {
+                            //AddVerification(uuid, transactionHash);
+                            //sessionStorage.setItem("testuuid", uuid);
+                            //sessionStorage.setItem("faced", data.facedetect);
+                            $.alert({
+                                title: "Error!",
+                                content: "Your face does not match the UDI. Please wait while staff attend to your request."
+                            });
+                        } else if (data.status === "Error") {
+                            $.alert({
+                                title: "Error!",
+                                content: "Your face does not match the UDI. Please wait while staff attend to your request."
+                            });
+                        }
+
+                        return;
                     }
-                },
-                content: function () {
-                    var self = this;
-                    return $.ajax({
-                        url: "./PassBin",
+
+                    $.ajax({
+                        url: "./CreateCustomerServlet", //edit address accordingly
                         type: "POST",
-                        data: JSON.stringify(object),
+                        data: JSON.stringify(createJson),
                         contentType: "application/json",
-                    }).done(function (data) {
-                        //self.setContent('Identity Uploaded!');
-                        //self.setTitle('Success!');
+                        success: function (createData) {
+                            if (createData.createStatus === "success") {
+                                self.setTitle('Your account has been created!');
+                                self.setContent('You can now login to your tBank account.');
 
-                        var jsonObject = {};
-                        var uuid = data.uuid;
-                        var transactionHash = data.transactionHash;
-                        jsonObject["uuid"] = data.uuid;
-                        var sampleimage = data.picture.replace("data:image/png;base64,", "");
-                        jsonObject["sampleimage"] = sampleimage;
-                        var camimage = canvasbase.replace("data:image/png;base64,", "");
-                        jsonObject["camimage"] = camimage;
+                                /*$.confirm({
+                                 title: "Your account has been created! ",
+                                 content: "You can now login to your tBank account.",
+                                 
+                                 buttons: {
+                                 OK: function () {
+                                 window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
+                                 },
+                                 }
+                                 });*/
+                            } else {
+                                self.setTitle('Duplicated NRIC. Customer already exist in tBank');
+                                self.setContent('Please check your information again as there are already an existing account with tBank');
+                                /*$.confirm({
+                                 title: "Duplicated NRIC. Customer already exist in tBank ",
+                                 content: "Please check your information again as there are already an existing account with tBank",
+                                 
+                                 buttons: {
+                                 OK: function () {
+                                 //window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
+                                 },
+                                 }
+                                 });*/
+                            }
 
-                        console.log("json: " + JSON.stringify(jsonObject));
+                        }, error: function (xhr) {
+                            console.log("Create Customer failed");
+                            $.alert({
+                                title: "Error!",
+                                content: "Your face does not match the UDI. Please wait while staff attend to your request."
+                            });
+                            /*$.confirm({
+                             title: "Create Customer failed",
+                             content: "Create customer failed please validate your information again.",
+                             
+                             buttons: {
+                             OK: function () {
+                             //window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
+                             },
+                             }
+                             });*/
+                        }
+                    });
 
-                        var createJson = {};
-                        createJson["nric"] = $("#nric").val();
-                        createJson["fullname"] = $("#fullname").val();
-                        createJson["email"] = $("#email").val();
-                        createJson["mobile"] = $("#mobile").val();
-                        createJson["gender"] = $("#gender").val();
-                        createJson["marital"] = $("#marital").val();
-                        createJson["address"] = $("#address").val();
-                        createJson["occupation"] = $("#occupation").val();
-                        createJson["prefUsername"] = $("#prefUsername").val();
-                        console.log("working for createjson");
+                    $.ajax({
+                        url: "./SendFR", //edit address accordingly
+                        type: "POST",
+                        data: JSON.stringify(jsonObject),
+                        contentType: "application/json",
+                        success: function (data) {
+                            if (data.status === "Match") {
+                                //create tbank customer
+                                var createJson = {};
+                                createJson["nric"] = $("#nric").val();
+                                createJson["fullname"] = $("#fullname").val();
+                                createJson["email"] = $("#email").val();
+                                createJson["mobile"] = $("#mobile").val();
+                                createJson["gender"] = $("#gender").val();
+                                createJson["marital"] = $("#marital").val();
+                                createJson["address"] = $("#address").val();
+                                createJson["occupation"] = $("#occupation").val();
+                                createJson["prefUsername"] = $("#prefUsername").val();
+                                console.log("working for createjson");
 
-                        if ("status" in data) {
-                            if (data.status === "Do Not Match") {
+                                console.log("aft servlet");
+                            } else if (data.status === "Do Not Match") {
                                 //AddVerification(uuid, transactionHash);
                                 //sessionStorage.setItem("testuuid", uuid);
                                 //sessionStorage.setItem("faced", data.facedetect);
@@ -611,274 +693,180 @@
                                     title: "Error!",
                                     content: "Your face does not match the UDI. Please wait while staff attend to your request."
                                 });
-                            }
-
-                            return;
-                        }
-
-                        $.ajax({
-                            url: "./CreateCustomerServlet", //edit address accordingly
-                            type: "POST",
-                            data: JSON.stringify(createJson),
-                            contentType: "application/json",
-                            success: function (createData) {
-                                if (createData.createStatus === "success") {
-                                    self.setTitle('Your account has been created!');
-                                    self.setContent('You can now login to your tBank account.');
-
-                                    /*$.confirm({
-                                     title: "Your account has been created! ",
-                                     content: "You can now login to your tBank account.",
-                                     
-                                     buttons: {
-                                     OK: function () {
-                                     window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
-                                     },
-                                     }
-                                     });*/
-                                } else {
-                                    self.setTitle('Duplicated NRIC. Customer already exist in tBank');
-                                    self.setContent('Please check your information again as there are already an existing account with tBank');
-                                    /*$.confirm({
-                                     title: "Duplicated NRIC. Customer already exist in tBank ",
-                                     content: "Please check your information again as there are already an existing account with tBank",
-                                     
-                                     buttons: {
-                                     OK: function () {
-                                     //window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
-                                     },
-                                     }
-                                     });*/
-                                }
-
-                            }, error: function (xhr) {
-                                console.log("Create Customer failed");
+                            } else {
                                 $.alert({
                                     title: "Error!",
-                                    content: "Your face does not match the UDI. Please wait while staff attend to your request."
+                                    content: "The file has been compromised or tampered with. Please wait while staff attend to your request."
                                 });
-                                /*$.confirm({
-                                 title: "Create Customer failed",
-                                 content: "Create customer failed please validate your information again.",
-                                 
-                                 buttons: {
-                                 OK: function () {
-                                 //window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
-                                 },
-                                 }
-                                 });*/
                             }
-                        });
-
-                        $.ajax({
-                            url: "./SendFR", //edit address accordingly
-                            type: "POST",
-                            data: JSON.stringify(jsonObject),
-                            contentType: "application/json",
-                            success: function (data) {
-                                if (data.status === "Match") {
-                                    //create tbank customer
-                                    var createJson = {};
-                                    createJson["nric"] = $("#nric").val();
-                                    createJson["fullname"] = $("#fullname").val();
-                                    createJson["email"] = $("#email").val();
-                                    createJson["mobile"] = $("#mobile").val();
-                                    createJson["gender"] = $("#gender").val();
-                                    createJson["marital"] = $("#marital").val();
-                                    createJson["address"] = $("#address").val();
-                                    createJson["occupation"] = $("#occupation").val();
-                                    createJson["prefUsername"] = $("#prefUsername").val();
-                                    console.log("working for createjson");
-
-                                    console.log("aft servlet");
-                                } else if (data.status === "Do Not Match") {
-                                    //AddVerification(uuid, transactionHash);
-                                    //sessionStorage.setItem("testuuid", uuid);
-                                    //sessionStorage.setItem("faced", data.facedetect);
-                                    $.alert({
-                                        title: "Error!",
-                                        content: "Your face does not match the UDI. Please wait while staff attend to your request."
-                                    });
-                                } else if (data.status === "Error") {
-                                    $.alert({
-                                        title: "Error!",
-                                        content: "Your face does not match the UDI. Please wait while staff attend to your request."
-                                    });
-                                } else {
-                                    $.alert({
-                                        title: "Error!",
-                                        content: "The file has been compromised or tampered with. Please wait while staff attend to your request."
-                                    });
-                                }
-                                console.log(result.result);
-                            }, error: function (xhr) {
-                                $.alert({
-                                    title: "Error!",
-                                    content: "Your face does not match the UDI. Please wait while staff attend to your request."
-                                });
-                            },
-                        });
-
-
-                    }).fail(function () {
-                        self.setTitle('Failure!');
-                        self.setContent('The file has been compromised or tampered with. Please wait while staff attend to your request.');
+                            console.log(result.result);
+                        }, error: function (xhr) {
+                            $.alert({
+                                title: "Error!",
+                                content: "Your face does not match the UDI. Please wait while staff attend to your request."
+                            });
+                        },
                     });
-                }
-            });
 
-            /*$.ajax({
-             url: "./PassBin",
-             type: "POST",
-             data: JSON.stringify(object),
-             contentType: "application/json",
-             success: function (data) {
-             console.log("done!");
-             console.log(data);
-             
-             var jsonObject = {};
-             
-             var uuid = data.uuid;
-             var transactionHash = data.transactionHash;
-             jsonObject["uuid"] = data.uuid;
-             var sampleimage = data.picture.replace("data:image/png;base64,", "");
-             jsonObject["sampleimage"] = sampleimage;
-             var camimage = canvasbase.replace("data:image/png;base64,", "");
-             jsonObject["camimage"] = camimage;
-             
-             console.log("json: " + JSON.stringify(jsonObject));
-             
-             var createJson = {};
-             createJson["nric"] = $("#nric").val();
-             createJson["fullname"] = $("#fullname").val();
-             createJson["email"] = $("#email").val();
-             createJson["mobile"] = $("#mobile").val();
-             createJson["gender"] = $("#gender").val();
-             createJson["marital"] = $("#marital").val();
-             createJson["address"] = $("#address").val();
-             createJson["occupation"] = $("#occupation").val();
-             createJson["prefUsername"] = $("#prefUsername").val();
-             console.log("working for createjson");
-             
-             if ("status" in data) {
-             if (data.status === "Do Not Match") {
-             //AddVerification(uuid, transactionHash);
-             //sessionStorage.setItem("testuuid", uuid);
-             //sessionStorage.setItem("faced", data.facedetect);
-             $.alert({
-             title: "Error!",
-             content: "Your face does not match the UDI. Please wait while staff attend to your request."
-             });
-             } else if (data.status === "Error") {
-             $.alert({
-             title: "Error!",
-             content: "Your face does not match the UDI. Please wait while staff attend to your request."
-             });
-             }
-             
-             return;
-             }
-             
-             $.ajax({
-             url: "./CreateCustomerServlet", //edit address accordingly
-             type: "POST",
-             data: JSON.stringify(createJson),
-             contentType: "application/json",
-             success: function (createData) {
-             if (createData.createStatus === "success") {
-             $.confirm({
-             title: "Your account has been created! ",
-             content: "You can now login to your tBank account.",
-             
-             buttons: {
-             OK: function () {
-             window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
-             },
-             }
-             });
-             } else {
-             $.confirm({
-             title: "Duplicated NRIC. Customer already exist in tBank ",
-             content: "Please check your information again as there are already an existing account with tBank",
-             
-             buttons: {
-             OK: function () {
-             //window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
-             },
-             }
-             });
-             }
-             
-             }, error: function (xhr) {
-             console.log("Create Customer failed");
-             $.confirm({
-             title: "Create Customer failed",
-             content: "Create customer failed please validate your information again.",
-             
-             buttons: {
-             OK: function () {
-             //window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
-             },
-             }
-             });
-             }
-             });
-             
-             $.ajax({
-             url: "./SendFR", //edit address accordingly
-             type: "POST",
-             data: JSON.stringify(jsonObject),
-             contentType: "application/json",
-             success: function (data) {
-             if (data.status === "Match") {
-             //create tbank customer
-             var createJson = {};
-             createJson["nric"] = $("#nric").val();
-             createJson["fullname"] = $("#fullname").val();
-             createJson["email"] = $("#email").val();
-             createJson["mobile"] = $("#mobile").val();
-             createJson["gender"] = $("#gender").val();
-             createJson["marital"] = $("#marital").val();
-             createJson["address"] = $("#address").val();
-             createJson["occupation"] = $("#occupation").val();
-             createJson["prefUsername"] = $("#prefUsername").val();
-             console.log("working for createjson");
-             
-             console.log("aft servlet");
-             } else if (data.status === "Do Not Match") {
-             //AddVerification(uuid, transactionHash);
-             //sessionStorage.setItem("testuuid", uuid);
-             //sessionStorage.setItem("faced", data.facedetect);
-             $.alert({
-             title: "Error!",
-             content: "Your face does not match the UDI. Please wait while staff attend to your request."
-             });
-             } else if (data.status === "Error") {
-             $.alert({
-             title: "Error!",
-             content: "Your face does not match the UDI. Please wait while staff attend to your request."
-             });
-             } else {
-             $.alert({
-             title: "Error!",
-             content: "The file has been compromised or tampered with. Please wait while staff attend to your request."
-             });
-             }
-             console.log(result.result);
-             }, error: function (xhr) {
-             $.alert({
-             title: "Error!",
-             content: "Your face does not match the UDI. Please wait while staff attend to your request."
-             });
-             },
-             });
-             
-             }, error: function (xhr) {
-             console.log("The file has been compromised or tampered with. Please wait while staff attend to your request.");
-             }
-             
-             });*/
-        }
+
+                }).fail(function () {
+                    self.setTitle('Failure!');
+                    self.setContent('The file has been compromised or tampered with. Please wait while staff attend to your request.');
+                });
+            }
+        });
+
+        /*$.ajax({
+         url: "./PassBin",
+         type: "POST",
+         data: JSON.stringify(object),
+         contentType: "application/json",
+         success: function (data) {
+         console.log("done!");
+         console.log(data);
+         
+         var jsonObject = {};
+         
+         var uuid = data.uuid;
+         var transactionHash = data.transactionHash;
+         jsonObject["uuid"] = data.uuid;
+         var sampleimage = data.picture.replace("data:image/png;base64,", "");
+         jsonObject["sampleimage"] = sampleimage;
+         var camimage = canvasbase.replace("data:image/png;base64,", "");
+         jsonObject["camimage"] = camimage;
+         
+         console.log("json: " + JSON.stringify(jsonObject));
+         
+         var createJson = {};
+         createJson["nric"] = $("#nric").val();
+         createJson["fullname"] = $("#fullname").val();
+         createJson["email"] = $("#email").val();
+         createJson["mobile"] = $("#mobile").val();
+         createJson["gender"] = $("#gender").val();
+         createJson["marital"] = $("#marital").val();
+         createJson["address"] = $("#address").val();
+         createJson["occupation"] = $("#occupation").val();
+         createJson["prefUsername"] = $("#prefUsername").val();
+         console.log("working for createjson");
+         
+         if ("status" in data) {
+         if (data.status === "Do Not Match") {
+         //AddVerification(uuid, transactionHash);
+         //sessionStorage.setItem("testuuid", uuid);
+         //sessionStorage.setItem("faced", data.facedetect);
+         $.alert({
+         title: "Error!",
+         content: "Your face does not match the UDI. Please wait while staff attend to your request."
+         });
+         } else if (data.status === "Error") {
+         $.alert({
+         title: "Error!",
+         content: "Your face does not match the UDI. Please wait while staff attend to your request."
+         });
+         }
+         
+         return;
+         }
+         
+         $.ajax({
+         url: "./CreateCustomerServlet", //edit address accordingly
+         type: "POST",
+         data: JSON.stringify(createJson),
+         contentType: "application/json",
+         success: function (createData) {
+         if (createData.createStatus === "success") {
+         $.confirm({
+         title: "Your account has been created! ",
+         content: "You can now login to your tBank account.",
+         
+         buttons: {
+         OK: function () {
+         window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
+         },
+         }
+         });
+         } else {
+         $.confirm({
+         title: "Duplicated NRIC. Customer already exist in tBank ",
+         content: "Please check your information again as there are already an existing account with tBank",
+         
+         buttons: {
+         OK: function () {
+         //window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
+         },
+         }
+         });
+         }
+         
+         }, error: function (xhr) {
+         console.log("Create Customer failed");
+         $.confirm({
+         title: "Create Customer failed",
+         content: "Create customer failed please validate your information again.",
+         
+         buttons: {
+         OK: function () {
+         //window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
+         },
+         }
+         });
+         }
+         });
+         
+         $.ajax({
+         url: "./SendFR", //edit address accordingly
+         type: "POST",
+         data: JSON.stringify(jsonObject),
+         contentType: "application/json",
+         success: function (data) {
+         if (data.status === "Match") {
+         //create tbank customer
+         var createJson = {};
+         createJson["nric"] = $("#nric").val();
+         createJson["fullname"] = $("#fullname").val();
+         createJson["email"] = $("#email").val();
+         createJson["mobile"] = $("#mobile").val();
+         createJson["gender"] = $("#gender").val();
+         createJson["marital"] = $("#marital").val();
+         createJson["address"] = $("#address").val();
+         createJson["occupation"] = $("#occupation").val();
+         createJson["prefUsername"] = $("#prefUsername").val();
+         console.log("working for createjson");
+         
+         console.log("aft servlet");
+         } else if (data.status === "Do Not Match") {
+         //AddVerification(uuid, transactionHash);
+         //sessionStorage.setItem("testuuid", uuid);
+         //sessionStorage.setItem("faced", data.facedetect);
+         $.alert({
+         title: "Error!",
+         content: "Your face does not match the UDI. Please wait while staff attend to your request."
+         });
+         } else if (data.status === "Error") {
+         $.alert({
+         title: "Error!",
+         content: "Your face does not match the UDI. Please wait while staff attend to your request."
+         });
+         } else {
+         $.alert({
+         title: "Error!",
+         content: "The file has been compromised or tampered with. Please wait while staff attend to your request."
+         });
+         }
+         console.log(result.result);
+         }, error: function (xhr) {
+         $.alert({
+         title: "Error!",
+         content: "Your face does not match the UDI. Please wait while staff attend to your request."
+         });
+         },
+         });
+         
+         }, error: function (xhr) {
+         console.log("The file has been compromised or tampered with. Please wait while staff attend to your request.");
+         }
+         
+         });*/
     }
 
     function AddVerification(uuid, transactionHash) {

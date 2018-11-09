@@ -69,11 +69,12 @@ public class PassBin extends HttpServlet {
             System.out.println("THIS IS THE BINFILE");
             System.out.println(binfile);
             System.out.println(binfile.indexOf(','));
-            String base = binfile.substring(binfile.indexOf(',') + 1, binfile.length());
-            byte[] binBytes = base.getBytes();
-            byte[] decoded = Base64.decodeBase64(binBytes);
-            System.out.println("decoded JSON" + new String(decoded));
-            String bin = new String(decoded);
+            //String base = binfile.substring(binfile.indexOf(',') + 1, binfile.length());
+            //byte[] binBytes = base.getBytes();
+            //byte[] decoded = Base64.decodeBase64(binBytes);
+            //System.out.println("decoded JSON" + new String(decoded));
+            String bin = binfile;
+            System.out.println(bin);
             JSONObject binJSON = getJSONObject(bin);
             String uuid = (String) binJSON.get("uuid");
             String hash = (String) binJSON.get("hash");
