@@ -113,7 +113,6 @@ $.ajax({
                         {
                             type: "radiogroup",
                             name: "questionID-" + questionOneID,
-                            isRequired: true,
                             title: questionOne, //"How does Aether store the consumer initial data inputted by the KYC Agent (7-11 Staff)",
                             choices: choicesArr,
                             correctAnswer: answerOne
@@ -125,7 +124,6 @@ $.ajax({
                             type: "radiogroup",
                             name: "questionID-" + questionTwoID,
                             title: questionTwo,
-                            isRequired: true,
                             choicesOrder: "random",
                             choices: choicesArrTwo,
                             correctAnswer: answerTwo
@@ -138,7 +136,6 @@ $.ajax({
                             type: "radiogroup",
                             name: "questionID-" + questionThreeID,
                             title: questionThree,
-                            isRequired: true,
                             choicesOrder: "random",
                             choices: choicesArrThree,
                             correctAnswer: answerThree
