@@ -70,7 +70,7 @@ $.ajax({
             showTimerPanel: "top",
             maxTimeToFinishPage: 60,
             maxTimeToFinish: 360,
-            firstPageIsStarted: true,
+            firstPageIsStarted: true, //true
             startSurveyText: "Start Quiz",
             pages: [
                 {

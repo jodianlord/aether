@@ -17,6 +17,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -76,8 +78,6 @@ public class CreateCustomerServlet extends HttpServlet {
         processRequest(request, response);
         response.setContentType("application/json");
                 
-
-
         String apiServiceUrl = "http://tbankonline.com/SMUtBank_API/Gateway";
         String body = getBody(request);
         try(PrintWriter out = response.getWriter()){
@@ -87,11 +87,23 @@ public class CreateCustomerServlet extends HttpServlet {
             //org.json.simple.JSONObject resultJSON = getJSONObject(body);
             String nric = (String) jsonContent.get("nric");
             String fullname = (String) jsonContent.get("fullname");
+            String[] splitName = fullname.split(" ",2); 
+            String familyname = splitName[0];//family name is the fist word of name
+            String givenname = splitName[1]; //given name is the rest
             String email = (String) jsonContent.get("email");
             String mobile = (String) jsonContent.get("mobile");
             String gender = (String) jsonContent.get("gender");
             String marital = (String) jsonContent.get("marital");
             String address = (String) jsonContent.get("address");
+            
+            Pattern p = Pattern.compile("(\\d{6})");
+            Matcher m = p.matcher(address);
+
+            String postalcode = "";
+            if(m.find()) {
+                postalcode = m.group(1);
+            }
+
             String occupation = (String) jsonContent.get("occupation");
             String prefUsername = (String) jsonContent.get("prefUsername");
             
@@ -105,12 +117,12 @@ public class CreateCustomerServlet extends HttpServlet {
             JSONObject headerObj = new JSONObject();
             headerObj.put("Header", jo);
             String header = headerObj.toString();
-            System.out.println("wtf header");
+   
             //set inputs into json object 
             jo = new JSONObject();
             jo.put("IC_number", nric);	// this must be unique, otherwise "duplicate" error.
-            jo.put("familyName", "Lee"); //fyi this is hardcoded for now
-            jo.put("givenName", fullname);
+            jo.put("familyName", familyname); //fyi this is hardcoded for now
+            jo.put("givenName", givenname);
             jo.put("dateOfBirth", "1994-12-12");
             jo.put("gender", gender);
             jo.put("occupation", occupation);
@@ -118,7 +130,7 @@ public class CreateCustomerServlet extends HttpServlet {
             jo.put("city", "Singapore");
             jo.put("state", "Singapore");
             jo.put("country", "Singapore");
-            jo.put("postalCode", "760123");
+            jo.put("postalCode", postalcode);
             jo.put("emailAddress", email);
             jo.put("countryCode", "+65");
             jo.put("mobileNumber", mobile);

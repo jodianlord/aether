@@ -52,7 +52,7 @@
 
 
 
-                                <input type="text" id="pastebin" name="pastebin" class="form-control" placeholder="Paste your email here">
+                                <input type="text" id="pastebin" name="pastebin" class="form-control" placeholder="Paste the content of your email here">
 
                                 <button id="populate" style="margin-top:4em;" type="button" class="btn btn-danger btn-lg btn-block center-block">Populate User Details</button>
 

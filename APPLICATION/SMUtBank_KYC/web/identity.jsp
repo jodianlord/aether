@@ -331,7 +331,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">Address</label>
+                                        <label class="col-sm-2 col-sm-2 control-label">Address (with postal code)</label>
                                         <div class="col-sm-10">
                                             <input type="text" name="address" class="form-control">
                                         </div>
