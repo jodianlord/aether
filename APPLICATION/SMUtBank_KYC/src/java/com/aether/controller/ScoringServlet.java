@@ -89,7 +89,7 @@ public class ScoringServlet extends HttpServlet {
             org.json.simple.JSONObject resultJSON = new org.json.simple.JSONObject();
             boolean result = false;
             org.json.simple.JSONObject jsonContent = getJSONObject(body);
-            
+
             //System.out.println(jsonContent);
             int timeOne = Integer.parseInt(jsonContent.get("pageNo4").toString());
             int timeTwo = Integer.parseInt(jsonContent.get("pageNo5").toString());
@@ -115,26 +115,43 @@ public class ScoringServlet extends HttpServlet {
             JSONObject getQnsAns = qnsDAO.getQuestionAnswer(qIDOne);
             if (getQnsAns != null) {
                 qAnswerOne = getQnsAns.getString("answer");
-                System.out.print("qqqqq"+qAnswerOne);
-                String correctAns = jsonContent.get("questionID-" + qIDOne).toString();
-                if (qAnswerOne.equals(correctAns)) {
-                    scoreA += 100;
+                System.out.print("qqqqq" + qAnswerOne);
+
+                Object c1 = jsonContent.get("questionID-" + qIDOne);
+                if (c1 != null) {
+                    String correctAns = jsonContent.get("questionID-" + qIDOne).toString();
+                    if (qAnswerOne.equals(correctAns)) {
+                        scoreA += 100;
+                    }
+                } else {
+                    scoreA = 0;
                 }
+
             }
             getQnsAns = qnsDAO.getQuestionAnswer(qIDTwo);
             if (getQnsAns != null) {
                 qAnswerTwo = getQnsAns.getString("answer");
-                String correctAns = jsonContent.get("questionID-" + qIDTwo).toString();
-                if (qAnswerTwo.equals(correctAns)) {
-                    scoreB += 100;
+                Object c1 = jsonContent.get("questionID-" + qIDTwo);
+                if (c1 != null) {
+                    String correctAns = jsonContent.get("questionID-" + qIDTwo).toString();
+                    if (qAnswerTwo.equals(correctAns)) {
+                        scoreB += 100;
+                    }
+                } else {
+                    scoreB = 0;
                 }
             }
             getQnsAns = qnsDAO.getQuestionAnswer(qIDThree);
             if (getQnsAns != null) {
                 qAnswerThree = getQnsAns.getString("answer");
-                String correctAns = jsonContent.get("questionID-" + qIDThree).toString();
-                if (qAnswerThree.equals(correctAns)) {
-                    scoreC += 100;
+                Object c1 = jsonContent.get("questionID-" + qIDThree);
+                if (c1 != null) {
+                    String correctAns = jsonContent.get("questionID-" + qIDThree).toString();
+                    if (qAnswerThree.equals(correctAns)) {
+                        scoreC += 100;
+                    }
+                } else {
+                    scoreC = 0;
                 }
             }
             JSONObject scoreObj = new JSONObject();
@@ -153,7 +170,7 @@ public class ScoringServlet extends HttpServlet {
             String userID = jsonContent.get("userID").toString(); //pass in from front end //jsonContent.get("userID").toString();
             String PIN = "";
             String OTP = "";
-            String gameID = "5003";
+            String gameID = "9665";
             String questionID = "";
             String scoreString = "";
             String mode = "Default";
@@ -174,11 +191,11 @@ public class ScoringServlet extends HttpServlet {
                 //build content
                 jo = new JSONObject();
                 jo.put("gameID", gameID);
-                jo.put("questionID", qObj.get(""+i));
-                jo.put("score", scoreObj.get(""+i) );
+                jo.put("questionID", qObj.get("" + i));
+                jo.put("score", scoreObj.get("" + i));
                 jo.put("groupID", groupID); //
                 //test
-                System.out.println(qObj.get(""+i).toString() + ">>>>>>" +scoreObj.get(""+i).toString());
+                System.out.println(qObj.get("" + i).toString() + ">>>>>>" + scoreObj.get("" + i).toString());
                 jo.put("mode", mode);
                 JSONObject contentObj = new JSONObject();
                 contentObj.put("Content", jo);
@@ -212,7 +229,7 @@ public class ScoringServlet extends HttpServlet {
                 responseObj = new JSONObject(outputRes);
                 if (verbose) {
                     System.out.println(responseObj.toString(4));
-                    
+
                     System.out.println("Entered here>>>>>>  ");
                 }
 

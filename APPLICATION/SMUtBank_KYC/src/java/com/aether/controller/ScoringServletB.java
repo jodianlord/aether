@@ -93,9 +93,9 @@ public class ScoringServletB extends HttpServlet {
             int timeOne = Integer.parseInt(jsonContent.get("pageNo1").toString());
             int timeTwo = Integer.parseInt(jsonContent.get("pageNo2").toString());
             int timeThree = Integer.parseInt(jsonContent.get("pageNo3").toString());
-            int scoreA = 1000 - timeOne;
-            int scoreB = 1000 - timeTwo;
-            int scoreC = 1000 - timeThree;
+            int scoreA = 1000 + timeOne;
+            int scoreB = 1000 + timeTwo;
+            int scoreC = 1000 + timeThree;
             //getting questionID
             String qIDOne = jsonContent.get("qnsA").toString();
             String qIDTwo = jsonContent.get("qnsB").toString();
@@ -114,26 +114,43 @@ public class ScoringServletB extends HttpServlet {
             JSONObject getQnsAns = qnsDAO.getQuestionAnswer(qIDOne);
             if (getQnsAns != null) {
                 qAnswerOne = getQnsAns.getString("answer");
-                System.out.print("qqqqq"+qAnswerOne);
-                String correctAns = jsonContent.get("questionID-" + qIDOne).toString();
-                if (qAnswerOne.equals(correctAns)) {
-                    scoreA += 100;
+                System.out.print("qqqqq" + qAnswerOne);
+
+                Object c1 = jsonContent.get("questionID-" + qIDOne);
+                if (c1 != null) {
+                    String correctAns = jsonContent.get("questionID-" + qIDOne).toString();
+                    if (qAnswerOne.equals(correctAns)) {
+                        scoreA += 100;
+                    }
+                } else {
+                    scoreA = 0;
                 }
+
             }
             getQnsAns = qnsDAO.getQuestionAnswer(qIDTwo);
             if (getQnsAns != null) {
                 qAnswerTwo = getQnsAns.getString("answer");
-                String correctAns = jsonContent.get("questionID-" + qIDTwo).toString();
-                if (qAnswerTwo.equals(correctAns)) {
-                    scoreB += 100;
+                Object c1 = jsonContent.get("questionID-" + qIDTwo);
+                if (c1 != null) {
+                    String correctAns = jsonContent.get("questionID-" + qIDTwo).toString();
+                    if (qAnswerTwo.equals(correctAns)) {
+                        scoreB += 100;
+                    }
+                } else {
+                    scoreB = 0;
                 }
             }
             getQnsAns = qnsDAO.getQuestionAnswer(qIDThree);
             if (getQnsAns != null) {
                 qAnswerThree = getQnsAns.getString("answer");
-                String correctAns = jsonContent.get("questionID-" + qIDThree).toString();
-                if (qAnswerThree.equals(correctAns)) {
-                    scoreC += 100;
+                Object c1 = jsonContent.get("questionID-" + qIDThree);
+                if (c1 != null) {
+                    String correctAns = jsonContent.get("questionID-" + qIDThree).toString();
+                    if (qAnswerThree.equals(correctAns)) {
+                        scoreC += 100;
+                    }
+                } else {
+                    scoreC = 0;
                 }
             }
             JSONObject scoreObj = new JSONObject();
