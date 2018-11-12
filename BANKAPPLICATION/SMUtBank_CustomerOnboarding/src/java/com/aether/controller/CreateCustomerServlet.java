@@ -230,12 +230,12 @@ public class CreateCustomerServlet extends HttpServlet {
             //check for error:
             if(globalErrorID.equals("010009")){
                 printCreateJSON.put("createStatus", "fail");
-                System.out.println("NV NV NV SEND SMS!!!!!!!!!!!!!!!!!!!!");
+                //System.out.println("NV NV NV SEND SMS!!!!!!!!!!!!!!!!!!!!");
             }
             else{
                 System.out.println("SEND SMS!!!!!!!!!!!!!!!!!!!!");
                 SendSMSDAO msg = new SendSMSDAO();
-                msg.sendMessage( mobile, "Your account has been created! Please use your NRIC as the username and this is your PIN: "+customerPINText+"");
+                msg.sendMessage( mobile, "Your account has been created! Please use your Preferred Username as the username and this is your PIN: "+customerPINText+"");
                 printCreateJSON.put("createStatus", "success");
             }
             //send response using printJSON
