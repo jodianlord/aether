@@ -95,6 +95,8 @@ public class CreateCustomerServlet extends HttpServlet {
             String gender = (String) jsonContent.get("gender");
             String marital = (String) jsonContent.get("marital");
             String address = (String) jsonContent.get("address");
+            String currency = (String) jsonContent.get("currency");
+            String bankID = (String) jsonContent.get("bankID");
             
             Pattern p = Pattern.compile("(\\d{6})");
             Matcher m = p.matcher(address);

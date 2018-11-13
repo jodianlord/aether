@@ -584,6 +584,8 @@
                     createJson["address"] = $("#address").val();
                     createJson["occupation"] = $("#occupation").val();
                     createJson["prefUsername"] = $("#prefUsername").val();
+                    createJson["currency"] = $("#currency").val();
+                    createJson["bankID"] = $("#bankID").val();
                     console.log("working for createjson");
 
                     if ("status" in data) {
@@ -626,7 +628,7 @@
                                  }
                                  });*/
                             } else {
-                                self.setTitle('Duplicated NRIC. Customer already exist in tBank');
+                                self.setTitle('Duplicated Username. Customer already exist in tBank');
                                 self.setContent('Please check your information again as there are already an existing account with tBank');
                                 /*$.confirm({
                                  title: "Duplicated NRIC. Customer already exist in tBank ",

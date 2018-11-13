@@ -84,7 +84,7 @@ public class LeaderboardServlet extends HttpServlet {
             String userID = "";
             String PIN = "";
             String OTP = "";
-            String gameID = "9404"; //change game id!
+            String gameID = "9405"; //change game id!
             String start = "2010-01-01 00:00:00";
             String end = "2019-01-01 23:59:59";
             String mode = "*";
