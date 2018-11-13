@@ -170,7 +170,7 @@ public class ScoringServlet extends HttpServlet {
             String userID = jsonContent.get("userID").toString(); //pass in from front end //jsonContent.get("userID").toString();
             String PIN = "";
             String OTP = "";
-            String gameID = "9665";
+            String gameID = "9404";
             String questionID = "";
             String scoreString = "";
             String mode = "Default";
