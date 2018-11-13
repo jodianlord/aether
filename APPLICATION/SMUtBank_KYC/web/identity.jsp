@@ -516,11 +516,11 @@
                                                     console.log("arary length: " + length);
                                                     console.log("json: " + JSON.stringify(data));
                                                     var text = "";
-                                                    text += '<table class="table table-striped"><tr><td><b> GROUP </b></td><td><b> SCORE </b></td></tr>';
+                                                    text += '<table class="table table-striped"><tr><td><b> RANK </b></td><td><b> GROUP </b></td><td><b> SCORE </b></td></tr>';
                                                     
                                                     for (i = 0; i < data.Leader.length; i++) {
                                                         
-                                                                text += '<tr><td>' + data.Leader[i].user_Id + '</td><td>' + data.Leader[i].score + '</td></tr>';
+                                                                text += '<tr><td>' + (i+1) + '</td><td>'data.Leader[i].user_Id + '</td><td>' + data.Leader[i].score + '</td></tr>';
                                                     }
                                                     text += '</table>';
                                                     //alert(text);
