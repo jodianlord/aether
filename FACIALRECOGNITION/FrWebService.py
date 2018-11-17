@@ -62,8 +62,8 @@ def facialreg():
     #compare user taken face image to sample image
     #tolerence is how strict
     #lower the stricter
-    #current sweet spot = 0.3, changed from 0.4
-    results = face_recognition.compare_faces([sample_image_encoding], camera_image_encoding,tolerance=0.3) 
+    #current sweet spot = 0.5, changed from 0.4
+    results = face_recognition.compare_faces([sample_image_encoding], camera_image_encoding,tolerance=0.5) 
 
     #true = match
     #false = not match
