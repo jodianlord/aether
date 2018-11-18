@@ -54,16 +54,91 @@
                 margin-top: auto;
                 margin-bottom: auto;
             }
-            .blockchainoverview {
-                background: url(img/bg1.png) no-repeat center top;
+            
+            
+            
+            
+            
+            
+            /*BLOCKCHAIN*/ 
+            .blockchainoverviewmain {
+                background: url(img/bc_visualisation/Blockchain/bc-main.jpeg) no-repeat center top;
                 text-align: center;
                 background-position: center center;
             }
-            .whatisblockchain {
-                background: url(img/enterprise-blockchain.png) no-repeat center top;
+            
+            .blockchainoverview1 {
+                background: url(img/bc_visualisation/Blockchain/bc1.jpg) no-repeat center top;
+                text-align: center;
+                background-position: center center;
+                /*background-size: 100%;*/
+                /*height: 100%;*/
+            }
+            .blockchainoverview2 {
+                background: url(img/bc_visualisation/Blockchain/bc2.png) no-repeat center top;
+                text-align: center;
+                background-position: center center;
+                /*background-size: 100%;*/
+                /*height: 100%;*/
+            }
+            .blockchainoverview3 {
+                background: url(img/bc_visualisation/Blockchain/bc3.jpg) no-repeat center top;
+                text-align: center;
+                background-position: center center;
+                /*background-size: 100%;*/
+                /*height: 100%;*/
+            }
+            
+            
+            /* Data Handling */
+            .datahandlingmain {
+                background: url(img/bc_visualisation/Encryption/en-main.jpg) no-repeat center top;
                 text-align: center;
                 background-position: center center;
             }
+            .datahandling1 {
+                background: url(img/bc_visualisation/Encryption/en1.jpg) no-repeat center top;
+                text-align: center;
+                background-position: center center;
+            }
+            .datahandling2 {
+                background: url(img/bc_visualisation/Encryption/en2.jpg) no-repeat center top;
+                text-align: center;
+                background-position: center center;
+            }
+            
+            
+            /* Test Quiz */
+            .testmain {
+                background: url(img/bc_visualisation/TestBC/test-main.jpg) no-repeat center top;
+                text-align: center;
+                background-position: center center;
+            }
+            .test1 {
+                background: url(img/bc_visualisation/TestBC/t1.jpg) no-repeat center top;
+                text-align: center;
+                background-position: center center;
+            }
+            .test2 {
+                background: url(img/bc_visualisation/TestBC/t2.jpg) no-repeat center top;
+                text-align: center;
+                background-position: center center;
+            }
+            .test3 {
+                background: url(img/bc_visualisation/TestBC/t3.jpg) no-repeat center top;
+                text-align: center;
+                background-position: center center;
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
 
             .vispanel i {
                 color: white;
@@ -98,7 +173,7 @@
 
                                 <!-- OVERVIEW PANEL -->
                                 <div class="col-md-4 col-sm-4 mb" id="box1">
-                                    <div id="blockover" class="blockchainoverview vispanel pn">
+                                    <div id="blockover" class="blockchainoverviewmain vispanel pn">
                                         <i class="fa fa-th-large fa-4x"></i>
                                         <h2>Blockchain</h2>
                                         <h4>What Is It?</h4>
@@ -107,7 +182,7 @@
 
                                 <!-- WHATIS PANEL -->
                                 <div class="col-md-4 col-sm-4 mb" id="box2">
-                                    <div id="secure" class="whatisblockchain vispanel pn">
+                                    <div id="secure" class="datahandlingmain vispanel pn">
                                         <i class="fa fa-user-secret fa-4x"></i>
                                         <h2>Data Handling & Encryption</h2>
                                         <h4>Keeping things safe</h4>
@@ -116,7 +191,7 @@
 
                                 <!-- WHATIS PANEL -->
                                 <div class="col-md-4 col-sm-4 mb" id="box3">
-                                    <div id="tryout" class="whatisblockchain vispanel pn">
+                                    <div id="tryout" class="testmain vispanel pn">
                                         <i class="fa fa-user-secret fa-4x"></i>
                                         <h2>Test out our blockchain!</h2>
                                         <h4>Hands On</h4>
@@ -128,7 +203,7 @@
 
                                 <!-- OVERVIEW PANEL -->
                                 <div class="col-md-4 col-sm-4 mb">
-                                    <div id="whatis" class="blockchainoverview vispanel pn">
+                                    <div id="whatis" class="blockchainoverview1 vispanel pn">
                                         <i class="fa fa-lock fa-4x"></i>
                                         <h2>The Basics: What's A Blockchain?</h2>
                                         <h4>Click to start</h4>
@@ -137,7 +212,7 @@
 
                                 <!-- OVERVIEW PANEL -->
                                 <div class="col-md-4 col-sm-4 mb">
-                                    <div id="smartcon" class="blockchainoverview vispanel pn">
+                                    <div id="smartcon" class="blockchainoverview2 vispanel pn">
                                         <i class="fa fa-file-contract fa-4x"></i>
                                         <h2>Smart Contracts</h2>
                                         <h4>Click to start</h4>
@@ -146,7 +221,7 @@
 
                                 <!-- OVERVIEW PANEL -->
                                 <div class="col-md-4 col-sm-4 mb">
-                                    <div id="overblck" class="blockchainoverview vispanel pn">
+                                    <div id="overblck" class="blockchainoverview3 vispanel pn">
                                         <i class="fa fa-link fa-4x"></i>
                                         <h2>Linking It Together</h2>
                                         <h4>Click to start</h4>
@@ -157,7 +232,7 @@
                             <div class="row hiddenrow" id="hidden2">
                                 <!-- OVERVIEW PANEL -->
                                 <div class="col-md-4 col-sm-4 mb">
-                                    <div id="encrypt" class="blockchainoverview vispanel pn">
+                                    <div id="encrypt" class="datahandling1 vispanel pn">
                                         <i class="fa fa-fingerprint fa-4x"></i>
                                         <h2>The Basics of Hashing</h2>
                                         <h4>Click to start</h4>
@@ -166,7 +241,7 @@
 
                                 <!-- OVERVIEW PANEL -->
                                 <div class="col-md-4 col-sm-4 mb">
-                                    <div id="hashtest" class="blockchainoverview vispanel pn">
+                                    <div id="hashtest" class="datahandling2 vispanel pn">
                                         <i class="fa fa-hashtag fa-4x"></i>
                                         <h2>Hashing</h2>
                                         <h4>Let's Test Hashing!</h4>
@@ -176,7 +251,7 @@
                             <div class="row hiddenrow" id="hidden3">
                                 <!-- OVERVIEW PANEL -->
                                 <div class="col-md-4 col-sm-4 mb">
-                                    <div id="account" class="blockchainoverview vispanel pn">
+                                    <div id="account" class="test1 vispanel pn">
                                         <i class="fa fa-dollar-sign fa-4x"></i>
                                         <h2>Accounts and Balance</h2>
                                         <h4>View your ether!</h4>
@@ -184,27 +259,34 @@
                                 </div><!-- /col-md-4--> 
                                 <!-- OVERVIEW PANEL -->
                                 <div class="col-md-4 col-sm-4 mb">
-                                    <div id="contracts" class="blockchainoverview vispanel pn">
+                                    <div id="contracts" class="test2 vispanel pn">
                                         <i class="fa fa-file-signature fa-4x"></i>
                                         <h2>Contracts And Deployment</h2>
                                         <h4>Deploy a contract!</h4>
                                     </div>
-                                </div><!-- /col-md-4--> 
-                            </div>
-                        </div>
-                    </div>
+                                </div>
+                                <!-- /col-md-4--> 
+                            
                     <!-- Modal -->
                     <%
                         String val = session.getAttribute("groupid").toString();
                         //String learningIDVal = "4";
                         if (!val.equals("0")) {
                     %>
-                    <button class="btn btn-lg btn-info open-modal">Time for the final quiz!</button>
-
+                    <!--<button class="btn btn-lg btn-info open-modal">Time for the final quiz!</button> -->
+                            <div class="col-md-4 col-sm-4 mb">
+                                <div id="FINAL_QUIZ" class="test3 vispanel pn">
+                                    <i class="fa fa-file-contract fa-4x"></i>
+                                    <h2>QUIZ TIME!</h2>
+                                    <h4>Test your Knowledge!</h4>
+                                </div>
+                            </div>
                     <%
                         }
                     %>
-
+                    </div>
+                        </div>
+                    </div>
                     <div class="modal fade" id="myModal" role="dialog" data-keyboard="false" data-backdrop="static">
                         <div class="modal-dialog" style="width:740px;">
 
@@ -553,6 +635,18 @@
                 }
             });
         });
+        
+        
+        $('#FINAL_QUIZ').click(function () {
+//            $(document).on('ready', function() {
+//            $('.open-modal').click(function() {
+            $('#myModal').modal();
+//            });
+//        });
+        });
+        
+        
+        
         $('#hashtest').click(function () {
             $.confirm({
                 theme: 'material',
