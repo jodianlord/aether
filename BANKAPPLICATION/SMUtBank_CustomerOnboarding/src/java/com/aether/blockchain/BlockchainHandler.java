@@ -5,6 +5,7 @@
  */
 package com.aether.blockchain;
 
+import com.aether.util.ConnectionManager;
 import com.aether.util.RESTHandler;
 import java.net.*;
 import java.util.*;
@@ -16,6 +17,8 @@ import org.json.simple.*;
 import org.json.simple.parser.*;
 import org.bouncycastle.jcajce.provider.digest.Keccak;
 import java.security.MessageDigest;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.bind.DatatypeConverter;
 
 /**
@@ -25,9 +28,45 @@ import javax.xml.bind.DatatypeConverter;
 public class BlockchainHandler {
 
     private static HttpURLConnection con;
-    private static final String URL = "http://ec2-18-224-180-158.us-east-2.compute.amazonaws.com:8080/Blockchain/";
+    private static String URL;
     private static final BigInteger ETHTOWEI = new BigInteger("1000000000000000000");
+    private static final String PROPS_FILENAME = "connection.properties";
 
+    static{
+        readBlockchainURL();
+    }
+    
+    private static void readBlockchainURL(){
+        InputStream is = null;
+        try {
+            // Retrieve properties from connection.properties via the CLASSPATH
+            // WEB-INF/classes is on the CLASSPATH
+            is = ConnectionManager.class.getResourceAsStream(PROPS_FILENAME);
+            Properties props = new Properties();
+            props.load(is);
+
+            // load database connection details
+            String url = props.getProperty("blockchain.url");
+            BlockchainHandler.URL = url;
+            
+        } catch (Exception ex) {
+            // unable to load properties file
+            String message = "Unable to load '" + PROPS_FILENAME + "'.";
+
+            System.out.println(message);
+            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, message, ex);
+            throw new RuntimeException(message, ex);
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(ConnectionManager.class.getName()).log(Level.WARNING, "Unable to close connection.properties", ex);
+                }
+            }
+        }
+    }
+    
     /**
      * Gets a JSONObject from a String, not to be directly called
      *
