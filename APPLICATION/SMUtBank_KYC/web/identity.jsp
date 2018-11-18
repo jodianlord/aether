@@ -517,12 +517,12 @@
                                                     console.log("json: " + JSON.stringify(data));
                                                     var text = "";
                                                     text += '<table class="table table-striped"><tr><td><b> RANK </b></td><td><b> GROUP </b></td><td><b> SCORE </b></td></tr>';
-                                                    
+                                                    test += '<tbody style = "overflow-y: scroll;position:absolute;width:50em;height:10em">';
                                                     for (i = 0; i < data.Leader.length; i++) {
                                                         
                                                                 text += '<tr><td>' + (i+1) + '</td><td>' + data.Leader[i].user_Id + '</td><td>' + data.Leader[i].score + '</td></tr>';
                                                     }
-                                                    text += '</table>';
+                                                    text += '</tbody></table>';
                                                     //alert(text);
                                                     
                                                     var result = document.getElementById("modal-body-grpleaderboard").innerHTML = text;
@@ -535,7 +535,7 @@
                                                     console.log(text);
                                                     console.log("score: " + data.Leader[0].score) //score
                                                     console.log("user_Id: " + data.Leader[0].user_Id) //group
-
+                                                    
                                                 }, error: function (xhr) {
 
                                                 }
@@ -578,7 +578,7 @@
 
         <%@include file="Components/script.html" %>
         <!--set dashboard button to active-->
-        <script type="application/javascript">
+        <script>
             document.getElementById("identityside").className = "active";
         </script>
 

@@ -66,7 +66,7 @@
                                         <input type="password" name='password' required autocomplete="off"/>
                                     </div>
 
-                                    <p class="forgot"><a href="#">Forgot Password?</a></p>
+                                    <!--<p class="forgot"><a href="#">Forgot Password?</a></p>-->
 
                                     <div class="field-wrap"> <!-- <div class="field-wrap"> -->
                                         <label style="margin-top:2.3%">

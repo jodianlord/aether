@@ -83,7 +83,7 @@
         </style>
         <section id="container" >
             <%@include  file="Components/topbar.html" %>
-            <%@include  file="Components/sidebar.html" %>
+            <%@include  file="Components/sidebar.jsp" %>
 
             <!-- **********************************************************************************************************************************************************
             MAIN CONTENT
@@ -330,6 +330,11 @@
             </script>
 
     </body>
+    <script>
+        document.getElementById("visualisationside").className = "active";
+    </script>
+    
+    
     <script type="text/javascript">
         var toHash;
         var ethBalance = "<%=eth%>";
