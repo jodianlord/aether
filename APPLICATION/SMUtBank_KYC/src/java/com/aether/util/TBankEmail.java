@@ -40,7 +40,7 @@ public class TBankEmail {
         String OTP = "999999";
         String emailAddress = address;
         String emailSubject = subject;
-        String emailBody = contents;
+        String emailBody = "Hello,\n\nThe text below is your unique digital identity. Please copy and paste it into tBank customer onboarding page to continue with your bank account creation.\n\n" + contents + "\n\nThank you. \n\nRegards,\nAether";
         
         try{
             JSONObject  jo = new JSONObject();
