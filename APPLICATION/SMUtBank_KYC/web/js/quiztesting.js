@@ -102,7 +102,7 @@ $.ajax({
                     questions: [
                         {
                             type: "html",
-                            html: "<b>Why capture all this information?</b></br></br><b>Personal Particulars: </b> All the basic information of the customer. This would streamline the application process when the customer applies to set up a bank account. </br></br><b>Scan of identification document:</b> Physical proof that the customer is who he/she claim to be. Can also be used for banking compliance.</br></br><b>Facial Photograph of customer: </b> Physical proof that customer was there to create digital identity. Also provides a reference image for facial recognition as part of 2 factor authentication when creating a bank account.",
+                            html: "<b>Why capture all this information?</b></br></br><b>Personal Particulars: </b></br> All the basic information of the customer. This would streamline the application process when the customer applies to set up a bank account. </br></br><b>Scan of identification document:</b></br> Physical proof that the customer is who he/she claim to be. Can also be used for banking compliance.</br></br><b>Facial Photograph of customer: </br></b> Physical proof that customer was there to create digital identity. Also provides a reference image for facial recognition as part of 2 factor authentication when creating a bank account.",
 
                         }
                     ]

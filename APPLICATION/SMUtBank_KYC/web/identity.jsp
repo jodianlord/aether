@@ -423,8 +423,8 @@
                     </div>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="myModal" role="dialog" data-keyboard="false" data-backdrop="static">
-                        <div class="modal-dialog" style="width:740px;">
+                    <div class="modal fade" id="myModal" role="dialog" data-keyboard="false" data-backdrop="static" >
+                        <div class="modal-dialog" style="width:1000px;">
 
                             <!-- Modal content-->
                             <div class="modal-content">
