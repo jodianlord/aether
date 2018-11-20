@@ -23,11 +23,6 @@ $("#email").keyup(function(){
     }else{
         document.getElementById("emailerror").style.display =  "block";
     }
-    /*if(!val.includes('@')){
-        document.getElementById("emailerror").style.display =  "block";
-    }else{
-        document.getElementById("emailerror").style.display =  "none";
-    }*/
 });
 
 $("#mobile").keyup(function(){
@@ -37,11 +32,16 @@ $("#mobile").keyup(function(){
     }else{
         document.getElementById("mobileerror").style.display =  "block";
     }
-    /*if(val.match(/^[0-9]+$/) == null){
-        document.getElementById("mobileerror").style.display =  "block";
-    }else{
-        document.getElementById("mobileerror").style.display =  "none";
-    }*/
 });
+
+$("#address").keyup(function(){
+    var val = document.getElementById('address').value;
+    if(val.match(/\d{6}/)){
+        document.getElementById("addresserror").style.display =  "none";
+    }else{
+        document.getElementById("addresserror").style.display =  "block";
+    }
+});
+
 
 

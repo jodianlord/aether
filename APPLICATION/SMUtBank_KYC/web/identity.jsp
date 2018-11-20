@@ -331,10 +331,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 col-sm-2 control-label">Address (with postal code)</label>
+                                        <label class="col-sm-2 col-sm-2 control-label">Address</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="address" class="form-control">
-                                        </div>
+                                            <input type="text" id="address" name="address" class="form-control">
+                                            <div id="addresserror" style="display:none;color: red">
+                                                Please enter a postal code!
+                                            </div>
+                                        </div>                                       
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Occupation</label>
