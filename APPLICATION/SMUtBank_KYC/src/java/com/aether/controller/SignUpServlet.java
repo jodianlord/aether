@@ -18,26 +18,35 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.mindrot.BCrypt;
 import com.aether.blockchain.BlockchainHandler;
+import com.aether.util.ConnectionManager;
+import java.io.InputStream;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @WebServlet(name = "SignUpServlet", urlPatterns = {"/SignUpServlet"})
 public class SignUpServlet extends HttpServlet {
-
+    
+    private static final String PROPS_FILENAME = "connection.properties";
+    private static String publickey;
     private UserDAO userdao;
 
     public SignUpServlet() {
         super();
         userdao = new UserDAO();
     }
+    
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        readPublicKey();
         HttpSession session = request.getSession();
         String userid = request.getParameter("userid");
         userid = userid.toLowerCase();
         String password = request.getParameter("password");
         //String publickey = BlockchainHandler.createAccount("password");
         //publickey = publickey.replace("\u0000", "");
-        String publickey = "0x42e6671d1d489c47e3418557167a2373607996b8";
+        //String publickey = "0x42e6671d1d489c47e3418557167a2373607996b8";
         //BlockchainHandler.unlockAccount("0x2d117903f7b2dc16abe2d6272d11d84233ff7c1f", "password");
         //BlockchainHandler.sendTransaction("0x2d117903f7b2dc16abe2d6272d11d84233ff7c1f", publickey, 1000000000);
 
@@ -47,7 +56,7 @@ public class SignUpServlet extends HttpServlet {
         User existingUser =  userdao.getUser(userid);
         
         if(existingUser == null) { //do not exist
-            User user = new User(userid, hashedPWD, publickey);
+            User user = new User(userid, hashedPWD, SignUpServlet.publickey);
             userdao.insertUser(user);
             session.setAttribute("userError","donotexists");  
         } 
@@ -60,6 +69,35 @@ public class SignUpServlet extends HttpServlet {
     
         response.sendRedirect("index.jsp");
 
+    }
+    
+    private static void readPublicKey() {
+        InputStream is = null;
+        try {
+            // Retrieve properties from connection.properties via the CLASSPATH
+            // WEB-INF/classes is on the CLASSPATH
+            is = ConnectionManager.class.getResourceAsStream(PROPS_FILENAME);
+            Properties props = new Properties();
+            props.load(is);
+
+            // load database connection details
+            SignUpServlet.publickey = props.getProperty("blockchain.address");
+        } catch (Exception ex) {
+            // unable to load properties file
+            String message = "Unable to load '" + PROPS_FILENAME + "'.";
+
+            System.out.println(message);
+            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, message, ex);
+            throw new RuntimeException(message, ex);
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(ConnectionManager.class.getName()).log(Level.WARNING, "Unable to close connection.properties", ex);
+                }
+            }
+        }
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
