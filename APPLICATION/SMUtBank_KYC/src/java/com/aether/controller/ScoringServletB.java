@@ -6,6 +6,7 @@
 package com.aether.controller;
 
 import com.aether.dao.QuestionDAO;
+import com.aether.util.ConnectionManager;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -29,12 +31,16 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
 /**
  *
  * @author Yuefeng
  */
 @WebServlet(name = "ScoringServletB", urlPatterns = {"/ScoringServletB"})
 public class ScoringServletB extends HttpServlet {
+
+    private static final String PROPS_FILENAME = "connection.properties";
+    public static String gameID;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,7 +51,7 @@ public class ScoringServletB extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
@@ -74,6 +80,41 @@ public class ScoringServletB extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    static {
+        readGameID();
+    }
+
+    private static void readGameID() {
+        InputStream is = null;
+        try {
+            // Retrieve properties from connection.properties via the CLASSPATH
+            // WEB-INF/classes is on the CLASSPATH
+            is = ConnectionManager.class.getResourceAsStream(PROPS_FILENAME);
+            Properties props = new Properties();
+            props.load(is);
+
+            // load database connection details
+            String conngameID = props.getProperty("gameID");
+            gameID = conngameID;
+
+        } catch (Exception ex) {
+            // unable to load properties file
+            String message = "Unable to load '" + PROPS_FILENAME + "'.";
+
+            System.out.println(message);
+            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, message, ex);
+            throw new RuntimeException(message, ex);
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(ConnectionManager.class.getName()).log(Level.WARNING, "Unable to close connection.properties", ex);
+                }
+            }
+        }
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -88,14 +129,14 @@ public class ScoringServletB extends HttpServlet {
             org.json.simple.JSONObject resultJSON = new org.json.simple.JSONObject();
             boolean result = false;
             org.json.simple.JSONObject jsonContent = getJSONObject(body);
-            
+
             //System.out.println(jsonContent);
             int timeOne = Integer.parseInt(jsonContent.get("pageNo1").toString());
             int timeTwo = Integer.parseInt(jsonContent.get("pageNo2").toString());
             int timeThree = Integer.parseInt(jsonContent.get("pageNo3").toString());
-            int scoreA = 1000 + timeOne;
-            int scoreB = 1000 + timeTwo;
-            int scoreC = 1000 + timeThree;
+            int scoreA = 1000 + (60-timeOne);
+            int scoreB = 1000 + (60-timeTwo);
+            int scoreC = 1000 + (60-timeThree);
             //getting questionID
             String qIDOne = jsonContent.get("qnsA").toString();
             String qIDTwo = jsonContent.get("qnsB").toString();
@@ -168,7 +209,8 @@ public class ScoringServletB extends HttpServlet {
             String userID = jsonContent.get("userID").toString(); //pass in from front end //jsonContent.get("userID").toString();
             String PIN = "";
             String OTP = "";
-            String gameID = "9405";
+            String gameID = ScoringServletB.gameID;
+            System.out.println("" + ScoringServletB.gameID);
             String questionID = "";
             String scoreString = "";
             String mode = "Default";
@@ -189,11 +231,11 @@ public class ScoringServletB extends HttpServlet {
                 //build content
                 jo = new JSONObject();
                 jo.put("gameID", gameID);
-                jo.put("questionID", qObj.get(""+i));
-                jo.put("score", scoreObj.get(""+i) );
+                jo.put("questionID", qObj.get("" + i));
+                jo.put("score", scoreObj.get("" + i));
                 jo.put("groupID", groupID); //
                 //test
-                System.out.println(qObj.get(""+i).toString() + ">>>>>>" +scoreObj.get(""+i).toString());
+                System.out.println(qObj.get("" + i).toString() + ">>>>>>" + scoreObj.get("" + i).toString());
                 jo.put("mode", mode);
                 JSONObject contentObj = new JSONObject();
                 contentObj.put("Content", jo);
@@ -227,7 +269,7 @@ public class ScoringServletB extends HttpServlet {
                 responseObj = new JSONObject(outputRes);
                 if (verbose) {
                     System.out.println(responseObj.toString(4));
-                    
+
                     System.out.println("Entered here>>>>>>  ");
                 }
 

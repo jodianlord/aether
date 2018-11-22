@@ -16,7 +16,7 @@
     <link href="https://surveyjs.azureedge.net/1.0.46/survey.css" type="text/css" rel="stylesheet"/>
     
     <!-- Datatable -->
-    <script type="text/javascript" src="./js/datatables.min.js"></script>
+    <!--<script type="text/javascript" src="./js/datatables.min.js"></script>-->
     <link href="./css/datatables.min.css" rel="stylesheet">
     
     
@@ -515,20 +515,25 @@
                                                 type: "POST",
                                                 contentType: "application/json",
                                                 success: function (data) {
+                                                    
                                                     var length = data.Leader.length;
-                                                    console.log("arary length: " + length);
+                                                    console.log(data);
+                                                     console.log("data in?");
+                                                    //console.log("qwert   "+Object.entries());
+                                                    console.log("array length: " + length);
                                                     console.log("json: " + JSON.stringify(data));
+                                                    //var data = JSON.stringify(data);
                                                     var text = "";
                                                     text += '<table class="table table-striped"><tr><td><b> RANK </b></td><td><b> GROUP </b></td><td><b> SCORE </b></td></tr>';
-                                                    test += '<tbody style = "overflow-y: scroll;position:absolute;width:50em;height:10em">';
-                                                    for (i = 0; i < data.Leader.length; i++) {
-                                                        
-                                                                text += '<tr><td>' + (i+1) + '</td><td>' + data.Leader[i].user_Id + '</td><td>' + data.Leader[i].score + '</td></tr>';
+                                                    text += '<tbody style = "width:50em;height:10em">';
+                                                    for (var i = 0; i < length; i++) {
+                                                                var idCounter = i + 1;
+                                                                text += '<tr><td>' + (idCounter) + '</td><td>' + data.Leader[i].user_Id + '</td><td>' + data.Leader[i].score + '</td></tr>';
                                                     }
                                                     text += '</tbody></table>';
                                                     //alert(text);
                                                     
-                                                    var result = document.getElementById("modal-body-grpleaderboard").innerHTML = text;
+                                                    document.getElementById("modal-body-grpleaderboard").innerHTML = text;
 //                                                    result.innerHTML(text);
 //                                                    result.appendChild(text);
                                                     /*for (i = 0; i < data.Leader.length5; i++) {
@@ -536,8 +541,8 @@
                                                      data.Leader[i].user_Id;
                                                      }*/
                                                     console.log(text);
-                                                    console.log("score: " + data.Leader[0].score) //score
-                                                    console.log("user_Id: " + data.Leader[0].user_Id) //group
+                                                    //console.log("score: " + data.Leader[0].score); //score
+                                                    //console.log("user_Id: " + data.Leader[0].user_Id); //group
                                                     
                                                 }, error: function (xhr) {
 

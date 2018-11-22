@@ -82,13 +82,56 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Bank Id</label>
                                         <div class="col-sm-10">
-                                            <input type="text" id="bankID" name="bankID" class="form-control" placeholder="e.g. 1">
+                                            <!--<input type="text" id="bankID" name="bankID" class="form-control" placeholder="e.g. 1">-->
+                                            <select class="form-control" id="bankID"  name="bankID">
+                                                <option selected="selected">Please Select</option>
+                                                <!--<optgroup label="Please Select">-->
+                                                <option value="1">SMU</option>
+                                                <option value="2">NP</option>
+                                                <option value="3">MAS</option>
+                                                <option value="4">OCBC</option>
+                                                <option value="5">DBS</option>
+                                                <option value="6">CMU</option>
+                                                <option value="7">BOT</option>
+                                                <option value="8">HSBC</option>
+                                                <option value="9">CITI</option>
+                                                <option value="10">BOA</option>
+                                                <option value="11">JPMC</option>
+                                                <option value="12">BNPP</option>
+                                                <option value="13">DEUT</option>
+                                                <option value="14">BOG</option>
+                                                <option value="15">MAYB</option>
+                                                <option value="16">BOM</option>
+                                                <option value="17">CIMB</option>
+                                                <option value="18">ANZ</option>
+                                                <option value="19">NAB</option>
+                                                <option value="20">CBA</option>
+                                                <option value="21">RBS</option>
+                                                <option value="22">BOE</option>
+                                                <option value="23">CCB</option>
+                                                <option value="24">ABC</option>
+                                                <option value="25">MAS</option>
+                                                <option value="26">SMU</option>
+                                                <option value="27">NP2</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 col-sm-2 control-label">Currency</label>
                                         <div class="col-sm-10">
-                                            <input type="text" id="currency" name="currency" class="form-control" placeholder="e.g. SGD">
+                                            <!--<input type="text" id="currency" name="currency" class="form-control" placeholder="e.g. SGD">-->
+                                            <select class="form-control" id="currency"  name="currency">
+                                                <option selected="selected">Please Select</option>
+                                                <option value="SGD">SGD</option>
+                                                <option value="THB">THB</option>
+                                                <option value="HKD">HKD</option>
+                                                <option value="USD">USD</option>
+                                                <option value="MYR">MYR</option>
+                                                <option value="EUR">EUR</option>
+                                                <option value="AUD">AUD</option>
+                                                <option value="GBP">GBP</option>
+                                                <option value="CNY">CNY</option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -541,6 +584,46 @@
             });
             return;
         }
+        //validate bank id
+        var e = document.getElementById("bankID");
+        var strUser = e.options[e.selectedIndex].value;
+        console.log(id);
+        //var bankID = document.getElementById("bankID").value;
+        var id = strUser.toString();
+        //console.log(id);
+        if (id === null || id==="Please Select") {
+            $.alert({
+                title: 'Sorry!',
+                content: 'Please select your Bank ID!',
+            });
+            return;
+        }
+        
+               
+        //validate bank id
+        var curr = document.getElementById("currency");
+        var currID = curr.options[curr.selectedIndex].value;
+       // console.log(id);
+        //var bankID = document.getElementById("bankID").value;
+        var currency = currID.toString();
+       // console.log(id);
+        if (currency === null || currency==="Please Select") {
+            $.alert({
+                title: 'Sorry!',
+                content: 'Please select your currency!',
+            });
+            return;
+        }
+        var nricBox = document.getElementById("nric").value;
+        var nric = nricBox.toString();
+        if (nric === null || nric === "") {
+            $.alert({
+                title: 'Sorry!',
+                content: 'Please populate user details!',
+            });
+            return;
+        }
+        
 
         var canvasbase = canvas.toDataURL();
         object["verificationfile"] = canvasbase;

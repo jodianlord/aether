@@ -6,6 +6,7 @@
 package com.aether.controller;
 
 import com.aether.dao.QuestionDAO;
+import com.aether.util.ConnectionManager;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -36,6 +38,9 @@ import org.json.simple.parser.ParseException;
  */
 @WebServlet(name = "ScoringServlet", urlPatterns = {"/ScoringServlet"})
 public class ScoringServlet extends HttpServlet {
+
+    private static final String PROPS_FILENAME = "connection.properties";
+    public static String gameID;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -75,6 +80,42 @@ public class ScoringServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    static {
+        readGameID();
+    }
+
+    private static void readGameID() {
+        InputStream is = null;
+        try {
+            // Retrieve properties from connection.properties via the CLASSPATH
+            // WEB-INF/classes is on the CLASSPATH
+            is = ConnectionManager.class.getResourceAsStream(PROPS_FILENAME);
+            Properties props = new Properties();
+            props.load(is);
+
+            // load database connection details
+            String conngameID = props.getProperty("gameID");
+            gameID = conngameID;
+
+        } catch (Exception ex) {
+            // unable to load properties file
+            String message = "Unable to load '" + PROPS_FILENAME + "'.";
+
+            System.out.println(message);
+            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, message, ex);
+            throw new RuntimeException(message, ex);
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(ConnectionManager.class.getName()).log(Level.WARNING, "Unable to close connection.properties", ex);
+                }
+            }
+        }
+    }
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -94,9 +135,11 @@ public class ScoringServlet extends HttpServlet {
             int timeOne = Integer.parseInt(jsonContent.get("pageNo4").toString());
             int timeTwo = Integer.parseInt(jsonContent.get("pageNo5").toString());
             int timeThree = Integer.parseInt(jsonContent.get("pageNo6").toString());
-            int scoreA = 1000 - timeOne;
-            int scoreB = 1000 - timeTwo;
-            int scoreC = 1000 - timeThree;
+            int scoreA = 1000 + (60-timeOne);
+            int scoreB = 1000 + (60-timeTwo);
+            int scoreC = 1000 + (60-timeThree);
+            
+            System.out.println("SCORE>>>" + timeOne);
             //getting questionID
             String qIDOne = jsonContent.get("qnsA").toString();
             String qIDTwo = jsonContent.get("qnsB").toString();
@@ -170,7 +213,8 @@ public class ScoringServlet extends HttpServlet {
             String userID = jsonContent.get("userID").toString(); //pass in from front end //jsonContent.get("userID").toString();
             String PIN = "";
             String OTP = "";
-            String gameID = "9405";
+            String gameID = ScoringServlet.gameID;
+            System.out.println(""+ScoringServlet.gameID);
             String questionID = "";
             String scoreString = "";
             String mode = "Default";
