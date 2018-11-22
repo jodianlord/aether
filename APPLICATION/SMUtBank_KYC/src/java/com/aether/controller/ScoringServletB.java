@@ -7,6 +7,7 @@ package com.aether.controller;
 
 import com.aether.dao.QuestionDAO;
 import com.aether.util.ConnectionManager;
+import com.aether.util.TbankAPI;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -121,7 +122,7 @@ public class ScoringServletB extends HttpServlet {
         processRequest(request, response);
         response.setContentType("application/json");
 
-        String apiServiceUrl = "http://tbankonline.com/SMUtBank_API/Gateway";
+        String apiServiceUrl = TbankAPI.tbankURL;
         String body = getBody(request);
         boolean verbose = true;
 

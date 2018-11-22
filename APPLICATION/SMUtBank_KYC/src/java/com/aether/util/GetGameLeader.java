@@ -33,7 +33,7 @@ public class GetGameLeader
 
                //api url
 
-               String apiServiceUrl = "http://tbankonline.com/SMUtBank_API/Gateway";
+               String apiServiceUrl = TbankAPI.tbankURL;
 
                
 

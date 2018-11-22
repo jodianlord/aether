@@ -5,6 +5,7 @@
  */
 package com.aether.dao;
 
+import com.aether.util.TbankAPI;
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -18,7 +19,7 @@ import org.json.JSONObject;
  * @author Yuefeng
  */
 public class SendSMSDAO {
-    String apiServiceUrl = "http://tbankonline.com/SMUtBank_API/Gateway";
+    String apiServiceUrl = TbankAPI.tbankURL;
     public String sendMessage(String mobile, String message){
         try {
 

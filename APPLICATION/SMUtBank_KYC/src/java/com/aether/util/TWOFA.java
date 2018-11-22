@@ -63,7 +63,7 @@ public class TWOFA extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/plain;charset=UTF-8");
         
-        String apiServiceUrl = "http://tbankonline.com/SMUtBank_API/Gateway";
+        String apiServiceUrl = TbankAPI.tbankURL;
 
         try {
 

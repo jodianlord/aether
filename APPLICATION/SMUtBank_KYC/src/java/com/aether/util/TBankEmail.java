@@ -28,7 +28,7 @@ public class TBankEmail {
     }
     
     public static boolean sendEmail(String address, String subject, String contents){
-        String apiServiceUrl = "http://tbankonline.com/SMUtBank_API/Gateway";
+        String apiServiceUrl = TbankAPI.tbankURL;
         
         String globalErrorID;
         String errorText;

@@ -5,6 +5,7 @@
  */
 package com.aether.dao;
 
+import com.aether.util.TbankAPI;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -33,7 +34,7 @@ import org.json.simple.parser.ParseException;
  */
 public class QuestionDAO {
 
-    String apiServiceUrl = "http://tbankonline.com/SMUtBank_API/Gateway";
+    String apiServiceUrl = TbankAPI.tbankURL;
     
     public JSONArray getSetA(){
         JSONArray qnsArray = new JSONArray();

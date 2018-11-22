@@ -6,6 +6,7 @@
 package com.aether.controller;
 
 import com.aether.util.ConnectionManager;
+import com.aether.util.TbankAPI;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -111,7 +112,7 @@ public class LeaderboardServlet extends HttpServlet {
             boolean verbose = true;
 
             //api url
-            String apiServiceUrl = "http://tbankonline.com/SMUtBank_API/Gateway";
+            String apiServiceUrl = TbankAPI.tbankURL;
 
             String serviceRespTag = "Get_Game_Leaders_ReadResponse";
             String globalErrorID;

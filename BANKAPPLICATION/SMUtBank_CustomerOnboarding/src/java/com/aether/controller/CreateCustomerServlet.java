@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import com.aether.util.TbankAPI;
 
 @WebServlet(name = "CreateCustomerServlet", urlPatterns = {"/CreateCustomerServlet"})
 public class CreateCustomerServlet extends HttpServlet {
@@ -78,7 +79,7 @@ public class CreateCustomerServlet extends HttpServlet {
         processRequest(request, response);
         response.setContentType("application/json");
                 
-        String apiServiceUrl = "http://tbankonline.com/SMUtBank_API/Gateway";
+        String apiServiceUrl = TbankAPI.tbankURL;
         String body = getBody(request);
         try(PrintWriter out = response.getWriter()){
             org.json.simple.JSONObject printCreateJSON = new org.json.simple.JSONObject();
