@@ -59,7 +59,7 @@ document.getElementById("capture").onclick = function () {
     document.getElementById("capture").style.visibility = "hidden"; //make invisible
     
     document.getElementById("captureagain").style.margin = "-60px 0px 0px 0px";
-    document.getElementById("camerapanel").style.height = "480px";
+    document.getElementById("camerapanel").style.height = "45em";
     document.getElementById("captureagain").style.visibility = "visible"; //make visible
 }
 
