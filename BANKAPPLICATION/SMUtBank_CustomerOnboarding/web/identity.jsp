@@ -24,7 +24,7 @@
                         <div class="col-lg-6">
                             <div class="form-panel col-lg-12" id="camerapanel">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> Take Picture</h4>
-                                <div id="media" style="width:198%;">
+                                <div id="media" style="width:74em;">
                                 </div>
 
                                 <div style="position:relative;float:left;clear:left;margin-top: 10px">
@@ -534,6 +534,7 @@
             },
             content: function () {
                 var self = this;
+                self.setTitle("Loading");
                 self.setContent("Loading...");
                 return $.ajax({
                     url: "./PassBin",
@@ -629,15 +630,19 @@
         var canvasbase = canvas.toDataURL();
         object["verificationfile"] = canvasbase;
 
+        var success = false;
 
         $.confirm({
             buttons: {
                 OK: function () {
-                    window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
+                    if(success){
+                        window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
+                    }
                 }
             },
             content: function () {
                 var self = this;
+                this.setTitle("Now Submitting");
                 this.setContent("Loading...");
                 return $.ajax({
                     url: "./PassBin",
@@ -698,10 +703,13 @@
                         data: JSON.stringify(createJson),
                         contentType: "application/json",
                         success: function (createData) {
-                            if (createData.createStatus === "success") {
+                            if(createData == null || createData.length == 0){
+                                self.setTitle("Error!");
+                                self.setContent("Please contact the system adminstrator. Your account could not be created.");
+                            }else if (createData.createStatus === "success") {
                                 self.setTitle('Your account has been created!');
                                 self.setContent('You can now login to your tBank account.');
-
+                                success = true;
                                 /*$.confirm({
                                  title: "Your account has been created! ",
                                  content: "You can now login to your tBank account.",

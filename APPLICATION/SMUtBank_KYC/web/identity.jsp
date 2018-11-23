@@ -407,7 +407,7 @@
                         <div class="col-lg-6">
                             <div class="form-panel col-lg-12" id="camerapanel">
                                 <h4 class="mb"><i class="fa fa-angle-right"></i> Take Picture</h4>
-                                <div id="media" style="width:198%;">
+                                <div id="media" style="width:72em;">
                                 </div>
 
                                 <div style="position:relative;float:left;clear:left;margin-top: 10px">

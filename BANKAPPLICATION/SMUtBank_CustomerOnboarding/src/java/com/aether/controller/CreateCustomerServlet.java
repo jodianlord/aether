@@ -42,8 +42,6 @@ public class CreateCustomerServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //response.setContentType("text/html;charset=UTF-8");
@@ -78,17 +76,17 @@ public class CreateCustomerServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         response.setContentType("application/json");
-        System.out.println("BEEEE" + request.getServletContext());
+        
         String apiServiceUrl = TbankAPI.tbankURL;
         String body = getBody(request);
-        try(PrintWriter out = response.getWriter()){
+        try (PrintWriter out = response.getWriter()) {
             org.json.simple.JSONObject printCreateJSON = new org.json.simple.JSONObject();
-            boolean createResult=false;
+            boolean createResult = false;
             org.json.simple.JSONObject jsonContent = getJSONObject(body);
             //org.json.simple.JSONObject resultJSON = getJSONObject(body);
             String nric = (String) jsonContent.get("nric");
             String fullname = (String) jsonContent.get("fullname");
-            String[] splitName = fullname.split(" ",2); 
+            String[] splitName = fullname.split(" ", 2);            
             String familyname = splitName[0];//family name is the fist word of name
             String givenname = splitName[1]; //given name is the rest
             String email = (String) jsonContent.get("email");
@@ -101,26 +99,25 @@ public class CreateCustomerServlet extends HttpServlet {
             
             Pattern p = Pattern.compile("(\\d{6})");
             Matcher m = p.matcher(address);
-
+            
             String postalcode = "";
-            if(m.find()) {
+            if (m.find()) {
                 postalcode = m.group(1);
             }
-
+            
             String occupation = (String) jsonContent.get("occupation");
             String prefUsername = (String) jsonContent.get("prefUsername");
-            
-            
+
             // build header
             JSONObject jo = new JSONObject();
             jo.put("serviceName", "onboardCustomer");
-            jo.put("userID", ""); 
-            jo.put("PIN", ""); 
-            jo.put("OTP", ""); 
+            jo.put("userID", "");            
+            jo.put("PIN", "");            
+            jo.put("OTP", "");            
             JSONObject headerObj = new JSONObject();
             headerObj.put("Header", jo);
             String header = headerObj.toString();
-   
+
             //set inputs into json object 
             jo = new JSONObject();
             jo.put("IC_number", nric);	// this must be unique, otherwise "duplicate" error.
@@ -140,7 +137,7 @@ public class CreateCustomerServlet extends HttpServlet {
             jo.put("preferredUserID", prefUsername);
             jo.put("currency", "SGD");
             jo.put("bankID", "1");
-            
+
             /*
             jo.put("IC_number", request.getParameter("nric"));	// this must be unique, otherwise "duplicate" error.
             jo.put("familyName", "");
@@ -160,18 +157,17 @@ public class CreateCustomerServlet extends HttpServlet {
             jo.put("currency", "SGD");
             jo.put("bankID", "1");
             
-            */
-            
+             */
             //set content
             JSONObject contentObj = new JSONObject();
             contentObj.put("Content", jo);
             String content = contentObj.toString();
-            
+
             // connect to API service 
             HttpURLConnection urlConnection = (HttpURLConnection) new URL(apiServiceUrl).openConnection();
             urlConnection.setDoOutput(true);
             urlConnection.setRequestMethod("POST");
-            
+
             // build request parameters
             String parameters
                     = "Header=" + header + "&"
@@ -189,7 +185,7 @@ public class CreateCustomerServlet extends HttpServlet {
                 resp += s.nextLine();
             }
             s.close();
-            
+
             // get response object
             JSONObject responseObj = new JSONObject(resp);
             System.out.println(responseObj.toString(4)); // indent 4 spaces
@@ -203,24 +199,22 @@ public class CreateCustomerServlet extends HttpServlet {
             JSONObject customerDetailsObj = serviceRespObj.getJSONObject("CustomerDetails");
             Object accID = customerDetailsObj.get("AccountID");
             String AccountIDText = "";
-            if(accID==null){
+            if (accID == null) {
                 printCreateJSON.put("createStatus", "fail");
-                
-            }
-            else{
-                createResult=true;
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            } else {
+                createResult = true;
                 AccountIDText = accID.toString();
             }
             String custID = customerDetailsObj.getString("CustomerID");
             Object custPIN = customerDetailsObj.get("PIN");
             String customerPINText = "";
-            if(custPIN==null){
+            if (custPIN == null) {
                 
                 printCreateJSON.put("createStatus", "fail");
-                           
-            }
-            else{
-                createResult=true;
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            } else {
+                createResult = true;
                 customerPINText = custPIN.toString();
             }
             System.out.println("wtf parse custdetails");
@@ -228,39 +222,40 @@ public class CreateCustomerServlet extends HttpServlet {
             JSONObject serviceRespHeaderObj = serviceRespObj.getJSONObject("ServiceRespHeader");
             String globalErrorID = serviceRespHeaderObj.getString("GlobalErrorID");
             String errorText = serviceRespHeaderObj.getString("ErrorText");
-            Object errorDetails =  serviceRespHeaderObj.get("ErrorDetails");
+            Object errorDetails = serviceRespHeaderObj.get("ErrorDetails");
             System.out.println("wtf parse error");
             //check for error:
-            if(globalErrorID.equals("010009")){
+            if (globalErrorID.equals("010009")) {
                 printCreateJSON.put("createStatus", "fail");
                 //System.out.println("NV NV NV SEND SMS!!!!!!!!!!!!!!!!!!!!");
-            }
-            else{
+            } else {
                 System.out.println("SEND SMS!!!!!!!!!!!!!!!!!!!!");
                 SendSMSDAO msg = new SendSMSDAO();
-                msg.sendMessage( mobile, "Your account has been created! Please use your Preferred Username as the username and this is your PIN: "+customerPINText+"");
+                msg.sendMessage(mobile, "Your account has been created! Please use your Preferred Username as the username and this is your PIN: " + customerPINText + "");
                 printCreateJSON.put("createStatus", "success");
             }
             //send response using printJSON
             //org.json.simple.JSONObject printCreateJSON = new org.json.simple.JSONObject();
             //printCreateJSON.put("createStatus", "success");
             
-           
+            response.setStatus(HttpServletResponse.SC_OK);
             out.println(printCreateJSON.toString());
-             
+            
         } catch (Exception e) {
             
-            
             e.printStackTrace(System.out);
-
+            
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            
         }
     }
-    public static String getBody(HttpServletRequest request) throws IOException {
 
+    public static String getBody(HttpServletRequest request) throws IOException {
+        
         String body = null;
         StringBuilder stringBuilder = new StringBuilder();
         BufferedReader bufferedReader = null;
-
+        
         try {
             InputStream inputStream = request.getInputStream();
             if (inputStream != null) {
@@ -284,16 +279,15 @@ public class CreateCustomerServlet extends HttpServlet {
                 }
             }
         }
-
+        
         body = stringBuilder.toString();
         return body;
     }
-
+    
     public static org.json.simple.JSONObject getJSONObject(String jsonString) throws ParseException {
         JSONParser parser = new JSONParser();
         return (org.json.simple.JSONObject) parser.parse(jsonString);
     }
-
 
     /**
      * Returns a short description of the servlet.
