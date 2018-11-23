@@ -534,6 +534,7 @@
             },
             content: function () {
                 var self = this;
+                self.setContent("Loading...");
                 return $.ajax({
                     url: "./PassBin",
                     type: "POST",
@@ -637,6 +638,7 @@
             },
             content: function () {
                 var self = this;
+                this.setContent("Loading...");
                 return $.ajax({
                     url: "./PassBin",
                     type: "POST",
