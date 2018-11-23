@@ -192,7 +192,7 @@
                                 <!-- WHATIS PANEL -->
                                 <div class="col-md-4 col-sm-4 mb" id="box3">
                                     <div id="tryout" class="testmain vispanel pn">
-                                        <i class="fa fa-user-secret fa-4x"></i>
+                                        <i class="fa fas fa-flask fa-4x"></i>
                                         <h2>Test out our blockchain!</h2>
                                         <h4>Hands On</h4>
                                     </div>
