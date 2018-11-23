@@ -62,27 +62,27 @@
             
             /*BLOCKCHAIN*/ 
             .blockchainoverviewmain {
-                background: url(img/bc_visualisation/Blockchain/bc-main.jpeg) no-repeat center top;
+                background: url(img/bc_visualisation/Blockchain/bc-mainn.jpeg) no-repeat center top;
                 text-align: center;
                 background-position: center center;
             }
             
             .blockchainoverview1 {
-                background: url(img/bc_visualisation/Blockchain/bc1.jpg) no-repeat center top;
+                background: url(img/bc_visualisation/Blockchain/bc1n.jpg) no-repeat center top;
                 text-align: center;
                 background-position: center center;
                 /*background-size: 100%;*/
                 /*height: 100%;*/
             }
             .blockchainoverview2 {
-                background: url(img/bc_visualisation/Blockchain/bc2.png) no-repeat center top;
+                background: url(img/bc_visualisation/Blockchain/bc2n.png) no-repeat center top;
                 text-align: center;
                 background-position: center center;
                 /*background-size: 100%;*/
                 /*height: 100%;*/
             }
             .blockchainoverview3 {
-                background: url(img/bc_visualisation/Blockchain/bc3.jpg) no-repeat center top;
+                background: url(img/bc_visualisation/Blockchain/bc3n.jpg) no-repeat center top;
                 text-align: center;
                 background-position: center center;
                 /*background-size: 100%;*/
@@ -92,17 +92,17 @@
             
             /* Data Handling */
             .datahandlingmain {
-                background: url(img/bc_visualisation/Encryption/en-main.jpg) no-repeat center top;
+                background: url(img/bc_visualisation/Encryption/en-mainn.jpg) no-repeat center top;
                 text-align: center;
                 background-position: center center;
             }
             .datahandling1 {
-                background: url(img/bc_visualisation/Encryption/en1.jpg) no-repeat center top;
+                background: url(img/bc_visualisation/Encryption/en1n.jpg) no-repeat center top;
                 text-align: center;
                 background-position: center center;
             }
             .datahandling2 {
-                background: url(img/bc_visualisation/Encryption/en2.jpg) no-repeat center top;
+                background: url(img/bc_visualisation/Encryption/en2n.jpg) no-repeat center top;
                 text-align: center;
                 background-position: center center;
             }
@@ -110,22 +110,22 @@
             
             /* Test Quiz */
             .testmain {
-                background: url(img/bc_visualisation/TestBC/test-main.jpg) no-repeat center top;
+                background: url(img/bc_visualisation/TestBC/test-mainn.jpg) no-repeat center top;
                 text-align: center;
                 background-position: center center;
             }
             .test1 {
-                background: url(img/bc_visualisation/TestBC/t1.jpg) no-repeat center top;
+                background: url(img/bc_visualisation/TestBC/t1n.jpg) no-repeat center top;
                 text-align: center;
                 background-position: center center;
             }
             .test2 {
-                background: url(img/bc_visualisation/TestBC/t2.jpg) no-repeat center top;
+                background: url(img/bc_visualisation/TestBC/t2n.jpg) no-repeat center top;
                 text-align: center;
                 background-position: center center;
             }
             .test3 {
-                background: url(img/bc_visualisation/TestBC/t3.jpg) no-repeat center top;
+                background: url(img/bc_visualisation/TestBC/t3n.jpg) no-repeat center top;
                 text-align: center;
                 background-position: center center;
             }
