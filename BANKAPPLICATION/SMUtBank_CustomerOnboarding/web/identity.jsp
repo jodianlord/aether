@@ -700,7 +700,10 @@
                         data: JSON.stringify(createJson),
                         contentType: "application/json",
                         success: function (createData) {
-                            if (createData.createStatus === "success") {
+                            if(createData == null || createData.length == 0){
+                                self.setTitle("Error!");
+                                self.setContent("Please contact the system adminstrator. Your account could not be created.");
+                            }else if (createData.createStatus === "success") {
                                 self.setTitle('Your account has been created!');
                                 self.setContent('You can now login to your tBank account.');
 
