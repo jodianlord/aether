@@ -78,7 +78,7 @@ public class CreateCustomerServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         response.setContentType("application/json");
-                
+        System.out.println("BEEEE" + request.getServletContext());
         String apiServiceUrl = TbankAPI.tbankURL;
         String body = getBody(request);
         try(PrintWriter out = response.getWriter()){

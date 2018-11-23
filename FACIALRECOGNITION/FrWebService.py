@@ -30,7 +30,7 @@ def compareimages():
     data = request.get_json(force=True)
     first_encoding = np.array(data['first_encoding'])
     second_encoding = np.array(data['second_encoding'])
-    results = face_recognition.compare_faces([first_encoding], second_encoding, tolerance=0.5)
+    results = face_recognition.compare_faces([first_encoding], second_encoding, tolerance=0.4)
     print(results[0])
 
     rObj = {'match': str(results[0]).lower()}

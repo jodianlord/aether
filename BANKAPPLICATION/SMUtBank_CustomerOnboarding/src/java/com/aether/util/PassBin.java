@@ -120,7 +120,7 @@ public class PassBin extends HttpServlet {
                         JSONObject outJSON = new JSONObject();
                         outJSON.put("status", "Error");
                         out.println(outJSON.toString());
-                        response.setStatus(HttpServletResponse.SC_OK);
+                        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                     }
                     
                     return;
@@ -158,7 +158,7 @@ public class PassBin extends HttpServlet {
                     JSONObject outJSON = new JSONObject();
                     outJSON.put("status", "Do Not Match");
                     out.println(outJSON.toString());
-                    response.setStatus(HttpServletResponse.SC_OK);
+                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 }
                 return;
             }
