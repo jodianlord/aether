@@ -630,11 +630,14 @@
         var canvasbase = canvas.toDataURL();
         object["verificationfile"] = canvasbase;
 
+        var success = false;
 
         $.confirm({
             buttons: {
                 OK: function () {
-                    window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
+                    if(success){
+                        window.location.href = "http://tbankonline.com/SMUtBank_RIB/";
+                    }
                 }
             },
             content: function () {
@@ -706,7 +709,7 @@
                             }else if (createData.createStatus === "success") {
                                 self.setTitle('Your account has been created!');
                                 self.setContent('You can now login to your tBank account.');
-
+                                success = true;
                                 /*$.confirm({
                                  title: "Your account has been created! ",
                                  content: "You can now login to your tBank account.",
