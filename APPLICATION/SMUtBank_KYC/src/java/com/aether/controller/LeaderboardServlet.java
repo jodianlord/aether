@@ -29,6 +29,9 @@ import org.json.*;
 public class LeaderboardServlet extends HttpServlet {
     private static final String PROPS_FILENAME = "connection.properties";
     public static String gameID;
+    public static String startGameTime;
+    public static String endGameTime;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -70,7 +73,6 @@ public class LeaderboardServlet extends HttpServlet {
     static {
         readGameID();
     }
-
     private static void readGameID() {
         InputStream is = null;
         try {
@@ -101,6 +103,42 @@ public class LeaderboardServlet extends HttpServlet {
             }
         }
     }
+    //get start date
+    static {
+        readStartDate();
+    }
+    private static void readStartDate() {
+        InputStream is = null;
+        try {
+            // Retrieve properties from connection.properties via the CLASSPATH
+            // WEB-INF/classes is on the CLASSPATH
+            is = ConnectionManager.class.getResourceAsStream(PROPS_FILENAME);
+            Properties props = new Properties();
+            props.load(is);
+
+            // load database connection details
+            String startTime = props.getProperty("startLeaderboardDateTime");
+            startGameTime = startTime;
+            String endTime = props.getProperty("endLeaderboardDateTime");
+            endGameTime = endTime;
+        } catch (Exception ex) {
+            // unable to load properties file
+            String message = "Unable to load '" + PROPS_FILENAME + "'.";
+
+            System.out.println(message);
+            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, message, ex);
+            throw new RuntimeException(message, ex);
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(ConnectionManager.class.getName()).log(Level.WARNING, "Unable to close connection.properties", ex);
+                }
+            }
+        }
+    }
+    //end
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -127,8 +165,9 @@ public class LeaderboardServlet extends HttpServlet {
             String OTP = "";
             System.out.println("LEADER : >>>"  + LeaderboardServlet.gameID);
             String gameID = LeaderboardServlet.gameID; //change game id!
-            String start = "2010-01-01 00:00:00";
-            String end = "2019-01-01 23:59:59";
+            String start = startGameTime; //"2019-01-01 00:00:00";   
+            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + startGameTime);
+            String end = endGameTime; //"2019-01-20 23:59:59";
             String mode = "*";
             String byGroup = "true";
 

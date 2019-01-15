@@ -14,12 +14,12 @@
     <script src="https://unpkg.com/jquery"></script>
     <script src="js/surveyJQuery.js"></script>
     <link href="https://surveyjs.azureedge.net/1.0.46/survey.css" type="text/css" rel="stylesheet"/>
-    
+
     <!-- Datatable -->
     <!--<script type="text/javascript" src="./js/datatables.min.js"></script>-->
     <link href="./css/datatables.min.css" rel="stylesheet">
-    
-    
+
+
     <body>
         <!-- Loading Screen -->
         <div class="se-pre-con">                        
@@ -435,7 +435,7 @@
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     <h4 class="modal-title">Aether Quiz Questions</h4>
                                     <div id="timeInfo" style="display: none;">
-                                        
+
                                         <p>
                                             <span>The time spent on this page: </span><span id="timeEl"></span>
                                         </p>
@@ -443,8 +443,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div id="surveyElement"></div>
-                                    <%
-                                        String userID = session.getAttribute("userid").toString();
+                                    <%                                        String userID = session.getAttribute("userid").toString();
                                         String learningIDVal = session.getAttribute("groupid").toString();
                                         //String learningIDVal = "4";
                                         if (!learningIDVal.equals("0")) {
@@ -479,25 +478,32 @@
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     <h4 class="modal-title">Leaderboard Ranking</h4>
                                 </div>
-                                <div class="modal-body-grpleaderboard" id="modal-body-grpleaderboard">
-
-
+                                <table>
+                                    <tr>
+                                        <td>Start Date:</td>
+                                        <td><input type="datetime-local" id="meeting-time"
+                                           name="meeting-time" value="2018-06-12T19:30"
+                                           ></td>
+                                    </tr>
                                     
-
-
+                                </table>
+                                
+                                <div class="modal-body-grpleaderboard" id="modal-body-grpleaderboard">
+                                    
                                 </div>
+                                
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
 
                         </div>
-                        
-                        
-                        
-                        
-                        
-                        
+
+
+
+
+
+
                     </div>              
                 </section>
             </section>
@@ -515,10 +521,10 @@
                                                 type: "POST",
                                                 contentType: "application/json",
                                                 success: function (data) {
-                                                    
+
                                                     var length = data.Leader.length;
                                                     console.log(data);
-                                                     console.log("data in?");
+                                                    console.log("data in?");
                                                     //console.log("qwert   "+Object.entries());
                                                     console.log("array length: " + length);
                                                     console.log("json: " + JSON.stringify(data));
@@ -527,12 +533,12 @@
                                                     text += '<table class="table table-striped"><tr><td><b> RANK </b></td><td><b> GROUP </b></td><td><b> SCORE </b></td></tr>';
                                                     text += '<tbody style = "width:50em;height:10em">';
                                                     for (var i = 0; i < length; i++) {
-                                                                var idCounter = i + 1;
-                                                                text += '<tr><td>' + (idCounter) + '</td><td>' + data.Leader[i].user_Id + '</td><td>' + data.Leader[i].score + '</td></tr>';
+                                                        var idCounter = i + 1;
+                                                        text += '<tr><td>' + (idCounter) + '</td><td>' + data.Leader[i].user_Id + '</td><td>' + data.Leader[i].score + '</td></tr>';
                                                     }
                                                     text += '</tbody></table>';
                                                     //alert(text);
-                                                    
+
                                                     document.getElementById("modal-body-grpleaderboard").innerHTML = text;
 //                                                    result.innerHTML(text);
 //                                                    result.appendChild(text);
@@ -543,7 +549,7 @@
                                                     console.log(text);
                                                     //console.log("score: " + data.Leader[0].score); //score
                                                     //console.log("user_Id: " + data.Leader[0].user_Id); //group
-                                                    
+
                                                 }, error: function (xhr) {
 
                                                 }
@@ -617,27 +623,27 @@
 
 
 <script>
-                                        document.getElementById("captureagain").style.visibility = "hidden";
-                                        var startstream = document.getElementById("startstream").style.visibility;
-                                        var capture = document.getElementById("capture").style.visibility;
-                                        if (startstream === "hidden") {
-                                            document.getElementById("captureagain").style.visibility = "visible";
-                                        } else if (capture === "hidden") {
-                                            document.getElementById("captureagain").style.visibility = "visible";
-                                        } else {
-                                            document.getElementById("capture").style.visibility = "hidden"
-                                        }
+            document.getElementById("captureagain").style.visibility = "hidden";
+            var startstream = document.getElementById("startstream").style.visibility;
+            var capture = document.getElementById("capture").style.visibility;
+            if (startstream === "hidden") {
+                document.getElementById("captureagain").style.visibility = "visible";
+            } else if (capture === "hidden") {
+                document.getElementById("captureagain").style.visibility = "visible";
+            } else {
+                document.getElementById("capture").style.visibility = "hidden"
+            }
 </script>
 
 <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
 
 <script>
-                                        var pondScum = FilePond.create(document.getElementById("fileupload"));
-                                        pondScum.setOptions({
-                                            maxFiles: 10,
-                                            required: true
-                                        });
-                                        //FilePond.parse(document.body);
+            var pondScum = FilePond.create(document.getElementById("fileupload"));
+            pondScum.setOptions({
+                maxFiles: 10,
+                required: true
+            });
+            //FilePond.parse(document.body);
 </script>
 
 <style>
